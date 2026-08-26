@@ -581,7 +581,7 @@ function waterfall(svgId, steps, maxV){
     else { base = cum; top = cum + s.value; cum = top; }
     const y0 = y(Math.min(base,top)), y1=y(Math.max(base,top));
     const x = padL + i*gap + (gap-bw)/2;
-    svgEls += `<rect x="${x}" y="${y0}" width="${bw}" height="${Math.max(2,y1-y0)}" rx="3" fill="${colors[s.type]}"></rect>`;
+    svgEls += `<rect x="${x}" y="${y1}" width="${bw}" height="${Math.max(2,y0-y1)}" rx="3" fill="${colors[s.type]}"></rect>`;
     const lbl = s.label.split("\n");
     svgEls += `<text x="${x+bw/2}" y="${H-16}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${lbl[0]}</text>`;
     if(lbl[1]) svgEls += `<text x="${x+bw/2}" y="${H-6}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${lbl[1]}</text>`;
@@ -603,7 +603,7 @@ waterfall("waterfall", [
   {label:"Conversion", value:-304000, type:"neg"},
   {label:"AOV", value:61000, type:"pos"},
   {label:"Aug'26\nGMV", value:2946159, type:"total"},
-], 3100000);
+], 3300000);
 
 /* ---- 02 subcategory ---- */
 /* growth/abs/cvrChg/aspChg = clean YoY, Jul'26 vs Jul'25 (both full months). cvr/asp/instock/nsku/selling = current Aug'26 snapshot. */
