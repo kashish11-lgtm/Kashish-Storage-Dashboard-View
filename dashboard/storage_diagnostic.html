@@ -1,0 +1,1004 @@
+<title>Storage &amp; Organisers Diagnostic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --paper:#EEF0EE; --surface:#FFFFFF; --surface-2:#F7F8F6;
+  --ink:#1C211F; --steel:#5B655F; --steel-2:#828B85; --line:#D6DBD6; --line-soft:#E5E8E4;
+  --amber:#B86A22; --amber-ink:#8A4E16; --amber-soft:#F1DCC0;
+  --teal:#2B6862; --teal-soft:#D9E7E4;
+  --moss:#2E7D50; --moss-soft:#D9EBDE;
+  --rose:#B23F34; --rose-soft:#F3DCD8;
+  --warn:#9A7A1E; --warn-soft:#F1E4BE;
+  --shadow: 0 1px 2px rgba(28,33,31,.06), 0 6px 20px -8px rgba(28,33,31,.12);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#14181A; --surface:#1B211E; --surface-2:#202824;
+    --ink:#EAEEEA; --steel:#A2ACA5; --steel-2:#7B857F; --line:#313A34; --line-soft:#28312B;
+    --amber:#E0954A; --amber-ink:#F0B679; --amber-soft:#3A2C18;
+    --teal:#5AAAA2; --teal-soft:#1D3330;
+    --moss:#57BD86; --moss-soft:#1B3324;
+    --rose:#E28377; --rose-soft:#3B211E;
+    --warn:#DABD62; --warn-soft:#3A3016;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -10px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14181A; --surface:#1B211E; --surface-2:#202824;
+  --ink:#EAEEEA; --steel:#A2ACA5; --steel-2:#7B857F; --line:#313A34; --line-soft:#28312B;
+  --amber:#E0954A; --amber-ink:#F0B679; --amber-soft:#3A2C18;
+  --teal:#5AAAA2; --teal-soft:#1D3330;
+  --moss:#57BD86; --moss-soft:#1B3324;
+  --rose:#E28377; --rose-soft:#3B211E;
+  --warn:#DABD62; --warn-soft:#3A3016;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -10px rgba(0,0,0,.5);
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,Segoe UI,sans-serif;
+  font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--teal);}
+::selection{background:var(--amber-soft); color:var(--ink);}
+:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+
+h1,h2,h3,h4{font-family:"Big Shoulders Display","Arial Narrow",sans-serif; font-weight:700; letter-spacing:.01em; text-wrap:balance; margin:0; color:var(--ink);}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--steel-2);}
+
+/* ============ SHELL ============ */
+.shell{display:grid; grid-template-columns:230px 1fr; max-width:1400px; margin:0 auto;}
+@media (max-width:980px){ .shell{grid-template-columns:1fr;} .rail{display:none;} }
+
+.rail{position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto; padding:28px 10px 28px 22px; border-right:1px solid var(--line);}
+.rail-brand{font-family:"Big Shoulders Display"; font-weight:800; font-size:22px; line-height:1.1; margin-bottom:2px;}
+.rail-brand span{color:var(--amber);}
+.rail-sub{font-size:11px; color:var(--steel-2); margin-bottom:22px; font-family:"IBM Plex Mono",monospace;}
+.rail nav{display:flex; flex-direction:column; gap:1px;}
+.rail nav a{
+  display:flex; gap:8px; align-items:baseline; text-decoration:none; color:var(--steel);
+  font-size:12.5px; padding:6px 8px; border-radius:5px; border-left:2px solid transparent;
+}
+.rail nav a:hover{background:var(--surface-2); color:var(--ink);}
+.rail nav a .idx{font-family:"IBM Plex Mono",monospace; color:var(--steel-2); font-size:10.5px; min-width:16px;}
+.rail nav a.active{color:var(--ink); border-left-color:var(--amber); background:var(--surface-2); font-weight:600;}
+
+.main{padding:0 0 80px;}
+.hero{padding:44px 40px 28px; border-bottom:1px solid var(--line);}
+.hero .eyebrow{margin-bottom:10px;}
+.hero h1{font-size:42px; line-height:1.02;}
+.hero p.lede{max-width:66ch; color:var(--steel); font-size:15.5px; margin-top:12px;}
+.hero .metabar{display:flex; flex-wrap:wrap; gap:18px; margin-top:20px; font-size:12px; color:var(--steel-2); font-family:"IBM Plex Mono",monospace;}
+.hero .metabar b{color:var(--ink); font-weight:600;}
+
+.section{padding:34px 40px; border-bottom:1px solid var(--line); scroll-margin-top:10px;}
+.section.alt{background:var(--surface-2);}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:6px;}
+.section-head .idx{font-family:"IBM Plex Mono",monospace; color:var(--amber); font-size:13px; font-weight:600;}
+.section h2{font-size:26px;}
+.section .dek{color:var(--steel); max-width:76ch; margin-top:8px; font-size:14.5px;}
+
+/* ============ COMPONENTS ============ */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow);}
+.grid{display:grid; gap:14px;}
+.g-kpi{grid-template-columns:repeat(5,1fr); margin-top:22px;}
+@media (max-width:980px){ .g-kpi{grid-template-columns:repeat(2,1fr);} }
+.g2{grid-template-columns:1fr 1fr;}
+.g3{grid-template-columns:repeat(3,1fr);}
+@media (max-width:900px){ .g2,.g3{grid-template-columns:1fr;} }
+
+.kpi{padding:16px 16px 14px;}
+.kpi .eyebrow{margin-bottom:8px;}
+.kpi .v{font-family:"IBM Plex Mono",monospace; font-size:23px; font-weight:600; letter-spacing:-.01em;}
+.kpi .d{display:flex; gap:6px; align-items:center; margin-top:6px; font-size:12px;}
+.pill{display:inline-flex; align-items:center; gap:4px; padding:2px 7px; border-radius:100px; font-size:11.5px; font-weight:600; font-family:"IBM Plex Mono",monospace;}
+.pill.up{background:var(--moss-soft); color:var(--moss);}
+.pill.down{background:var(--rose-soft); color:var(--rose);}
+.pill.flat{background:var(--surface-2); color:var(--steel);}
+.pill.p0{background:var(--rose-soft); color:var(--rose);}
+.pill.p1{background:var(--amber-soft); color:var(--amber-ink);}
+.pill.p2{background:var(--teal-soft); color:var(--teal);}
+.pill.p3{background:var(--surface-2); color:var(--steel);}
+
+.callout{padding:14px 16px; border-radius:8px; border:1px solid var(--line); background:var(--surface); font-size:13.5px;}
+.callout.warn{border-color:var(--warn); background:var(--warn-soft);}
+.callout.gap{border-color:var(--line); background:var(--surface-2); color:var(--steel);}
+.callout b{color:var(--ink);}
+.callout.warn b{color:var(--amber-ink);}
+
+.table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:var(--surface);}
+table{border-collapse:collapse; width:100%; min-width:640px; font-size:12.8px;}
+thead th{position:sticky; top:0; background:var(--surface-2); text-align:right; padding:9px 10px; font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--steel-2); border-bottom:1px solid var(--line); white-space:nowrap;}
+thead th:first-child,thead th.l{text-align:left;}
+tbody td{padding:8px 10px; text-align:right; border-bottom:1px solid var(--line-soft); font-family:"IBM Plex Mono",monospace; white-space:nowrap;}
+tbody td:first-child,tbody td.l{text-align:left; font-family:"IBM Plex Sans"; white-space:normal; min-width:170px;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:var(--surface-2);}
+td.up{color:var(--moss);} td.down{color:var(--rose);}
+.small{color:var(--steel-2); font-size:11px;}
+
+.bars{display:flex; flex-direction:column; gap:9px;}
+.bar-row{display:grid; grid-template-columns:150px 1fr 92px; gap:10px; align-items:center; font-size:12.3px;}
+.bar-row .lbl{color:var(--ink); text-align:right; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.bar-track{height:16px; background:var(--surface-2); border-radius:4px; position:relative; overflow:hidden;}
+.bar-fill{height:100%; border-radius:4px 0 0 4px;}
+.bar-row .val{font-family:"IBM Plex Mono",monospace; font-size:12px; text-align:right;}
+
+.chip{display:inline-block; padding:2px 8px; border-radius:5px; font-size:11px; font-family:"IBM Plex Mono",monospace; background:var(--surface-2); color:var(--steel); border:1px solid var(--line); margin:1px 3px 1px 0;}
+.chip.a{background:var(--teal-soft); color:var(--teal); border-color:transparent;}
+.chip.b{background:var(--amber-soft); color:var(--amber-ink); border-color:transparent;}
+.chip.c{background:var(--rose-soft); color:var(--rose); border-color:transparent;}
+.chip.d{background:var(--warn-soft); color:var(--warn); border-color:transparent;}
+
+.hl{color:var(--ink); font-weight:600;}
+.tag-h{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--steel-2); margin:22px 0 8px; display:block;}
+
+.action-grid{display:grid; grid-template-columns:1fr; gap:12px; margin-top:16px;}
+.action{padding:18px 20px; display:grid; grid-template-columns:44px 1fr; gap:14px;}
+.action .rank{font-family:"Big Shoulders Display"; font-size:30px; font-weight:800; color:var(--line); line-height:1;}
+.action.p0 .rank{color:var(--rose);}
+.action.p1 .rank{color:var(--amber);}
+.action.p2 .rank{color:var(--teal);}
+.action.p3 .rank{color:var(--steel-2);}
+.action-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;}
+.action h4{font-size:17.5px; font-weight:700; font-family:"IBM Plex Sans"; color:var(--ink); max-width:60ch;}
+.action .gmv{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--moss); font-size:14px; white-space:nowrap;}
+.action-meta{display:flex; flex-wrap:wrap; gap:16px 24px; margin-top:12px; font-size:12.3px;}
+.action-meta div b{display:block; color:var(--steel-2); font-size:10px; font-family:"IBM Plex Mono",monospace; text-transform:uppercase; letter-spacing:.06em; font-weight:500; margin-bottom:2px;}
+.action p.ev{margin-top:10px; font-size:13px; color:var(--steel);}
+
+svg text{font-family:"IBM Plex Mono",monospace;}
+
+.heat{font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-align:center !important;}
+footer{padding:30px 40px; color:var(--steel-2); font-size:12px;}
+.assume{font-size:12.5px; color:var(--steel); background:var(--surface-2); border:1px dashed var(--line); border-radius:8px; padding:12px 15px; margin-top:14px;}
+.assume b{color:var(--ink);}
+</style>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="rail-brand">STORAGE<span>&amp;</span>ORG.</div>
+    <div class="rail-sub">CATEGORY DIAGNOSTIC — AE</div>
+    <nav id="navlinks">
+      <a href="#exec"><span class="idx">00</span>Executive Summary</a>
+      <a href="#health"><span class="idx">01</span>Category Health</a>
+      <a href="#subcat"><span class="idx">02</span>Subcategory Matrix</a>
+      <a href="#price"><span class="idx">03</span>Price Band Matrix</a>
+      <a href="#funnel"><span class="idx">04</span>Funnel Diagnosis</a>
+      <a href="#brand"><span class="idx">05</span>Brand Matrix</a>
+      <a href="#sku"><span class="idx">06</span>SKU Opportunity</a>
+      <a href="#assort"><span class="idx">07</span>Assortment &amp; White Space</a>
+      <a href="#stock"><span class="idx">08</span>Stock &amp; Lost Sales</a>
+      <a href="#seller"><span class="idx">09</span>Seller Analysis</a>
+      <a href="#ads"><span class="idx">10</span>Visibility &amp; Promotion</a>
+      <a href="#season"><span class="idx">11</span>Seasonality</a>
+      <a href="#opp"><span class="idx">12</span>Opportunity Universe</a>
+      <a href="#actions"><span class="idx">13</span>Top 10 Actions</a>
+      <a href="#plan"><span class="idx">14</span>Growth Plan</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <div class="hero" id="exec">
+      <div class="eyebrow">Category Growth Diagnostic · Storage &amp; Organisers · Noon AE</div>
+      <h1>The category is growing on traffic —<br>and quietly losing it on conversion.</h1>
+      <p class="lede">GMV run-rate is up <b class="hl">+17.5% MoM</b> and <b class="hl">+60% vs the FY25&nbsp;H1 baseline</b>, almost entirely on more visits and slightly higher basket value. Underneath that headline, the category's two largest subcategories — Storage Boxes and Racks — plus Storage Baskets have lost 1.1–4.1 conversion points each since mid-2025, masking a materially faster growth rate the category is currently leaving on the table.</p>
+      <div class="metabar">
+        <span>Period: <b>Aug&nbsp;2026</b> (current, 16 days) vs <b>Jul&nbsp;2026</b> (MoM) vs <b>H1&nbsp;2025 avg</b> (baseline)</span>
+        <span>Rows analysed: <b>235,933</b> SKU-months</span>
+        <span>Prepared for: Category Manager, Storage &amp; Organisers</span>
+      </div>
+      <div class="assume" style="margin-top:22px;">
+        <b>Data note — read before the numbers below.</b> The two source files cover Jan–Jun 2025 and Jul–Aug 2026 only — there is a 12-month gap with no data, so a true calendar YoY comparison does not exist. "MoM" below means Aug'26 vs Jul'26; "vs baseline" means Aug'26 vs the FY25 H1 monthly average, used as the closest available prior-period reference — <b>not</b> a same-month YoY. Aug'26 contains 16 days only (data cut, not a short month); every Aug figure is shown as a daily-rate, month-equivalent run-rate (×30.4) so it's comparable to full months. No competitor, ad-spend/ROAS, or ratings/reviews data exists in the source — those sections are flagged as data gaps rather than estimated.
+      </div>
+    </div>
+
+    <div class="section" id="health-exec">
+      <div class="grid g-kpi">
+        <div class="card kpi"><div class="eyebrow">GMV run-rate /mo</div><div class="v">AED 2.95M</div><div class="d"><span class="pill up">▲ 17.5% MoM</span></div></div>
+        <div class="card kpi"><div class="eyebrow">vs FY25 H1 avg</div><div class="v">+60.4%</div><div class="d"><span class="pill up">▲ AED +1.11M/mo</span></div></div>
+        <div class="card kpi"><div class="eyebrow">GV (visits) /mo</div><div class="v">1.15M</div><div class="d"><span class="pill up">▲ 27.2% MoM</span></div></div>
+        <div class="card kpi"><div class="eyebrow">CVR</div><div class="v">4.75%</div><div class="d"><span class="pill down">▼ 0.50pp MoM</span></div></div>
+        <div class="card kpi"><div class="eyebrow">Instock %</div><div class="v">96.2%</div><div class="d"><span class="pill up">▲ 3.1pp MoM</span></div></div>
+      </div>
+      <p style="margin-top:18px; font-size:13.5px; color:var(--steel); max-width:80ch;">
+      <b class="hl">Why:</b> traffic growth explains 87% of the GMV gain vs baseline and 156% of the MoM gain (conversion softness is actively subtracting from MoM growth). Full decomposition in Section 01.
+      </p>
+    </div>
+
+    <div class="section alt">
+      <div class="section-head"><span class="idx">00.1</span><h2>Where the GMV opportunity sits</h2></div>
+      <p class="dek">Every number below is quantified from the data, not extrapolated from a trend line. Ranges reflect immediate (vs last month) to structural (vs FY25 baseline) benchmarks.</p>
+      <div class="grid g3" style="margin-top:18px;">
+        <div class="card" style="padding:18px;">
+          <div class="eyebrow" style="color:var(--rose);">Biggest single lever</div>
+          <div class="v num" style="font-size:22px; margin:6px 0;">AED 485K–538K /mo</div>
+          <div style="font-size:13px; color:var(--steel);">Conversion recovery in <b class="hl">Storage Boxes, Racks &amp; Storage Baskets</b> — CVR fell 1.1–4.1pp in each since mid-2025 while traffic kept growing. See §02, §04, §13 Action 1.</div>
+        </div>
+        <div class="card" style="padding:18px;">
+          <div class="eyebrow" style="color:var(--teal);">Second lever</div>
+          <div class="v num" style="font-size:22px; margin:6px 0;">AED 437K /mo</div>
+          <div style="font-size:13px; color:var(--steel);">Click-through gap in 7 subcategories (Food Containers, Hangers, Lunch Boxes/Bags…) — CTR 3.0–3.7% vs 5.05% category avg on healthy impression volume. See §04, §13 Action 2.</div>
+        </div>
+        <div class="card" style="padding:18px;">
+          <div class="eyebrow" style="color:var(--amber-ink);">Third lever</div>
+          <div class="v num" style="font-size:22px; margin:6px 0;">AED 192K–280K /mo</div>
+          <div style="font-size:13px; color:var(--steel);">Lost GMV to OOS, concentrated in Express fulfilment (88.4% instock vs 95.6% standard) — real fields in the data, not modelled. See §08, §13 Action 4–5.</div>
+        </div>
+      </div>
+      <p style="margin-top:16px; font-size:13px; color:var(--steel);">Gross identified opportunity across all P0–P2 actions: <b class="hl num">~AED 1.2M/mo</b>. A realistic, execution-adjusted capture in the first two quarters is <b class="hl num">~AED 400–500K/mo</b>, scaling toward the full figure as fulfilment and assortment actions land (§12, §14).</p>
+    </div>
+
+    <!-- ================= 01 CATEGORY HEALTH ================= -->
+    <div class="section" id="health">
+      <div class="section-head"><span class="idx">01</span><h2>Category Health</h2></div>
+      <p class="dek">GMV = GV × CVR × AOV. Effects below use AOV (GMV/Order) so the identity reconciles exactly to the observed AED change; ASP (GMV/Unit) is reported separately as the pure pricing metric.</p>
+
+      <div class="grid g2" style="margin-top:20px;">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th class="l">Metric (monthly run-rate)</th><th>Jul '26</th><th>Aug '26</th><th>FY25 H1 avg</th><th>MoM</th><th>vs Baseline</th></tr></thead>
+            <tbody id="tbl-health"></tbody>
+          </table>
+        </div>
+        <div class="card" style="padding:20px;">
+          <div class="eyebrow" style="margin-bottom:10px;">GMV decomposition — AED/month</div>
+          <svg id="waterfall" width="100%" height="230" viewBox="0 0 460 230" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:16px;">
+        <div class="callout"><b>MoM (Aug vs Jul):</b> Traffic +AED 681K, Conversion −AED 304K, AOV/pricing +AED 61K → net +AED 438K/mo. Traffic is doing <b>156%</b> of the work; conversion is the active drag.</div>
+        <div class="callout"><b>vs FY25 H1 baseline:</b> Traffic +AED 968K, Conversion −AED 27K, AOV/pricing +AED 168K → net +AED 1.11M/mo. Traffic explains <b>87%</b> of the structural gain; conversion is roughly flat, pricing contributes a healthy 15%.</div>
+      </div>
+      <p style="margin-top:14px; font-size:13px; color:var(--steel); max-width:82ch;"><b class="hl">Read:</b> the category isn't winning on conversion or on discounting — it's winning because materially more shoppers are reaching the category (GV +27–53%) and paying slightly more per order (AOV +2–6%) when they buy. Conversion is the one lever moving the wrong way, and because it applies to the whole (growing) traffic base, it is the single highest-leverage fix available (§02, §04).</p>
+    </div>
+
+    <!-- ================= 02 SUBCATEGORY ================= -->
+    <div class="section alt" id="subcat">
+      <div class="section-head"><span class="idx">02</span><h2>Subcategory Growth Matrix</h2></div>
+      <p class="dek">45 subcategories (pst). Ranked by absolute GMV change vs the FY25 H1 baseline — the metric that matters for prioritisation, not % growth on a small base.</p>
+
+      <span class="tag-h">Top 12 by absolute GMV contribution to category change</span>
+      <div class="bars" id="bar-subcat"></div>
+
+      <div class="grid g2" style="margin-top:24px;">
+        <div class="card" style="padding:16px 18px;">
+          <div class="eyebrow" style="color:var(--moss);">Winning, and why</div>
+          <p style="font-size:13px; margin-top:6px;"><b class="hl">Space Saver Bags</b> (+241%, +AED 202K/mo, 18% of category growth) is growing on both volume and price — ASP up 54% while still gaining share, i.e. mix-shift into larger/better kits, not discounting. <b class="hl">Bags</b> (+364% off a small base) and <b class="hl">Foldable Wardrobes</b> (+222%) show the same pattern: real demand, not promo-fuelled.</p>
+        </div>
+        <div class="card" style="padding:16px 18px;">
+          <div class="eyebrow" style="color:var(--rose);">Declining, and why</div>
+          <p style="font-size:13px; margin-top:6px;"><b class="hl">Closet Organization Systems</b> (−35%, −AED 26K/mo), <b class="hl">Kitchen Storage Accessories</b> (−60%) and <b class="hl">Outdoor Storage</b> (−65%) are all small (≤1.6% share) but declining on both weak CTR (3.0%) and, for Closet Org. Systems, a 35% ASP drop alongside falling GMV — a genuine demand or listing-quality problem, not seasonality.</p>
+        </div>
+      </div>
+
+      <span class="tag-h">Subcategory table — top &amp; notable movers, ranked by GMV</span>
+      <div class="table-wrap"><table><thead><tr>
+        <th class="l">Subcategory</th><th>GMV/mo</th><th>Share</th><th>Δ vs base</th><th>Abs Δ/mo</th><th>CVR</th><th>CVR Δpp</th><th>ASP</th><th>ASP Δ%</th><th>Instock%</th><th>SKUs</th><th>Selling%</th>
+      </tr></thead><tbody id="tbl-subcat"></tbody></table></div>
+      <p class="small" style="margin-top:8px;">GV = visits · CVR = orders/GV · ASP = GMV/units, all Aug'26. "Δ vs base" and "Abs Δ/mo" compare Aug'26 monthly-equivalent run-rate to the FY25 H1 monthly average.</p>
+    </div>
+
+    <!-- ================= 03 PRICE BAND ================= -->
+    <div class="section" id="price">
+      <div class="section-head"><span class="idx">03</span><h2>Price Band × Subcategory Matrix</h2></div>
+      <p class="dek">Bands built from actual listed price (offer_price_aed) distribution: &lt;25, 25–50, 50–100, 100–200, 200–400, 400+ AED.</p>
+
+      <div class="grid g2" style="margin-top:20px;">
+        <div>
+          <span class="tag-h">GMV share by band — Aug'26 vs FY25 H1</span>
+          <div class="bars" id="bar-priceband"></div>
+        </div>
+        <div class="table-wrap"><table><thead><tr>
+          <th class="l">Band</th><th>Share</th><th>Δ vs base</th><th>CVR</th><th>CVRΔpp</th><th>ASP</th><th>Instock%</th><th>Selling%</th>
+        </tr></thead><tbody id="tbl-priceband"></tbody></table></div>
+      </div>
+
+      <div class="callout warn" style="margin-top:18px;"><b>The 50–100 AED band is now the category's centre of gravity</b> — 40.6% of GMV (up from 36.3%), GV up +110%, and 47.6% of all category growth vs baseline. But its CVR is down 0.5pp, the only mid/low band moving the wrong way — this is where the Section 02/04 conversion problem physically lives.</div>
+
+      <span class="tag-h">GMV by price band × top-10 subcategories (Aug'26, AED/mo, darker = more GMV)</span>
+      <div class="table-wrap"><table><thead><tr>
+        <th class="l">Subcategory</th><th>&lt;25</th><th>25–50</th><th>50–100</th><th>100–200</th><th>200–400</th><th>400+</th>
+      </tr></thead><tbody id="tbl-heat"></tbody></table></div>
+
+      <div class="callout" style="margin-top:16px;"><b>White-space signal:</b> the 200–400 and 400+ AED bands show the fastest visit growth of any band (GV +8% and +36% vs baseline) but carry the thinnest assortment (667 and 169 SKUs, only 10–13% selling) and the weakest instock (92.2%, 90.7% — lowest of all bands). Demand is outpacing premium assortment depth. See §07.</div>
+    </div>
+
+    <!-- ================= 04 FUNNEL ================= -->
+    <div class="section alt" id="funnel">
+      <div class="section-head"><span class="idx">04</span><h2>Funnel Diagnosis</h2></div>
+      <p class="dek">Impressions → GV → ATC → Orders → GMV, category-wide, Aug'26 vs Jul'26.</p>
+      <div class="grid g2" style="margin-top:20px;">
+        <div class="card" style="padding:20px;">
+          <div class="eyebrow" style="margin-bottom:12px;">Funnel step change, MoM</div>
+          <div class="bars" id="bar-funnel"></div>
+          <p style="font-size:12.5px; color:var(--steel); margin-top:14px;"><b class="hl">Leak point:</b> GV→ATC (add-to-cart rate) fell 3.3pp (18.4%→15.1%) even as GV surged — new traffic is browsing but adding to cart at a lower rate, and what does get added converts to orders slightly worse too (CVR −0.5pp). The funnel is wider at the top and leakier in the middle simultaneously.</p>
+        </div>
+        <div class="card" style="padding:20px;">
+          <div class="eyebrow" style="margin-bottom:12px;">Problem classification, by subcategory (Aug'26)</div>
+          <div style="font-size:12.8px; line-height:2.1;">
+            <span class="chip a">A · Traffic problem</span> Food Saver, Cooler, Cling Film, Aluminium Foil, Sink Sets, Kitchen Storage Acc. — high CVR, thin visits<br>
+            <span class="chip b">B · CTR problem</span> Food Containers, Closet Hangers, Lunch Box/Bag, Cabinet Organizers, Storage Set, Closet Org. Systems<br>
+            <span class="chip c">C · Conversion problem</span> Storage Box, Racks, Lunch Box, Foldable Wardrobe, Storage Basket, Closet Shelf Divider<br>
+            <span class="chip d">D · Stock problem</span> Storage Box, Food Containers, Bag, Spice Jars, Under-bed Storage
+          </div>
+          <p style="font-size:12.5px; color:var(--steel); margin-top:12px;">Quantified: <b>B ≈ AED 437K/mo</b>, <b>C ≈ AED 485–538K/mo</b>, <b>D ≈ AED 192–280K/mo</b> (§08). A is real but small-base (≤1% share each). No subcategory shows E (healthy funnel, falling ASP) at meaningful scale — the closest, Storage Set, has ASP −22% but CVR is improving (+3.6pp), so it's healthy mix-shift, not a pricing problem.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 05 BRAND ================= -->
+    <div class="section" id="brand">
+      <div class="section-head"><span class="idx">05</span><h2>Brand Performance Matrix</h2></div>
+      <p class="dek">Brand cuts of the three highest-GMV subcategories — where a brand-level fix moves the category needle most.</p>
+
+      <span class="tag-h">Storage Box — top brands (Aug'26 monthly-equiv)</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp vs base</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-sb"></tbody></table></div>
+      <div class="callout warn" style="margin-top:10px;"><b>Declining leader — Cosmoplast:</b> share fell 29.1pp (was the #1–2 brand at ~24% share through H1'25, now 5.5%). This is not a demand problem: instock stayed ~90%+ throughout. It's a <b>visibility collapse</b> — impressions for the noon-Retail Cosmoplast storage-box listings fell from ~330–420K/month (H1'25) to 94K (Jul'26) to just 40K (Aug'26), an 85–90% drop. See sparkline and Action 3 (§13).</div>
+      <svg id="cosmo-chart" width="100%" height="160" viewBox="0 0 900 160" preserveAspectRatio="xMidYMid meet" style="margin-top:10px;"></svg>
+
+      <span class="tag-h" style="margin-top:26px;">Racks — top brands</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp vs base</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-rk"></tbody></table></div>
+
+      <span class="tag-h" style="margin-top:26px;">Storage Basket — top brands</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp vs base</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-bk"></tbody></table></div>
+
+      <div class="grid g2" style="margin-top:22px;">
+        <div class="card" style="padding:16px 18px;"><div class="eyebrow" style="color:var(--moss);">Share gainers, and why</div><p style="font-size:13px; margin-top:6px;"><b class="hl">Duniso</b> is the standout — #1 in Storage Box (23.7% share, +12.2pp) and a top-3 gainer in Racks (+7.8pp) and Storage Basket. Broad-based, multi-subcategory share gain at low ASP (AED 20–171/SKU) — a value/generic-tier consolidator winning on assortment breadth and price, not a single hero SKU.</p></div>
+        <div class="card" style="padding:16px 18px;"><div class="eyebrow" style="color:var(--rose);">Share losers, and why</div><p style="font-size:13px; margin-top:6px;"><b class="hl">Cosmoplast</b> (storage box, −29pp) and <b class="hl">Generic</b>-tagged listings in Racks (−9.2pp) are the largest losers. Generic's loss is structural — branded/named sellers (Duniso, Toshionics, Auraluxi) are displacing unbranded listings as the mix professionalises. Cosmoplast's loss is a visibility incident, not competitive displacement (see above) — different root cause, different fix.</p></div>
+      </div>
+    </div>
+
+    <!-- ================= 06 SKU ================= -->
+    <div class="section alt" id="sku">
+      <div class="section-head"><span class="idx">06</span><h2>SKU Opportunity Matrix</h2></div>
+
+      <span class="tag-h">Hero SKUs — highest GMV, healthy CVR &amp; instock (Aug'26)</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">SKU</th><th class="l">Brand / Subcat</th><th>GMV/mo</th><th>CVR</th><th>Instock%</th></tr></thead><tbody id="tbl-sku-hero"></tbody></table></div>
+
+      <span class="tag-h" style="margin-top:24px;">Conversion opportunity — high visits, CVR &lt; 60% of category average</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">SKU</th><th class="l">Brand / Subcat</th><th>Visits/mo</th><th>CVR</th><th>ASP</th><th>Opp. GMV/mo</th></tr></thead><tbody id="tbl-sku-conv"></tbody></table></div>
+      <div class="callout" style="margin-top:10px;"><b>Pattern:</b> 6 of the top 15 conversion-opportunity SKUs are near-identical <b>dish-drying racks</b> from 6 different brands (anmi, zimnest, generic, eworld, essentials_360), each converting 0.0–2.0% on real traffic (1,800–4,000 visits/mo). Worth a dedicated content/duplicate-listing audit before touching pricing — see Action 1 (§13).</div>
+
+      <span class="tag-h" style="margin-top:24px;">Stock opportunity — chronic OOS on SKUs with real demand (platform_gmv_loss, Aug'26)</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">SKU</th><th class="l">Brand / Subcat</th><th>Instock%</th><th>Platform loss/mo</th><th>Express loss/mo</th></tr></thead><tbody id="tbl-sku-stock"></tbody></table></div>
+      <p class="small" style="margin-top:8px;">These 15 SKUs alone account for <b>39%</b> of all category-wide platform_gmv_loss.</p>
+
+      <div class="grid g3" style="margin-top:24px;">
+        <div class="card" style="padding:16px;"><div class="eyebrow">Catalog size (Aug'26)</div><div class="v num" style="font-size:24px; margin-top:6px;">28,767 SKUs</div><div style="font-size:12.5px; color:var(--steel); margin-top:4px;">up from 22,651 avg in FY25 H1</div></div>
+        <div class="card" style="padding:16px;"><div class="eyebrow">Zero-sales SKUs</div><div class="v num" style="font-size:24px; margin-top:6px; color:var(--rose);">77.0%</div><div style="font-size:12.5px; color:var(--steel); margin-top:4px;">22,152 SKUs sold 0 units in the month</div></div>
+        <div class="card" style="padding:16px;"><div class="eyebrow">Top-100 SKU concentration</div><div class="v num" style="font-size:24px; margin-top:6px;">26.4%</div><div style="font-size:12.5px; color:var(--steel); margin-top:4px;">long tail (6,515 selling SKUs) carries 73.6% of GMV</div></div>
+      </div>
+    </div>
+
+    <!-- ================= 07 ASSORTMENT / WHITE SPACE ================= -->
+    <div class="section" id="assort">
+      <div class="section-head"><span class="idx">07</span><h2>SKU Productivity, Assortment &amp; White-Space</h2></div>
+      <div class="grid g2" style="margin-top:18px;">
+        <div class="card" style="padding:18px;">
+          <div class="eyebrow" style="color:var(--rose);">Over-assorted (rationalize)</div>
+          <p style="font-size:13px; margin-top:8px;">Selling-SKU rate fell from <b class="hl">29.9%</b> (FY25 H1) to <b class="hl">23.0%</b> (Aug'26) even as total listings grew 27%. Food Containers (3,309 zero-sale SKUs), Racks (2,766) and Lunch Box (2,194) hold the largest dead-stock pools — assortment is being added faster than it's being sold through. See §13 Action 10.</p>
+        </div>
+        <div class="card" style="padding:18px;">
+          <div class="eyebrow" style="color:var(--moss);">Under-assorted (evidenced demand)</div>
+          <p style="font-size:13px; margin-top:8px;">200–400 &amp; 400+ AED bands: GV growth of +8% and +36% vs baseline against only 10–13% selling-SKU rate and the category's two lowest instock scores. This is a demand-first signal (not a guess) — concentrated in Racks, Clothes Rack and Cabinet/Drawer Organization, where a handful of premium SKUs (esqube, teuuea) already prove the tier works. Directional opportunity: <b class="hl">AED 80–120K/mo</b>, low confidence pending a curated test. See §13 Action 7.</p>
+        </div>
+      </div>
+      <div class="callout gap" style="margin-top:16px;"><b>Data gap:</b> no competitor price, assortment or ranking data exists in the source files, so white-space sizing above is demand-led (internal GV/instock/SKU-count signals only) and cannot be cross-checked against competitor assortment or pricing. Treat all §07 and §09 figures as internal-signal estimates.</div>
+    </div>
+
+    <!-- ================= 08 STOCK ================= -->
+    <div class="section alt" id="stock">
+      <div class="section-head"><span class="idx">08</span><h2>Stock &amp; Lost Sales</h2></div>
+      <p class="dek">The data carries actual lost-GMV fields (platform_gmv_loss_aed, express_gmv_loss_aed) — this is measured, not benchmarked.</p>
+      <div class="grid g3" style="margin-top:18px;">
+        <div class="card" style="padding:16px;"><div class="eyebrow">Platform-wide OOS loss</div><div class="v num" style="font-size:23px; margin-top:6px; color:var(--rose);">AED 192K/mo</div></div>
+        <div class="card" style="padding:16px;"><div class="eyebrow">Express-specific OOS loss</div><div class="v num" style="font-size:23px; margin-top:6px; color:var(--rose);">AED 280K/mo</div></div>
+        <div class="card" style="padding:16px;"><div class="eyebrow">Express vs standard instock</div><div class="v num" style="font-size:23px; margin-top:6px;">88.4% <span style="font-size:14px; color:var(--steel);">vs 95.6%</span></div></div>
+      </div>
+      <div class="assume"><b>Assumption:</b> platform and express loss are not summed into one number — express loss is very likely a partial subset/overlay of the same underlying stockout events measured through a different lens, so we treat AED 280K/mo as the fulfilment-specific ceiling and AED 192K/mo as the conservative, non-overlapping headline figure used in §12/§14.</div>
+      <span class="tag-h">Top subcategories by platform stock loss (Aug'26)</span>
+      <div class="bars" id="bar-stock"></div>
+    </div>
+
+    <!-- ================= 09 SELLER ================= -->
+    <div class="section" id="seller">
+      <div class="section-head"><span class="idx">09</span><h2>Seller Analysis</h2></div>
+      <div class="grid g2" style="margin-top:18px;">
+        <div class="card" style="padding:18px;">
+          <div class="eyebrow" style="margin-bottom:10px;">Seller concentration (1,046 active sellers)</div>
+          <div class="bars" id="bar-seller-conc"></div>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th class="l">Business model</th><th>Share</th><th>CVR</th><th>Cancel%</th><th>Return%</th></tr></thead><tbody id="tbl-bizmodel"></tbody></table></div>
+      </div>
+      <div class="callout warn" style="margin-top:16px;"><b>SBB sellers cancel 12.0% of GMV</b> — 3–4× the FBN (2.6%), Retail (2.6%) and DSE (4.2%) rates, on only 3.9% of category GMV. Not a scale risk, but a concrete, fixable CX/recovery item worth ~AED 10K/mo direct plus retention upside. See Action 8 (§13).</div>
+      <p style="font-size:13px; color:var(--steel); margin-top:14px; max-width:80ch;">Seller concentration itself is healthy — the top seller (noon Retail) holds 21.7%, top 10 hold 45%, top 20 hold 55% — no single-seller dependency risk. FBN (Fulfilled by Noon marketplace) is the dominant model at 68.3% share with the best cancellation/return profile, consistent with the express-instock gap in §08 sitting mostly on FBN/DSE inventory rather than being a seller-quality issue.</p>
+    </div>
+
+    <!-- ================= 10 ADS / VISIBILITY / PROMOTION ================= -->
+    <div class="section alt" id="ads">
+      <div class="section-head"><span class="idx">10</span><h2>Visibility &amp; Promotion</h2></div>
+      <div class="callout gap"><b>Data gap:</b> no ad-spend, Ad GMV or ROAS fields exist in the source. Section 12 (Ads &amp; Visibility) is therefore analysed through organic discoverability (impressions, search share, CTR) rather than paid performance — recommendations below are deliberately about organic fixes, not incremental ad spend.</div>
+
+      <span class="tag-h">Organic CTR by subcategory — category average 5.05%</span>
+      <div class="bars" id="bar-ctr"></div>
+
+      <span class="tag-h" style="margin-top:24px;">Discount depth vs conversion — Aug'26</span>
+      <div class="grid g2">
+        <div class="bars" id="bar-discount"></div>
+        <div class="callout" style="align-self:start;"><b>No discount → conversion relationship found.</b> 0% and 1–10% discount tiers convert at 5.9% and 6.2% — the two best-converting bands in the category. 11–50%+ discount tiers convert at 5.0–5.6%, all lower. Deeper discounting is not evidenced to drive incremental conversion here; it looks like it's mostly applied to weaker SKUs, not used to unlock demand. <b>Recommendation: do not expand blanket discounting</b> — see Action 9 (§13).</div>
+      </div>
+    </div>
+
+    <!-- ================= 11 SEASONALITY ================= -->
+    <div class="section" id="season">
+      <div class="section-head"><span class="idx">11</span><h2>Seasonality</h2></div>
+      <p class="dek">Only 8 months of data exist (Jan–Jun 2025, Jul–Aug 2026), with a 12-month gap between them — insufficient for a genuine 12–24 month seasonality read. Shown for directional context only.</p>
+      <svg id="season-chart" width="100%" height="220" viewBox="0 0 900 220" preserveAspectRatio="xMidYMid meet" style="margin-top:12px;"></svg>
+      <p style="font-size:13px; color:var(--steel); margin-top:12px; max-width:82ch;">FY25 H1 shows a Feb peak (AED 2.07M/mo, pre-Ramadan 2025 stocking — Ramadan fell ~Mar 1–30, 2025) tapering through summer to a Jun trough (AED 1.67M/mo). Jul–Aug 2026 sits well above any FY25 H1 month, consistent with the structural, traffic-led growth in §01 rather than a seasonal spike — but this cannot be confirmed as YoY growth without the missing Jul 2025–Jun 2026 months. <b class="hl">Do not read the Jun'25→Jul'26 jump as a single trend point</b> — it spans the data gap.</p>
+    </div>
+
+    <!-- ================= 12 OPPORTUNITY UNIVERSE ================= -->
+    <div class="section alt" id="opp">
+      <div class="section-head"><span class="idx">12</span><h2>Growth Opportunity Universe</h2></div>
+      <p class="dek">Every bucket below is sized with a stated method; buckets with no defensible incremental-GMV evidence are shown as AED 0 with the reasoning, not omitted.</p>
+      <div class="bars" id="bar-opp" style="margin-top:16px;"></div>
+      <div class="table-wrap" style="margin-top:20px;"><table><thead><tr>
+        <th class="l">Bucket</th><th class="l">Method</th><th>Est. GMV/mo</th><th>Confidence</th>
+      </tr></thead><tbody id="tbl-opp"></tbody></table></div>
+    </div>
+
+    <!-- ================= 13 TOP 10 ACTIONS ================= -->
+    <div class="section" id="actions">
+      <div class="section-head"><span class="idx">13</span><h2>Top 10 Actions</h2></div>
+      <p class="dek">Prioritised by GMV impact × confidence × ease of execution. P0 = immediate/high-GMV/easy; P1 = high-value strategic; P2 = medium-term; P3 = low priority / efficiency.</p>
+      <div class="action-grid" id="action-list"></div>
+    </div>
+
+    <!-- ================= 14 GROWTH PLAN ================= -->
+    <div class="section alt" id="plan">
+      <div class="section-head"><span class="idx">14</span><h2>Category Growth Plan</h2></div>
+
+      <span class="tag-h">A · Diagnosis — what is happening</span>
+      <p style="font-size:14px; max-width:84ch;">Storage &amp; Organisers is in genuine growth — run-rate GMV is up 60% vs the FY25 H1 baseline and 17.5% MoM — driven almost entirely by more shoppers reaching the category (GV +27–53%) and a modest, non-promotional lift in order value (AOV +2–6%). That growth is happening <i>despite</i>, not because of, conversion: the category's two largest subcategories (Storage Box, Racks) plus Storage Basket have each lost 1.1–4.1 conversion points since mid-2025, and add-to-cart rate has fallen 3.3pp MoM even as visits surged.</p>
+
+      <span class="tag-h">B · Root causes — why</span>
+      <p style="font-size:14px; max-width:84ch;">Three distinct, independently-evidenced mechanisms: <b class="hl">(1)</b> a genuine conversion-quality problem concentrated in a handful of high-visit subcategories and SKU clusters (e.g. duplicate dish-rack listings) — not price-driven, since discount depth shows no CVR benefit anywhere in the category; <b class="hl">(2)</b> a discoverability/CTR gap in seven mid-size subcategories that sit on healthy impression volume but convert those impressions to visits poorly, pointing at title/thumbnail/search-relevance rather than demand; <b class="hl">(3)</b> operational leakage — chronic OOS concentrated in a short list of SKUs and specifically in Express fulfilment (88.4% vs 95.6% instock), plus one clear brand-visibility incident (Cosmoplast) that looks like a listing/ranking fault, not competitive loss.</p>
+
+      <span class="tag-h">C · Biggest growth pools — where</span>
+      <div class="bars" id="bar-plan-pools" style="margin-top:10px;"></div>
+
+      <span class="tag-h" style="margin-top:22px;">D · The 5–10 things to do next</span>
+      <p style="font-size:14px; max-width:84ch; margin-bottom:6px;">In order: fix conversion in the Big 3 subcategories (§13 Action 1); close the CTR gap in the seven mid-size subcategories (Action 2); recover Cosmoplast's lost visibility (Action 3); clear the top-15 chronic-OOS SKU list and the Express fulfilment gap (Actions 4–5); protect the Space Saver Bag / Storage Box breakout without discounting (Action 6); test premium price-band assortment in Racks-adjacent subcategories (Action 7); fix SBB seller cancellations (Action 8); stop expanding discount depth (Action 9); and rationalize the 22K-SKU zero-sales tail to fund the above (Action 10). Full detail, evidence and owners for each are in §13.</p>
+
+      <div class="assume" style="margin-top:18px;"><b>Confidence &amp; scope statement.</b> All GMV estimates hold current traffic, price and mix structure constant and isolate one lever at a time — they are not additive guarantees, and real-world capture will be lower than the gross sum due to execution friction and interaction effects between levers (e.g. fixing CTR raises the traffic base the conversion fix acts on, which is directionally positive but not modelled here). Treat the ~AED 400–500K/mo two-quarter capture estimate in §00 as the operating target, and the ~AED 1.2M/mo gross figure as the multi-quarter ceiling.</div>
+    </div>
+
+    <footer>
+      Storage &amp; Organisers Category Growth Diagnostic — built from ATLAS115_AE_Home_SKU_Monthly (Jan–Jun 2025, Jul–Aug 2026), 235,933 SKU-month rows, filtered to pt ∈ {storage_organization, storage_home_organization}. All AED figures are monthly run-rate equivalents unless stated. Prepared for internal category planning use.
+    </footer>
+  </main>
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+const fmtAED = v => "AED " + Math.round(v).toLocaleString("en-US");
+const fmtK = v => (Math.abs(v)>=1000? (v/1000).toFixed(0)+"K" : Math.round(v).toString());
+const fmtPct = (v,d=1) => (v>=0?"+":"") + v.toFixed(d) + "%";
+const fmtPp = (v,d=1) => (v>=0?"+":"") + v.toFixed(d) + "pp";
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+function bar(container, rows, opts={}){
+  const max = opts.max || Math.max(...rows.map(r=>Math.abs(r.value)));
+  const el = document.getElementById(container);
+  el.innerHTML = rows.map(r=>{
+    const w = Math.max(2, Math.abs(r.value)/max*100);
+    const color = r.color || "var(--teal)";
+    const valTxt = opts.fmt ? opts.fmt(r.value) : r.value;
+    return `<div class="bar-row"><div class="lbl" title="${esc(r.label)}">${esc(r.label)}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${w}%; background:${color};"></div></div>
+      <div class="val">${valTxt}${r.sub?`<span class="small"> ${r.sub}</span>`:""}</div></div>`;
+  }).join("");
+}
+
+function table(container, rows, cols){
+  document.getElementById(container).innerHTML = rows.map(r=>{
+    return "<tr>" + cols.map(c=>{
+      const v = r[c.k];
+      let cls = c.l ? "l" : "";
+      if(c.dir && typeof v === "number"){ cls += v>0?" up":(v<0?" down":""); }
+      const txt = c.fmt ? c.fmt(v, r) : v;
+      return `<td class="${cls}">${txt}</td>`;
+    }).join("") + "</tr>";
+  }).join("");
+}
+
+/* ---- 01 category health ---- */
+const HEALTH = [
+  {m:"GMV (AED)", jul:2508104, aug:2946159, base:1839094, mom:17.5, base_d:60.4},
+  {m:"GV — visits", jul:905254, aug:1151085, base:753857, mom:27.2, base_d:52.7},
+  {m:"Orders", jul:47572, aug:54720, base:36183, mom:15.0, base_d:51.2},
+  {m:"Units", jul:56583, aug:64834, base:42348, mom:14.6, base_d:53.1},
+  {m:"Impressions", jul:23083470, aug:22786704, base:16054612, mom:-1.3, base_d:41.9},
+  {m:"CVR", jul:5.26, aug:4.75, base:4.80, mom:-0.50, base_d:-0.05, pp:true},
+  {m:"ASP (AED)", jul:44.33, aug:45.44, base:43.38, mom:2.5, base_d:4.7},
+  {m:"AOV (AED)", jul:52.72, aug:53.84, base:50.77, mom:2.1, base_d:6.0},
+  {m:"CTR", jul:3.92, aug:5.05, base:4.70, mom:1.13, base_d:0.35, pp:true},
+  {m:"Instock %", jul:93.1, aug:96.2, base:94.4, mom:3.1, base_d:1.8, pp:true},
+];
+table("tbl-health", HEALTH, [
+  {k:"m", l:true},
+  {k:"jul", fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:2})},
+  {k:"aug", fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:2})},
+  {k:"base", fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:2})},
+  {k:"mom", dir:true, fmt:(v)=>0},
+]);
+// custom render for mom/base_d columns with pp vs %
+document.querySelectorAll("#tbl-health tr").forEach((tr,i)=>{
+  const h = HEALTH[i];
+  const momTxt = h.pp ? fmtPp(h.mom) : fmtPct(h.mom);
+  const baseTxt = h.pp ? fmtPp(h.base_d) : fmtPct(h.base_d);
+  const momCell = tr.children[4]; momCell.textContent = momTxt; momCell.className = h.mom>0?"up":(h.mom<0?"down":"");
+  const td = document.createElement("td"); td.textContent = baseTxt; td.className = h.base_d>0?"up":(h.base_d<0?"down":"");
+  tr.appendChild(td);
+});
+
+/* waterfall svg: MoM decomposition */
+(function(){
+  const svg = document.getElementById("waterfall");
+  const steps = [
+    {label:"Jul'26\nGMV", value:2508104, type:"total"},
+    {label:"Traffic", value:681000, type:"pos"},
+    {label:"Conversion", value:-304000, type:"neg"},
+    {label:"AOV", value:61000, type:"pos"},
+    {label:"Aug'26\nGMV", value:2946159, type:"total"},
+  ];
+  const W=460,H=230, padL=42,padR=10,padT=16,padB=34;
+  const plotW = W-padL-padR, plotH = H-padT-padB;
+  const maxV = 3100000;
+  const y = v => padT + plotH - (v/maxV*plotH);
+  const bw = plotW/steps.length*0.62;
+  const gap = plotW/steps.length;
+  let cum = 0;
+  let svgEls = "";
+  const colors = {total:"var(--steel)", pos:"var(--moss)", neg:"var(--rose)"};
+  steps.forEach((s,i)=>{
+    let base, top;
+    if(s.type==="total"){ base=0; top=s.value; cum=s.value; }
+    else { base = cum; top = cum + s.value; cum = top; }
+    const y0 = y(Math.min(base,top)), y1=y(Math.max(base,top));
+    const x = padL + i*gap + (gap-bw)/2;
+    svgEls += `<rect x="${x}" y="${y0}" width="${bw}" height="${Math.max(2,y1-y0)}" rx="3" fill="${colors[s.type]}"></rect>`;
+    const lbl = s.label.split("\n");
+    svgEls += `<text x="${x+bw/2}" y="${H-16}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${lbl[0]}</text>`;
+    if(lbl[1]) svgEls += `<text x="${x+bw/2}" y="${H-6}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${lbl[1]}</text>`;
+    const valTxt = s.type==="total" ? "AED "+(s.value/1e6).toFixed(2)+"M" : (s.value>0?"+":"") + Math.round(s.value/1000)+"K";
+    svgEls += `<text x="${x+bw/2}" y="${Math.min(y0,y1)-6}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink)">${valTxt}</text>`;
+  });
+  svg.innerHTML = svgEls;
+})();
+
+/* ---- 02 subcategory ---- */
+const SUBCAT = [
+ {name:"Storage Box", gmv:431906, share:14.7, growth:117.8, abs:233630, cvr:3.66,cvrChg:-1.8, asp:48.9,aspChg:11.3, instock:93.7, nsku:2685, selling:26.7},
+ {name:"Space Saver Bag", gmv:285822, share:9.7, growth:241.1, abs:202040, cvr:7.31,cvrChg:-0.2, asp:53.6,aspChg:54.3, instock:96.3, nsku:1297, selling:29.5},
+ {name:"Closet Clothes Hanger", gmv:247462, share:8.4, growth:76.7, abs:107393, cvr:13.62,cvrChg:4.2, asp:34.2,aspChg:-3.9, instock:96.6, nsku:1816, selling:24.9},
+ {name:"Food Containers", gmv:322057, share:10.9, growth:42.9, abs:96620, cvr:6.86,cvrChg:1.9, asp:37.8,aspChg:1.5, instock:95.9, nsku:4261, selling:22.3},
+ {name:"Lunch Box", gmv:204719, share:6.9, growth:88.9, abs:96349, cvr:3.12,cvrChg:0.0, asp:48.6,aspChg:8.3, instock:97.4, nsku:2821, selling:22.2},
+ {name:"Bag", gmv:109334, share:3.7, growth:364.4, abs:85790, cvr:9.18,cvrChg:3.1, asp:29.2,aspChg:40.1, instock:94.8, nsku:973, selling:24.4},
+ {name:"Racks", gmv:424666, share:14.4, growth:17.4, abs:63049, cvr:2.39,cvrChg:-1.1, asp:71.7,aspChg:3.7, instock:96.2, nsku:3505, selling:21.1},
+ {name:"Foldable Wardrobe", gmv:69198, share:2.3, growth:221.7, abs:47686, cvr:2.58,cvrChg:0.9, asp:94.8,aspChg:-6.8, instock:98.5, nsku:275, selling:22.9},
+ {name:"Lunch Bag", gmv:84899, share:2.9, growth:127.5, abs:47581, cvr:5.66,cvrChg:1.2, asp:31.8,aspChg:19.8, instock:96.6, nsku:1094, selling:28.9},
+ {name:"Storage Set", gmv:63212, share:2.1, growth:106.3, abs:32565, cvr:8.20,cvrChg:3.6, asp:31.8,aspChg:-21.6, instock:98.3, nsku:1016, selling:17.6},
+ {name:"Storage Basket", gmv:57638, share:2.0, growth:119.1, abs:31333, cvr:1.33,cvrChg:-4.0, asp:52.1,aspChg:16.2, instock:98.8, nsku:877, selling:20.6},
+ {name:"Hanging Closet Organizer", gmv:48192, share:1.6, growth:61.0, abs:18260, cvr:4.21,cvrChg:-0.9, asp:48.1,aspChg:22.2, instock:96.8, nsku:545, selling:25.3},
+ {name:"Cabinet/Drawer Organization", gmv:104387, share:3.5, growth:9.9, abs:9400, cvr:5.65,cvrChg:-0.3, asp:65.0,aspChg:6.0, instock:97.1, nsku:793, selling:26.5},
+ {name:"Clothes Rack", gmv:132566, share:4.5, growth:11.0, abs:13100, cvr:4.72,cvrChg:-0.4, asp:78.9,aspChg:2.2, instock:98.0, nsku:884, selling:23.9},
+ {name:"Closet Organization Systems", gmv:48294, share:1.6, growth:-35.4, abs:-26470, cvr:8.06,cvrChg:3.3, asp:37.4,aspChg:-11.4, instock:97.7, nsku:725, selling:15.0},
+ {name:"Kitchen Storage Accessories", gmv:10993, share:0.4, growth:-60.3, abs:-16710, cvr:5.79,cvrChg:-0.2, asp:36.4,aspChg:20.0, instock:94.4, nsku:313, selling:16.0},
+ {name:"Outdoor Storage", gmv:7634, share:0.3, growth:-64.5, abs:-13867, cvr:3.70,cvrChg:0.7, asp:93.4,aspChg:8.9, instock:97.2, nsku:104, selling:12.5},
+];
+bar("bar-subcat", [...SUBCAT].sort((a,b)=>Math.abs(b.abs)-Math.abs(a.abs)).slice(0,12).map(s=>({
+  label:s.name, value:s.abs, color: s.abs>=0? "var(--moss)":"var(--rose)"
+})), {fmt:v=> (v>=0?"▲ ":"▼ ")+fmtAED(Math.abs(v))});
+
+table("tbl-subcat", [...SUBCAT].sort((a,b)=>b.gmv-a.gmv).slice(0,20), [
+  {k:"name", l:true},
+  {k:"gmv", fmt:fmtAED},
+  {k:"share", fmt:v=>v.toFixed(1)+"%"},
+  {k:"growth", dir:true, fmt:fmtPct},
+  {k:"abs", dir:true, fmt:v=>(v>=0?"+":"")+fmtAED(v)},
+  {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
+  {k:"cvrChg", dir:true, fmt:fmtPp},
+  {k:"asp", fmt:v=>"AED "+v.toFixed(0)},
+  {k:"aspChg", dir:true, fmt:fmtPct},
+  {k:"instock", fmt:v=>v.toFixed(1)+"%"},
+  {k:"nsku", fmt:v=>v.toLocaleString()},
+  {k:"selling", fmt:v=>v.toFixed(1)+"%"},
+]);
+
+/* ---- 03 price band ---- */
+const PB = [
+  {name:"<25 AED", gmv:288321, share:9.9, base_share:11.6, growth:37.8, cvr:9.2, cvrChg:2.2, asp:14.8, instock:96.4, selling:30.9},
+  {name:"25-50 AED", gmv:849188, share:29.2, base_share:31.6, growth:49.5, cvr:5.5, cvrChg:0.2, asp:37.7, instock:96.9, selling:23.1},
+  {name:"50-100 AED", gmv:1182679, share:40.6, base_share:36.3, growth:80.9, cvr:3.3, cvrChg:-0.5, asp:67.0, instock:96.8, selling:20.5},
+  {name:"100-200 AED", gmv:481172, share:16.5, base_share:16.5, growth:62.1, cvr:2.6, cvrChg:0.1, asp:129.9, instock:94.6, selling:17.8},
+  {name:"200-400 AED", gmv:84615, share:2.9, base_share:3.2, growth:48.8, cvr:1.9, cvrChg:0.4, asp:235.6, instock:92.2, selling:13.0},
+  {name:"400+ AED", gmv:26590, share:0.9, base_share:0.9, growth:65.7, cvr:2.1, cvrChg:0.8, asp:499.8, instock:90.7, selling:10.1},
+];
+bar("bar-priceband", PB.map(p=>({label:p.name, value:p.share, color:"var(--teal)", sub:"vs "+p.base_share.toFixed(1)+"% base"})), {fmt:v=>v.toFixed(1)+"%"});
+table("tbl-priceband", PB, [
+  {k:"name", l:true},
+  {k:"share", fmt:v=>v.toFixed(1)+"%"},
+  {k:"growth", dir:true, fmt:fmtPct},
+  {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
+  {k:"cvrChg", dir:true, fmt:fmtPp},
+  {k:"asp", fmt:v=>"AED "+v.toFixed(0)},
+  {k:"instock", fmt:v=>v.toFixed(1)+"%"},
+  {k:"selling", fmt:v=>v.toFixed(1)+"%"},
+]);
+
+const HEAT_SUBS = ["Storage Box","Racks","Food Containers","Space Saver Bag","Closet Clothes Hanger","Lunch Box","Clothes Rack","Bag","Cabinet/Drawer Organization","Lunch Bag"];
+const HEAT_DATA = [
+ [9291,83224,97376,31689,2121,464],
+ [5124,34791,83795,84591,11385,2685],
+ [22126,42729,86595,13450,380,471],
+ [7592,38407,91474,11856,0,715],
+ [26660,56388,38436,6253,468,440],
+ [6693,35331,45525,10578,9361,0],
+ [1993,10966,29069,19260,7708,739],
+ [19976,6144,10571,20224,245,0],
+ [2699,19402,17928,10817,968,2854],
+ [15005,11898,9409,7162,0,0],
+];
+(function(){
+  const flat = HEAT_DATA.flat(); const max = Math.max(...flat);
+  function shade(v){
+    const t = v/max; // 0..1
+    const l = 92 - t*58; // lightness
+    return `hsl(28 45% ${l}%)`;
+  }
+  const rows = HEAT_SUBS.map((name,i)=>{
+    const cells = HEAT_DATA[i].map(v=>`<td class="heat" style="background:${shade(v)}; color:${v/max>0.55?'#fff':'var(--ink)'}">${v>=1000?(v/1000).toFixed(0)+"K":v}</td>`).join("");
+    return `<tr><td class="l">${name}</td>${cells}</tr>`;
+  }).join("");
+  document.getElementById("tbl-heat").innerHTML = rows;
+})();
+
+/* ---- 04 funnel ---- */
+bar("bar-funnel", [
+  {label:"Impressions", value:-1.3, color:"var(--rose)"},
+  {label:"GV (visits)", value:27.2, color:"var(--moss)"},
+  {label:"ATC", value:4.2, color:"var(--moss)"},
+  {label:"Orders", value:15.0, color:"var(--moss)"},
+  {label:"GMV", value:17.5, color:"var(--moss)"},
+], {max:30, fmt:v=>fmtPct(v)});
+
+/* ---- 05 brand ---- */
+const BRAND_SB = [
+ {name:"Duniso", gmv:102477, share:23.7, chg:12.15, nsku:598, zero:32, gpsku:171.22},
+ {name:"noon_east", gmv:51549, share:11.9, chg:0.63, nsku:70, zero:38, gpsku:733.27},
+ {name:"marcolo", gmv:39776, share:9.2, chg:null, nsku:211, zero:41, gpsku:188.60},
+ {name:"esqube", gmv:35599, share:8.2, chg:null, nsku:6, zero:0, gpsku:6245.40},
+ {name:"generic", gmv:28698, share:6.6, chg:-0.92, nsku:1089, zero:83, gpsku:26.36},
+ {name:"cosmoplast", gmv:23741, share:5.5, chg:-29.13, nsku:57, zero:68, gpsku:219.21},
+ {name:"soten", gmv:14950, share:3.5, chg:null, nsku:49, zero:35, gpsku:302.63},
+ {name:"teuuea", gmv:9016, share:2.1, chg:1.31, nsku:2, zero:0, gpsku:4745.35},
+];
+const BRAND_RK = [
+ {name:"duniso", gmv:38231, share:9.0, chg:7.77, nsku:287, zero:63, gpsku:133.25},
+ {name:"toshionics", gmv:34109, share:8.0, chg:4.00, nsku:80, zero:35, gpsku:427.43},
+ {name:"auraluxi", gmv:31961, share:7.5, chg:null, nsku:4, zero:0, gpsku:8410.67},
+ {name:"generic", gmv:31819, share:7.5, chg:-9.24, nsku:1414, zero:87, gpsku:22.51},
+ {name:"haidue", gmv:29094, share:6.9, chg:-1.76, nsku:51, zero:31, gpsku:567.14},
+ {name:"dubaigallery", gmv:24310, share:5.7, chg:3.33, nsku:1203, zero:88, gpsku:20.21},
+ {name:"zimnest", gmv:18500, share:4.4, chg:1.57, nsku:13, zero:8, gpsku:1391.01},
+];
+const BRAND_BK = [
+ {name:"generic", gmv:10225, share:17.7, chg:2.07, nsku:334, zero:88, gpsku:30.58},
+ {name:"ununs", gmv:6653, share:11.5, chg:-8.31, nsku:29, zero:24, gpsku:233.45},
+ {name:"anmi", gmv:5451, share:9.5, chg:2.94, nsku:15, zero:7, gpsku:358.63},
+ {name:"teuuea", gmv:4795, share:8.3, chg:3.66, nsku:2, zero:0, gpsku:2523.45},
+ {name:"gudoo", gmv:4226, share:7.3, chg:7.04, nsku:4, zero:0, gpsku:1112.22},
+];
+const brandCols = [
+  {k:"name", l:true},
+  {k:"gmv", fmt:fmtAED},
+  {k:"share", fmt:v=>v.toFixed(1)+"%"},
+  {k:"chg", dir:true, fmt:v=> v===null? "—" : fmtPp(v)},
+  {k:"nsku", fmt:v=>v},
+  {k:"zero", fmt:v=>v.toFixed(0)+"%"},
+  {k:"gpsku", fmt:v=>"AED "+v.toFixed(0)},
+];
+table("tbl-brand-sb", BRAND_SB, brandCols);
+table("tbl-brand-rk", BRAND_RK, brandCols);
+table("tbl-brand-bk", BRAND_BK, brandCols);
+
+function lineChart(svgId, months, vals, opts={}){
+  const svg = document.getElementById(svgId);
+  const W=900,H= svg.viewBox.baseVal.height, padL=54,padR=20,padT=18,padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const max = opts.max || Math.max(...vals)*1.12;
+  const min = 0;
+  const n = months.length;
+  const x = i => padL + i*(plotW/(n-1));
+  const y = v => padT + plotH - (v-min)/(max-min)*plotH;
+  let gridLines="";
+  for(let g=0; g<=3; g++){
+    const gy = padT + plotH - g/3*plotH;
+    gridLines += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line-soft)" stroke-width="1"/>`;
+    gridLines += `<text x="${padL-8}" y="${gy+3}" text-anchor="end" font-size="9.5" fill="var(--steel-2)">${((g/3*max)/1000).toFixed(0)}K</text>`;
+  }
+  let path="", areaPath="", dashPath="";
+  const gapIdx = opts.gapAt;
+  vals.forEach((v,i)=>{
+    const cmd = i===0?"M":"L";
+    path += `${cmd}${x(i).toFixed(1)},${y(v).toFixed(1)} `;
+  });
+  areaPath = `M${x(0)},${y(0)} ` + vals.map((v,i)=>`L${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ") + ` L${x(n-1)},${y(0)} Z`;
+  let dots="", labels="";
+  vals.forEach((v,i)=>{
+    const isGapEdge = gapIdx!==undefined && (i===gapIdx || i===gapIdx+1);
+    dots += `<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${isGapEdge?'var(--amber)':'var(--teal)'}" stroke="var(--surface)" stroke-width="2"/>`;
+    labels += `<text x="${x(i)}" y="${H-10}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${months[i]}</text>`;
+    labels += `<text x="${x(i)}" y="${y(v)-10}" text-anchor="middle" font-size="9.5" font-weight="600" fill="var(--ink)">${(v/1000).toFixed(0)}K</text>`;
+  });
+  let gapMarker = "";
+  if(gapIdx!==undefined){
+    const gx = (x(gapIdx)+x(gapIdx+1))/2;
+    gapMarker = `<line x1="${gx}" y1="${padT}" x2="${gx}" y2="${padT+plotH}" stroke="var(--rose)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="${gx}" y="${padT-4}" text-anchor="middle" font-size="9" fill="var(--rose)">data gap</text>`;
+  }
+  svg.innerHTML = `${gridLines}
+    <path d="${areaPath}" fill="var(--teal-soft)" opacity="0.5"/>
+    <path d="${path}" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+    ${gapMarker}
+    ${dots}${labels}`;
+}
+lineChart("cosmo-chart", ["Jan25","Feb25","Mar25","Apr25","May25","Jun25","Jul26","Aug26"], [41770,73214,82348,80985,58103,75519,24261,12495], {gapAt:5});
+lineChart("season-chart", ["Jan25","Feb25","Mar25","Apr25","May25","Jun25","Jul26","Aug26"], [1783629,2072283,1980506,1842132,1689684,1671923,2508104,2946159], {gapAt:5});
+
+/* ---- 06 sku tables ---- */
+const SKU_HERO = [
+ {name:"50-Pc Non-Slip Velvet Hanger Set, Sturdy, 44.5×23.5cm", brand:"noon_east", sub:"Closet Hanger", gmv:20085, cvr:26.2, instock:100},
+ {name:"Digital Hanging Luggage Scale, LCD, 50Kg", brand:"moment", sub:"Bag", gmv:10313, cvr:34.0, instock:100},
+ {name:"100L Clear Plastic Storage Box w/ Lockable Lid", brand:"esqube", sub:"Storage Box", gmv:9658, cvr:10.5, instock:100},
+ {name:"20-Pack Vacuum Storage Bags w/ Pump", brand:"ecalza", sub:"Space Saver Bag", gmv:9139, cvr:15.2, instock:100},
+ {name:"5-Tier Heavy Duty Iron Storage Rack, White, 90×30×180cm", brand:"auraluxi", sub:"Racks", gmv:8588, cvr:2.7, instock:100},
+ {name:"6-Pack Foldable Blanket Storage Bags w/ Lids", brand:"duniso", sub:"Storage Box", gmv:8113, cvr:10.3, instock:100},
+ {name:"6-Pc Wardrobe Clothes Organizer, Foldable Closet Bins", brand:"duniso", sub:"Foldable Wardrobe", gmv:8059, cvr:8.4, instock:100},
+ {name:"Rolling Garment Rack, Double Rail, Black", brand:"livvy", sub:"Clothes Rack", gmv:7745, cvr:3.7, instock:100},
+ {name:"5-Pack Recyclable Corrugated Moving Boxes, 45×45×70cm", brand:"noon_east", sub:"Storage Box", gmv:7624, cvr:12.1, instock:100},
+ {name:"ZOBER Non-Slip Velvet Hangers, 100-Pack, Black", brand:"zober", sub:"Closet Hanger", gmv:7449, cvr:19.5, instock:100},
+];
+table("tbl-sku-hero", SKU_HERO, [
+  {k:"name", l:true},
+  {k:"brand", l:true, fmt:(v,r)=>v+" · "+r.sub},
+  {k:"gmv", fmt:fmtAED},
+  {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
+  {k:"instock", fmt:v=>v.toFixed(0)+"%"},
+]);
+document.querySelectorAll("#tbl-sku-hero tr").forEach((tr,i)=>{
+  tr.children[1].textContent = SKU_HERO[i].brand + " · " + SKU_HERO[i].sub;
+});
+
+const SKU_CONV = [
+ {name:"Dish Drying Rack, Extendable, Stainless Steel", brand:"anmi", sub:"Racks", gv:2646, cvr:0.0, asp:98.50, opp:22600},
+ {name:"Large Dish Drying Rack, Foldable, 2-Tier", brand:"anmi", sub:"Racks", gv:2473, cvr:0.0, asp:98.50, opp:21800},
+ {name:"Dish Drying Rack, Stainless Steel, Large Capacity", brand:"zimnest", sub:"Racks", gv:4056, cvr:1.0, asp:69.74, opp:21300},
+ {name:"4-Pc Linen Storage Bins, Closet Organizers, 40×27×18cm", brand:"jaexest", sub:"Storage Box", gv:2666, cvr:0.0, asp:79.98, opp:18800},
+ {name:"6-Pc Fabric Closet Organizer Set, Mesh Front", brand:"generic", sub:"Storage Box", gv:2662, cvr:0.0, asp:78.35, opp:18200},
+ {name:"3-Tier Dish Drying Rack, Chopstick Holder", brand:"generic", sub:"Racks", gv:3409, cvr:1.0, asp:68.35, opp:17800},
+ {name:"6-Pack Plastic Storage Basket w/ Handles, Black", brand:"pikengenus", sub:"Storage Basket", gv:2943, cvr:0.0, asp:68.63, opp:17600},
+ {name:"Dish Rack, Rustproof, Space-Saving, 2-Tier", brand:"anmi", sub:"Racks", gv:2242, cvr:0.0, asp:85.50, opp:17000},
+ {name:"2-Tier Stainless Dish Drying Rack + Cutting Board", brand:"eworld", sub:"Racks", gv:3281, cvr:1.0, asp:64.02, opp:14800},
+ {name:"4-Pc Stackable Closet Organizer Basket", brand:"generic", sub:"Closet Shelf Divider", gv:1119, cvr:0.0, asp:149.00, opp:14800},
+];
+table("tbl-sku-conv", SKU_CONV, [
+  {k:"name", l:true},
+  {k:"brand", l:true},
+  {k:"gv", fmt:v=>v.toLocaleString()},
+  {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
+  {k:"asp", fmt:v=>"AED "+v.toFixed(0)},
+  {k:"opp", dir:true, fmt:v=>"+"+fmtAED(v)},
+]);
+document.querySelectorAll("#tbl-sku-conv tr").forEach((tr,i)=>{ tr.children[1].textContent = SKU_CONV[i].brand+" · "+SKU_CONV[i].sub; });
+
+const SKU_STOCK = [
+ {name:"5-Pack Storage Boxes w/ Handles, Carton, 55×35×35cm", brand:"noon_east", sub:"Storage Box", instock:31.2, plat:9915, exp:9915},
+ {name:"Longchamp Medium Organization Bag, Foldable", brand:"longchamp", sub:"Bag", instock:25.0, plat:9159, exp:9388},
+ {name:"Set of 4 Clear Plastic Storage Boxes, Lockable Lids", brand:"cosmoplast", sub:"Storage Box", instock:37.5, plat:6846, exp:7620},
+ {name:"3-Pc Borosilicate Glass Food Container Set, Airtight", brand:"noon_east", sub:"Food Containers", instock:12.5, plat:6527, exp:6773},
+ {name:"Vacuum Storage Bags, 6pc, 3-Size Set w/ Pump", brand:"toshionics", sub:"Space Saver Bag", instock:6.2, plat:6013, exp:6636},
+ {name:"Foldable Storage Organizer, 4-Tier, 137×71×34cm", brand:"sky_touch", sub:"Racks", instock:25.0, plat:4522, exp:4522},
+ {name:"10-Pack Recyclable Corrugated Moving Boxes, 45×45×70cm", brand:"noon_east", sub:"Storage Box", instock:50.0, plat:4339, exp:4339},
+ {name:"28-Pc Clear Drawer Organizer Trays, 4 Sizes", brand:"pikengenus", sub:"Cabinet/Drawer Org.", instock:18.8, plat:4223, exp:4362},
+];
+table("tbl-sku-stock", SKU_STOCK, [
+  {k:"name", l:true},
+  {k:"brand", l:true},
+  {k:"instock", fmt:v=>v.toFixed(0)+"%"},
+  {k:"plat", dir:true, fmt:v=>"-"+fmtAED(v)},
+  {k:"exp", dir:true, fmt:v=>"-"+fmtAED(v)},
+]);
+document.querySelectorAll("#tbl-sku-stock tr").forEach((tr,i)=>{ tr.children[1].textContent = SKU_STOCK[i].brand+" · "+SKU_STOCK[i].sub; });
+
+/* ---- 08 stock bars ---- */
+bar("bar-stock", [
+  {label:"Storage Box", value:42071, sub:""},
+  {label:"Food Containers", value:32925, sub:""},
+  {label:"Racks", value:30465, sub:""},
+  {label:"Space Saver Bag", value:29947, sub:""},
+  {label:"Bag", value:15040, sub:""},
+  {label:"Cabinet/Drawer Org.", value:9870, sub:""},
+].map(r=>({...r, color:"var(--rose)"})), {fmt:v=>fmtAED(v)+"/mo"});
+
+/* ---- 09 seller ---- */
+bar("bar-seller-conc", [
+  {label:"Top 1 seller", value:21.7},
+  {label:"Top 5 sellers", value:38.0},
+  {label:"Top 10 sellers", value:45.0},
+  {label:"Top 20 sellers", value:54.7},
+].map(r=>({...r, color:"var(--teal)"})), {max:100, fmt:v=>v.toFixed(1)+"%"});
+
+const BIZMODEL = [
+ {name:"FBN (Fulfilled by Noon)", share:68.3, cvr:3.94, cancel:2.64, ret:3.96},
+ {name:"Retail", share:22.1, cvr:8.34, cancel:2.63, ret:2.88},
+ {name:"DSE", share:5.7, cvr:4.05, cancel:4.16, ret:5.18},
+ {name:"SBB (Sold &amp; shipped by biz.)", share:3.9, cvr:7.33, cancel:12.03, ret:4.49},
+];
+table("tbl-bizmodel", BIZMODEL, [
+  {k:"name", l:true},
+  {k:"share", fmt:v=>v.toFixed(1)+"%"},
+  {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
+  {k:"cancel", fmt:v=>v.toFixed(1)+"%"},
+  {k:"ret", fmt:v=>v.toFixed(1)+"%"},
+]);
+
+/* ---- 10 ctr / discount ---- */
+bar("bar-ctr", [
+  {name:"Storage Basket", v:14.34},{name:"Racks", v:7.73},{name:"Storage Box", v:6.69},
+  {name:"Foldable Wardrobe", v:5.89},{name:"Clothes Rack", v:5.02},{name:"Bag", v:5.35},
+  {name:"Spice Jars", v:4.86},{name:"Hanging Closet Org.", v:4.72},{name:"Lunch Box", v:3.59},
+  {name:"Storage Set", v:3.34},{name:"Food Containers", v:3.43},{name:"Cabinet/Drawer Org.", v:3.66},
+  {name:"Lunch Bag", v:3.50},{name:"Closet Clothes Hanger", v:3.22},
+].map(r=>({label:r.name, value:r.v, color: r.v<5.05*0.85? "var(--rose)":"var(--teal)"})), {fmt:v=>v.toFixed(1)+"%"});
+
+bar("bar-discount", [
+  {label:"0% discount", value:5.91},
+  {label:"1-10%", value:6.19},
+  {label:"11-20%", value:4.99},
+  {label:"21-30%", value:5.55},
+  {label:"31-50%", value:5.18},
+  {label:"50%+", value:5.03},
+].map(r=>({...r, color: r.value>=5.9? "var(--moss)":"var(--steel)"})), {max:7, fmt:v=>v.toFixed(1)+"% CVR"});
+
+/* ---- 12 opportunity universe ---- */
+const OPP = [
+  {b:"Conversion recovery", m:"Big-3 subcat CVR restored to Jul'26 / FY25H1 level, current GV & ASP held", v:485000, conf:"High"},
+  {b:"Ads/Visibility (organic CTR)", m:"7 subcats' CTR raised to category avg 5.05%, current impressions & CVR held", v:437000, conf:"Medium-High"},
+  {b:"Fulfilment (Express OOS)", m:"express_gmv_loss field, Aug'26 monthly-equiv (ceiling, overlaps Stock below)", v:280000, conf:"High (measured)"},
+  {b:"Stock / availability", m:"platform_gmv_loss field, Aug'26 monthly-equiv (conservative headline figure)", v:192000, conf:"High (measured)"},
+  {b:"Assortment / white space", m:"200-400 & 400+ AED bands, selling-SKU rate to category avg, demand-evidenced", v:100000, conf:"Low-Medium"},
+  {b:"Brand acquisition/recovery", m:"Cosmoplast storage_box visibility restored to FY25 H1 avg impressions", v:53000, conf:"Medium"},
+  {b:"Seller quality", m:"SBB cancellation rate reduced from 12.0% to blended 3.4% avg", v:10000, conf:"Medium"},
+  {b:"Traffic (low-GV/high-CVR SKUs)", m:"Small subcats (Food Saver, Aluminium Foil, etc.) — real but under 1% share each", v:15000, conf:"Low"},
+  {b:"Pricing / discount reallocation", m:"No CVR benefit found above 10% discount — margin lever, not GMV; not sized", v:0, conf:"n/a — do not pursue as GMV lever"},
+  {b:"Promotion (incremental)", m:"No evidence of incremental demand creation from deeper discount tiers", v:0, conf:"n/a — evidence against"},
+  {b:"SKU rationalization", m:"22,152 zero-sale SKUs — efficiency/catalog-health lever, not direct GMV", v:0, conf:"n/a — opex lever"},
+];
+bar("bar-opp", OPP.filter(o=>o.v>0).sort((a,b)=>b.v-a.v).map(o=>({label:o.b, value:o.v, color:"var(--amber)"})), {fmt:v=>fmtAED(v)+"/mo"});
+table("tbl-opp", OPP, [
+  {k:"b", l:true},
+  {k:"m", l:true},
+  {k:"v", fmt:v=>v>0?fmtAED(v)+"/mo":"—"},
+  {k:"conf", fmt:v=>v},
+]);
+
+bar("bar-plan-pools", [
+  {label:"Conversion (Big-3)", value:485000},
+  {label:"CTR / Discoverability", value:437000},
+  {label:"OOS / Availability", value:192000},
+  {label:"Assortment white-space", value:100000},
+  {label:"Brand recovery (Cosmoplast)", value:53000},
+  {label:"Seller quality", value:10000},
+].map(r=>({...r, color:"var(--amber)"})), {fmt:v=>fmtAED(v)+"/mo"});
+
+/* ---- 13 actions ---- */
+const ACTIONS = [
+ {p:"p0", title:"Fix the conversion collapse in Storage Box, Racks &amp; Storage Basket", gmv:"AED 485K–538K/mo",
+  ev:"CVR fell from 6.3%→3.7% (Storage Box), 3.9%→2.4% (Racks) and 5.4%→1.3% (Storage Basket) since mid-2025, while visits to all three kept growing. Six near-identical dish-drying-rack listings (anmi, zimnest, generic, eworld) converting 0–2% are the clearest single diagnostic starting point inside Racks.",
+  sub:"Storage Box, Racks, Storage Basket", who:"anmi, zimnest, generic, eworld, jaexest (dish racks &amp; storage bins)",
+  act:"Run a PDP/content/price-perception audit on the top 20 highest-visit, lowest-CVR SKUs in these 3 subcategories; verify no attribute/price-sync fault; consolidate or differentiate duplicate dish-rack listings.",
+  owner:"Category Manager + Content/Catalog + Growth (CRO)", horizon:"2–6 weeks"},
+ {p:"p0", title:"Close the click-through gap in 7 mid-size subcategories", gmv:"AED 437K/mo",
+  ev:"Food Containers, Closet Hangers, Lunch Box, Lunch Bag, Cabinet/Drawer Organizers, Storage Set and Closet Org. Systems all show CTR 3.0–3.7% vs the 5.05% category average, despite 250K–1.6M monthly impressions and 80%+ search-driven traffic — an on-page/relevance problem, not a reach problem.",
+  sub:"Food Containers, Closet Clothes Hanger, Lunch Box/Bag, Cabinet/Drawer Organization, Storage Set", who:"Category-wide listing quality",
+  act:"Title, thumbnail and price-badge optimisation plus a search-relevance/keyword audit on page-1 listings in these 7 subcategories. This is a content/search fix, not a paid-media fix.",
+  owner:"Category Manager + SEO/Content + Search Merchandising", horizon:"4–6 weeks"},
+ {p:"p1", title:"Recover Cosmoplast's collapsed visibility in Storage Box", gmv:"AED 46K–60K/mo",
+  ev:"Cosmoplast (noon Retail) GMV fell from ~AED 75K/mo (FY25 H1 avg) to AED 12.5K/mo (Aug'26, −83%) while instock held at ~90%+. Listing impressions collapsed from ~330–420K/mo to 94K (Jul'26) to 40K (Aug'26) — an 85–90% drop with no matching demand or stock cause.",
+  sub:"Storage Box", who:"Cosmoplast (noon Retail)",
+  act:"Audit for delisting, catalog suppression, buy-box loss or search de-ranking on the noon Retail Cosmoplast catalog; escalate to Retail Merchandising and Search Ops.",
+  owner:"Category Manager + noon Retail Merchandising + Search Ops", horizon:"2–4 weeks audit, 4–8 weeks recovery"},
+ {p:"p1", title:"Emergency-replenish the top 15 chronically out-of-stock SKUs", gmv:"AED 75K–95K/mo",
+  ev:"These 15 SKUs carry 39% of all category platform_gmv_loss; several sit at 6–37% instock (noon_east storage cartons, Cosmoplast box sets, Toshionics vacuum bags) despite real, measured demand.",
+  sub:"Storage Box, Space Saver Bag, Food Containers, Cabinet/Drawer Organization", who:"noon_east, cosmoplast, toshionics, longchamp, pikengenus, sky_touch",
+  act:"Named-SKU replenishment escalation with owning sellers/warehouses; pause search-boosting on any SKU that stays chronically OOS after escalation.",
+  owner:"Category Manager + Inventory Planning + named Sellers", horizon:"2–6 weeks"},
+ {p:"p1", title:"Close the Express fulfilment instock gap", gmv:"up to AED 280K/mo (ceiling, overlaps Action 4)",
+  ev:"Express-eligible instock is 88.4% vs 95.6% for standard delivery — the single largest stockout lens in the data (express_gmv_loss AED 280K/mo vs platform_gmv_loss AED 192K/mo).",
+  sub:"Storage Box, Food Containers, Racks, Space Saver Bag", who:"Top FBN/DSE sellers by express loss",
+  act:"Prioritise express-warehouse replenishment for the top loss SKUs; tighten express-eligibility SLAs with the FBN/DSE sellers carrying the largest express loss.",
+  owner:"Category Manager + Supply Chain/Inventory + Seller Ops", horizon:"4–8 weeks"},
+ {p:"p1", title:"Protect and scale the Space Saver Bag / Storage Box breakout — without discounting", gmv:"AED 30K–50K/mo incremental",
+  ev:"These two subcategories delivered 39% of all category GMV growth vs baseline. Space Saver Bag ASP is up 54% while still gaining share — this is mix-shift into better kits, not promo-fuelled growth, and deeper discounting shows no CVR benefit anywhere in the category (§10).",
+  sub:"Space Saver Bag, Storage Box", who:"Category-wide",
+  act:"Protect stock and search visibility on the current winning SKUs; expand assortment depth at the 100–200 AED tier where instock is comparatively weaker (94.6%). Do not discount to accelerate — the data doesn't support it.",
+  owner:"Category Manager + Buying", horizon:"Ongoing / quarterly"},
+ {p:"p2", title:"Test curated premium assortment in the 200–400 &amp; 400+ AED bands", gmv:"AED 80K–120K/mo (low confidence)",
+  ev:"These bands show the category's fastest visit growth (+8%, +36% vs baseline) but the thinnest assortment (667 &amp; 169 SKUs, only 10–13% selling) and weakest instock (92.2%, 90.7%) of any band — a demand-ahead-of-assortment signal concentrated in Racks, Clothes Rack and Cabinet/Drawer Organization, where esqube and teuuea already prove the tier converts.",
+  sub:"Racks, Clothes Rack, Cabinet/Drawer Organization", who:"Candidates: brands proven in-tier (esqube, teuuea) plus 15–25 new curated premium SKUs",
+  act:"Source and test 15–25 curated premium SKUs in the proven subcategories before a broader roll-out; no competitor data exists to cross-validate, so treat as a test, not a commit.",
+  owner:"Category Manager + Brand/Vendor Acquisition", horizon:"1–2 quarters"},
+ {p:"p2", title:"Fix the SBB seller cancellation rate", gmv:"~AED 10K/mo direct + CX/retention upside",
+  ev:"SBB (sold &amp; shipped by business) sellers cancel 12.0% of GMV vs 2.6–4.2% for FBN/Retail/DSE — 3–4× the category norm, on 3.9% of category GMV.",
+  sub:"Category-wide, SBB channel", who:"Top SBB sellers by cancellation volume",
+  act:"Audit top SBB sellers for cancellation drivers (stock sync, pricing errors); apply SLA penalties or migrate chronically high-cancel SKUs to FBN.",
+  owner:"Category Manager + Seller Operations/Quality", horizon:"4–8 weeks"},
+ {p:"p2", title:"Stop expanding discount depth — reallocate to margin", gmv:"Margin lever (not booked as GMV)",
+  ev:"0% and 1–10% discount tiers convert at 5.9–6.2%, the two best in the category; every deeper tier (11–50%+) converts at 5.0–5.6%, all lower. ~AED 780K/mo of GMV currently sells at 11–50%+ discount with no evidenced conversion benefit.",
+  sub:"Category-wide", who:"SKUs currently discounted &gt;10% with flat/negative CVR",
+  act:"A/B-test trimming discount on a sample of &gt;10%-discounted, low-CVR-lift SKUs; redirect saved margin rather than expanding blanket promotions.",
+  owner:"Category Manager + Pricing", horizon:"1 quarter (test)"},
+ {p:"p3", title:"Rationalize the 22,152-SKU zero-sales long tail", gmv:"Ops/content efficiency (not direct GMV)",
+  ev:"77.0% of listed SKUs sold zero units in Aug'26; selling-SKU rate fell from 29.9% (FY25 H1) to 23.0% even as total listings grew 27%. Largest dead-stock pools sit in Food Containers (3,309), Racks (2,766) and Lunch Box (2,194).",
+  sub:"Food Containers, Racks, Lunch Box, Storage Box, Closet Clothes Hanger", who:"Long-tail zero-sale SKUs, 2+ consecutive months",
+  act:"Delist or deprioritise zero-sale SKUs with no stock/content issue explaining the outcome; redeploy freed content/photography/ops capacity to Actions 1–2.",
+  owner:"Category Manager + Catalog Ops", horizon:"Ongoing / quarterly"},
+];
+document.getElementById("action-list").innerHTML = ACTIONS.map((a,i)=>`
+  <div class="card action ${a.p}">
+    <div class="rank">${String(i+1).padStart(2,"0")}</div>
+    <div>
+      <div class="action-top">
+        <h4>${a.title}</h4>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="gmv">${a.gmv}</span>
+          <span class="pill ${a.p}">${a.p.toUpperCase()}</span>
+        </div>
+      </div>
+      <p class="ev"><b class="hl">Evidence:</b> ${a.ev}</p>
+      <div class="action-meta">
+        <div><b>Subcategory</b>${a.sub}</div>
+        <div><b>Brand / SKU</b>${a.who}</div>
+        <div><b>Action</b>${a.act}</div>
+        <div><b>Owner</b>${a.owner}</div>
+        <div><b>Time horizon</b>${a.horizon}</div>
+      </div>
+    </div>
+  </div>
+`).join("");
+
+/* ---- scrollspy ---- */
+const links = [...document.querySelectorAll("#navlinks a")];
+const targets = links.map(l=>document.querySelector(l.getAttribute("href")));
+function onScroll(){
+  let idx = 0;
+  targets.forEach((t,i)=>{ if(t && t.getBoundingClientRect().top < 140) idx = i; });
+  links.forEach((l,i)=>l.classList.toggle("active", i===idx));
+}
+document.addEventListener("scroll", onScroll, {passive:true});
+onScroll();
+</script>

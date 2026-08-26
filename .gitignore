@@ -1,0 +1,2 @@
+# Regenerable intermediate data caches (rebuild via analysis/build*.py from the source xlsx)
+analysis/*.parquet
