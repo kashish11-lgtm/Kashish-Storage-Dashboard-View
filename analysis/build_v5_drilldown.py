@@ -7,12 +7,17 @@ F = 30.4/16  # daily-rate monthly-equiv factor for Aug (16 days)
 
 def agg(df):
     gmv=df['gmv_aed'].sum(); gv=df['gv'].sum(); orders=df['orders'].sum(); units=df['units'].sum()
+    impressions=df['impressions'].sum(); search_impressions=df['search_impressions'].sum(); atc=df['atc'].sum()
     instock = df['live_days'].sum()/df['days_in_month'].sum()*100 if df['days_in_month'].sum() else 0
     n_skus=df['sku'].nunique(); n_selling=df.loc[df['gmv_aed']>0,'sku'].nunique()
     return dict(
         gmv=round(gmv*F), cvr=round(orders/gv*100,2) if gv else 0, asp=round(gmv/units,2) if units else 0,
         instock=round(instock,1), skus=int(n_skus), selling=int(n_selling),
-        sellpct=round(n_selling/n_skus*100,1) if n_skus else 0
+        sellpct=round(n_selling/n_skus*100,1) if n_skus else 0,
+        gv=round(gv*F), units=round(units*F),
+        impressions=round(impressions*F), search_impressions=round(search_impressions*F),
+        si_share=round(search_impressions/impressions*100,1) if impressions else 0,
+        atc=round(atc*F), atc_pct=round(atc/gv*100,1) if gv else 0,
     )
 
 # ---- Level 1: PT ----
