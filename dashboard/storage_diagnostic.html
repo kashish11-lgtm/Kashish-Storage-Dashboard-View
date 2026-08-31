@@ -387,7 +387,7 @@ table.heat-sub td.hc{border-radius:3px;}
     <!-- ================= 04 FUNNEL ================= -->
     <div class="section alt" id="funnel">
       <div class="section-head"><span class="idx">04</span><h2>Funnel Diagnosis</h2></div>
-      <p class="dek">Impressions → GV → ATC → Orders → GMV, category-wide, Aug'26 vs Jul'26.</p>
+      <p class="dek">Impressions → Search Impressions → GV → ATC → Units → GMV, category-wide, Aug'26 vs Jul'26.</p>
       <div class="grid g2" style="margin-top:20px;">
         <div class="card" style="padding:20px;">
           <div class="eyebrow" style="margin-bottom:12px;">Funnel step change, MoM</div>
@@ -414,7 +414,7 @@ table.heat-sub td.hc{border-radius:3px;}
 
       <span class="tag-h" style="margin-top:26px;">04.1 · The funnel, drawn — and exactly where each stage leaks</span>
       <div class="card" style="padding:24px;">
-        <svg id="funnel-shape" width="100%" height="290" viewBox="0 0 900 290" preserveAspectRatio="xMidYMid meet"></svg>
+        <svg id="funnel-shape" width="100%" height="340" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet"></svg>
       </div>
 
       <div class="grid g3" style="margin-top:16px;">
@@ -1105,9 +1105,10 @@ const BAND_LABELS = ["<25","25-50","50-100","100-200","200-400","400+"];
 /* ---- 04 funnel ---- */
 bar("bar-funnel", [
   {label:"Impressions", value:-1.3, color:"var(--rose)"},
+  {label:"Search Impressions", value:-1.5, color:"var(--rose)"},
   {label:"GV (visits)", value:27.2, color:"var(--moss)"},
   {label:"ATC", value:4.2, color:"var(--moss)"},
-  {label:"Orders", value:15.0, color:"var(--moss)"},
+  {label:"Units", value:14.6, color:"var(--moss)"},
   {label:"GMV", value:17.5, color:"var(--moss)"},
 ], {max:30, fmt:v=>fmtPct(v)});
 
@@ -1526,23 +1527,24 @@ const TYPE_SKUS = {"storage_box||Foldable Fabric Storage Bag":[{"n":"6 Pack Clot
   const svg = document.getElementById("funnel-shape");
   const stages = [
     {label:"Impressions", value:22786704, retained:100},
-    {label:"GV (visits)", value:1151085, retained:5.05},
+    {label:"Search Impressions", value:17835313, retained:78.27},
+    {label:"GV (visits)", value:1151085, retained:6.45},
     {label:"ATC", value:173688, retained:15.09},
-    {label:"Orders", value:54720, retained:31.50},
+    {label:"Units", value:64834, retained:37.33},
   ];
-  const W=900,H=290, top=30, rowH=58, gap=8, maxW=760, minW=170, cx=W/2;
+  const W=900,H=340, top=26, rowH=48, gap=7, maxW=760, minW=150, cx=W/2;
   let els="";
   stages.forEach((s,i)=>{
     const w = maxW - i*((maxW-minW)/(stages.length-1));
     const y = top + i*(rowH+gap);
     const x = cx - w/2;
-    const colors = ["var(--steel-2)","var(--teal)","var(--amber)","var(--moss)"];
+    const colors = ["var(--steel-2)","var(--steel)","var(--teal)","var(--amber)","var(--moss)"];
     els += `<rect x="${x}" y="${y}" width="${w}" height="${rowH}" rx="8" fill="${colors[i]}" opacity="0.88"/>`;
     els += `<text x="${cx}" y="${y+24}" text-anchor="middle" font-size="13" font-weight="700" fill="white">${s.label}</text>`;
     els += `<text x="${cx}" y="${y+42}" text-anchor="middle" font-size="12" fill="white">${s.value.toLocaleString()}</text>`;
     if(i>0) els += `<text x="${cx+w/2+16}" y="${y+34}" font-size="11.5" fill="var(--steel)">${s.retained.toFixed(2)}% of prior stage</text>`;
   });
-  els += `<text x="${cx}" y="${top+stages.length*(rowH+gap)+18}" text-anchor="middle" font-size="12" fill="var(--steel)">→ GMV AED 2.95M/mo · AOV AED 53.84 · overall Impression→Order rate 0.24%</text>`;
+  els += `<text x="${cx}" y="${top+stages.length*(rowH+gap)+18}" text-anchor="middle" font-size="12" fill="var(--steel)">→ GMV AED 2.95M/mo · AOV AED 53.84 · overall Impression→Unit rate 0.28%</text>`;
   svg.innerHTML = els;
 })();
 const LEAK_DETAIL = {"ctr":{"food_containers":{"worst":[{"brand":"teuuea","gmv_mo":10497,"impr":60415,"ctr":1.2},{"brand":"snh_packing","gmv_mo":1748,"impr":17319,"ctr":1.81},{"brand":"noon_east","gmv_mo":50204,"impr":307963,"ctr":1.81},{"brand":"sky_touch","gmv_mo":3360,"impr":22068,"ctr":2.33}],"best":[{"brand":"homestar","gmv_mo":6722,"impr":16122,"ctr":6.26},{"brand":"alsaqer","gmv_mo":4788,"impr":20843,"ctr":5.19},{"brand":"locknlock","gmv_mo":7788,"impr":59948,"ctr":4.93}],"cat_avg":5.05},"closet_clothes_hanger":{"worst":[{"brand":"noon_east","gmv_mo":51623,"impr":148884,"ctr":1.7},{"brand":"feelings","gmv_mo":30930,"impr":104582,"ctr":3.01},{"brand":"duniso","gmv_mo":15618,"impr":45146,"ctr":3.24},{"brand":"sky_touch","gmv_mo":5065,"impr":16307,"ctr":3.27}],"best":[{"brand":"red_dot_gift","gmv_mo":9097,"impr":18584,"ctr":4.81},{"brand":"generic","gmv_mo":19385,"impr":49051,"ctr":4.14},{"brand":"yanek","gmv_mo":23159,"impr":36244,"ctr":3.6}],"cat_avg":5.05},"lunch_box":{"worst":[{"brand":"homify","gmv_mo":9162,"impr":83144,"ctr":0.56},{"brand":"milton","gmv_mo":18666,"impr":370983,"ctr":2.42},{"brand":"stor","gmv_mo":814,"impr":27788,"ctr":2.53},{"brand":"omie","gmv_mo":7443,"impr":25815,"ctr":2.79}],"best":[{"brand":"ggerou","gmv_mo":5439,"impr":39284,"ctr":5.07},{"brand":"royalford","gmv_mo":3108,"impr":36189,"ctr":5.01},{"brand":"arabest","gmv_mo":3757,"impr":22015,"ctr":4.96}],"cat_avg":5.05},"lunch_bag":{"worst":[{"brand":"mi_vaza","gmv_mo":9452,"impr":153467,"ctr":2.07},{"brand":"thermos","gmv_mo":1560,"impr":34773,"ctr":2.59},{"brand":"ssovi","gmv_mo":2375,"impr":20528,"ctr":2.82},{"brand":"mahmir","gmv_mo":3932,"impr":30916,"ctr":3.34}],"best":[{"brand":"cytheria","gmv_mo":2840,"impr":27537,"ctr":4.92},{"brand":"munkan","gmv_mo":3130,"impr":21630,"ctr":4.87},{"brand":"generic","gmv_mo":9183,"impr":45260,"ctr":4.59}],"cat_avg":5.05},"cabinet_drawer_organization":{"worst":[{"brand":"eworld","gmv_mo":8002,"impr":64933,"ctr":1.39},{"brand":"sky_touch","gmv_mo":7522,"impr":56202,"ctr":3.18},{"brand":"haidue","gmv_mo":15257,"impr":40598,"ctr":3.39},{"brand":"toshionics","gmv_mo":5813,"impr":30332,"ctr":3.6}],"best":[{"brand":"generic","gmv_mo":9485,"impr":39981,"ctr":3.71},{"brand":"duniso","gmv_mo":4996,"impr":29852,"ctr":3.66},{"brand":"toshionics","gmv_mo":5813,"impr":30332,"ctr":3.6}],"cat_avg":5.05},"storage_set":{"worst":[{"brand":"noon","gmv_mo":5307,"impr":26707,"ctr":2.2},{"brand":"feelings","gmv_mo":10903,"impr":112725,"ctr":2.26},{"brand":"home_box","gmv_mo":2257,"impr":20912,"ctr":2.4},{"brand":"generic","gmv_mo":7107,"impr":22652,"ctr":3.58}],"best":[{"brand":"generic","gmv_mo":7107,"impr":22652,"ctr":3.58},{"brand":"home_box","gmv_mo":2257,"impr":20912,"ctr":2.4},{"brand":"feelings","gmv_mo":10903,"impr":112725,"ctr":2.26}],"cat_avg":5.05},"closet_organization_systems":{"worst":[{"brand":"urbazaar","gmv_mo":11803,"impr":80946,"ctr":1.45},{"brand":"duniso","gmv_mo":3964,"impr":17751,"ctr":1.62},{"brand":"xiuwoo","gmv_mo":5154,"impr":16930,"ctr":5.22}],"best":[{"brand":"xiuwoo","gmv_mo":5154,"impr":16930,"ctr":5.22},{"brand":"duniso","gmv_mo":3964,"impr":17751,"ctr":1.62},{"brand":"urbazaar","gmv_mo":11803,"impr":80946,"ctr":1.45}],"cat_avg":5.05}},"atc":{"racks":{"worst":[{"brand":"topyich","gmv_mo":3528,"gv":2919,"atcr":1.06},{"brand":"anmi","gmv_mo":5948,"gv":11158,"atcr":1.32},{"brand":"zimnest","gmv_mo":18500,"gv":12382,"atcr":2.94},{"brand":"dunekart","gmv_mo":3965,"gv":5699,"atcr":3.46}],"best":[{"brand":"toshionics","gmv_mo":34109,"gv":3211,"atcr":18.75},{"brand":"dubaigallery","gmv_mo":24310,"gv":2104,"atcr":15.05},{"brand":"duniso","gmv_mo":38231,"gv":10214,"atcr":14.52}],"cat_avg":15.09},"storage_box":{"worst":[{"brand":"jaexest","gmv_mo":456,"gv":2683,"atcr":0.15},{"brand":"moment","gmv_mo":2188,"gv":4487,"atcr":3.52},{"brand":"soten","gmv_mo":14950,"gv":7123,"atcr":3.54},{"brand":"generic","gmv_mo":28698,"gv":9321,"atcr":6.87}],"best":[{"brand":"noon_east","gmv_mo":51549,"gv":5125,"atcr":19.34},{"brand":"marcolo","gmv_mo":39776,"gv":5746,"atcr":17.64},{"brand":"esqube","gmv_mo":35599,"gv":5249,"atcr":16.17}],"cat_avg":15.09},"storage_basket":{"worst":[{"brand":"pikengenus","gmv_mo":652,"gv":2943,"atcr":0.82},{"brand":"arabest","gmv_mo":841,"gv":3503,"atcr":1.43},{"brand":"haidue","gmv_mo":1275,"gv":2368,"atcr":1.86},{"brand":"eworld","gmv_mo":1404,"gv":2142,"atcr":2.29}],"best":[{"brand":"gudoo","gmv_mo":4226,"gv":2159,"atcr":8.01},{"brand":"generic","gmv_mo":10225,"gv":8681,"atcr":3.27},{"brand":"anmi","gmv_mo":5451,"gv":2410,"atcr":2.82}],"cat_avg":15.09}},"cvr":{"racks":{"worst":[{"brand":"topyich","gmv_mo":3528,"gv":2919,"cvr":0.27},{"brand":"anmi","gmv_mo":5948,"gv":11158,"cvr":0.37},{"brand":"dunekart","gmv_mo":3965,"gv":5699,"cvr":0.77},{"brand":"yoawllty","gmv_mo":9583,"gv":2679,"cvr":1.05}],"best":[{"brand":"toshionics","gmv_mo":34109,"gv":3211,"cvr":4.73},{"brand":"haidue","gmv_mo":29094,"gv":6066,"cvr":4.67},{"brand":"dubaigallery","gmv_mo":24310,"gv":2104,"cvr":3.85}],"cat_avg":4.75},"storage_basket":{"worst":[{"brand":"pikengenus","gmv_mo":652,"gv":2943,"cvr":0.17},{"brand":"arabest","gmv_mo":841,"gv":3503,"cvr":0.23},{"brand":"haidue","gmv_mo":1275,"gv":2368,"cvr":0.59},{"brand":"generic","gmv_mo":10225,"gv":8681,"cvr":0.93}],"best":[{"brand":"gudoo","gmv_mo":4226,"gv":2159,"cvr":2.32},{"brand":"anmi","gmv_mo":5451,"gv":2410,"cvr":1.29},{"brand":"eworld","gmv_mo":1404,"gv":2142,"cvr":0.93}],"cat_avg":4.75},"storage_box":{"worst":[{"brand":"jaexest","gmv_mo":456,"gv":2683,"cvr":0.04},{"brand":"moment","gmv_mo":2188,"gv":4487,"cvr":0.91},{"brand":"soten","gmv_mo":14950,"gv":7123,"cvr":1.35},{"brand":"generic","gmv_mo":28698,"gv":9321,"cvr":2.04}],"best":[{"brand":"noon_east","gmv_mo":51549,"gv":5125,"cvr":8.25},{"brand":"marcolo","gmv_mo":39776,"gv":5746,"cvr":6.14},{"brand":"esqube","gmv_mo":35599,"gv":5249,"cvr":6.02}],"cat_avg":4.75},"lunch_box":{"worst":[{"brand":"milton","gmv_mo":18666,"gv":8993,"cvr":2.51},{"brand":"beola","gmv_mo":15225,"gv":3294,"cvr":2.58},{"brand":"generic","gmv_mo":27197,"gv":8325,"cvr":3.14},{"brand":"toshionics","gmv_mo":5900,"gv":3218,"cvr":3.6}],"best":[{"brand":"toshionics","gmv_mo":5900,"gv":3218,"cvr":3.6},{"brand":"generic","gmv_mo":27197,"gv":8325,"cvr":3.14},{"brand":"beola","gmv_mo":15225,"gv":3294,"cvr":2.58}],"cat_avg":4.75}}};
