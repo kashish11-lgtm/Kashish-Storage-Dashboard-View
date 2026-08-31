@@ -230,7 +230,7 @@ for pst in ALL_PSTS:
         sg = sg[sg['gmv'] > 0].sort_values('gmv', ascending=False).head(8)
         srows = []
         for _, r in sg.iterrows():
-            srows.append({'n': clean_name(r['product_name']),
+            srows.append({'n': clean_name(r['product_name']), 'sid': r['sku'],
                           'b': r['brand'] if pd.notna(r['brand']) else 'unbranded_generic',
                           'gmv': round(r['gmv'] * F),
                           'cvr': round(r['orders'] / r['gv'] * 100, 1) if r['gv'] else 0,

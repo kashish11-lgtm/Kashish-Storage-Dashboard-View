@@ -67,7 +67,7 @@ for key, brands in L3.items():
         rows=[]
         for _,r in sg.iterrows():
             rows.append({
-                'name': clean_name(r['product_name']),
+                'name': clean_name(r['product_name']), 'sid': r['sku'],
                 'gmv': round(r['gmv']*F), 'cvr': round(r['orders']/r['gv']*100,1) if r['gv'] else 0,
                 'instock': round(r['instock'],0), 'units': int(r['units'])
             })
