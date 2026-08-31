@@ -393,7 +393,7 @@ table.heat-sub td.hc{border-radius:3px;}
       <span class="tag-h" style="margin-top:26px;">03.2 · Product types within every subcategory — what to actually buy, and at what price</span>
       <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">All 44 subcategories with GMV, Jun–Aug 2026. Product names grouped into types by keyword pattern (e.g. "clear plastic box" vs "cardboard moving box" within Storage Box). The 6 largest subcategories use hand-reviewed type labels; the rest are auto-clustered from the most GMV-significant keyword in their listing titles — both drill the same way. Price range is the 25th–75th percentile of listed price within that type, not the full spread. Three clickable levels: <b class="hl">click a subcategory</b> to see its product types, <b class="hl">click a type</b> to go one level deeper — capacity bands where the title states a size (e.g. Storage Box › Clear Plastic Box › 80–120L), or top SKUs where it doesn't.</p>
       <div class="table-wrap" style="margin-top:10px; max-height:640px; overflow-y:auto;"><table><thead><tr>
-        <th class="l">Subcategory</th><th>GMV (Jun–Aug)</th><th>Types</th><th>CVR</th><th>Price range</th><th>SKUs</th>
+        <th class="l">Subcategory</th><th>GMV (Jun–Aug)</th><th>Types</th><th>CVR</th><th>Price range</th><th>Selling SKUs</th>
       </tr></thead><tbody id="tbl-pst-types"></tbody></table></div>
       <div class="callout" style="margin-top:14px; max-width:82ch;"><b>No live Noon.com browsing was used</b> — this dataset has no product-URL field, and browsing tens of thousands of individual listing pages isn't practical at this scale. Every number here comes from the structured fields already in the source (product_name, price, GMV, GV, orders) — capacity is parsed from the listing title text, which is why some types drill into capacity and others (where titles don't state a size) drill into SKUs instead.</div>
     </div>
@@ -1497,10 +1497,11 @@ const TYPE_SKUS = {"storage_box||Foldable Fabric Storage Bag":[{"n":"6 Pack Clot
     const rows = PRODUCT_TYPES_BY_PST[pst];
     const gmv = rows.reduce((a,r)=>a+r.gmv,0);
     const skus = rows.reduce((a,r)=>a+r.skus,0);
+    const selling = rows.reduce((a,r)=>a+(r.selling||0),0);
     const cvr = gmv ? rows.reduce((a,r)=>a+r.cvr*r.gmv,0)/gmv : 0;
     const p25 = Math.min(...rows.map(r=>r.p25));
     const p75 = Math.max(...rows.map(r=>r.p75));
-    return {name:ALL_TYPES_LABELS[pst], key:pst, gmv, types:rows.length, cvr, p25, p75, skus};
+    return {name:ALL_TYPES_LABELS[pst], key:pst, gmv, types:rows.length, cvr, p25, p75, skus, selling};
   }).sort((a,b)=>b.gmv-a.gmv);
 
   table("tbl-pst-types", PST_TYPE_SUMMARY, [
@@ -1509,7 +1510,7 @@ const TYPE_SKUS = {"storage_box||Foldable Fabric Storage Bag":[{"n":"6 Pack Clot
     {k:"types", fmt:v=>v+" types"},
     {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
     {k:"p25", fmt:(v,r)=>"AED "+v+"–"+r.p75},
-    {k:"skus", fmt:v=>v.toLocaleString()},
+    {k:"skus", fmt:(v,r)=>(r.selling||0).toLocaleString()+" / "+v.toLocaleString()},
   ]);
 
   // Level 2: clicking a subcategory renders its product-type table (lazily),
