@@ -53,12 +53,17 @@ def yoy_matrix(cur, prev):
         out.append(row)
     return out
 
+def delta_matrix(cur, prev):
+    """Absolute count delta (cur - prev), not %% -- unlike GMV, a SKU count
+    delta is meaningful even from a zero base, so no 'new' sentinel needed."""
+    return [[cur[i][j] - int(prev.values[i][j]) for j in range(len(cur[i]))] for i in range(len(cur))]
+
 HEAT_SUBS = [p.replace('_',' ').title() for p in all_psts]
 HEAT_KEYS = all_psts
 HEAT_DATA = mat.values.tolist()
 HEAT_SKUS = sku_mat.values.tolist()
 HEAT_GMV_YOY = yoy_matrix(HEAT_DATA, mat25)
-HEAT_SKU_YOY = yoy_matrix(HEAT_SKUS, sku_mat25)
+HEAT_SKU_YOY = delta_matrix(HEAT_SKUS, sku_mat25)
 
 # SKU counts at brand level -- Jul+Aug 2026 combined, a SKU counts if it either
 # has inventory (live_days>0, i.e. was listed/orderable at some point) or has
