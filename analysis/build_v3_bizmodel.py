@@ -6,7 +6,7 @@ def agg(df):
     o = {}
     o['gmv']=df['gmv_aed'].sum(); o['gv']=df['gv'].sum(); o['orders']=df['orders'].sum()
     o['units']=df['units'].sum()
-    o['instock']=np.average(df['instock_pct'], weights=df['gv']+1e-9) if df['gv'].sum()>0 else df['instock_pct'].mean()
+    o['instock']=df['live_days'].sum()/df['days_in_month'].sum()*100 if df['days_in_month'].sum() else 0
     o['cancelled']=df['cancelled_gmv_aed'].sum(); o['returns']=df['returns_gmv_aed'].sum()
     o['n_skus']=df['sku'].nunique(); o['n_brands']=df['brand'].nunique(); o['n_sellers']=df['partner_id'].nunique()
     return o
@@ -42,7 +42,7 @@ sub = aug[aug['sku'].isin(multi_bm_skus)]
 piv = sub.pivot_table(index='sku', columns='business_model', values=['gv','orders','instock_pct'], aggfunc='sum')
 # compute cvr per bm per sku where gv>0
 print("\nExample: brand-level view of brands present in BOTH FBN/Retail AND SBB/DSE, with SBB/DSE GMV >= 500 (Aug'26)")
-brand_bm = aug.groupby(['brand','business_model']).apply(lambda x: pd.Series({'gmv':x['gmv_aed'].sum(),'gv':x['gv'].sum(),'orders':x['orders'].sum(),'instock':np.average(x['instock_pct'],weights=x['gv']+1e-9)}), include_groups=False).reset_index()
+brand_bm = aug.groupby(['brand','business_model']).apply(lambda x: pd.Series({'gmv':x['gmv_aed'].sum(),'gv':x['gv'].sum(),'orders':x['orders'].sum(),'instock':x['live_days'].sum()/x['days_in_month'].sum()*100 if x['days_in_month'].sum() else 0}), include_groups=False).reset_index()
 brand_bm['cvr']=brand_bm['orders']/brand_bm['gv'].replace(0,np.nan)*100
 piv2 = brand_bm.pivot_table(index='brand', columns='business_model', values='gmv', aggfunc='sum').fillna(0)
 cand = piv2[( (piv2.get('SBB',0)>=500) | (piv2.get('DSE',0)>=500) ) & ( (piv2.get('FBN',0)>0) | (piv2.get('Retail',0)>0) )]

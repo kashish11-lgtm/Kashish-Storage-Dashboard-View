@@ -66,7 +66,8 @@ for pst, rules in RULES.items():
         sub = x[x['type']==typ]
         sg = sub.groupby(['sku','product_name','brand']).apply(lambda r: pd.Series({
             'gmv': r['gmv_aed'].sum(), 'gv': r['gv'].sum(), 'orders': r['orders'].sum(),
-            'instock': r['instock_pct'].mean(), 'units': r['units'].sum()
+            'instock': r['live_days'].sum()/r['days_in_month'].sum()*100 if r['days_in_month'].sum() else 0,
+            'units': r['units'].sum()
         }), include_groups=False).reset_index()
         sg = sg[sg['gmv']>0].sort_values('gmv', ascending=False).head(8)
         rows=[]

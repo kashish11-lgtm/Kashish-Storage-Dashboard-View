@@ -7,7 +7,7 @@ F = 30.4/16  # daily-rate monthly-equiv factor for Aug (16 days)
 
 def agg(df):
     gmv=df['gmv_aed'].sum(); gv=df['gv'].sum(); orders=df['orders'].sum(); units=df['units'].sum()
-    instock = np.average(df['instock_pct'], weights=df['gv']+1e-9) if len(df) else 0
+    instock = df['live_days'].sum()/df['days_in_month'].sum()*100 if df['days_in_month'].sum() else 0
     n_skus=df['sku'].nunique(); n_selling=df.loc[df['gmv_aed']>0,'sku'].nunique()
     return dict(
         gmv=round(gmv*F), cvr=round(orders/gv*100,2) if gv else 0, asp=round(gmv/units,2) if units else 0,
@@ -60,7 +60,8 @@ for key, brands in L3.items():
         sk = s[s['brand']==br]
         sg = sk.groupby(['sku','product_name']).apply(lambda x: pd.Series({
             'gmv': x['gmv_aed'].sum(), 'gv': x['gv'].sum(), 'orders': x['orders'].sum(),
-            'instock': x['instock_pct'].mean(), 'units': x['units'].sum()
+            'instock': x['live_days'].sum()/x['days_in_month'].sum()*100 if x['days_in_month'].sum() else 0,
+            'units': x['units'].sum()
         }), include_groups=False).reset_index()
         sg = sg[sg['gmv']>0].sort_values('gmv', ascending=False).head(10)
         rows=[]

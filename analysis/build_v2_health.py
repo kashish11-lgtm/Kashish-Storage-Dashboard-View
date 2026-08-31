@@ -9,7 +9,7 @@ def agg(df):
     o = {}
     o['gmv']=df['gmv_aed'].sum(); o['gv']=df['gv'].sum(); o['orders']=df['orders'].sum()
     o['units']=df['units'].sum(); o['impressions']=df['impressions'].sum(); o['atc']=df['atc'].sum()
-    o['instock']=np.average(df['instock_pct'], weights=df['gv']+1e-9)
+    o['instock']=df['live_days'].sum()/df['days_in_month'].sum()*100 if df['days_in_month'].sum() else 0
     o['platform_loss']=df['platform_gmv_loss_aed'].sum(); o['express_loss']=df['express_gmv_loss_aed'].sum()
     return o
 

@@ -18,7 +18,7 @@ print(loss.round(1))
 # brand x business model, excluding generic tags
 b = aug[~aug['brand'].isin(EXCLUDE)].groupby(['brand','business_model']).apply(lambda x: pd.Series({
     'gmv': x['gmv_aed'].sum(), 'gv': x['gv'].sum(), 'orders': x['orders'].sum(),
-    'instock': np.average(x['instock_pct'], weights=x['gv']+1e-9),
+    'instock': x['live_days'].sum()/x['days_in_month'].sum()*100 if x['days_in_month'].sum() else 0,
     'cancelled': x['cancelled_gmv_aed'].sum(), 'platform_loss': x['platform_gmv_loss_aed'].sum(),
     'n_skus': x['sku'].nunique(),
 }), include_groups=False).reset_index()

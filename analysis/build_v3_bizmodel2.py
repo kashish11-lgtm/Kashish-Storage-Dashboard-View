@@ -7,8 +7,8 @@ aug['brand']=aug['brand'].fillna('unbranded_generic')
 # full bm table with instock/cancel
 bm = aug.groupby('business_model').apply(lambda x: pd.Series({
     'gmv': x['gmv_aed'].sum(), 'gv': x['gv'].sum(), 'orders': x['orders'].sum(), 'units': x['units'].sum(),
-    'instock': np.average(x['instock_pct'], weights=x['gv']+1e-9),
-    'express_instock': np.average(x['express_instock_pct'], weights=x['gv']+1e-9),
+    'instock': x['live_days'].sum()/x['days_in_month'].sum()*100 if x['days_in_month'].sum() else 0,
+    'express_instock': x['express_live_days'].sum()/x['days_in_month'].sum()*100 if x['days_in_month'].sum() else 0,
     'cancelled': x['cancelled_gmv_aed'].sum(), 'returns': x['returns_gmv_aed'].sum(),
     'platform_loss': x['platform_gmv_loss_aed'].sum(), 'express_loss': x['express_gmv_loss_aed'].sum(),
     'n_skus': x['sku'].nunique(), 'n_brands': x['brand'].nunique(), 'n_sellers': x['partner_id'].nunique(),
@@ -30,7 +30,7 @@ print(f"\nFBN cancel rate benchmark: {FBN_CANCEL:.2f}%")
 # per-brand x business_model breakdown, excluding generic
 b = aug[aug['brand']!='unbranded_generic'].groupby(['brand','business_model']).apply(lambda x: pd.Series({
     'gmv': x['gmv_aed'].sum(), 'gv': x['gv'].sum(), 'orders': x['orders'].sum(),
-    'instock': np.average(x['instock_pct'], weights=x['gv']+1e-9),
+    'instock': x['live_days'].sum()/x['days_in_month'].sum()*100 if x['days_in_month'].sum() else 0,
     'cancelled': x['cancelled_gmv_aed'].sum(), 'n_skus': x['sku'].nunique(),
 }), include_groups=False).reset_index()
 b['cvr']=b['orders']/b['gv'].replace(0,np.nan)*100

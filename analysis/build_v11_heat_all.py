@@ -6,10 +6,12 @@ bins=[0,25,50,100,200,400,np.inf]; labels=['<25','25-50','50-100','100-200','200
 aug['pb']=pd.cut(aug['offer_price_aed'], bins=bins, labels=labels, right=False)
 F = 30.4/16
 
-# all psts with meaningful GMV (drop the ~0 noise ones like carton/compost/clamshells)
+# every subcategory present in Aug'26 (44 of 45 total -- garment_rack has zero
+# rows in any 2026 month, only a single stray Feb'25 row, so it's excluded as
+# having no current-period presence at all rather than by a GMV filter)
 pst_gmv = aug.groupby('pst')['gmv_aed'].sum().sort_values(ascending=False)
-all_psts = pst_gmv[pst_gmv>0].index.tolist()
-print(f"{len(all_psts)} subcategories with GMV > 0 (of {aug['pst'].nunique()} total)")
+all_psts = pst_gmv.index.tolist()
+print(f"{len(all_psts)} subcategories total ({(pst_gmv>0).sum()} with GMV>0 in Aug'26)")
 
 # also need pt for each pst (for DRILL key matching used elsewhere)
 pst_to_pt = aug.groupby('pst')['pt'].agg(lambda x: x.mode().iloc[0]).to_dict()
@@ -28,6 +30,14 @@ HEAT_KEYS = all_psts
 HEAT_DATA = mat.values.tolist()
 HEAT_SKUS = sku_mat.values.tolist()
 
+# SKU counts at brand level -- Jul+Aug 2026 combined, a SKU counts if it either
+# has inventory (live_days>0, i.e. was listed/orderable at some point) or has
+# sales (gmv_aed>0) in either month; deduplicated across the two months.
+julaug = d[d['month'].isin(['2026-07','2026-08'])].copy()
+julaug['brand'] = julaug['brand'].fillna('unbranded_generic')
+julaug_active = julaug[(julaug['live_days']>0) | (julaug['gmv_aed']>0)]
+brand_sku_counts = julaug_active.groupby(['pst','brand'])['sku'].nunique()
+
 # brand x band matrix for ALL psts (top 20 brands each) -- reuse for click-to-expand
 PST_BRAND_BAND = {}
 for pst in all_psts:
@@ -41,7 +51,8 @@ for pst in all_psts:
             v = bd[bd['pb']==band]['gmv_aed'].sum()*F
             if v>0: row[band]=round(v)
         total = bd['gmv_aed'].sum()*F
-        if total>0: m[br] = {'total': round(total), 'bands': row}
+        skus = int(brand_sku_counts.get((pst,br), 0))
+        if total>0: m[br] = {'total': round(total), 'bands': row, 'skus': skus}
     if m: PST_BRAND_BAND[pst] = m
 
 OUT = {'subs':HEAT_SUBS, 'keys':HEAT_KEYS, 'pts':[pst_to_pt[p] for p in all_psts], 'data':HEAT_DATA, 'skus':HEAT_SKUS, 'brandband':PST_BRAND_BAND}

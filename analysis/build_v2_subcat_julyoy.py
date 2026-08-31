@@ -5,7 +5,7 @@ def sub_agg(df):
     r = df.groupby('pst').apply(lambda x: pd.Series({
         'gmv': x['gmv_aed'].sum(), 'units': x['units'].sum(), 'orders': x['orders'].sum(),
         'gv': x['gv'].sum(), 'impressions': x['impressions'].sum(), 'atc': x['atc'].sum(),
-        'instock_wtd': np.average(x['instock_pct'], weights=(x['gv']+1e-9)),
+        'instock_wtd': x['live_days'].sum()/x['days_in_month'].sum()*100 if x['days_in_month'].sum() else 0,
         'n_skus': x['sku'].nunique(), 'n_selling': x.loc[x['gmv_aed']>0,'sku'].nunique(),
     }), include_groups=False)
     r['asp']=r['gmv']/r['units'].replace(0,np.nan)
