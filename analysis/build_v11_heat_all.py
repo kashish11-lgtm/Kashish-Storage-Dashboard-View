@@ -31,9 +31,18 @@ sku_mat = aug[(aug['pst'].isin(all_psts)) & (aug['gmv_aed']>0)].pivot_table(
     index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
 ).reindex(all_psts)[labels].fillna(0).astype(int)
 
-# same two matrices for Aug'25, to compute per-cell YoY against
+# total LISTED SKU count per (pst, band) cell -- no gmv filter, so this
+# includes SKUs that were live/listed in that band but didn't sell
+sku_total_mat = aug[aug['pst'].isin(all_psts)].pivot_table(
+    index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
+).reindex(all_psts)[labels].fillna(0).astype(int)
+
+# same matrices for Aug'25, to compute per-cell YoY / show last-year counts against
 mat25 = aug25.pivot_table(index='pst', columns='pb', values='gmv_aed', aggfunc='sum', observed=True).reindex(all_psts)[labels].fillna(0)*F25
 sku_mat25 = aug25[aug25['gmv_aed']>0].pivot_table(
+    index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
+).reindex(all_psts)[labels].fillna(0)
+sku_total_mat25 = aug25.pivot_table(
     index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
 ).reindex(all_psts)[labels].fillna(0)
 
@@ -64,6 +73,8 @@ HEAT_DATA = mat.values.tolist()
 HEAT_SKUS = sku_mat.values.tolist()
 HEAT_GMV_YOY = yoy_matrix(HEAT_DATA, mat25)
 HEAT_SKU_PREV = prev_matrix(sku_mat25)
+HEAT_SKU_TOTAL = sku_total_mat.values.tolist()
+HEAT_SKU_TOTAL_PREV = prev_matrix(sku_total_mat25)
 
 # SKU counts at brand level -- Jul+Aug 2026 combined, a SKU counts if it either
 # has inventory (live_days>0, i.e. was listed/orderable at some point) or has
@@ -90,7 +101,7 @@ for pst in all_psts:
         if total>0: m[br] = {'total': round(total), 'bands': row, 'skus': skus}
     if m: PST_BRAND_BAND[pst] = m
 
-OUT = {'subs':HEAT_SUBS, 'keys':HEAT_KEYS, 'pts':[pst_to_pt[p] for p in all_psts], 'data':HEAT_DATA, 'skus':HEAT_SKUS, 'gmvYoy':HEAT_GMV_YOY, 'skuPrev':HEAT_SKU_PREV, 'brandband':PST_BRAND_BAND}
+OUT = {'subs':HEAT_SUBS, 'keys':HEAT_KEYS, 'pts':[pst_to_pt[p] for p in all_psts], 'data':HEAT_DATA, 'skus':HEAT_SKUS, 'gmvYoy':HEAT_GMV_YOY, 'skuPrev':HEAT_SKU_PREV, 'skuTotal':HEAT_SKU_TOTAL, 'skuTotalPrev':HEAT_SKU_TOTAL_PREV, 'brandband':PST_BRAND_BAND}
 with open('heat_all.json','w') as f:
     json.dump(OUT, f, separators=(',',':'))
 import os
