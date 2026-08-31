@@ -234,6 +234,7 @@ for pst in ALL_PSTS:
                           'b': r['brand'] if pd.notna(r['brand']) else 'unbranded_generic',
                           'gmv': round(r['gmv'] * F),
                           'cvr': round(r['orders'] / r['gv'] * 100, 1) if r['gv'] else 0,
+                          'asp': round(r['gmv'] / r['units'], 1) if r['units'] else 0,
                           'instock': round(r['instock'], 0)})
         if srows:
             TYPE_SKUS[dk] = srows
