@@ -108,14 +108,6 @@ h1,h2,h3,h4{font-family:"Big Shoulders Display","Arial Narrow",sans-serif; font-
 .pill.p1{background:var(--amber-soft); color:var(--amber-ink);}
 .pill.p2{background:var(--teal-soft); color:var(--teal);}
 .pill.p3{background:var(--surface-2); color:var(--steel);}
-.flow{display:flex; flex-direction:column; max-width:560px;}
-.flow-node{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:11px 18px; background:var(--surface); border:1px solid var(--line); border-radius:10px;}
-.flow-node.headline{background:var(--surface-2); border-color:var(--amber);}
-.flow-node.context{border-style:dashed;}
-.flow-node .label{font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--steel); font-weight:600;}
-.flow-node .val{font-family:"IBM Plex Mono",monospace; font-size:16.5px; font-weight:600; color:var(--ink); white-space:nowrap;}
-.flow-connector{display:flex; align-items:center; justify-content:center; padding:2px 0; color:var(--steel-2); font-size:13px;}
-.flow-divider{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--steel-2); text-align:center; margin:12px 0 2px; font-weight:600;}
 
 .callout{padding:14px 16px; border-radius:8px; border:1px solid var(--line); background:var(--surface); font-size:13.5px;}
 .callout.warn{border-color:var(--warn); background:var(--warn-soft);}
@@ -329,9 +321,6 @@ table.heat-sub td.hc{border-radius:3px;}
           <tbody id="tbl-health"></tbody>
         </table>
       </div>
-
-      <span class="tag-h" style="margin-top:22px;">Full metric flow — Aug'26 snapshot, YoY vs Jul'25 (clean)</span>
-      <div class="flow" id="metric-flow"></div>
 
       <div class="grid g2" style="margin-top:16px;">
         <div class="callout"><b>YoY (Jul'26 vs Jul'25, clean full month both years):</b> Traffic +AED 337K, Conversion +AED 294K, AOV/pricing +AED 174K → net +AED 804K/mo (+47.2%). All three levers positive — traffic 42%, conversion 37%, pricing 22% of the gain.</div>
@@ -895,6 +884,7 @@ const HEALTH = [
   {m:"Impressions", jul25:15853001, jul26:23083470, aug:22786704, yoy:45.6, mom:-1.3},
   {m:"CTR", jul25:4.77, jul26:3.92, aug:5.05, yoy:-0.85, mom:1.13, pp:true},
   {m:"GV — visits", jul25:755964, jul26:905256, aug:1151085, yoy:19.7, mom:27.2},
+  {m:"ATC", jul25:132054, jul26:166650, aug:173688, yoy:26.2, mom:4.2},
   {m:"CVR", jul25:4.59, jul26:5.26, aug:4.75, yoy:0.67, mom:-0.50, pp:true},
   {m:"Orders", jul25:34730, jul26:47572, aug:54720, yoy:37.0, mom:15.0},
   {m:"Units", jul25:40655, jul26:56583, aug:64834, yoy:39.2, mom:14.6},
@@ -920,46 +910,6 @@ document.querySelectorAll("#tbl-health tr").forEach((tr,i)=>{
   const td = document.createElement("td"); td.textContent = momTxt; td.className = h.mom>0?"up":(h.mom<0?"down":"");
   tr.appendChild(td);
 });
-
-/* full metric flow: Aug'26 snapshot value + clean YoY (Jul'26 vs Jul'25) per
-   stage, in demand -> conversion -> assortment order. search_impressions/atc
-   computed the same monthly-equivalent way as the rest of this table. */
-const FLOW = [
-  {label:"GMV", val:2946159, unit:"aed", yoy:47.2, cls:"headline"},
-  {label:"Impressions", val:22786704, unit:"count", yoy:45.6},
-  {label:"Search Impressions", val:17835313, unit:"count", yoy:55.7},
-  {label:"CTR (GV / Impressions)", val:5.05, unit:"pct", yoy:-0.85, pp:true},
-  {label:"GV — Visits", val:1151085, unit:"count", yoy:19.7},
-  {label:"ATC", val:173688, unit:"count", yoy:26.2},
-  {label:"CVR (Orders / GV)", val:4.75, unit:"pct", yoy:0.67, pp:true},
-  {label:"Orders", val:54720, unit:"count", yoy:37.0},
-  {label:"Units", val:64834, unit:"count", yoy:39.2},
-  {label:"AOV", val:53.84, unit:"aed2", yoy:7.4},
-  {label:"ASP", val:45.44, unit:"aed2", yoy:5.7},
-  {label:"Total SKUs (assortment)", val:28767, unit:"count", yoy:14.1, cls:"context"},
-  {label:"Selling SKUs", val:6615, unit:"count", yoy:14.4, cls:"context"},
-  {label:"Instock %", val:95.6, unit:"pct", yoy:-1.7, pp:true, cls:"context"},
-];
-function flowValTxt(f){
-  if(f.unit==="aed") return fmtAED(f.val);
-  if(f.unit==="aed2") return "AED "+f.val.toFixed(2);
-  if(f.unit==="pct") return f.val.toFixed(2)+"%";
-  return Math.round(f.val).toLocaleString();
-}
-const flowHTML = FLOW.map((f,i)=>{
-  const dir = f.yoy>0?"up":(f.yoy<0?"down":"flat");
-  const arrow = f.yoy>0?"▲":(f.yoy<0?"▼":"–");
-  const yoyTxt = f.pp ? fmtPp(f.yoy) : fmtPct(f.yoy);
-  const node = `<div class="flow-node ${f.cls||""}">
-    <div class="label">${esc(f.label)}</div>
-    <div class="val">${flowValTxt(f)}</div>
-    <span class="pill ${dir}">${arrow} ${yoyTxt} YoY</span>
-  </div>`;
-  if(i===0) return node;
-  if(i===11) return `<div class="flow-divider">Assortment &amp; availability</div>` + node;
-  return `<div class="flow-connector">↓</div>` + node;
-}).join("");
-document.getElementById("metric-flow").innerHTML = flowHTML;
 
 /* ---- 02 subcategory ---- */
 /* growth/abs/cvrChg/aspChg = clean YoY, Jul'26 vs Jul'25 (both full months). cvr/asp/instock/nsku/selling = current Aug'26 snapshot. */
