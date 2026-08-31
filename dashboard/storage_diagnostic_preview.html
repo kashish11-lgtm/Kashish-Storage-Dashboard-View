@@ -389,8 +389,10 @@ table.heat-sub td.hc{border-radius:3px;}
       <p style="font-size:12.5px; color:var(--steel); margin-top:10px; max-width:82ch;">Read as "where to focus assortment," not "where most GMV already sits." <b class="hl">Entry-price (&lt;25 AED) is the conversion sweet spot</b> for most subcategories and for value-tier brands (Feelings, Moment, noon_east, sky_touch, Royalford) — these convert 12–16% at the low end vs 3–6% category-wide. Premium/niche brands (Auraluxi, Dubaigallery) instead peak in the 100–400 tier — pushing them down-market would likely dilute, not grow, their conversion.</p>
 
       <span class="tag-h" style="margin-top:26px;">03.2 · Product types within the top subcategories — what to actually buy, and at what price</span>
-      <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Product names, grouped into types by keyword pattern (e.g. "clear plastic box" vs "cardboard moving box" within Storage Box) — Jun–Aug 2026. Price range is the 25th–75th percentile of listed price within that type, not the full spread. <b class="hl">Click a type row</b> to go one level deeper: capacity bands where the title states a size (e.g. Storage Box › Clear Plastic Box › 80–120L), or top SKUs where it doesn't.</p>
-      <div class="grid g2" style="margin-top:10px;" id="producttype-grid"></div>
+      <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Product names, grouped into types by keyword pattern (e.g. "clear plastic box" vs "cardboard moving box" within Storage Box) — Jun–Aug 2026. Price range is the 25th–75th percentile of listed price within that type, not the full spread. Three clickable levels: <b class="hl">click a subcategory</b> to see its product types, <b class="hl">click a type</b> to go one level deeper — capacity bands where the title states a size (e.g. Storage Box › Clear Plastic Box › 80–120L), or top SKUs where it doesn't.</p>
+      <div class="table-wrap" style="margin-top:10px;"><table><thead><tr>
+        <th class="l">Subcategory</th><th>GMV (Jun–Aug)</th><th>Types</th><th>CVR</th><th>Price range</th><th>SKUs</th>
+      </tr></thead><tbody id="tbl-pst-types"></tbody></table></div>
       <div class="callout" style="margin-top:14px; max-width:82ch;"><b>No live Noon.com browsing was used</b> — this dataset has no product-URL field, and browsing tens of thousands of individual listing pages isn't practical at this scale. Every number here comes from the structured fields already in the source (product_name, price, GMV, GV, orders) — capacity is parsed from the listing title text, which is why some types drill into capacity and others (where titles don't state a size) drill into SKUs instead.</div>
     </div>
 
@@ -724,7 +726,7 @@ function table(container, rows, cols){
 /* Makes every row of an already-rendered table() expandable in place: click a row,
    it opens a colspan sub-row below it built by buildHTML(row). Reused by every
    section below instead of spawning new standalone tables. */
-function attachExpand(container, rows, colspan, buildHTML){
+function attachExpand(container, rows, colspan, buildHTML, afterInsert){
   const tbody = document.getElementById(container);
   const trs = [...tbody.querySelectorAll(":scope > tr")];
   trs.forEach((tr,i)=>{
@@ -741,8 +743,12 @@ function attachExpand(container, rows, colspan, buildHTML){
       sub.hidden = isOpen;
       tr.classList.toggle("open", !isOpen);
       if(!isOpen && !sub.dataset.rendered){
-        sub.querySelector("td").innerHTML = buildHTML(rows[i]) || '<div class="small" style="padding:12px;">No further breakdown available.</div>';
+        const html = buildHTML(rows[i]);
+        sub.querySelector("td").innerHTML = html || '<div class="small" style="padding:12px;">No further breakdown available.</div>';
         sub.dataset.rendered = "1";
+        // Lets a caller wire up a further level of clickability (e.g. another
+        // table()+attachExpand() pair) on the markup just inserted above.
+        if(html && afterInsert) afterInsert(rows[i], sub.querySelector("td"), i);
       }
     });
   });
@@ -1492,35 +1498,57 @@ const PRODUCT_TYPES = {
  ],
 };
 (function(){
-  const grid = document.getElementById('producttype-grid');
   const PST_ID = {"Storage Box":"storage_box","Racks":"racks","Food Containers":"food_containers","Space Saver Bag":"space_saver_bag","Closet Clothes Hanger":"closet_clothes_hanger","Lunch Box":"lunch_box"};
-  grid.innerHTML = Object.keys(PRODUCT_TYPES).map(pst => `
-    <div>
-      <div class="eyebrow" style="margin-bottom:6px;">${pst} <span class="small">— click a type for capacity / top SKUs</span></div>
-      <div class="table-wrap compact"><table><thead><tr><th class="l">Type</th><th>GMV (Jun–Aug)</th><th>CVR</th><th>Price range</th></tr></thead>
-      <tbody id="pt-${pst.replace(/[^a-zA-Z]/g,'')}"></tbody></table></div>
-    </div>`).join('');
-  Object.entries(PRODUCT_TYPES).forEach(([pst, rows])=>{
-    const cid = "pt-"+pst.replace(/[^a-zA-Z]/g,'');
-    table(cid, rows, [
+
+  // Level 1: one row per subcategory, rolled up from its product types.
+  const PST_TYPE_SUMMARY = Object.entries(PRODUCT_TYPES).map(([pst, rows])=>{
+    const gmv = rows.reduce((a,r)=>a+r.gmv,0);
+    const skus = rows.reduce((a,r)=>a+r.skus,0);
+    const cvr = rows.reduce((a,r)=>a+r.cvr*r.gmv,0)/gmv;
+    const p25 = Math.min(...rows.map(r=>r.p25));
+    const p75 = Math.max(...rows.map(r=>r.p75));
+    return {name:pst, key:PST_ID[pst], gmv, types:rows.length, cvr, p25, p75, skus};
+  }).sort((a,b)=>b.gmv-a.gmv);
+
+  table("tbl-pst-types", PST_TYPE_SUMMARY, [
+    {k:"name", l:true},
+    {k:"gmv", fmt:fmtAED},
+    {k:"types", fmt:v=>v+" types"},
+    {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
+    {k:"p25", fmt:(v,r)=>"AED "+v+"–"+r.p75},
+    {k:"skus", fmt:v=>v.toLocaleString()},
+  ]);
+
+  // Level 2: clicking a subcategory renders its product-type table (lazily),
+  // then wires each type row to expand into level 3 below.
+  attachExpand("tbl-pst-types", PST_TYPE_SUMMARY, 6, row=>{
+    const cid = "types-"+row.key;
+    return `<div class="heat-sub-wrap"><div class="small" style="padding:8px 12px 0;">Product types within "${esc(row.name)}" (Jun–Aug 2026) — click a type for capacity / top SKUs</div>
+      <table class="heat-sub"><thead><tr><th class="l">Type</th><th>GMV (Jun–Aug)</th><th>CVR</th><th>Price range</th></tr></thead>
+      <tbody id="${cid}"></tbody></table></div>`;
+  }, row=>{
+    const cid = "types-"+row.key;
+    const typeRows = PRODUCT_TYPES[row.name];
+    table(cid, typeRows, [
       {k:"type", l:true},
       {k:"gmv", fmt:fmtAED},
       {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
       {k:"p25", fmt:(v,r)=>"AED "+v+"–"+r.p75},
     ]);
-    attachExpand(cid, rows, 4, row=>{
-      const dk = PST_ID[pst]+"||"+row.type;
+    // Level 3: capacity bands where titles state a size, else top SKUs.
+    attachExpand(cid, typeRows, 4, row2=>{
+      const dk = row.key+"||"+row2.type;
       const cap = TYPE_CAPACITY[dk];
       if(cap && cap.length){
         const rows2 = cap.map(c=>`<tr><td class="l">${esc(c.band)}</td><td>${fmtAED(c.gmv)}</td><td>${c.cvr.toFixed(1)}%</td><td>AED ${c.p25}–${c.p75}</td><td>${c.skus}</td></tr>`).join("");
-        return `<div class="heat-sub-wrap"><div class="small" style="padding:8px 12px 0;">Capacity within "${esc(row.type)}" (Jun–Aug 2026, parsed from listing titles)</div><table class="heat-sub">
+        return `<div class="heat-sub-wrap"><div class="small" style="padding:8px 12px 0;">Capacity within "${esc(row2.type)}" (Jun–Aug 2026, parsed from listing titles)</div><table class="heat-sub">
           <thead><tr><th class="l">Capacity</th><th>GMV</th><th>CVR</th><th>Price range</th><th>SKUs</th></tr></thead>
           <tbody>${rows2}</tbody></table></div>`;
       }
       const skus = TYPE_SKUS[dk];
       if(skus && skus.length){
         const rows2 = skus.map(s=>`<tr><td class="l">${esc(s.n)}</td><td class="l">${esc(s.b)}</td><td>${fmtAED(s.gmv)}</td><td>${s.cvr.toFixed(1)}%</td><td>${s.instock.toFixed(0)}%</td></tr>`).join("");
-        return `<div class="heat-sub-wrap"><div class="small" style="padding:8px 12px 0;">Top SKUs in "${esc(row.type)}" (no reliable capacity signal in titles for this type — showing SKUs instead)</div><table class="heat-sub">
+        return `<div class="heat-sub-wrap"><div class="small" style="padding:8px 12px 0;">Top SKUs in "${esc(row2.type)}" (no reliable capacity signal in titles for this type — showing SKUs instead)</div><table class="heat-sub">
           <thead><tr><th class="l">SKU</th><th class="l">Brand</th><th>GMV/mo</th><th>CVR</th><th>Instock%</th></tr></thead>
           <tbody>${rows2}</tbody></table></div>`;
       }
