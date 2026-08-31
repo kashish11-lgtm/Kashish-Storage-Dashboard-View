@@ -245,10 +245,10 @@ table.heat-sub td.hc{border-radius:3px;}
       <a href="#price"><span class="idx">03</span>Price Band Matrix</a>
       <a href="#funnel"><span class="idx">04</span>Funnel Diagnosis</a>
       <a href="#brand"><span class="idx">05</span>Brand Matrix</a>
-      <a href="#sku"><span class="idx">06</span>SKU Opportunity</a>
-      <a href="#assort"><span class="idx">07</span>Assortment &amp; White Space</a>
-      <a href="#stock"><span class="idx">08</span>Stock &amp; Lost Sales</a>
-      <a href="#seller"><span class="idx">09</span>Seller Analysis</a>
+      <a href="#seller"><span class="idx">06</span>Seller Analysis</a>
+      <a href="#sku"><span class="idx">07</span>SKU Opportunity</a>
+      <a href="#assort"><span class="idx">08</span>Assortment &amp; White Space</a>
+      <a href="#stock"><span class="idx">09</span>Stock &amp; Lost Sales</a>
       <a href="#ads"><span class="idx">10</span>Visibility &amp; Promotion</a>
       <a href="#season"><span class="idx">11</span>Seasonality</a>
       <a href="#opp"><span class="idx">12</span>Opportunity Universe</a>
@@ -304,7 +304,7 @@ table.heat-sub td.hc{border-radius:3px;}
         <div class="card" style="padding:18px;">
           <div class="eyebrow" style="color:var(--amber-ink);">Third lever</div>
           <div class="v num" style="font-size:22px; margin:6px 0;">AED 192K–280K /mo</div>
-          <div style="font-size:13px; color:var(--steel);">Lost GMV to OOS, concentrated in Express fulfilment (88.4% instock vs 95.6% standard) — real fields in the data, not modelled. See §08, §13 Action 4–5.</div>
+          <div style="font-size:13px; color:var(--steel);">Lost GMV to OOS, concentrated in Express fulfilment (88.4% instock vs 95.6% standard) — real fields in the data, not modelled. See §09, §13 Action 4–5.</div>
         </div>
       </div>
       <p style="margin-top:16px; font-size:13px; color:var(--steel);">Gross identified opportunity across all P0–P2 actions: <b class="hl num">~AED 1.2M/mo</b>. A realistic, execution-adjusted capture in the first two quarters is <b class="hl num">~AED 400–500K/mo</b>, scaling toward the full figure as fulfilment and assortment actions land (§12, §14).</p>
@@ -369,7 +369,7 @@ table.heat-sub td.hc{border-radius:3px;}
         <th class="l">Subcategory</th><th>&lt;25</th><th>25–50</th><th>50–100</th><th>100–200</th><th>200–400</th><th>400+</th>
       </tr></thead><tbody id="tbl-heat"></tbody></table></div>
 
-      <div class="callout" style="margin-top:16px;"><b>White-space signal:</b> the 100–200 and 400+ AED bands show the fastest visit growth YoY (GV +51% and +58%) but the 200–400 and 400+ tiers carry the thinnest assortment (667 and 169 SKUs, only 10–13% selling). The 200–400 AED band also has the category's weakest instock (90.0%, clearly the lowest band) — 400+ AED's instock is actually fine (95.6%), so the assortment-depth gap there is a SKU-count problem, not a stock problem. Demand is outpacing premium assortment depth. See §07.</div>
+      <div class="callout" style="margin-top:16px;"><b>White-space signal:</b> the 100–200 and 400+ AED bands show the fastest visit growth YoY (GV +51% and +58%) but the 200–400 and 400+ tiers carry the thinnest assortment (667 and 169 SKUs, only 10–13% selling). The 200–400 AED band also has the category's weakest instock (90.0%, clearly the lowest band) — 400+ AED's instock is actually fine (95.6%), so the assortment-depth gap there is a SKU-count problem, not a stock problem. Demand is outpacing premium assortment depth. See §08.</div>
 
       <span class="tag-h" style="margin-top:26px;">03.1 · Which price point wins — by subcategory (this year only)</span>
       <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Jun–Aug 2026 combined (the most recent complete quarter, 2026 data only — not blended with 2025) so this reflects current buying behaviour, not last year's. "Wins" = highest GMV, not highest CVR — cheap items convert better almost by definition, so a CVR-ranked winner would just point at the entry band every time and say nothing about where the money actually is. All 40 subcategories with meaningful volume; CVR shown alongside for reference only.</p>
@@ -395,24 +395,30 @@ table.heat-sub td.hc{border-radius:3px;}
           <p style="font-size:12.5px; color:var(--steel); margin-top:14px;"><b class="hl">Leak point:</b> GV→ATC (add-to-cart rate) fell 3.3pp (18.4%→15.1%) even as GV surged — new traffic is browsing but adding to cart at a lower rate, and what does get added converts to orders slightly worse too (CVR −0.5pp). The funnel is wider at the top and leakier in the middle simultaneously.</p>
         </div>
         <div class="card" style="padding:20px;">
-          <div class="eyebrow" style="margin-bottom:12px;">Problem classification, by subcategory (Aug'26)</div>
+          <div class="eyebrow" style="margin-bottom:12px;">Problem classification — how to read the table below</div>
           <div style="font-size:12.8px; line-height:2.1;">
-            <span class="chip a">A · Traffic problem</span> Food Saver, Cooler, Cling Film, Aluminium Foil, Sink Sets, Kitchen Storage Acc. — high CVR, thin visits<br>
-            <span class="chip b">B · CTR problem</span> Food Containers, Closet Hangers, Lunch Box/Bag, Cabinet Organizers, Storage Set, Closet Org. Systems<br>
-            <span class="chip c">C · Conversion problem</span> Storage Box, Racks, Lunch Box, Foldable Wardrobe, Storage Basket, Closet Shelf Divider<br>
-            <span class="chip d">D · Stock problem</span> Storage Box, Food Containers, Bag, Spice Jars, Under-bed Storage
+            <span class="chip a">A · Traffic problem</span> High CVR, thin visits — real but small-base (≤1% share each): Food Saver, Cooler, Cling Film, Aluminium Foil, Sink Sets, Kitchen Storage Acc.<br>
+            <span class="chip b">B · CTR problem</span> Impressions not converting to visits — capped at category CTR to size the loss<br>
+            <span class="chip c">C · Conversion problem</span> Visits not adding to cart, or cart not converting to orders — worse of the two stages<br>
+            <span class="chip d">D · Stock problem</span> Measured platform + express GMV lost to being out of stock (§09)
           </div>
-          <p style="font-size:12.5px; color:var(--steel); margin-top:12px;">Quantified: <b>B ≈ AED 437K/mo</b>, <b>C ≈ AED 485–538K/mo</b>, <b>D ≈ AED 192–280K/mo</b> (§08). A is real but small-base (≤1% share each). No subcategory shows E (healthy funnel, falling ASP) at meaningful scale — the closest, Storage Set, has ASP −7% YoY but CVR is improving (+0.8pp), so it's healthy mix-shift, not a pricing problem.</p>
+          <p style="font-size:12.5px; color:var(--steel); margin-top:12px;">Every subcategory's opportunity is quantified per-stage in the table below, not just bucketed — <b>B ≈ AED 590K/mo</b>, <b>C ≈ AED 960K/mo</b>, <b>D ≈ AED 467K/mo</b> summed across all subcategories with meaningful traffic (impressions &gt; 20K/mo). No subcategory shows E (healthy funnel, falling ASP) at meaningful scale — the closest, Storage Set, has ASP −7% YoY but CVR is improving (+0.8pp), so it's healthy mix-shift, not a pricing problem.</p>
         </div>
       </div>
 
-      <span class="tag-h">CVR, 20 months — category vs the Big 3 (this is why Action 1 is P0)</span>
+      <span class="tag-h" style="margin-top:22px;">04.1 · $ opportunity by subcategory and funnel stage (Aug'26, ranked by total)</span>
+      <p style="font-size:12.5px; color:var(--steel); max-width:88ch; margin-top:2px;">Each loss column is "what this subcategory would gain per month if it converted at the category benchmark for that stage, holding its own traffic constant." Columns aren't additive with each other in a strict sense (fixing CTR changes the traffic base for the conversion calc too) but the ranking and relative sizing are directionally solid, and Stock loss is a directly measured field, not modelled. For the brand-level "why" behind the worst offenders, see the leak panels in §04.2 below.</p>
+      <div class="table-wrap" style="margin-top:8px;"><table><thead><tr>
+        <th class="l">Subcategory</th><th>GMV/mo</th><th class="l">Primary issue</th><th>B · CTR opp.</th><th>C · Conversion opp.</th><th>D · Stock opp.</th><th>Total opp.</th>
+      </tr></thead><tbody id="tbl-funnel-opp"></tbody></table></div>
+
+      <span class="tag-h" style="margin-top:26px;">CVR, 20 months — category vs the Big 3 (this is why Action 1 is P0)</span>
       <div class="card" style="padding:20px;">
         <svg id="big3-chart" width="100%" height="230" viewBox="0 0 900 230" preserveAspectRatio="xMidYMid meet"></svg>
-        <p style="font-size:12.5px; color:var(--steel); margin-top:10px;">Category CVR has held a 4.4–5.9% band for 20 straight months. Storage Box (4.8–6.5%), Racks (3.2–4.1%) and Storage Basket (4.9–6.2%) each held their own stable bands too — then all three broke sharply downward in the single most recent month, well outside anything seen in the prior 19. This is a fresh, live event, not a slow bleed since mid-2025 — which is exactly why it's fixable fast if caught now.</p>
+        <p style="font-size:12.5px; color:var(--steel); margin-top:10px;">Category CVR has held a 4.4–5.9% band for 20 straight months. Storage Basket (4.9–6.2%), Storage Box (4.8–6.5%) and Racks (3.2–4.1%) each held their own stable bands too — then all three broke sharply downward in the single most recent month, well outside anything seen in the prior 19, with <b class="hl">Storage Basket the most severe by far</b>: it fell to 1.3% CVR, 2.8× its own historic band width below the floor it held for 19 months. The same three subcategories show the identical pattern independently in ATC-rate (add-to-cart ÷ visits) — Storage Basket's ATC-rate collapsed from an 18.4–22.5% band to 4.2%, a break even larger in relative terms than its CVR drop. Two independent funnel-stage metrics breaking the same three subcategories in the same month is strong confirmation this is a fresh, live event, not a slow bleed since mid-2025 — which is exactly why it's fixable fast if caught now.</p>
       </div>
 
-      <span class="tag-h" style="margin-top:26px;">04.1 · The funnel, drawn — and exactly where each stage leaks</span>
+      <span class="tag-h" style="margin-top:26px;">04.2 · The funnel, drawn — and exactly where each stage leaks</span>
       <div class="card" style="padding:24px;">
         <svg id="funnel-shape" width="100%" height="340" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet"></svg>
       </div>
@@ -445,7 +451,7 @@ table.heat-sub td.hc{border-radius:3px;}
         </div>
         <div class="card" style="padding:16px 18px;">
           <div class="eyebrow" style="color:var(--rose);">↑ Increase CVR</div>
-          <p style="font-size:12.8px; margin-top:8px;">Start with the dish-drying-rack duplicate-listing cluster inside Racks (§06) — 6 near-identical SKUs converting 0–2% on real traffic. Then verify no price/stock sync fault broke checkout for Storage Box and Storage Basket specifically in the last cycle.</p>
+          <p style="font-size:12.8px; margin-top:8px;">Start with the dish-drying-rack duplicate-listing cluster inside Racks (§07) — 6 near-identical SKUs converting 0–2% on real traffic. Then verify no price/stock sync fault broke checkout for Storage Box and Storage Basket specifically in the last cycle.</p>
         </div>
       </div>
     </div>
@@ -472,9 +478,63 @@ table.heat-sub td.hc{border-radius:3px;}
       </div>
     </div>
 
-    <!-- ================= 06 SKU ================= -->
+    <!-- ================= 06 SELLER ================= -->
+    <div class="section" id="seller">
+      <div class="section-head"><span class="idx">06</span><h2>Seller Analysis</h2></div>
+      <div class="grid g2" style="margin-top:18px;">
+        <div class="card" style="padding:18px;">
+          <div class="eyebrow" style="margin-bottom:10px;">Seller concentration (1,046 active sellers)</div>
+          <div class="bars" id="bar-seller-conc"></div>
+        </div>
+        <div class="table-wrap compact"><table><thead><tr><th class="l">Business model</th><th>Share</th><th>CVR</th><th>Cancel%</th><th>Return%</th></tr></thead><tbody id="tbl-bizmodel"></tbody></table></div>
+      </div>
+      <div class="callout warn" style="margin-top:16px;"><b>SBB sellers cancel 12.0% of GMV</b> — 3–4× the FBN (2.6%), Retail (2.6%) and DSE (4.2%) rates, on only 3.9% of category GMV. Not a scale risk, but a concrete, fixable CX/recovery item worth ~AED 10K/mo direct plus retention upside. See Action 8 (§13).</div>
+      <p style="font-size:13px; color:var(--steel); margin-top:14px; max-width:80ch;">Seller concentration itself is healthy — the top seller (noon Retail) holds 21.7%, top 10 hold 45%, top 20 hold 55% — no single-seller dependency risk. FBN (Fulfilled by Noon marketplace) is the dominant model at 68.3% share with the best cancellation/return profile, consistent with the express-instock gap in §09 sitting mostly on FBN/DSE inventory rather than being a seller-quality issue.</p>
+
+      <span class="tag-h" style="margin-top:26px;">06.1 · Business model hierarchy — testing Retail &gt; FBN &gt; DSE &gt; SBB</span>
+      <p style="font-size:13px; color:var(--steel); max-width:82ch; margin-top:2px;">Testing the hypothesis directly: <b class="hl">SBB is unambiguously the floor</b> on every operational metric — instock, express-readiness, cancellations — by a wide margin. But Retail/FBN/DSE do <i>not</i> rank in a single clean order above it: which of the three leads flips depending on the metric (below). On <b class="hl">conversion</b> the hypothesis inverts entirely: SBB (7.33%) and Retail (8.34%) both out-convert FBN (3.94%) and DSE (4.05%). SBB's problem is not weak customer demand — it's fulfilment execution.</p>
+      <div class="table-wrap" style="margin-top:12px;"><table><thead><tr>
+        <th class="l">Business model</th><th>GMV/mo</th><th>Share</th><th>YoY</th><th>CVR</th><th>ASP</th><th>Instock%</th><th>Express Instock%</th><th>Cancel%</th><th>Return%</th><th>Sellers</th>
+      </tr></thead><tbody id="tbl-bizmodel-full"></tbody></table></div>
+
+      <div class="grid g2" style="margin-top:16px;">
+        <div>
+          <span class="tag-h">Instock % — SBB is the floor, the other three trade places</span>
+          <div class="bars" id="bar-bizmodel-instock"></div>
+        </div>
+        <div class="callout warn">
+          <b>Partially confirmed:</b> SBB (72.7%) is the clear floor on instock — but among the other three the order flips by metric, so "Retail &gt; FBN &gt; DSE" is not the clean hierarchy it looks like on paper. Standard instock: <b>DSE (96.3%) &gt; FBN (94.6%) &gt; Retail (89.7%)</b>. Express instock: <b>FBN (91.2%) &gt; Retail (88.1%) &gt; DSE (81.4%)</b> — DSE's Express readiness is actually its weak spot, not its strength. Cancellation is the one metric where the hypothesis roughly holds: Retail (2.6%) ≈ FBN (2.6%) &lt; DSE (4.2%) &lt;&lt; SBB (12.0%). SBB is structurally the weakest fulfilment channel in the category, even though its listings convert well when they're actually in stock.
+        </div>
+      </div>
+
+      <span class="tag-h" style="margin-top:22px;">Brand migration candidates — real brands with meaningful GMV concentrated on SBB/DSE</span>
+      <p style="font-size:13px; color:var(--steel); max-width:82ch;">Filtered to brands (excluding unbranded/generic listings) where ≥20% of GMV runs through SBB or DSE. "Recoverable GMV" = cancelled GMV in excess of the FBN cancellation benchmark (2.64%) + the platform_gmv_loss already measured on their SBB/DSE-fulfilled SKUs — i.e. what these brands would plausibly keep if their SBB/DSE listings moved to FBN or Retail fulfilment.</p>
+      <div class="table-wrap" style="margin-top:10px;"><table><thead><tr>
+        <th class="l">Brand</th><th>Total GMV/mo</th><th>SBB/DSE GMV/mo</th><th>SBB/DSE Share</th><th>SBB/DSE CVR</th><th>Recoverable GMV/mo</th>
+      </tr></thead><tbody id="tbl-bizmodel-migration"></tbody></table></div>
+      <div class="callout" style="margin-top:12px;"><b>Quantified opportunity:</b> ~<b class="hl">AED 8.6K/mo</b> from this candidate list specifically (high confidence, small but real — cancellation/stockout recovery only, holding demand constant). <b class="hl">dubaigallery</b> (AED 28.6K/mo, 100% SBB/DSE) and <b class="hl">marcolo</b> (AED 39.8K/mo total, 31% SBB/DSE) are the two largest brands with material SBB/DSE exposure and are worth a direct fulfilment-migration conversation regardless of the small immediate recovery number, given their scale. See Action 8 (§13, expanded).</div>
+
+      <span class="tag-h" style="margin-top:12px;">The proof, at SKU level: same product, different channel</span>
+      <div class="grid g2">
+        <div class="callout warn"><b>CHAKO LAB stainless-steel vacuum tumbler</b> (Food Containers) sells through both FBN and DSE simultaneously. Its two FBN listings: AED 596 combined GMV, <b>zero</b> cancellations. Its two DSE listings: AED 1,490 combined GMV, <b>AED 596 cancelled (40%)</b> — one DSE listing sits at just 81% instock. Identical product, channel is the only variable.</div>
+        <div class="callout warn"><b>MACKENZIE-CHILDS enamel pot</b> (Storage Set): the SBB-fulfilled listing had its <b>entire</b> AED 593 order cancelled outright, while its two FBN-fulfilled sibling listings (canisters from the same brand) sold cleanly with zero cancellations.</div>
+      </div>
+
+      <span class="tag-h" style="margin-top:24px;">06.2 · Returns &amp; cancellations — where and why</span>
+      <div class="grid g2">
+        <div class="table-wrap compact"><table><thead><tr><th class="l">Subcategory</th><th>GMV/mo</th><th>Return%</th></tr></thead><tbody id="tbl-returns-pst"></tbody></table></div>
+        <div class="table-wrap compact"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Return%</th><th class="l">Subcat</th></tr></thead><tbody id="tbl-returns-brand"></tbody></table></div>
+      </div>
+      <div class="grid g2" style="margin-top:14px;">
+        <div class="table-wrap compact"><table><thead><tr><th class="l">Subcategory</th><th>GMV/mo</th><th>Cancel%</th></tr></thead><tbody id="tbl-cancel-pst"></tbody></table></div>
+        <div class="table-wrap compact"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Cancel%</th></tr></thead><tbody id="tbl-cancel-brand"></tbody></table></div>
+      </div>
+      <div class="callout" style="margin-top:12px;"><b class="hl">Bentgo</b> (Lunch Box) returns 40% of its GMV — the single worst brand-level return rate in the category, on a small but real base (AED 2.9K/mo). <b class="hl">Chako_lab</b> cancels 26.5% (matches its DSE/SBB exposure above). Both are named already in the migration and SKU tables — the pattern is consistent: small, low-diversification brands leaning on weaker fulfilment channels show up on every quality metric, not just one. Likely root causes from the data available: <b class="hl">returns</b> cluster in bulky/assembly-heavy PSTs (Foldable Wardrobe, Hanging Closet Organizer, Cube Shelf — consistent with fit/assembly or damage-in-transit issues, not confirmable without a returns-reason field); <b class="hl">cancellations</b> cluster in the same small-brand, SBB/DSE-heavy names — a fulfilment-capacity issue, not a demand issue.</div>
+    </div>
+
+    <!-- ================= 07 SKU ================= -->
     <div class="section alt" id="sku">
-      <div class="section-head"><span class="idx">06</span><h2>SKU Opportunity Matrix</h2></div>
+      <div class="section-head"><span class="idx">07</span><h2>SKU Opportunity Matrix</h2></div>
 
       <span class="tag-h">Hero SKUs — highest GMV, healthy CVR &amp; instock (Aug'26)</span>
       <div class="table-wrap"><table><thead><tr><th class="l">SKU</th><th class="l">Brand / Subcat</th><th>GMV/mo</th><th>CVR</th><th>Instock%</th></tr></thead><tbody id="tbl-sku-hero"></tbody></table></div>
@@ -498,11 +558,11 @@ table.heat-sub td.hc{border-radius:3px;}
       </div>
     </div>
 
-    <!-- ================= 07 ASSORTMENT / WHITE SPACE ================= -->
+    <!-- ================= 08 ASSORTMENT / WHITE SPACE ================= -->
     <div class="section" id="assort">
-      <div class="section-head"><span class="idx">07</span><h2>SKU Productivity, Assortment &amp; White-Space</h2></div>
+      <div class="section-head"><span class="idx">08</span><h2>SKU Productivity, Assortment &amp; White-Space</h2></div>
 
-      <span class="tag-h">07.0 · Interactive explorer — click through Product Type → Subcategory → Brand → SKU</span>
+      <span class="tag-h">08.0 · Interactive explorer — click through Product Type → Subcategory → Brand → SKU</span>
       <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Covers all 44 active subcategories and up to the top 30 brands within each — not just the highlights shown elsewhere in this report. Every bar is a waterfall of that level's GMV, ranked; click one to drill in, or use a breadcrumb to jump back up.</p>
       <div class="explorer" style="margin-top:12px;">
         <div class="explorer-head">
@@ -535,9 +595,9 @@ table.heat-sub td.hc{border-radius:3px;}
           <p style="font-size:13px; margin-top:8px;">200–400 &amp; 400+ AED bands: GV growth of +8% and +36% vs baseline against only 10–13% selling-SKU rate — and for 200–400 AED specifically, the category's single weakest instock score (90.0%, well below every other band). This is a demand-first signal (not a guess) — concentrated in Racks, Clothes Rack and Cabinet/Drawer Organization, where a handful of premium SKUs (esqube, teuuea) already prove the tier works. Directional opportunity: <b class="hl">AED 80–120K/mo</b>, low confidence pending a curated test. See §13 Action 7.</p>
         </div>
       </div>
-      <div class="callout gap" style="margin-top:16px;"><b>Data gap:</b> no competitor price, assortment or ranking data exists in the source files, so white-space sizing above is demand-led (internal GV/instock/SKU-count signals only) and cannot be cross-checked against competitor assortment or pricing. Treat all §07 and §09 figures as internal-signal estimates.</div>
+      <div class="callout gap" style="margin-top:16px;"><b>Data gap:</b> no competitor price, assortment or ranking data exists in the source files, so white-space sizing above is demand-led (internal GV/instock/SKU-count signals only) and cannot be cross-checked against competitor assortment or pricing. Treat all §06 and §08 figures as internal-signal estimates.</div>
 
-      <span class="tag-h" style="margin-top:26px;">07.1 · Cannibalization check</span>
+      <span class="tag-h" style="margin-top:26px;">08.1 · Cannibalization check</span>
       <div class="grid g2">
         <div class="callout" style="align-self:start;"><b>No subcategory-level evidence.</b> Checked whether selling-SKU count grew faster than GMV MoM (a proxy for demand being split across more listings rather than genuinely growing) across all 45 subcategories — <b>zero</b> show that pattern in the latest month. Category growth in §02 is not an artifact of catalog inflation.</div>
         <div class="table-wrap compact"><table><thead><tr><th class="l">Brand × Subcat</th><th>SKUs</th><th>Selling%</th><th>GMV/mo</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-cannibal"></tbody></table></div>
@@ -545,9 +605,9 @@ table.heat-sub td.hc{border-radius:3px;}
       <p style="font-size:12.5px; color:var(--steel); margin-top:8px; max-width:82ch;"><b class="hl">But real risk exists within specific brands.</b> <b class="hl">dubaigallery</b> in Racks runs 633 SKUs for just AED 20/SKU/mo (6.5% selling) and <b class="hl">locknlock</b> in Food Containers runs 320 SKUs for AED 13/SKU/mo (17.5% selling) — assortment sprawl broad enough that near-duplicate listings are very likely splitting the same search traffic against each other rather than capturing incremental demand. Worth a listing-consolidation review before adding any more SKUs to either.</p>
     </div>
 
-    <!-- ================= 08 STOCK ================= -->
+    <!-- ================= 09 STOCK ================= -->
     <div class="section alt" id="stock">
-      <div class="section-head"><span class="idx">08</span><h2>Stock &amp; Lost Sales</h2></div>
+      <div class="section-head"><span class="idx">09</span><h2>Stock &amp; Lost Sales</h2></div>
       <p class="dek">The data carries actual lost-GMV fields (platform_gmv_loss_aed, express_gmv_loss_aed) — this is measured, not benchmarked.</p>
       <div class="grid g3" style="margin-top:18px;">
         <div class="card" style="padding:16px;"><div class="eyebrow">Platform-wide OOS loss</div><div class="v num" style="font-size:23px; margin-top:6px; color:var(--rose);">AED 192K/mo</div></div>
@@ -557,60 +617,6 @@ table.heat-sub td.hc{border-radius:3px;}
       <div class="assume"><b>Assumption:</b> platform and express loss are not summed into one number — express loss is very likely a partial subset/overlay of the same underlying stockout events measured through a different lens, so we treat AED 280K/mo as the fulfilment-specific ceiling and AED 192K/mo as the conservative, non-overlapping headline figure used in §12/§14.</div>
       <span class="tag-h">Top subcategories by platform stock loss (Aug'26)</span>
       <div class="bars" id="bar-stock"></div>
-    </div>
-
-    <!-- ================= 09 SELLER ================= -->
-    <div class="section" id="seller">
-      <div class="section-head"><span class="idx">09</span><h2>Seller Analysis</h2></div>
-      <div class="grid g2" style="margin-top:18px;">
-        <div class="card" style="padding:18px;">
-          <div class="eyebrow" style="margin-bottom:10px;">Seller concentration (1,046 active sellers)</div>
-          <div class="bars" id="bar-seller-conc"></div>
-        </div>
-        <div class="table-wrap compact"><table><thead><tr><th class="l">Business model</th><th>Share</th><th>CVR</th><th>Cancel%</th><th>Return%</th></tr></thead><tbody id="tbl-bizmodel"></tbody></table></div>
-      </div>
-      <div class="callout warn" style="margin-top:16px;"><b>SBB sellers cancel 12.0% of GMV</b> — 3–4× the FBN (2.6%), Retail (2.6%) and DSE (4.2%) rates, on only 3.9% of category GMV. Not a scale risk, but a concrete, fixable CX/recovery item worth ~AED 10K/mo direct plus retention upside. See Action 8 (§13).</div>
-      <p style="font-size:13px; color:var(--steel); margin-top:14px; max-width:80ch;">Seller concentration itself is healthy — the top seller (noon Retail) holds 21.7%, top 10 hold 45%, top 20 hold 55% — no single-seller dependency risk. FBN (Fulfilled by Noon marketplace) is the dominant model at 68.3% share with the best cancellation/return profile, consistent with the express-instock gap in §08 sitting mostly on FBN/DSE inventory rather than being a seller-quality issue.</p>
-
-      <span class="tag-h" style="margin-top:26px;">09.1 · Business model hierarchy — testing Retail &gt; FBN &gt; DSE &gt; SBB</span>
-      <p style="font-size:13px; color:var(--steel); max-width:82ch; margin-top:2px;">Testing the hypothesis directly: <b class="hl">SBB is unambiguously the floor</b> on every operational metric — instock, express-readiness, cancellations — by a wide margin. But Retail/FBN/DSE do <i>not</i> rank in a single clean order above it: which of the three leads flips depending on the metric (below). On <b class="hl">conversion</b> the hypothesis inverts entirely: SBB (7.33%) and Retail (8.34%) both out-convert FBN (3.94%) and DSE (4.05%). SBB's problem is not weak customer demand — it's fulfilment execution.</p>
-      <div class="table-wrap" style="margin-top:12px;"><table><thead><tr>
-        <th class="l">Business model</th><th>GMV/mo</th><th>Share</th><th>YoY</th><th>CVR</th><th>ASP</th><th>Instock%</th><th>Express Instock%</th><th>Cancel%</th><th>Return%</th><th>Sellers</th>
-      </tr></thead><tbody id="tbl-bizmodel-full"></tbody></table></div>
-
-      <div class="grid g2" style="margin-top:16px;">
-        <div>
-          <span class="tag-h">Instock % — SBB is the floor, the other three trade places</span>
-          <div class="bars" id="bar-bizmodel-instock"></div>
-        </div>
-        <div class="callout warn">
-          <b>Partially confirmed:</b> SBB (72.7%) is the clear floor on instock — but among the other three the order flips by metric, so "Retail &gt; FBN &gt; DSE" is not the clean hierarchy it looks like on paper. Standard instock: <b>DSE (96.3%) &gt; FBN (94.6%) &gt; Retail (89.7%)</b>. Express instock: <b>FBN (91.2%) &gt; Retail (88.1%) &gt; DSE (81.4%)</b> — DSE's Express readiness is actually its weak spot, not its strength. Cancellation is the one metric where the hypothesis roughly holds: Retail (2.6%) ≈ FBN (2.6%) &lt; DSE (4.2%) &lt;&lt; SBB (12.0%). SBB is structurally the weakest fulfilment channel in the category, even though its listings convert well when they're actually in stock.
-        </div>
-      </div>
-
-      <span class="tag-h" style="margin-top:22px;">Brand migration candidates — real brands with meaningful GMV concentrated on SBB/DSE</span>
-      <p style="font-size:13px; color:var(--steel); max-width:82ch;">Filtered to brands (excluding unbranded/generic listings) where ≥20% of GMV runs through SBB or DSE. "Recoverable GMV" = cancelled GMV in excess of the FBN cancellation benchmark (2.64%) + the platform_gmv_loss already measured on their SBB/DSE-fulfilled SKUs — i.e. what these brands would plausibly keep if their SBB/DSE listings moved to FBN or Retail fulfilment.</p>
-      <div class="table-wrap" style="margin-top:10px;"><table><thead><tr>
-        <th class="l">Brand</th><th>Total GMV/mo</th><th>SBB/DSE GMV/mo</th><th>SBB/DSE Share</th><th>SBB/DSE CVR</th><th>Recoverable GMV/mo</th>
-      </tr></thead><tbody id="tbl-bizmodel-migration"></tbody></table></div>
-      <div class="callout" style="margin-top:12px;"><b>Quantified opportunity:</b> ~<b class="hl">AED 8.6K/mo</b> from this candidate list specifically (high confidence, small but real — cancellation/stockout recovery only, holding demand constant). <b class="hl">dubaigallery</b> (AED 28.6K/mo, 100% SBB/DSE) and <b class="hl">marcolo</b> (AED 39.8K/mo total, 31% SBB/DSE) are the two largest brands with material SBB/DSE exposure and are worth a direct fulfilment-migration conversation regardless of the small immediate recovery number, given their scale. See Action 8 (§13, expanded).</div>
-
-      <span class="tag-h" style="margin-top:12px;">The proof, at SKU level: same product, different channel</span>
-      <div class="grid g2">
-        <div class="callout warn"><b>CHAKO LAB stainless-steel vacuum tumbler</b> (Food Containers) sells through both FBN and DSE simultaneously. Its two FBN listings: AED 596 combined GMV, <b>zero</b> cancellations. Its two DSE listings: AED 1,490 combined GMV, <b>AED 596 cancelled (40%)</b> — one DSE listing sits at just 81% instock. Identical product, channel is the only variable.</div>
-        <div class="callout warn"><b>MACKENZIE-CHILDS enamel pot</b> (Storage Set): the SBB-fulfilled listing had its <b>entire</b> AED 593 order cancelled outright, while its two FBN-fulfilled sibling listings (canisters from the same brand) sold cleanly with zero cancellations.</div>
-      </div>
-
-      <span class="tag-h" style="margin-top:24px;">09.2 · Returns &amp; cancellations — where and why</span>
-      <div class="grid g2">
-        <div class="table-wrap compact"><table><thead><tr><th class="l">Subcategory</th><th>GMV/mo</th><th>Return%</th></tr></thead><tbody id="tbl-returns-pst"></tbody></table></div>
-        <div class="table-wrap compact"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Return%</th><th class="l">Subcat</th></tr></thead><tbody id="tbl-returns-brand"></tbody></table></div>
-      </div>
-      <div class="grid g2" style="margin-top:14px;">
-        <div class="table-wrap compact"><table><thead><tr><th class="l">Subcategory</th><th>GMV/mo</th><th>Cancel%</th></tr></thead><tbody id="tbl-cancel-pst"></tbody></table></div>
-        <div class="table-wrap compact"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Cancel%</th></tr></thead><tbody id="tbl-cancel-brand"></tbody></table></div>
-      </div>
-      <div class="callout" style="margin-top:12px;"><b class="hl">Bentgo</b> (Lunch Box) returns 40% of its GMV — the single worst brand-level return rate in the category, on a small but real base (AED 2.9K/mo). <b class="hl">Chako_lab</b> cancels 26.5% (matches its DSE/SBB exposure above). Both are named already in the migration and SKU tables — the pattern is consistent: small, low-diversification brands leaning on weaker fulfilment channels show up on every quality metric, not just one. Likely root causes from the data available: <b class="hl">returns</b> cluster in bulky/assembly-heavy PSTs (Foldable Wardrobe, Hanging Closet Organizer, Cube Shelf — consistent with fit/assembly or damage-in-transit issues, not confirmable without a returns-reason field); <b class="hl">cancellations</b> cluster in the same small-brand, SBB/DSE-heavy names — a fulfilment-capacity issue, not a demand issue.</div>
     </div>
 
     <!-- ================= 10 ADS / VISIBILITY / PROMOTION ================= -->
@@ -1111,6 +1117,19 @@ bar("bar-funnel", [
   {label:"Units", value:14.6, color:"var(--moss)"},
   {label:"GMV", value:17.5, color:"var(--moss)"},
 ], {max:30, fmt:v=>fmtPct(v)});
+
+const FUNNEL_OPP = [{"name":"Racks","key":"storage_organization|racks","gmv":424666,"ctr":0,"conv":420885,"atc_or_cvr":"cvr","stock":72355,"total":493241},{"name":"Storage Box","key":"storage_home_organization|storage_box","gmv":431906,"ctr":0,"conv":197723,"atc_or_cvr":"atc","stock":93758,"total":291481},{"name":"Food Containers","key":"storage_organization|food_containers","gmv":322057,"ctr":152793,"conv":0,"atc_or_cvr":"atc","stock":75219,"total":228012},{"name":"Lunch Box","key":"storage_organization|lunch_box","gmv":204719,"ctr":83640,"conv":107487,"atc_or_cvr":"cvr","stock":10484,"total":201611},{"name":"Storage Basket","key":"storage_home_organization|storage_basket","gmv":57638,"ctr":0,"conv":150037,"atc_or_cvr":"atc","stock":11391,"total":161428},{"name":"Closet Clothes Hanger","key":"storage_home_organization|closet_clothes_hanger","gmv":247462,"ctr":140960,"conv":0,"atc_or_cvr":"atc","stock":9248,"total":150208},{"name":"Space Saver Bag","key":"storage_home_organization|space_saver_bag","gmv":285822,"ctr":43289,"conv":0,"atc_or_cvr":"atc","stock":79191,"total":122480},{"name":"Cabinet Drawer Organization","key":"storage_organization|cabinet_drawer_organization","gmv":104387,"ctr":39866,"conv":0,"atc_or_cvr":"atc","stock":23743,"total":63609},{"name":"Foldable Wardrobe","key":"storage_home_organization|foldable_wardrobe","gmv":69198,"ctr":0,"conv":58468,"atc_or_cvr":"cvr","stock":1748,"total":60216},{"name":"Lunch Bag","key":"storage_organization|lunch_bag","gmv":84899,"ctr":37670,"conv":0,"atc_or_cvr":"atc","stock":8004,"total":45675},{"name":"Closet Organization Systems","key":"storage_home_organization|closet_organization_systems","gmv":48294,"ctr":32395,"conv":0,"atc_or_cvr":"atc","stock":12925,"total":45321},{"name":"Storage Set","key":"storage_organization|storage_set","gmv":63212,"ctr":32267,"conv":0,"atc_or_cvr":"atc","stock":3738,"total":36006},{"name":"Bag","key":"storage_organization|bag","gmv":109334,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":31555,"total":31555},{"name":"Hanging Closet Organizer","key":"storage_home_organization|hanging_closet_organizer","gmv":48192,"ctr":3337,"conv":8344,"atc_or_cvr":"atc","stock":3467,"total":15149},{"name":"Closet Shelf Divider","key":"storage_home_organization|closet_shelf_divider","gmv":8984,"ctr":0,"conv":7814,"atc_or_cvr":"cvr","stock":1531,"total":9345},{"name":"Spice Jars","key":"storage_organization|spice_jars","gmv":63008,"ctr":2461,"conv":0,"atc_or_cvr":"atc","stock":6552,"total":9013},{"name":"Storage Bottles","key":"storage_organization|storage_bottles","gmv":34091,"ctr":0,"conv":4575,"atc_or_cvr":"atc","stock":4212,"total":8787},{"name":"Clothes Rack","key":"storage_home_organization|clothes_rack","gmv":132566,"ctr":777,"conv":1014,"atc_or_cvr":"cvr","stock":5778,"total":7569},{"name":"Biscuit Cookie Jar","key":"storage_organization|biscuit_cookie_jar","gmv":23838,"ctr":5929,"conv":0,"atc_or_cvr":"atc","stock":826,"total":6755},{"name":"Food Saver","key":"storage_organization|food_saver","gmv":15833,"ctr":666,"conv":0,"atc_or_cvr":"atc","stock":5505,"total":6171},{"name":"Aluminium Foil","key":"storage_organization|aluminium_foil","gmv":12601,"ctr":5345,"conv":0,"atc_or_cvr":"atc","stock":339,"total":5684},{"name":"Countertop Wall Organization","key":"storage_organization|countertop_wall_organization","gmv":6673,"ctr":675,"conv":1628,"atc_or_cvr":"cvr","stock":1217,"total":3521},{"name":"Egg Holder","key":"storage_organization|egg_holder","gmv":2836,"ctr":2713,"conv":0,"atc_or_cvr":"atc","stock":0,"total":2713},{"name":"Cling Film","key":"storage_organization|cling_film","gmv":6915,"ctr":2331,"conv":0,"atc_or_cvr":"atc","stock":164,"total":2495},{"name":"Kitchen Storage Accessories","key":"storage_organization|kitchen_storage_accessories","gmv":10993,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":2402,"total":2402},{"name":"Dinnerware Stemware Storage","key":"storage_organization|dinnerware_stemware_storage","gmv":7140,"ctr":0,"conv":1618,"atc_or_cvr":"cvr","stock":0,"total":1618},{"name":"Sink Sets","key":"storage_organization|sink_sets","gmv":6869,"ctr":1459,"conv":0,"atc_or_cvr":"atc","stock":65,"total":1524},{"name":"Under Bed Storage","key":"storage_home_organization|under_bed_storage","gmv":16412,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":1492,"total":1492},{"name":"Garage Storage","key":"storage_home_organization|garage_storage","gmv":14665,"ctr":1210,"conv":96,"atc_or_cvr":"atc","stock":0,"total":1306},{"name":"Bread Box","key":"storage_organization|bread_box","gmv":5907,"ctr":0,"conv":772,"atc_or_cvr":"atc","stock":0,"total":772},{"name":"Flatware Utensil Storage","key":"storage_organization|flatware_utensil_storage","gmv":6659,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":0,"total":0},{"name":"Other Storage","key":"storage_home_organization|other_storage","gmv":22667,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":0,"total":0}];
+function funnelOppRow(r){
+  const parts = [
+    {k:'b', label:'CTR', val:r.ctr},
+    {k:'c', label:r.atc_or_cvr==='atc'?'ATC':'CVR', val:r.conv},
+    {k:'d', label:'Stock', val:r.stock},
+  ].sort((a,b)=>b.val-a.val);
+  const primary = parts[0].val>0 ? `<span class="chip ${parts[0].k}">${parts[0].k.toUpperCase()} · ${parts[0].label}</span>` : '<span class="small">—</span>';
+  const dash = v => v>0 ? fmtAED(v) : '<span class="small">—</span>';
+  return `<tr><td class="l">${esc(r.name)}</td><td>${fmtAED(r.gmv)}</td><td class="l">${primary}</td><td>${dash(r.ctr)}</td><td>${dash(r.conv)}</td><td>${dash(r.stock)}</td><td><b>${fmtAED(r.total)}</b></td></tr>`;
+}
+document.getElementById("tbl-funnel-opp").innerHTML = [...FUNNEL_OPP].filter(r=>r.total>0).sort((a,b)=>b.total-a.total).map(funnelOppRow).join("");
 
 /* ---- 05 brand ---- */
 const BRAND_SB = [
@@ -1616,7 +1635,7 @@ renderLeakAccordion("tbl-leak-cvr", LEAK_CVR, "cvr", "CVR", "cvr", v=>v.toFixed(
 
 /* ---- 07 assortment depth ---- */
 /* All 44 active subcategories, built directly from the same DRILL data behind
-   the explorer in §07.0 - not a hand-picked top-15, and every row expands to
+   the explorer in §08.0 - not a hand-picked top-15, and every row expands to
    its brands, same as §02 and the heatmap above. */
 const ASSORT_DEPTH = Object.entries(DRILL.pst).flatMap(([pt, rows]) =>
   rows.map(r => ({name:r.name.replace(/\b\w/g,c=>c.toUpperCase()), pt, key:pt+"|"+r.id, gmv:r.gmv, brands:r.nbrands, skus:r.skus, selling:r.selling, sellpct:r.sellpct}))
