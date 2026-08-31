@@ -345,7 +345,7 @@ table.heat-sub td.hc{border-radius:3px;}
 
       <span class="tag-h">Subcategory table — top &amp; notable movers, ranked by GMV</span>
       <div class="table-wrap"><table><thead><tr>
-        <th class="l">Subcategory</th><th>GMV/mo</th><th>Share</th><th>YoY Δ</th><th>Impressions (SI%)</th><th>GV</th><th>ATC%</th><th>Units</th><th>CVR</th><th>CVR YoY pp</th><th>ASP</th><th>ASP YoY%</th><th>SKUs</th><th>Selling SKUs</th><th>Selling%</th>
+        <th class="l">Subcategory</th><th>GMV/mo</th><th>Share</th><th>YoY Δ</th><th>Impressions (SI%)</th><th>CTR</th><th>GV</th><th>ATC%</th><th>Units</th><th>CVR</th><th>CVR YoY pp</th><th>ASP</th><th>ASP YoY%</th><th>SKUs</th><th>Selling SKUs</th><th>Selling%</th>
       </tr></thead><tbody id="tbl-subcat"></tbody></table></div>
       <p class="small" style="margin-top:8px;">GV = visits · CVR = orders/GV · ASP = GMV/units · SI% = search impressions as a share of total impressions. GMV/Impressions/GV/Units/CVR/ASP/SKUs are the current Aug'26 snapshot; YoY columns compare Jul'26 to Jul'25 (clean, both full months) to isolate structural trend from the Aug-specific conversion event in §04.</p>
     </div>
@@ -756,13 +756,14 @@ function brandBandMatrixHTML(pt, pst){
       else { yoyTxt = `<span class="${y.growth>=0?'up':'down'}">${fmtPct(y.growth)}</span>`; }
     }
     const impTxt = b.impressions!==undefined ? `${b.impressions.toLocaleString()} (${b.si_share.toFixed(0)}%)` : "—";
+    const ctrTxt = (b.gv!==undefined && b.impressions) ? (b.gv/b.impressions*100).toFixed(2)+"%" : "—";
     const gvTxt = b.gv!==undefined ? b.gv.toLocaleString() : "—";
     const atcTxt = b.atc_pct!==undefined ? b.atc_pct.toFixed(1)+"%" : "—";
     const unitsTxt = b.units!==undefined ? b.units.toLocaleString() : "—";
-    return `<tr><td class="l">${esc(b.name)}</td><td>${fmtAED(b.gmv)}</td><td>${yoyTxt}</td><td>${impTxt}</td><td>${gvTxt}</td><td>${atcTxt}</td><td>${unitsTxt}</td><td>${b.cvr.toFixed(1)}%</td><td>AED ${b.asp.toFixed(0)}</td><td>${b.instock.toFixed(0)}%</td><td>${b.selling}/${b.skus}</td></tr>`;
+    return `<tr><td class="l">${esc(b.name)}</td><td>${fmtAED(b.gmv)}</td><td>${yoyTxt}</td><td>${impTxt}</td><td>${ctrTxt}</td><td>${gvTxt}</td><td>${atcTxt}</td><td>${unitsTxt}</td><td>${b.cvr.toFixed(1)}%</td><td>AED ${b.asp.toFixed(0)}</td><td>${b.instock.toFixed(0)}%</td><td>${b.selling}/${b.skus}</td></tr>`;
   }).join("");
   return `<div class="heat-sub-wrap"><table class="heat-sub">
-    <thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>YoY Δ</th><th>Impressions (SI%)</th><th>GV</th><th>ATC%</th><th>Units</th><th>CVR</th><th>ASP</th><th>Instock%</th><th>Selling</th></tr></thead>
+    <thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>YoY Δ</th><th>Impressions (SI%)</th><th>CTR</th><th>GV</th><th>ATC%</th><th>Units</th><th>CVR</th><th>ASP</th><th>Instock%</th><th>Selling</th></tr></thead>
     <tbody>${rows}</tbody></table></div>`;
 }
 /* Brand's SKU list, reused wherever a brand row needs to expand to SKUs. */
@@ -958,7 +959,10 @@ const SUBCAT = [
  {name:"Pods", key:"storage_organization|pods", gmv:587, share:0.0, growth:-48.5, abs:-713, contrib:-0.1, cvr:5.68,cvrChg:-0.0, asp:61.8,aspChg:3.1, instock:93.4, nsku:65, sellcount:5, selling:7.7},
  {name:"Tool Organizers", key:"storage_home_organization|tool_organizers", gmv:124, share:0.0, growth:373.8, abs:228, contrib:0.0, cvr:2.27,cvrChg:5.8, asp:65.0,aspChg:35.4, instock:94.9, nsku:21, sellcount:1, selling:4.8}
 ];
-SUBCAT.forEach(r=>Object.assign(r, SUBCAT_EXTRA[r.key]||{}));
+SUBCAT.forEach(r=>{
+  Object.assign(r, SUBCAT_EXTRA[r.key]||{});
+  if(r.impressions) r.ctr_pct = r.gv/r.impressions*100;
+});
 bar("bar-subcat", [...SUBCAT].sort((a,b)=>Math.abs(b.abs)-Math.abs(a.abs)).map(s=>({
   label:s.name, value:s.abs, color: s.abs>=0? "var(--moss)":"var(--rose)",
   sub: (s.contrib>=0?"+":"")+s.contrib.toFixed(1)+"% of growth"
@@ -971,6 +975,7 @@ table("tbl-subcat", SUBCAT_SORTED, [
   {k:"share", fmt:v=>v.toFixed(1)+"%"},
   {k:"growth", dir:true, fmt:fmtPct},
   {k:"impressions", fmt:(v,r)=>v!==undefined?v.toLocaleString()+` (${r.si_share.toFixed(0)}%)`:"—"},
+  {k:"ctr_pct", fmt:v=>v!==undefined?v.toFixed(2)+"%":"—"},
   {k:"gv", fmt:v=>v!==undefined?v.toLocaleString():"—"},
   {k:"atc_pct", fmt:v=>v!==undefined?v.toFixed(1)+"%":"—"},
   {k:"units", fmt:v=>v!==undefined?v.toLocaleString():"—"},
@@ -982,7 +987,7 @@ table("tbl-subcat", SUBCAT_SORTED, [
   {k:"sellcount", fmt:v=>v!==undefined?v.toLocaleString():"—"},
   {k:"selling", fmt:v=>v.toFixed(1)+"%"},
 ]);
-attachExpand("tbl-subcat", SUBCAT_SORTED, 15, row=>{
+attachExpand("tbl-subcat", SUBCAT_SORTED, 16, row=>{
   const [pt,pst] = row.key.split("|");
   return brandBandMatrixHTML(pt,pst);
 });
