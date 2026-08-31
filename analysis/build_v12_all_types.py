@@ -49,6 +49,198 @@ CURATED = {
    ('Kids Character Lunch Box', ['kids','character','cartoon']),
    ('Other Lunch Box', []),
  ],
+ # ---- clothes_rack: already reviewed and confirmed good (was auto-generated,
+ # frozen here as explicit rules so it can't drift on a future regen) ----
+ 'clothes_rack': [
+   ('Garment Rack', ['garment']),
+   ('Metal Clothes Rack', ['metal']),
+   ('Double-Rail Rack', ['double']),
+   ('Rack w/ Shelf', ['shelf','shelve']),
+   ('Closet System Rack', ['closet']),
+   ('Rail / Rod Rack', ['rail','rod']),
+   ('Other Clothes Rack', []),
+ ],
+ # ---- round 2: hand-reviewed from real product-title/bigram evidence (not
+ # generic single-word auto-clusters) -- see diagnose_types.py output ----
+ 'cabinet_drawer_organization': [
+   ('Vanity / Makeup Organizer', ['vanity','makeup','cosmetic']),
+   ('Drawer Divider Tray', ['divider','drawer organizer','drawer tray','desk drawer']),
+   ('Utensil Tray', ['utensil']),
+   ('Multi-Tier Cabinet Rack', ['tier','cabinet organizer']),
+   ('Other Cabinet/Drawer Organizer', []),
+ ],
+ 'bag': [
+   ('Digital Luggage Scale', ['luggage scale','baggage scale']),
+   ('Tote / Shoulder Bag', ['shoulder','strap','tote','pliage','longchamp']),
+   ('Moving / Storage Tote Bag', ['moving','zipper','organization bag']),
+   ('Other Bag', []),
+ ],
+ 'lunch_bag': [
+   ('Insulated Cooler Bag', ['insulated','cooler','leakproof','leak proof']),
+   ('Tote-Style Lunch Bag', ['tote','oxford','shoulder']),
+   ('Kids School Lunch Bag', ['school','student','kids']),
+   ('Other Lunch Bag', []),
+ ],
+ 'spice_jars': [
+   ('Glass Spice Jar (Airtight)', ['glass','airtight']),
+   ('Spice Rack / Cabinet Organizer', ['rack','cabinet','drawer']),
+   ('Seasoning Shaker / Dispenser', ['shaker','seasoning','funnel','dispenser']),
+   ('Other Spice Jars', []),
+ ],
+ 'storage_basket': [
+   ('Woven Rope Basket', ['woven','rope','cotton']),
+   ('Toy / Book Basket', ['toy','book']),
+   ('Fabric / Linen Storage Bin', ['linen','fabric','bin']),
+   ('Closet Shelf Basket', ['closet','shelf','wardrobe']),
+   ('Other Storage Basket', []),
+ ],
+ 'foldable_wardrobe': [
+   ('Portable Wardrobe (w/ Hanging Rod)', ['hanging rod','freestanding','rod']),
+   ('Garment Storage Bag (Moisture-Proof)', ['moisture','mold','garment storage']),
+   ('Foldable Drawer Wardrobe', ['drawer','cabinet','tier']),
+   ('Other Foldable Wardrobe', []),
+ ],
+ 'closet_organization_systems': [
+   ('Moving / Storage Tote Bag', ['moving','tote','zipper','carrying','oversized']),
+   ('Metal Clip Hanger', ['metal','clip','hanger']),
+   ('Wardrobe Organizer', ['wardrobe','hanging']),
+   ('Other Closet Organization Systems', []),
+ ],
+ 'storage_set': [
+   ('Glass Jar Set (Coffee/Tea/Sugar)', ['jar','glass','coffee','tea','sugar','canister','mason']),
+   ('Airtight Cereal / Dry Food Bin', ['cereal','airtight','bin']),
+   ('Other Storage Set', []),
+ ],
+ 'hanging_closet_organizer': [
+   ('Cube Storage Organizer', ['cube']),
+   ('Fabric Hanging Bin', ['fabric','bin','woven']),
+   ('Garment Storage Bag', ['garment','dust','zipper','clothing']),
+   ('Other Hanging Closet Organizer', []),
+ ],
+ 'storage_bottles': [
+   ('Glass Bottle (Airtight)', ['glass','airtight']),
+   ('Juice / Oil Bottle', ['juice','oil','drink']),
+   ('Water Bottle Rack / Stand', ['water','rack','stand','tier']),
+   ('Other Storage Bottles', []),
+ ],
+ 'biscuit_cookie_jar': [
+   ('Glass Airtight Jar', ['glass','airtight']),
+   ('Overnight Oats Container', ['overnight','oat']),
+   ('Candy / Snack Jar', ['candy','snack']),
+   ('Other Biscuit/Cookie Jar', []),
+ ],
+ 'other_storage': [
+   ('Rolling Drawer Cabinet', ['cabinet','drawer','tier','wheel']),
+   ('Foldable Storage Box', ['foldable','box','lid']),
+   ('Other', []),
+ ],
+ 'food_saver': [
+   ('Vacuum Sealer Bag', ['vacuum','sealer','seal']),
+   ('Sous Vide Bag', ['sou vide','sous vide']),
+   ('Meal Prep Container', ['meal','prep']),
+   ('Other Food Saver', []),
+ ],
+ 'under_bed_storage': [
+   ('Clothes / Blanket Storage Bag', ['clothes','clothing','blanket','comforter','zip']),
+   ('Under-Bed Storage Bin', ['bin','closet']),
+   ('Other Under-Bed Storage', []),
+ ],
+ 'aluminium_foil': [
+   ('Aluminium Foil Roll', ['aluminium foil','aluminum foil','foil','embossed']),
+   ('Plastic Cling Wrap', ['plastic wrap','cling']),
+   ('Other Aluminium Foil', []),
+ ],
+ 'kitchen_storage_accessories': [
+   ('Cabinet / Desk Bin Organizer', ['bin','cabinet','desk','multiuse']),
+   ('Airtight Glass Jar', ['airtight','glass','jar']),
+   ('Refrigerator Organizer', ['refrigerator','fridge']),
+   ('Other Kitchen Storage Accessories', []),
+ ],
+ 'garage_storage': [
+   ('Foldable Shelving Unit', ['tier','shelf','shelve','shelving']),
+   ('Wardrobe / Closet Organizer', ['closet','wardrobe','clothes','clothing','cabinet']),
+   ('Tool / Broom Storage', ['tool','broom']),
+   ('Other Garage Storage', []),
+ ],
+ 'cling_film': [
+   ('Cling Film Roll (w/ Cutter)', ['cutter','wrap','stretch']),
+   ('Vacuum Sealer Roll', ['vacuum','sealer']),
+   ('Other Cling Film', []),
+ ],
+ 'closet_shelf_divider': [
+   ('Expandable Tension Rod / Rack', ['tension','expandable','wardrobe rack']),
+   ('Garment Cover / Divider', ['garment','cover','partition','separator']),
+   ('Other Closet Shelf Divider', []),
+ ],
+ 'outdoor_storage': [
+   ('Outdoor Storage Shed', ['shed','garage','garden']),
+   ('Weatherproof Storage Box', ['crate','box']),
+   ('Other Outdoor Storage', []),
+ ],
+ 'paper_towel_holder': [
+   ('Countertop Roll Holder', ['countertop','weighted base','bamboo']),
+   ('Stainless Steel Holder', ['steel','stainless']),
+   ('Other Paper Towel Holder', []),
+ ],
+ 'sink_sets': [
+   ('Soap Dispenser + Sponge Caddy', ['soap','dispenser','sponge','caddy']),
+   ('Sink Organizer Basket', ['basket','organizer']),
+   ('Other Sink Sets', []),
+ ],
+ 'countertop_wall_organization': [
+   ('Pegboard Wall Organizer Kit', ['pegboard','kit','modular']),
+   ('Wall-Mounted Display Shelf', ['shelf','display','hanging']),
+   ('Other Countertop/Wall Organization', []),
+ ],
+ 'cooler': [
+   ('Hard-Sided Cooler Box', ['cool','insulated','hard cooler']),
+   ('Ice Pack / Gel Pack', ['ice pack','gel pack','ice']),
+   ('Other Cooler', []),
+ ],
+ 'bread_box': [
+   ('Bread Box (Metal/Bamboo)', ['bread box','bin','countertop','counter','metal','bamboo']),
+   ('Bakery / Pastry Display Case', ['pastry','bakery','cake','donut','window']),
+   ('Other Bread Box', []),
+ ],
+ 'dinnerware_stemware_storage': [
+   ('Dish Drying Rack', ['dish drying','drying rack','drainer','dish rack']),
+   ('Cutlery / Cup Organizer', ['cutlery','cup','plate','spoon']),
+   ('Other Dinnerware/Stemware Storage', []),
+ ],
+ 'cube_shelf': [
+   ('Modular Cube Storage Unit', ['cube','unit']),
+   ('Display Shelf (Perfume/Cosmetic)', ['perfume','cologne','display']),
+   ('Other Cube Shelf', []),
+ ],
+ 'flatware_utensil_storage': [
+   ('Dish Drying Rack', ['dish drying','drying rack','drainer','dish rack']),
+   ('Cutlery / Silverware Organizer', ['cutlery','spoon','fork','silverware']),
+   ('Other Flatware/Utensil Storage', []),
+ ],
+ 'travel_containers': [
+   ('Travel Makeup Bag', ['makeup','toiletry']),
+   ('Refillable Travel Bottle', ['bottle','oil','refillable','atomizer','atomiser']),
+   ('Other Travel Containers', []),
+ ],
+ 'cereal_dispenser': [
+   ('Rotating Grain Dispenser', ['grain','rotating','click']),
+   ('Airtight Moisture-Proof Container', ['moisture','proof','sealed','airtight']),
+   ('Other Cereal Dispenser', []),
+ ],
+ 'food_wrap_dispenser': [
+   ('Foil & Cling Wrap Dispenser', ['foil','aluminum','cling','film']),
+   ('Paper Towel Dispenser', ['paper','towel']),
+   ('Other Food Wrap Dispenser', []),
+ ],
+ 'egg_holder': [
+   ('Automatic Rolling Egg Dispenser', ['automatic','rolling','dispenser','refrigerator','fridge']),
+   ('Egg Carton / Tray', ['carton','tray']),
+   ('Other Egg Holder', []),
+ ],
+ 'pods': [
+   ('Coffee Pod / Capsule Organizer', ['coffee','capsule','pod','nespresso']),
+   ('Other Pods', []),
+ ],
 }
 
 STOP = set("""a an the of in on for with and or to at from by is are was were be been being this
@@ -66,7 +258,15 @@ bathroom office car indoor outdoor free standing folding collapsible expandable 
 rolling wheeled wheels handle handles lid lids cover covers cap caps women men kids baby girl
 boy unisex xl inch inches cm mm feet foot piece-set combo bundle deal offer edition version
 type kind item product products item items number model number's brand made material materials
-capacity per total total-capacity approx approximately about""".split())
+capacity per total total-capacity approx approximately about really very bpa sqft litre liter
+liters sq ft dia diameter approx suitable useful""".split())
+
+# single-word brand names (multi-word/underscored brands are left alone --
+# their component words are often ordinary English and too risky to block
+# globally) -- excluded so a brand can't leak in as a "type", e.g. Hotpack,
+# Falcon, Longchamp, Songmics, Cedargrain all showed up as auto-picked
+# "types" before this was added.
+BRAND_TOKENS = {b for b in json.load(open('brand_list.json')) if '_' not in b and b.isalpha()}
 
 def singularize(t):
     # crude stemming so "jars"/"jar", "bins"/"bin" etc merge into one bucket
@@ -77,7 +277,7 @@ def singularize(t):
 
 def tokenize(name):
     n = re.sub(r'[^a-z0-9 ]', ' ', str(name).lower())
-    toks = [singularize(t) for t in n.split() if t.isalpha() and len(t) > 2 and t not in STOP]
+    toks = [singularize(t) for t in n.split() if t.isalpha() and len(t) > 2 and t not in STOP and t not in BRAND_TOKENS]
     return toks
 
 def auto_rules(pst, x, max_types=6, min_skus=5, min_share=0.02):
