@@ -372,6 +372,7 @@ for pst in ALL_PSTS:
         'p25': r.loc[r['offer_price_aed'] > 0, 'offer_price_aed'].quantile(0.25),
         'p75': r.loc[r['offer_price_aed'] > 0, 'offer_price_aed'].quantile(0.75),
         'n_skus': r['sku'].nunique(),
+        'n_selling': r.loc[r['gmv_aed'] > 0, 'sku'].nunique(),
     }), include_groups=False)
     g['cvr'] = g['orders'] / g['gv'].replace(0, np.nan) * 100
     g['asp'] = g['gmv'] / g['units'].replace(0, np.nan)
@@ -388,6 +389,7 @@ for pst in ALL_PSTS:
             'p25': int(row['p25']) if pd.notna(row['p25']) else 0,
             'p75': int(row['p75']) if pd.notna(row['p75']) else 0,
             'skus': int(row['n_skus']),
+            'selling': int(row['n_selling']),
         })
     PRODUCT_TYPES[pst] = rows
 
