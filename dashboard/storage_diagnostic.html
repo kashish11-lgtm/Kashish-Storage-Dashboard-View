@@ -108,6 +108,14 @@ h1,h2,h3,h4{font-family:"Big Shoulders Display","Arial Narrow",sans-serif; font-
 .pill.p1{background:var(--amber-soft); color:var(--amber-ink);}
 .pill.p2{background:var(--teal-soft); color:var(--teal);}
 .pill.p3{background:var(--surface-2); color:var(--steel);}
+.flow{display:flex; flex-direction:column; max-width:560px;}
+.flow-node{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:11px 18px; background:var(--surface); border:1px solid var(--line); border-radius:10px;}
+.flow-node.headline{background:var(--surface-2); border-color:var(--amber);}
+.flow-node.context{border-style:dashed;}
+.flow-node .label{font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--steel); font-weight:600;}
+.flow-node .val{font-family:"IBM Plex Mono",monospace; font-size:16.5px; font-weight:600; color:var(--ink); white-space:nowrap;}
+.flow-connector{display:flex; align-items:center; justify-content:center; padding:2px 0; color:var(--steel-2); font-size:13px;}
+.flow-divider{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--steel-2); text-align:center; margin:12px 0 2px; font-weight:600;}
 
 .callout{padding:14px 16px; border-radius:8px; border:1px solid var(--line); background:var(--surface); font-size:13.5px;}
 .callout.warn{border-color:var(--warn); background:var(--warn-soft);}
@@ -321,16 +329,9 @@ table.heat-sub td.hc{border-radius:3px;}
           <tbody id="tbl-health"></tbody>
         </table>
       </div>
-      <div class="grid g2" style="margin-top:14px;">
-        <div class="card" style="padding:20px;">
-          <div class="eyebrow" style="margin-bottom:6px;">GMV decomposition — YoY (Jul'26 vs Jul'25, clean)</div>
-          <svg id="waterfall-yoy" width="100%" height="200" viewBox="0 0 460 200" preserveAspectRatio="xMidYMid meet"></svg>
-        </div>
-        <div class="card" style="padding:20px;">
-          <div class="eyebrow" style="margin-bottom:6px;">GMV decomposition — MoM (Aug'26 vs Jul'26, live)</div>
-          <svg id="waterfall" width="100%" height="200" viewBox="0 0 460 200" preserveAspectRatio="xMidYMid meet"></svg>
-        </div>
-      </div>
+
+      <span class="tag-h" style="margin-top:22px;">Full metric flow — Aug'26 snapshot, YoY vs Jul'25 (clean)</span>
+      <div class="flow" id="metric-flow"></div>
 
       <div class="grid g2" style="margin-top:16px;">
         <div class="callout"><b>YoY (Jul'26 vs Jul'25, clean full month both years):</b> Traffic +AED 337K, Conversion +AED 294K, AOV/pricing +AED 174K → net +AED 804K/mo (+47.2%). All three levers positive — traffic 42%, conversion 37%, pricing 22% of the gain.</div>
@@ -360,9 +361,9 @@ table.heat-sub td.hc{border-radius:3px;}
 
       <span class="tag-h">Subcategory table — top &amp; notable movers, ranked by GMV</span>
       <div class="table-wrap"><table><thead><tr>
-        <th class="l">Subcategory</th><th>GMV/mo</th><th>Share</th><th>YoY Δ</th><th>Abs Δ/mo</th><th>CVR</th><th>CVR YoY pp</th><th>ASP</th><th>ASP YoY%</th><th>Instock%</th><th>SKUs</th><th>Selling SKUs</th><th>Selling%</th>
+        <th class="l">Subcategory</th><th>GMV/mo</th><th>Share</th><th>YoY Δ</th><th>Impressions (SI%)</th><th>GV</th><th>Units</th><th>CVR</th><th>CVR YoY pp</th><th>ASP</th><th>ASP YoY%</th><th>SKUs</th><th>Selling SKUs</th><th>Selling%</th>
       </tr></thead><tbody id="tbl-subcat"></tbody></table></div>
-      <p class="small" style="margin-top:8px;">GV = visits · CVR = orders/GV · ASP = GMV/units. GMV/CVR/ASP/Instock/SKUs are the current Aug'26 snapshot; YoY columns compare Jul'26 to Jul'25 (clean, both full months) to isolate structural trend from the Aug-specific conversion event in §04.</p>
+      <p class="small" style="margin-top:8px;">GV = visits · CVR = orders/GV · ASP = GMV/units · SI% = search impressions as a share of total impressions. GMV/Impressions/GV/Units/CVR/ASP/SKUs are the current Aug'26 snapshot; YoY columns compare Jul'26 to Jul'25 (clean, both full months) to isolate structural trend from the Aug-specific conversion event in §04.</p>
     </div>
 
     <!-- ================= 03 PRICE BAND ================= -->
@@ -373,7 +374,7 @@ table.heat-sub td.hc{border-radius:3px;}
       <span class="tag-h" style="margin-top:20px;">GMV share by band — Jul'26 vs Jul'25 (YoY)</span>
       <div class="bars" id="bar-priceband"></div>
       <div class="table-wrap" style="margin-top:16px;"><table><thead><tr>
-        <th class="l">Band</th><th>Share</th><th>YoY Δ</th><th>CVR</th><th>CVR YoY pp</th><th>ASP</th><th>Instock%</th><th>Selling%</th>
+        <th class="l">Band</th><th>Share</th><th>YoY Δ</th><th>CVR</th><th>CVR YoY pp</th><th>ASP</th><th>Instock%</th><th>Total SKUs</th><th>Selling SKUs</th><th>Selling%</th>
       </tr></thead><tbody id="tbl-priceband"></tbody></table></div>
 
       <div class="callout warn" style="margin-top:18px;"><b>The 50–100 AED band is now the category's centre of gravity</b> — 40.6% of GMV (up from 37.2% a year ago), GV up +37% YoY, and 48.2% of all category YoY growth. Its CVR actually improved YoY (+0.7pp through July) — the current Aug'26 dip to 3.3% is downstream of the same Big-3 conversion event in §04, not a structural price-band problem.</div>
@@ -919,56 +920,49 @@ document.querySelectorAll("#tbl-health tr").forEach((tr,i)=>{
   tr.appendChild(td);
 });
 
-/* waterfall svgs: YoY (clean) + MoM (live) decomposition */
-function waterfall(svgId, steps, maxV){
-  const svg = document.getElementById(svgId);
-  const W=460,H=svg.viewBox.baseVal.height, padL=42,padR=10,padT=24,padB=30;
-  const plotW = W-padL-padR, plotH = H-padT-padB;
-  const y = v => padT + plotH - (v/maxV*plotH);
-  const bw = plotW/steps.length*0.62;
-  const gap = plotW/steps.length;
-  // % of net change, for the pos/neg lever steps only (not the total bars)
-  const netChange = steps.filter(s=>s.type!=="total").reduce((a,s)=>a+s.value,0);
-  let cum = 0;
-  let svgEls = "";
-  const colors = {total:"var(--steel)", pos:"var(--moss)", neg:"var(--rose)"};
-  steps.forEach((s,i)=>{
-    let base, top;
-    if(s.type==="total"){ base=0; top=s.value; cum=s.value; }
-    else { base = cum; top = cum + s.value; cum = top; }
-    const y0 = y(Math.min(base,top)), y1=y(Math.max(base,top));
-    const x = padL + i*gap + (gap-bw)/2;
-    svgEls += `<rect x="${x}" y="${y1}" width="${bw}" height="${Math.max(2,y0-y1)}" rx="3" fill="${colors[s.type]}"></rect>`;
-    const lbl = s.label.split("\n");
-    svgEls += `<text x="${x+bw/2}" y="${H-16}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${lbl[0]}</text>`;
-    if(lbl[1]) svgEls += `<text x="${x+bw/2}" y="${H-6}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${lbl[1]}</text>`;
-    const valTxt = s.type==="total" ? "AED "+(s.value/1e6).toFixed(2)+"M" : (s.value>0?"+":"") + Math.round(s.value/1000)+"K";
-    const labelTop = Math.min(y0,y1);
-    if(s.type!=="total" && netChange){
-      const pct = (s.value/netChange*100).toFixed(0)+"% of change";
-      svgEls += `<text x="${x+bw/2}" y="${labelTop-18}" text-anchor="middle" font-size="9" fill="var(--steel-2)">${pct}</text>`;
-    }
-    svgEls += `<text x="${x+bw/2}" y="${labelTop-6}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink)">${valTxt}</text>`;
-  });
-  svg.innerHTML = svgEls;
+/* full metric flow: Aug'26 snapshot value + clean YoY (Jul'26 vs Jul'25) per
+   stage, in demand -> conversion -> assortment order. search_impressions/atc
+   computed the same monthly-equivalent way as the rest of this table. */
+const FLOW = [
+  {label:"GMV", val:2946159, unit:"aed", yoy:47.2, cls:"headline"},
+  {label:"Impressions", val:22786704, unit:"count", yoy:45.6},
+  {label:"Search Impressions", val:17835313, unit:"count", yoy:55.7},
+  {label:"CTR (GV / Impressions)", val:5.05, unit:"pct", yoy:-0.85, pp:true},
+  {label:"GV — Visits", val:1151085, unit:"count", yoy:19.7},
+  {label:"ATC", val:173688, unit:"count", yoy:26.2},
+  {label:"CVR (Orders / GV)", val:4.75, unit:"pct", yoy:0.67, pp:true},
+  {label:"Orders", val:54720, unit:"count", yoy:37.0},
+  {label:"Units", val:64834, unit:"count", yoy:39.2},
+  {label:"AOV", val:53.84, unit:"aed2", yoy:7.4},
+  {label:"ASP", val:45.44, unit:"aed2", yoy:5.7},
+  {label:"Total SKUs (assortment)", val:28767, unit:"count", yoy:14.1, cls:"context"},
+  {label:"Selling SKUs", val:6615, unit:"count", yoy:14.4, cls:"context"},
+  {label:"Instock %", val:95.6, unit:"pct", yoy:-1.7, pp:true, cls:"context"},
+];
+function flowValTxt(f){
+  if(f.unit==="aed") return fmtAED(f.val);
+  if(f.unit==="aed2") return "AED "+f.val.toFixed(2);
+  if(f.unit==="pct") return f.val.toFixed(2)+"%";
+  return Math.round(f.val).toLocaleString();
 }
-waterfall("waterfall-yoy", [
-  {label:"Jul'25\nGMV", value:1704262, type:"total"},
-  {label:"Traffic", value:337000, type:"pos"},
-  {label:"Conversion", value:294000, type:"pos"},
-  {label:"AOV", value:174000, type:"pos"},
-  {label:"Jul'26\nGMV", value:2508104, type:"total"},
-], 2900000);
-waterfall("waterfall", [
-  {label:"Jul'26\nGMV", value:2508104, type:"total"},
-  {label:"Traffic", value:681000, type:"pos"},
-  {label:"Conversion", value:-304000, type:"neg"},
-  {label:"AOV", value:61000, type:"pos"},
-  {label:"Aug'26\nGMV", value:2946159, type:"total"},
-], 3300000);
+const flowHTML = FLOW.map((f,i)=>{
+  const dir = f.yoy>0?"up":(f.yoy<0?"down":"flat");
+  const arrow = f.yoy>0?"▲":(f.yoy<0?"▼":"–");
+  const yoyTxt = f.pp ? fmtPp(f.yoy) : fmtPct(f.yoy);
+  const node = `<div class="flow-node ${f.cls||""}">
+    <div class="label">${esc(f.label)}</div>
+    <div class="val">${flowValTxt(f)}</div>
+    <span class="pill ${dir}">${arrow} ${yoyTxt} YoY</span>
+  </div>`;
+  if(i===0) return node;
+  if(i===11) return `<div class="flow-divider">Assortment &amp; availability</div>` + node;
+  return `<div class="flow-connector">↓</div>` + node;
+}).join("");
+document.getElementById("metric-flow").innerHTML = flowHTML;
 
 /* ---- 02 subcategory ---- */
 /* growth/abs/cvrChg/aspChg = clean YoY, Jul'26 vs Jul'25 (both full months). cvr/asp/instock/nsku/selling = current Aug'26 snapshot. */
+const SUBCAT_EXTRA = {"storage_organization|aluminium_foil":{"impressions":101564,"search_impressions":86963,"si_share":85.6,"gv":3602,"units":809},"storage_organization|bag":{"impressions":691271,"search_impressions":517205,"si_share":74.8,"gv":36959,"units":3741},"storage_organization|biscuit_cookie_jar":{"impressions":176784,"search_impressions":141075,"si_share":79.8,"gv":7152,"units":555},"storage_organization|bread_box":{"impressions":45438,"search_impressions":39942,"si_share":87.9,"gv":2937,"units":127},"storage_organization|cabinet_drawer_organization":{"impressions":845137,"search_impressions":679480,"si_share":80.4,"gv":30894,"units":1961},"storage_organization|carton":{"impressions":150,"search_impressions":142,"si_share":94.7,"gv":13,"units":0},"storage_organization|cereal_dispenser":{"impressions":29406,"search_impressions":18709,"si_share":63.6,"gv":1666,"units":114},"storage_organization|clamshells_hinged":{"impressions":180,"search_impressions":129,"si_share":71.7,"gv":4,"units":0},"storage_organization|cling_film":{"impressions":50342,"search_impressions":43977,"si_share":87.4,"gv":1902,"units":361},"storage_home_organization|closet_clothes_hanger":{"impressions":1171232,"search_impressions":962278,"si_share":82.2,"gv":37694,"units":7230},"storage_home_organization|closet_organization_systems":{"impressions":421734,"search_impressions":311851,"si_share":73.9,"gv":12751,"units":1290},"storage_home_organization|closet_shelf_divider":{"impressions":81242,"search_impressions":64501,"si_share":79.4,"gv":5829,"units":173},"storage_home_organization|clothes_rack":{"impressions":692867,"search_impressions":472693,"si_share":68.2,"gv":34797,"units":1784},"storage_organization|compost":{"impressions":38,"search_impressions":30,"si_share":78.9,"gv":13,"units":0},"storage_organization|cooler":{"impressions":16327,"search_impressions":13494,"si_share":82.6,"gv":956,"units":86},"storage_organization|countertop_wall_organization":{"impressions":83456,"search_impressions":60376,"si_share":72.3,"gv":3828,"units":154},"storage_home_organization|cube_shelf":{"impressions":24419,"search_impressions":17581,"si_share":72.0,"gv":1672,"units":93},"storage_organization|dinnerware_stemware_storage":{"impressions":51878,"search_impressions":34371,"si_share":66.3,"gv":3236,"units":205},"storage_organization|egg_holder":{"impressions":46288,"search_impressions":41773,"si_share":90.2,"gv":1195,"units":93},"storage_organization|flatware_utensil_storage":{"impressions":43711,"search_impressions":33132,"si_share":75.8,"gv":2719,"units":150},"storage_home_organization|foldable_wardrobe":{"impressions":442113,"search_impressions":348152,"si_share":78.7,"gv":26030,"units":730},"storage_organization|food_containers":{"impressions":3002407,"search_impressions":2530074,"si_share":84.3,"gv":102866,"units":8525},"storage_organization|food_saver":{"impressions":89087,"search_impressions":62050,"si_share":69.7,"gv":4319,"units":479},"storage_organization|food_wrap_dispenser":{"impressions":19923,"search_impressions":15631,"si_share":78.5,"gv":1387,"units":131},"storage_home_organization|garage_storage":{"impressions":66650,"search_impressions":46698,"si_share":70.1,"gv":3110,"units":220},"storage_home_organization|hanging_closet_organizer":{"impressions":441782,"search_impressions":360641,"si_share":81.6,"gv":20872,"units":1001},"storage_organization|kitchen_storage_accessories":{"impressions":77982,"search_impressions":45230,"si_share":58.0,"gv":4362,"units":302},"storage_organization|lunch_bag":{"impressions":1291331,"search_impressions":1128064,"si_share":87.4,"gv":45184,"units":2668},"storage_organization|lunch_box":{"impressions":3389005,"search_impressions":2328999,"si_share":68.7,"gv":121541,"units":4210},"storage_home_organization|other_storage":{"impressions":76256,"search_impressions":64782,"si_share":85.0,"gv":4433,"units":728},"storage_home_organization|outdoor_storage":{"impressions":12796,"search_impressions":8159,"si_share":63.8,"gv":1130,"units":82},"storage_organization|paper_towel_holder":{"impressions":34441,"search_impressions":28840,"si_share":83.7,"gv":1220,"units":304},"storage_organization|pods":{"impressions":3897,"search_impressions":3182,"si_share":81.7,"gv":167,"units":10},"storage_organization|racks":{"impressions":2975926,"search_impressions":2268961,"si_share":76.2,"gv":230147,"units":5922},"storage_organization|sink_sets":{"impressions":57141,"search_impressions":49189,"si_share":86.1,"gv":2381,"units":198},"storage_home_organization|space_saver_bag":{"impressions":1467514,"search_impressions":1224464,"si_share":83.4,"gv":64382,"units":5331},"storage_organization|spice_jars":{"impressions":481595,"search_impressions":381550,"si_share":79.2,"gv":23414,"units":1421},"storage_home_organization|storage_basket":{"impressions":510264,"search_impressions":430833,"si_share":84.4,"gv":73196,"units":1106},"storage_organization|storage_bottles":{"impressions":233400,"search_impressions":195757,"si_share":83.9,"gv":15827,"units":1007},"storage_home_organization|storage_box":{"impressions":2807083,"search_impressions":2212419,"si_share":78.8,"gv":187878,"units":8826},"storage_organization|storage_set":{"impressions":626350,"search_impressions":472452,"si_share":75.4,"gv":20948,"units":1987},"storage_home_organization|tool_organizers":{"impressions":1756,"search_impressions":1041,"si_share":59.3,"gv":84,"units":2},"storage_organization|travel_containers":{"impressions":33774,"search_impressions":27031,"si_share":80.0,"gv":1936,"units":336},"storage_home_organization|under_bed_storage":{"impressions":70764,"search_impressions":61408,"si_share":86.8,"gv":4454,"units":382}};
 const SUBCAT = [
  {name:"Storage Box", key:"storage_home_organization|storage_box", gmv:431906, share:16.5, growth:102.7, abs:213273, contrib:26.0, cvr:3.66,cvrChg:-0.2, asp:48.9,aspChg:11.7, instock:94.5, nsku:2685, sellcount:716, selling:26.7},
  {name:"Racks", key:"storage_organization|racks", gmv:424666, share:15.0, growth:22.0, abs:68944, contrib:8.4, cvr:2.39,cvrChg:-0.1, asp:71.7,aspChg:13.0, instock:96.3, nsku:3505, sellcount:739, selling:21.1},
@@ -1012,6 +1006,7 @@ const SUBCAT = [
  {name:"Pods", key:"storage_organization|pods", gmv:587, share:0.0, growth:-48.5, abs:-713, contrib:-0.1, cvr:5.68,cvrChg:-0.0, asp:61.8,aspChg:3.1, instock:93.4, nsku:65, sellcount:5, selling:7.7},
  {name:"Tool Organizers", key:"storage_home_organization|tool_organizers", gmv:124, share:0.0, growth:373.8, abs:228, contrib:0.0, cvr:2.27,cvrChg:5.8, asp:65.0,aspChg:35.4, instock:94.9, nsku:21, sellcount:1, selling:4.8}
 ];
+SUBCAT.forEach(r=>Object.assign(r, SUBCAT_EXTRA[r.key]||{}));
 bar("bar-subcat", [...SUBCAT].sort((a,b)=>Math.abs(b.abs)-Math.abs(a.abs)).map(s=>({
   label:s.name, value:s.abs, color: s.abs>=0? "var(--moss)":"var(--rose)",
   sub: (s.contrib>=0?"+":"")+s.contrib.toFixed(1)+"% of growth"
@@ -1023,30 +1018,33 @@ table("tbl-subcat", SUBCAT_SORTED, [
   {k:"gmv", fmt:fmtAED},
   {k:"share", fmt:v=>v.toFixed(1)+"%"},
   {k:"growth", dir:true, fmt:fmtPct},
-  {k:"abs", dir:true, fmt:v=>(v>=0?"+":"")+fmtAED(v)},
+  {k:"impressions", fmt:(v,r)=>v!==undefined?v.toLocaleString()+` (${r.si_share.toFixed(0)}%)`:"—"},
+  {k:"gv", fmt:v=>v!==undefined?v.toLocaleString():"—"},
+  {k:"units", fmt:v=>v!==undefined?v.toLocaleString():"—"},
   {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
   {k:"cvrChg", dir:true, fmt:fmtPp},
   {k:"asp", fmt:v=>"AED "+v.toFixed(0)},
   {k:"aspChg", dir:true, fmt:fmtPct},
-  {k:"instock", fmt:v=>v.toFixed(1)+"%"},
   {k:"nsku", fmt:v=>v.toLocaleString()},
   {k:"sellcount", fmt:v=>v!==undefined?v.toLocaleString():"—"},
   {k:"selling", fmt:v=>v.toFixed(1)+"%"},
 ]);
-attachExpand("tbl-subcat", SUBCAT_SORTED, 13, row=>{
+attachExpand("tbl-subcat", SUBCAT_SORTED, 14, row=>{
   const [pt,pst] = row.key.split("|");
   return brandBandMatrixHTML(pt,pst);
 });
 
 /* ---- 03 price band ---- */
 /* growth/cvrChg = clean YoY (Jul'26 vs Jul'25). gmv/cvr/asp/instock/selling = current Aug'26 snapshot. base_share = share a year ago (Jul'25). */
+/* nsku = total listed SKUs (live >=1 day in trailing ~60 days, same recency
+   filter as the heatmap's total-SKU line); nselling = SKUs with GMV>0, Aug'26 */
 const PB = [
-  {name:"<25 AED", gmv:288321, share:9.9, base_share:10.7, growth:48.0, cvr:9.2, cvrChg:1.9, asp:14.8, instock:96.9, selling:30.9},
-  {name:"25-50 AED", gmv:849188, share:29.2, base_share:34.0, growth:24.1, cvr:5.5, cvrChg:0.6, asp:37.7, instock:96.5, selling:23.1},
-  {name:"50-100 AED", gmv:1182679, share:40.6, base_share:37.2, growth:61.3, cvr:3.3, cvrChg:0.7, asp:67.0, instock:95.9, selling:20.5},
-  {name:"100-200 AED", gmv:481172, share:16.5, base_share:13.5, growth:72.9, cvr:2.6, cvrChg:0.3, asp:129.9, instock:95.0, selling:17.8},
-  {name:"200-400 AED", gmv:84615, share:2.9, base_share:3.5, growth:22.8, cvr:1.9, cvrChg:0.1, asp:235.6, instock:90.0, selling:13.0},
-  {name:"400+ AED", gmv:26590, share:0.9, base_share:1.1, growth:51.7, cvr:2.1, cvrChg:0.0, asp:499.8, instock:95.6, selling:10.1},
+  {name:"<25 AED", gmv:288321, share:9.9, base_share:10.7, growth:48.0, cvr:9.2, cvrChg:1.9, asp:14.8, instock:96.9, selling:30.9, nsku:4086, nselling:1266},
+  {name:"25-50 AED", gmv:849188, share:29.2, base_share:34.0, growth:24.1, cvr:5.5, cvrChg:0.6, asp:37.7, instock:96.5, selling:23.1, nsku:10675, nselling:2483},
+  {name:"50-100 AED", gmv:1182679, share:40.6, base_share:37.2, growth:61.3, cvr:3.3, cvrChg:0.7, asp:67.0, instock:95.9, selling:20.5, nsku:9638, nselling:1984},
+  {name:"100-200 AED", gmv:481172, share:16.5, base_share:13.5, growth:72.9, cvr:2.6, cvrChg:0.3, asp:129.9, instock:95.0, selling:17.8, nsku:3366, nselling:604},
+  {name:"200-400 AED", gmv:84615, share:2.9, base_share:3.5, growth:22.8, cvr:1.9, cvrChg:0.1, asp:235.6, instock:90.0, selling:13.0, nsku:634, nselling:87},
+  {name:"400+ AED", gmv:26590, share:0.9, base_share:1.1, growth:51.7, cvr:2.1, cvrChg:0.0, asp:499.8, instock:95.6, selling:10.1, nsku:167, nselling:17},
 ];
 bar("bar-priceband", PB.map(p=>({label:p.name, value:p.share, color:"var(--teal)", sub:"vs "+p.base_share.toFixed(1)+"% a year ago"})), {fmt:v=>v.toFixed(1)+"%"});
 table("tbl-priceband", PB, [
@@ -1057,6 +1055,8 @@ table("tbl-priceband", PB, [
   {k:"cvrChg", dir:true, fmt:fmtPp},
   {k:"asp", fmt:v=>"AED "+v.toFixed(0)},
   {k:"instock", fmt:v=>v.toFixed(1)+"%"},
+  {k:"nsku", fmt:v=>v.toLocaleString()},
+  {k:"nselling", fmt:v=>v.toLocaleString()},
   {k:"selling", fmt:v=>v.toFixed(1)+"%"},
 ]);
 
