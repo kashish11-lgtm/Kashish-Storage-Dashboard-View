@@ -198,25 +198,6 @@ footer{padding:30px 40px; color:var(--steel-2); font-size:12px;}
 .drill-row .r3{margin-top:4px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--steel-2);}
 .drill-empty{padding:34px; text-align:center; color:var(--steel-2); font-size:13px;}
 
-/* ---- leak accordion (click a "worst X" row to see why) ---- */
-.leak-panel{border:1px solid var(--line); border-radius:10px; background:var(--surface); overflow:hidden;}
-.leak-head{padding:9px 12px; font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--steel-2); background:var(--surface-2); border-bottom:1px solid var(--line); display:flex; justify-content:space-between;}
-.leak-row{width:100%; text-align:left; background:none; border:none; border-bottom:1px solid var(--line-soft); padding:10px 12px; cursor:pointer; font:inherit; color:inherit; display:block;}
-.leak-row:last-child{border-bottom:none;}
-.leak-row:hover{background:var(--surface-2);}
-.leak-row.open{background:var(--surface-2);}
-.leak-row .lr1{display:flex; justify-content:space-between; align-items:center; gap:8px;}
-.leak-row .lname{font-size:13px; color:var(--ink); font-weight:500;}
-.leak-row .lmeta{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--steel);}
-.leak-row .lval{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600;}
-.leak-row .ltoggle{font-size:11px; color:var(--steel-2); margin-left:6px;}
-.leak-detail{padding:12px 14px 14px; background:var(--surface); border-bottom:1px solid var(--line-soft); font-size:12px;}
-.leak-detail-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
-.leak-col-h{font-family:"IBM Plex Mono",monospace; font-size:10px; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;}
-.leak-item{display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dashed var(--line-soft); font-family:"IBM Plex Mono",monospace; font-size:11.5px;}
-.leak-item:last-child{border-bottom:none;}
-.leak-item .bname{font-family:"IBM Plex Sans"; color:var(--ink);}
-.leak-avg{margin-top:8px; font-size:11px; color:var(--steel-2); font-family:"IBM Plex Mono",monospace;}
 
 /* ---- clickable heatmap row -> brand x band sub-matrix ---- */
 tr.heat-row{cursor:pointer;}
@@ -243,9 +224,9 @@ table.heat-sub td.hc{border-radius:3px;}
       <a href="#health"><span class="idx">01</span>Category Health</a>
       <a href="#subcat"><span class="idx">02</span>Subcategory Matrix</a>
       <a href="#price"><span class="idx">03</span>Price Band Matrix</a>
-      <a href="#funnel"><span class="idx">04</span>Funnel Diagnosis</a>
-      <a href="#brand"><span class="idx">05</span>Brand Matrix</a>
-      <a href="#seller"><span class="idx">06</span>Seller Analysis</a>
+      <a href="#seller"><span class="idx">04</span>Seller Analysis</a>
+      <a href="#funnel"><span class="idx">05</span>Funnel Diagnosis</a>
+      <a href="#brand"><span class="idx">06</span>Brand Matrix</a>
       <a href="#sku"><span class="idx">07</span>SKU Opportunity</a>
       <a href="#assort"><span class="idx">08</span>Assortment &amp; White Space</a>
       <a href="#stock"><span class="idx">09</span>Stock &amp; Lost Sales</a>
@@ -294,12 +275,12 @@ table.heat-sub td.hc{border-radius:3px;}
         <div class="card" style="padding:18px;">
           <div class="eyebrow" style="color:var(--rose);">Biggest single lever</div>
           <div class="v num" style="font-size:22px; margin:6px 0;">AED 485K–538K /mo</div>
-          <div style="font-size:13px; color:var(--steel);">Conversion recovery in <b class="hl">Storage Boxes, Racks &amp; Storage Baskets</b> — each was stable for 19 straight months, then crashed 1.6–4.1 CVR points in the single most recent month, with no precedent in the prior data. See §02, §04, §13 Action 1.</div>
+          <div style="font-size:13px; color:var(--steel);">Conversion recovery in <b class="hl">Storage Boxes, Racks &amp; Storage Baskets</b> — each was stable for 19 straight months, then crashed 1.6–4.1 CVR points in the single most recent month, with no precedent in the prior data. See §02, §05, §13 Action 1.</div>
         </div>
         <div class="card" style="padding:18px;">
           <div class="eyebrow" style="color:var(--teal);">Second lever</div>
           <div class="v num" style="font-size:22px; margin:6px 0;">AED 437K /mo</div>
-          <div style="font-size:13px; color:var(--steel);">Click-through gap in 7 subcategories (Food Containers, Hangers, Lunch Boxes/Bags…) — CTR 3.0–3.7% vs 5.05% category avg on healthy impression volume. See §04, §13 Action 2.</div>
+          <div style="font-size:13px; color:var(--steel);">Click-through gap in 7 subcategories (Food Containers, Hangers, Lunch Boxes/Bags…) — CTR 3.0–3.7% vs 5.05% category avg on healthy impression volume. See §05, §13 Action 2.</div>
         </div>
         <div class="card" style="padding:18px;">
           <div class="eyebrow" style="color:var(--amber-ink);">Third lever</div>
@@ -339,7 +320,7 @@ table.heat-sub td.hc{border-radius:3px;}
         </div>
         <div class="card" style="padding:16px 18px;">
           <div class="eyebrow" style="color:var(--rose);">Declining, and why</div>
-          <p style="font-size:13px; margin-top:6px;"><b class="hl">Closet Organization Systems</b> (−29% YoY, −AED 20K/mo), <b class="hl">Kitchen Storage Accessories</b> (−46%) and <b class="hl">Cabinet/Drawer Organization</b> (−10%, −AED 11K/mo — the largest-GMV decliner) are down on weak CTR (§04) rather than price or stock — all three sit well below the category's 5.05% average click-through rate despite healthy impression volume.</p>
+          <p style="font-size:13px; margin-top:6px;"><b class="hl">Closet Organization Systems</b> (−29% YoY, −AED 20K/mo), <b class="hl">Kitchen Storage Accessories</b> (−46%) and <b class="hl">Cabinet/Drawer Organization</b> (−10%, −AED 11K/mo — the largest-GMV decliner) are down on weak CTR (§05) rather than price or stock — all three sit well below the category's 5.05% average click-through rate despite healthy impression volume.</p>
         </div>
       </div>
 
@@ -347,7 +328,7 @@ table.heat-sub td.hc{border-radius:3px;}
       <div class="table-wrap"><table><thead><tr>
         <th class="l">Subcategory</th><th>GMV/mo</th><th>Share</th><th>YoY Δ</th><th>Impressions (SI%)</th><th>CTR</th><th>GV</th><th>ATC%</th><th>Units</th><th>CVR</th><th>CVR YoY pp</th><th>ASP</th><th>ASP YoY%</th><th>SKUs</th><th>Selling SKUs</th><th>Selling%</th>
       </tr></thead><tbody id="tbl-subcat"></tbody></table></div>
-      <p class="small" style="margin-top:8px;">GV = visits · CVR = orders/GV · ASP = GMV/units · SI% = search impressions as a share of total impressions. GMV/Impressions/GV/Units/CVR/ASP/SKUs are the current Aug'26 snapshot; YoY columns compare Jul'26 to Jul'25 (clean, both full months) to isolate structural trend from the Aug-specific conversion event in §04.</p>
+      <p class="small" style="margin-top:8px;">GV = visits · CVR = orders/GV · ASP = GMV/units · SI% = search impressions as a share of total impressions. GMV/Impressions/GV/Units/CVR/ASP/SKUs are the current Aug'26 snapshot; YoY columns compare Jul'26 to Jul'25 (clean, both full months) to isolate structural trend from the Aug-specific conversion event in §05.</p>
     </div>
 
     <!-- ================= 03 PRICE BAND ================= -->
@@ -361,7 +342,7 @@ table.heat-sub td.hc{border-radius:3px;}
         <th class="l">Band</th><th>Share</th><th>YoY Δ</th><th>CVR</th><th>CVR YoY pp</th><th>ASP</th><th>Instock%</th><th>Total SKUs</th><th>Selling SKUs</th><th>Selling%</th>
       </tr></thead><tbody id="tbl-priceband"></tbody></table></div>
 
-      <div class="callout warn" style="margin-top:18px;"><b>The 50–100 AED band is now the category's centre of gravity</b> — 40.6% of GMV (up from 37.2% a year ago), GV up +37% YoY, and 48.2% of all category YoY growth. Its CVR actually improved YoY (+0.7pp through July) — the current Aug'26 dip to 3.3% is downstream of the same Big-3 conversion event in §04, not a structural price-band problem.</div>
+      <div class="callout warn" style="margin-top:18px;"><b>The 50–100 AED band is now the category's centre of gravity</b> — 40.6% of GMV (up from 37.2% a year ago), GV up +37% YoY, and 48.2% of all category YoY growth. Its CVR actually improved YoY (+0.7pp through July) — the current Aug'26 dip to 3.3% is downstream of the same Big-3 conversion event in §05, not a structural price-band problem.</div>
 
       <span class="tag-h">GMV by price band × all 44 subcategories (Aug'26, AED/mo, darker = more GMV) — click any row to see its top 20 brands by price band and SKU count</span>
       <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Each cell: GMV (YoY% vs Aug'25) and count of <b class="hl">selling SKUs</b> — SKUs with GMV&gt;0 in that (subcategory, price band), not total listed assortment — with last year's count shown alongside it. Both months normalized to a month-equivalent run-rate so the partial Aug'26 (16 days) is comparable to the full Aug'25. "New" = no Aug'25 GMV base in that cell to grow from.</p>
@@ -384,103 +365,9 @@ table.heat-sub td.hc{border-radius:3px;}
       <div class="callout" style="margin-top:14px; max-width:82ch;"><b>No live Noon.com browsing was used</b> — this dataset has no product-URL field, and browsing tens of thousands of individual listing pages isn't practical at this scale. Every number here comes from the structured fields already in the source (product_name, price, GMV, GV, orders) — capacity is parsed from the listing title text, which is why some types drill into capacity and others (where titles don't state a size) drill into SKUs instead.</div>
     </div>
 
-    <!-- ================= 04 FUNNEL ================= -->
-    <div class="section alt" id="funnel">
-      <div class="section-head"><span class="idx">04</span><h2>Funnel Diagnosis</h2></div>
-      <p class="dek">Impressions → Search Impressions → GV → ATC → Units → GMV, category-wide, Aug'26 vs Jul'26.</p>
-      <div class="grid g2" style="margin-top:20px;">
-        <div class="card" style="padding:20px;">
-          <div class="eyebrow" style="margin-bottom:12px;">Funnel step change, MoM</div>
-          <div class="bars" id="bar-funnel"></div>
-          <p style="font-size:12.5px; color:var(--steel); margin-top:14px;"><b class="hl">Leak point:</b> GV→ATC (add-to-cart rate) fell 3.3pp (18.4%→15.1%) even as GV surged — new traffic is browsing but adding to cart at a lower rate, and what does get added converts to orders slightly worse too (CVR −0.5pp). The funnel is wider at the top and leakier in the middle simultaneously.</p>
-        </div>
-        <div class="card" style="padding:20px;">
-          <div class="eyebrow" style="margin-bottom:12px;">Problem classification — how to read the table below</div>
-          <div style="font-size:12.8px; line-height:2.1;">
-            <span class="chip a">A · Traffic problem</span> High CVR, thin visits — real but small-base (≤1% share each): Food Saver, Cooler, Cling Film, Aluminium Foil, Sink Sets, Kitchen Storage Acc.<br>
-            <span class="chip b">B · CTR problem</span> Impressions not converting to visits — capped at category CTR to size the loss<br>
-            <span class="chip c">C · Conversion problem</span> Visits not adding to cart, or cart not converting to orders — worse of the two stages<br>
-            <span class="chip d">D · Stock problem</span> Measured platform + express GMV lost to being out of stock (§09)
-          </div>
-          <p style="font-size:12.5px; color:var(--steel); margin-top:12px;">Every subcategory's opportunity is quantified per-stage in the table below, not just bucketed — <b>B ≈ AED 590K/mo</b>, <b>C ≈ AED 960K/mo</b>, <b>D ≈ AED 467K/mo</b> summed across all subcategories with meaningful traffic (impressions &gt; 20K/mo). No subcategory shows E (healthy funnel, falling ASP) at meaningful scale — the closest, Storage Set, has ASP −7% YoY but CVR is improving (+0.8pp), so it's healthy mix-shift, not a pricing problem.</p>
-        </div>
-      </div>
-
-      <span class="tag-h" style="margin-top:22px;">04.1 · $ opportunity by subcategory and funnel stage (Aug'26, ranked by total)</span>
-      <p style="font-size:12.5px; color:var(--steel); max-width:88ch; margin-top:2px;">Each loss column is "what this subcategory would gain per month if it converted at the category benchmark for that stage, holding its own traffic constant." Columns aren't additive with each other in a strict sense (fixing CTR changes the traffic base for the conversion calc too) but the ranking and relative sizing are directionally solid, and Stock loss is a directly measured field, not modelled. For the brand-level "why" behind the worst offenders, see the leak panels in §04.2 below.</p>
-      <div class="table-wrap" style="margin-top:8px;"><table><thead><tr>
-        <th class="l">Subcategory</th><th>GMV/mo</th><th class="l">Primary issue</th><th>B · CTR opp.</th><th>C · Conversion opp.</th><th>D · Stock opp.</th><th>Total opp.</th>
-      </tr></thead><tbody id="tbl-funnel-opp"></tbody></table></div>
-
-      <span class="tag-h" style="margin-top:26px;">CVR, 20 months — category vs the Big 3 (this is why Action 1 is P0)</span>
-      <div class="card" style="padding:20px;">
-        <svg id="big3-chart" width="100%" height="230" viewBox="0 0 900 230" preserveAspectRatio="xMidYMid meet"></svg>
-        <p style="font-size:12.5px; color:var(--steel); margin-top:10px;">Category CVR has held a 4.4–5.9% band for 20 straight months. Storage Basket (4.9–6.2%), Storage Box (4.8–6.5%) and Racks (3.2–4.1%) each held their own stable bands too — then all three broke sharply downward in the single most recent month, well outside anything seen in the prior 19, with <b class="hl">Storage Basket the most severe by far</b>: it fell to 1.3% CVR, 2.8× its own historic band width below the floor it held for 19 months. The same three subcategories show the identical pattern independently in ATC-rate (add-to-cart ÷ visits) — Storage Basket's ATC-rate collapsed from an 18.4–22.5% band to 4.2%, a break even larger in relative terms than its CVR drop. Two independent funnel-stage metrics breaking the same three subcategories in the same month is strong confirmation this is a fresh, live event, not a slow bleed since mid-2025 — which is exactly why it's fixable fast if caught now.</p>
-      </div>
-
-      <span class="tag-h" style="margin-top:26px;">04.2 · The funnel, drawn — and exactly where each stage leaks</span>
-      <div class="card" style="padding:24px;">
-        <svg id="funnel-shape" width="100%" height="340" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet"></svg>
-      </div>
-
-      <div class="grid g3" style="margin-top:16px;">
-        <div class="leak-panel">
-          <div class="leak-head"><span>Worst CTR (impr→GV)</span><span>click a row →</span></div>
-          <div id="tbl-leak-ctr"></div>
-        </div>
-        <div class="leak-panel">
-          <div class="leak-head"><span>Worst ATC-rate (GV→ATC)</span><span>click a row →</span></div>
-          <div id="tbl-leak-atc"></div>
-        </div>
-        <div class="leak-panel">
-          <div class="leak-head"><span>Worst CVR (ATC→Order)</span><span>click a row →</span></div>
-          <div id="tbl-leak-cvr"></div>
-        </div>
-      </div>
-      <p style="font-size:12.5px; color:var(--steel); margin-top:8px;">Biggest single-brand CTR failures despite strong impression volume: <b class="hl">noon_east</b> in Food Containers (308K impr/mo, 1.8% CTR) and Closet Hangers (149K impr/mo, 1.7% CTR); <b class="hl">milton</b> in Lunch Box (371K impr/mo, 2.4% CTR); <b class="hl">homify</b> in Lunch Box (83K impr/mo, 0.6% CTR — essentially invisible). These are established, recognisable brand names — the failure is thumbnail/title/search-relevance, not brand trust.</p>
-
-      <span class="tag-h" style="margin-top:22px;">How to fix each stage — three separate levers, three separate teams</span>
-      <div class="grid g3">
-        <div class="card" style="padding:16px 18px;">
-          <div class="eyebrow" style="color:var(--teal);">↑ Increase GV (traffic)</div>
-          <p style="font-size:12.8px; margin-top:8px;">Fix CTR, not impressions — impression volume is already healthy in every problem subcat. Rewrite titles/thumbnails for noon_east and milton first (highest absolute impression waste); run a search-relevance/keyword audit on the 7 CTR-problem subcats. <b>Not</b> a paid-ads fix. ≈ AED 437K/mo (§12).</p>
-        </div>
-        <div class="card" style="padding:16px 18px;">
-          <div class="eyebrow" style="color:var(--amber-ink);">↑ Increase ATC</div>
-          <p style="font-size:12.8px; margin-top:8px;">ATC-rate loss is 96% concentrated in the Big 3 (Racks, Storage Box, Storage Basket) — this is the same August event, not a separate PDP problem elsewhere. Audit primary image, price badge and size/spec clarity on the highest-GV SKUs in these three subcats first.</p>
-        </div>
-        <div class="card" style="padding:16px 18px;">
-          <div class="eyebrow" style="color:var(--rose);">↑ Increase CVR</div>
-          <p style="font-size:12.8px; margin-top:8px;">Start with the dish-drying-rack duplicate-listing cluster inside Racks (§07) — 6 near-identical SKUs converting 0–2% on real traffic. Then verify no price/stock sync fault broke checkout for Storage Box and Storage Basket specifically in the last cycle.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ================= 05 BRAND ================= -->
-    <div class="section" id="brand">
-      <div class="section-head"><span class="idx">05</span><h2>Brand Performance Matrix</h2></div>
-      <p class="dek">Brand cuts of the three highest-GMV subcategories — where a brand-level fix moves the category needle most.</p>
-
-      <span class="tag-h">Storage Box — top brands (Aug'26 monthly-equiv)</span>
-      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp (vs H1'25)</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-sb"></tbody></table></div>
-      <div class="callout warn" style="margin-top:10px;"><b>Declining leader — Cosmoplast:</b> share fell 29.1pp. With 20 months of data now visible, the shape is unambiguous: Cosmoplast grew steadily and peaked in <b>March 2026</b> (AED 105K/mo GMV, 513K impressions) — then collapsed for five straight months to AED 12.5K/mo (Aug'26), a 92% fall exactly tracking an equally sharp impressions collapse (513K → 40K). Instock stayed ~90%+ throughout — this is not a demand or stock problem, it's a <b>visibility collapse that began precisely in April 2026</b> and has not stopped. See chart and Action 3 (§13).</div>
-      <svg id="cosmo-chart" width="100%" height="160" viewBox="0 0 900 160" preserveAspectRatio="xMidYMid meet" style="margin-top:10px;"></svg>
-
-      <span class="tag-h" style="margin-top:26px;">Racks — top brands</span>
-      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp (vs H1'25)</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-rk"></tbody></table></div>
-
-      <span class="tag-h" style="margin-top:26px;">Storage Basket — top brands</span>
-      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp (vs H1'25)</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-bk"></tbody></table></div>
-
-      <div class="grid g2" style="margin-top:22px;">
-        <div class="card" style="padding:16px 18px;"><div class="eyebrow" style="color:var(--moss);">Share gainers, and why</div><p style="font-size:13px; margin-top:6px;"><b class="hl">Duniso</b> is the standout — #1 in Storage Box (23.7% share, +12.2pp) and a top-3 gainer in Racks (+7.8pp) and Storage Basket. Broad-based, multi-subcategory share gain at low ASP (AED 20–171/SKU) — a value/generic-tier consolidator winning on assortment breadth and price, not a single hero SKU.</p></div>
-        <div class="card" style="padding:16px 18px;"><div class="eyebrow" style="color:var(--rose);">Share losers, and why</div><p style="font-size:13px; margin-top:6px;"><b class="hl">Cosmoplast</b> (storage box, −29pp) and <b class="hl">Generic</b>-tagged listings in Racks (−9.2pp) are the largest losers. Generic's loss is structural — branded/named sellers (Duniso, Toshionics, Auraluxi) are displacing unbranded listings as the mix professionalises. Cosmoplast's loss is a visibility incident, not competitive displacement (see above) — different root cause, different fix.</p></div>
-      </div>
-    </div>
-
-    <!-- ================= 06 SELLER ================= -->
+    <!-- ================= 04 SELLER ================= -->
     <div class="section" id="seller">
-      <div class="section-head"><span class="idx">06</span><h2>Seller Analysis</h2></div>
+      <div class="section-head"><span class="idx">04</span><h2>Seller Analysis</h2></div>
       <div class="grid g2" style="margin-top:18px;">
         <div class="card" style="padding:18px;">
           <div class="eyebrow" style="margin-bottom:10px;">Seller concentration (1,046 active sellers)</div>
@@ -491,7 +378,7 @@ table.heat-sub td.hc{border-radius:3px;}
       <div class="callout warn" style="margin-top:16px;"><b>SBB sellers cancel 12.0% of GMV</b> — 3–4× the FBN (2.6%), Retail (2.6%) and DSE (4.2%) rates, on only 3.9% of category GMV. Not a scale risk, but a concrete, fixable CX/recovery item worth ~AED 10K/mo direct plus retention upside. See Action 8 (§13).</div>
       <p style="font-size:13px; color:var(--steel); margin-top:14px; max-width:80ch;">Seller concentration itself is healthy — the top seller (noon Retail) holds 21.7%, top 10 hold 45%, top 20 hold 55% — no single-seller dependency risk. FBN (Fulfilled by Noon marketplace) is the dominant model at 68.3% share with the best cancellation/return profile, consistent with the express-instock gap in §09 sitting mostly on FBN/DSE inventory rather than being a seller-quality issue.</p>
 
-      <span class="tag-h" style="margin-top:26px;">06.1 · Business model hierarchy — testing Retail &gt; FBN &gt; DSE &gt; SBB</span>
+      <span class="tag-h" style="margin-top:26px;">04.1 · Business model hierarchy — testing Retail &gt; FBN &gt; DSE &gt; SBB</span>
       <p style="font-size:13px; color:var(--steel); max-width:82ch; margin-top:2px;">Testing the hypothesis directly: <b class="hl">SBB is unambiguously the floor</b> on every operational metric — instock, express-readiness, cancellations — by a wide margin. But Retail/FBN/DSE do <i>not</i> rank in a single clean order above it: which of the three leads flips depending on the metric (below). On <b class="hl">conversion</b> the hypothesis inverts entirely: SBB (7.33%) and Retail (8.34%) both out-convert FBN (3.94%) and DSE (4.05%). SBB's problem is not weak customer demand — it's fulfilment execution.</p>
       <div class="table-wrap" style="margin-top:12px;"><table><thead><tr>
         <th class="l">Business model</th><th>GMV/mo</th><th>Share</th><th>YoY</th><th>CVR</th><th>ASP</th><th>Instock%</th><th>Express Instock%</th><th>Cancel%</th><th>Return%</th><th>Sellers</th>
@@ -520,7 +407,14 @@ table.heat-sub td.hc{border-radius:3px;}
         <div class="callout warn"><b>MACKENZIE-CHILDS enamel pot</b> (Storage Set): the SBB-fulfilled listing had its <b>entire</b> AED 593 order cancelled outright, while its two FBN-fulfilled sibling listings (canisters from the same brand) sold cleanly with zero cancellations.</div>
       </div>
 
-      <span class="tag-h" style="margin-top:24px;">06.2 · Returns &amp; cancellations — where and why</span>
+      <span class="tag-h" style="margin-top:26px;">04.2 · Top 20 SBB sellers — migration candidates (selected by GMV uplift, sorted by impressions)</span>
+      <p style="font-size:13px; color:var(--steel); max-width:88ch; margin-top:2px;">SBB sellers with real, measurable demand whose GMV is being lost to fulfilment execution, not weak traffic — uplift = cancelled GMV over the FBN benchmark + measured stockout loss, same methodology as the brand table above, at seller grain. Click a row for the exact SKUs to move first, with a Noon link for each.</p>
+      <div class="table-wrap" style="margin-top:8px;"><table><thead><tr>
+        <th class="l">Seller</th><th>GMV/mo</th><th>Impressions (SI%)</th><th>GV</th><th>ATC</th><th>Units</th><th>CVR</th><th>Cancel%</th><th>Instock%</th><th>SKUs</th><th>Uplift GMV/mo</th>
+      </tr></thead><tbody id="tbl-sbb-sellers"></tbody></table></div>
+      <div class="callout warn" style="margin-top:10px;"><b>Quantified:</b> the top 20 SBB sellers above account for <b class="hl">~AED 20.5K/mo</b> of the <b class="hl">~AED 26.4K/mo</b> total recoverable across every SBB seller with real impressions — concentration is high, so fixing this list captures most of the opportunity. <b class="hl">JANTENS-SA</b> and <b class="hl">Jashstore</b> alone are ~43% of the top-20 total, driven by chronic OOS (64% and 19% instock respectively) rather than cancellations.</div>
+
+      <span class="tag-h" style="margin-top:24px;">04.3 · Returns &amp; cancellations — where and why</span>
       <div class="grid g2">
         <div class="table-wrap compact"><table><thead><tr><th class="l">Subcategory</th><th>GMV/mo</th><th>Return%</th></tr></thead><tbody id="tbl-returns-pst"></tbody></table></div>
         <div class="table-wrap compact"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Return%</th><th class="l">Subcat</th></tr></thead><tbody id="tbl-returns-brand"></tbody></table></div>
@@ -530,6 +424,71 @@ table.heat-sub td.hc{border-radius:3px;}
         <div class="table-wrap compact"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Cancel%</th></tr></thead><tbody id="tbl-cancel-brand"></tbody></table></div>
       </div>
       <div class="callout" style="margin-top:12px;"><b class="hl">Bentgo</b> (Lunch Box) returns 40% of its GMV — the single worst brand-level return rate in the category, on a small but real base (AED 2.9K/mo). <b class="hl">Chako_lab</b> cancels 26.5% (matches its DSE/SBB exposure above). Both are named already in the migration and SKU tables — the pattern is consistent: small, low-diversification brands leaning on weaker fulfilment channels show up on every quality metric, not just one. Likely root causes from the data available: <b class="hl">returns</b> cluster in bulky/assembly-heavy PSTs (Foldable Wardrobe, Hanging Closet Organizer, Cube Shelf — consistent with fit/assembly or damage-in-transit issues, not confirmable without a returns-reason field); <b class="hl">cancellations</b> cluster in the same small-brand, SBB/DSE-heavy names — a fulfilment-capacity issue, not a demand issue.</div>
+    </div>
+
+    <!-- ================= 05 FUNNEL ================= -->
+    <div class="section alt" id="funnel">
+      <div class="section-head"><span class="idx">05</span><h2>Funnel Diagnosis</h2></div>
+      <p class="dek">Impressions → Search Impressions → GV → ATC → Units → GMV, category-wide, Aug'26 vs Jul'26.</p>
+      <div class="grid g2" style="margin-top:20px;">
+        <div class="card" style="padding:20px;">
+          <div class="eyebrow" style="margin-bottom:12px;">Funnel step change, MoM</div>
+          <div class="bars" id="bar-funnel"></div>
+          <p style="font-size:12.5px; color:var(--steel); margin-top:14px;"><b class="hl">Leak point:</b> GV→ATC (add-to-cart rate) fell 3.3pp (18.4%→15.1%) even as GV surged — new traffic is browsing but adding to cart at a lower rate, and what does get added converts to orders slightly worse too (CVR −0.5pp). The funnel is wider at the top and leakier in the middle simultaneously.</p>
+        </div>
+        <div class="card" style="padding:20px;">
+          <div class="eyebrow" style="margin-bottom:10px;">How to read the table below</div>
+          <div style="font-size:12.8px; line-height:1.9;">Each row's <b class="hl">Issue</b> is the weak stage vs category benchmark. <b class="hl">Cause</b> is checked, not assumed — MoM instock and price moves are tested before defaulting to "listing/execution." Click a row for the worst offending brand, exact SKUs, and the action to take.</div>
+        </div>
+      </div>
+
+      <span class="tag-h" style="margin-top:22px;">05.1 · $ opportunity by subcategory — issue, cause &amp; action (Aug'26)</span>
+      <div class="table-wrap" style="margin-top:8px;"><table><thead><tr>
+        <th class="l">Subcategory</th><th>GMV/mo</th><th class="l">Issue (vs category)</th><th class="l">Cause</th><th>Opp./mo</th>
+      </tr></thead><tbody id="tbl-funnel-opp"></tbody></table></div>
+
+      <span class="tag-h" style="margin-top:26px;">05.2 · The funnel, drawn — and exactly where each stage leaks</span>
+      <div class="card" style="padding:24px;">
+        <svg id="funnel-shape" width="100%" height="340" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+
+      <span class="tag-h" style="margin-top:22px;">How to fix each stage — three separate levers, three separate teams</span>
+      <div class="grid g3">
+        <div class="card" style="padding:16px 18px;">
+          <div class="eyebrow" style="color:var(--teal);">↑ Increase GV (traffic)</div>
+          <p style="font-size:12.8px; margin-top:8px;">Fix CTR, not impressions — impression volume is already healthy in every problem subcat. Rewrite titles/thumbnails for noon_east and milton first (highest absolute impression waste); run a search-relevance/keyword audit on the 7 CTR-problem subcats. <b>Not</b> a paid-ads fix. ≈ AED 437K/mo (§12).</p>
+        </div>
+        <div class="card" style="padding:16px 18px;">
+          <div class="eyebrow" style="color:var(--amber-ink);">↑ Increase ATC</div>
+          <p style="font-size:12.8px; margin-top:8px;">ATC-rate loss is 96% concentrated in the Big 3 (Racks, Storage Box, Storage Basket) — this is the same August event, not a separate PDP problem elsewhere. Audit primary image, price badge and size/spec clarity on the highest-GV SKUs in these three subcats first.</p>
+        </div>
+        <div class="card" style="padding:16px 18px;">
+          <div class="eyebrow" style="color:var(--rose);">↑ Increase CVR</div>
+          <p style="font-size:12.8px; margin-top:8px;">Start with the dish-drying-rack duplicate-listing cluster inside Racks (§07) — 6 near-identical SKUs converting 0–2% on real traffic. Then verify no price/stock sync fault broke checkout for Storage Box and Storage Basket specifically in the last cycle.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 06 BRAND ================= -->
+    <div class="section" id="brand">
+      <div class="section-head"><span class="idx">06</span><h2>Brand Performance Matrix</h2></div>
+      <p class="dek">Brand cuts of the three highest-GMV subcategories — where a brand-level fix moves the category needle most.</p>
+
+      <span class="tag-h">Storage Box — top brands (Aug'26 monthly-equiv)</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp (vs H1'25)</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-sb"></tbody></table></div>
+      <div class="callout warn" style="margin-top:10px;"><b>Declining leader — Cosmoplast:</b> share fell 29.1pp. With 20 months of data now visible, the shape is unambiguous: Cosmoplast grew steadily and peaked in <b>March 2026</b> (AED 105K/mo GMV, 513K impressions) — then collapsed for five straight months to AED 12.5K/mo (Aug'26), a 92% fall exactly tracking an equally sharp impressions collapse (513K → 40K). Instock stayed ~90%+ throughout — this is not a demand or stock problem, it's a <b>visibility collapse that began precisely in April 2026</b> and has not stopped. See chart and Action 3 (§13).</div>
+      <svg id="cosmo-chart" width="100%" height="160" viewBox="0 0 900 160" preserveAspectRatio="xMidYMid meet" style="margin-top:10px;"></svg>
+
+      <span class="tag-h" style="margin-top:26px;">Racks — top brands</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp (vs H1'25)</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-rk"></tbody></table></div>
+
+      <span class="tag-h" style="margin-top:26px;">Storage Basket — top brands</span>
+      <div class="table-wrap"><table><thead><tr><th class="l">Brand</th><th>GMV/mo</th><th>Share</th><th>Share Δpp (vs H1'25)</th><th>SKUs</th><th>Zero-sale%</th><th>GMV/SKU</th></tr></thead><tbody id="tbl-brand-bk"></tbody></table></div>
+
+      <div class="grid g2" style="margin-top:22px;">
+        <div class="card" style="padding:16px 18px;"><div class="eyebrow" style="color:var(--moss);">Share gainers, and why</div><p style="font-size:13px; margin-top:6px;"><b class="hl">Duniso</b> is the standout — #1 in Storage Box (23.7% share, +12.2pp) and a top-3 gainer in Racks (+7.8pp) and Storage Basket. Broad-based, multi-subcategory share gain at low ASP (AED 20–171/SKU) — a value/generic-tier consolidator winning on assortment breadth and price, not a single hero SKU.</p></div>
+        <div class="card" style="padding:16px 18px;"><div class="eyebrow" style="color:var(--rose);">Share losers, and why</div><p style="font-size:13px; margin-top:6px;"><b class="hl">Cosmoplast</b> (storage box, −29pp) and <b class="hl">Generic</b>-tagged listings in Racks (−9.2pp) are the largest losers. Generic's loss is structural — branded/named sellers (Duniso, Toshionics, Auraluxi) are displacing unbranded listings as the mix professionalises. Cosmoplast's loss is a visibility incident, not competitive displacement (see above) — different root cause, different fix.</p></div>
+      </div>
     </div>
 
     <!-- ================= 07 SKU ================= -->
@@ -595,7 +554,7 @@ table.heat-sub td.hc{border-radius:3px;}
           <p style="font-size:13px; margin-top:8px;">200–400 &amp; 400+ AED bands: GV growth of +8% and +36% vs baseline against only 10–13% selling-SKU rate — and for 200–400 AED specifically, the category's single weakest instock score (90.0%, well below every other band). This is a demand-first signal (not a guess) — concentrated in Racks, Clothes Rack and Cabinet/Drawer Organization, where a handful of premium SKUs (esqube, teuuea) already prove the tier works. Directional opportunity: <b class="hl">AED 80–120K/mo</b>, low confidence pending a curated test. See §13 Action 7.</p>
         </div>
       </div>
-      <div class="callout gap" style="margin-top:16px;"><b>Data gap:</b> no competitor price, assortment or ranking data exists in the source files, so white-space sizing above is demand-led (internal GV/instock/SKU-count signals only) and cannot be cross-checked against competitor assortment or pricing. Treat all §06 and §08 figures as internal-signal estimates.</div>
+      <div class="callout gap" style="margin-top:16px;"><b>Data gap:</b> no competitor price, assortment or ranking data exists in the source files, so white-space sizing above is demand-led (internal GV/instock/SKU-count signals only) and cannot be cross-checked against competitor assortment or pricing. Treat all §04 and §08 figures as internal-signal estimates.</div>
 
       <span class="tag-h" style="margin-top:26px;">08.1 · Cannibalization check</span>
       <div class="grid g2">
@@ -1119,17 +1078,39 @@ bar("bar-funnel", [
 ], {max:30, fmt:v=>fmtPct(v)});
 
 const FUNNEL_OPP = [{"name":"Racks","key":"storage_organization|racks","gmv":424666,"ctr":0,"conv":420885,"atc_or_cvr":"cvr","stock":72355,"total":493241},{"name":"Storage Box","key":"storage_home_organization|storage_box","gmv":431906,"ctr":0,"conv":197723,"atc_or_cvr":"atc","stock":93758,"total":291481},{"name":"Food Containers","key":"storage_organization|food_containers","gmv":322057,"ctr":152793,"conv":0,"atc_or_cvr":"atc","stock":75219,"total":228012},{"name":"Lunch Box","key":"storage_organization|lunch_box","gmv":204719,"ctr":83640,"conv":107487,"atc_or_cvr":"cvr","stock":10484,"total":201611},{"name":"Storage Basket","key":"storage_home_organization|storage_basket","gmv":57638,"ctr":0,"conv":150037,"atc_or_cvr":"atc","stock":11391,"total":161428},{"name":"Closet Clothes Hanger","key":"storage_home_organization|closet_clothes_hanger","gmv":247462,"ctr":140960,"conv":0,"atc_or_cvr":"atc","stock":9248,"total":150208},{"name":"Space Saver Bag","key":"storage_home_organization|space_saver_bag","gmv":285822,"ctr":43289,"conv":0,"atc_or_cvr":"atc","stock":79191,"total":122480},{"name":"Cabinet Drawer Organization","key":"storage_organization|cabinet_drawer_organization","gmv":104387,"ctr":39866,"conv":0,"atc_or_cvr":"atc","stock":23743,"total":63609},{"name":"Foldable Wardrobe","key":"storage_home_organization|foldable_wardrobe","gmv":69198,"ctr":0,"conv":58468,"atc_or_cvr":"cvr","stock":1748,"total":60216},{"name":"Lunch Bag","key":"storage_organization|lunch_bag","gmv":84899,"ctr":37670,"conv":0,"atc_or_cvr":"atc","stock":8004,"total":45675},{"name":"Closet Organization Systems","key":"storage_home_organization|closet_organization_systems","gmv":48294,"ctr":32395,"conv":0,"atc_or_cvr":"atc","stock":12925,"total":45321},{"name":"Storage Set","key":"storage_organization|storage_set","gmv":63212,"ctr":32267,"conv":0,"atc_or_cvr":"atc","stock":3738,"total":36006},{"name":"Bag","key":"storage_organization|bag","gmv":109334,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":31555,"total":31555},{"name":"Hanging Closet Organizer","key":"storage_home_organization|hanging_closet_organizer","gmv":48192,"ctr":3337,"conv":8344,"atc_or_cvr":"atc","stock":3467,"total":15149},{"name":"Closet Shelf Divider","key":"storage_home_organization|closet_shelf_divider","gmv":8984,"ctr":0,"conv":7814,"atc_or_cvr":"cvr","stock":1531,"total":9345},{"name":"Spice Jars","key":"storage_organization|spice_jars","gmv":63008,"ctr":2461,"conv":0,"atc_or_cvr":"atc","stock":6552,"total":9013},{"name":"Storage Bottles","key":"storage_organization|storage_bottles","gmv":34091,"ctr":0,"conv":4575,"atc_or_cvr":"atc","stock":4212,"total":8787},{"name":"Clothes Rack","key":"storage_home_organization|clothes_rack","gmv":132566,"ctr":777,"conv":1014,"atc_or_cvr":"cvr","stock":5778,"total":7569},{"name":"Biscuit Cookie Jar","key":"storage_organization|biscuit_cookie_jar","gmv":23838,"ctr":5929,"conv":0,"atc_or_cvr":"atc","stock":826,"total":6755},{"name":"Food Saver","key":"storage_organization|food_saver","gmv":15833,"ctr":666,"conv":0,"atc_or_cvr":"atc","stock":5505,"total":6171},{"name":"Aluminium Foil","key":"storage_organization|aluminium_foil","gmv":12601,"ctr":5345,"conv":0,"atc_or_cvr":"atc","stock":339,"total":5684},{"name":"Countertop Wall Organization","key":"storage_organization|countertop_wall_organization","gmv":6673,"ctr":675,"conv":1628,"atc_or_cvr":"cvr","stock":1217,"total":3521},{"name":"Egg Holder","key":"storage_organization|egg_holder","gmv":2836,"ctr":2713,"conv":0,"atc_or_cvr":"atc","stock":0,"total":2713},{"name":"Cling Film","key":"storage_organization|cling_film","gmv":6915,"ctr":2331,"conv":0,"atc_or_cvr":"atc","stock":164,"total":2495},{"name":"Kitchen Storage Accessories","key":"storage_organization|kitchen_storage_accessories","gmv":10993,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":2402,"total":2402},{"name":"Dinnerware Stemware Storage","key":"storage_organization|dinnerware_stemware_storage","gmv":7140,"ctr":0,"conv":1618,"atc_or_cvr":"cvr","stock":0,"total":1618},{"name":"Sink Sets","key":"storage_organization|sink_sets","gmv":6869,"ctr":1459,"conv":0,"atc_or_cvr":"atc","stock":65,"total":1524},{"name":"Under Bed Storage","key":"storage_home_organization|under_bed_storage","gmv":16412,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":1492,"total":1492},{"name":"Garage Storage","key":"storage_home_organization|garage_storage","gmv":14665,"ctr":1210,"conv":96,"atc_or_cvr":"atc","stock":0,"total":1306},{"name":"Bread Box","key":"storage_organization|bread_box","gmv":5907,"ctr":0,"conv":772,"atc_or_cvr":"atc","stock":0,"total":772},{"name":"Flatware Utensil Storage","key":"storage_organization|flatware_utensil_storage","gmv":6659,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":0,"total":0},{"name":"Other Storage","key":"storage_home_organization|other_storage","gmv":22667,"ctr":0,"conv":0,"atc_or_cvr":"atc","stock":0,"total":0}];
-function funnelOppRow(r){
-  const parts = [
-    {k:'b', label:'CTR', val:r.ctr},
-    {k:'c', label:r.atc_or_cvr==='atc'?'ATC':'CVR', val:r.conv},
-    {k:'d', label:'Stock', val:r.stock},
-  ].sort((a,b)=>b.val-a.val);
-  const primary = parts[0].val>0 ? `<span class="chip ${parts[0].k}">${parts[0].k.toUpperCase()} · ${parts[0].label}</span>` : '<span class="small">—</span>';
-  const dash = v => v>0 ? fmtAED(v) : '<span class="small">—</span>';
-  return `<tr><td class="l">${esc(r.name)}</td><td>${fmtAED(r.gmv)}</td><td class="l">${primary}</td><td>${dash(r.ctr)}</td><td>${dash(r.conv)}</td><td>${dash(r.stock)}</td><td><b>${fmtAED(r.total)}</b></td></tr>`;
+const FUNNEL_DIAG = {"racks":{"ctr":7.73,"atcr":9.38,"cvr":2.39,"instock":96.3,"instock_jul":91.4,"instock_chg":4.9,"asp_chg_pct":-2.3,"total_sku":3497,"selling_sku":739,"selling_pct":21.1,"selling_chg":-292,"primary":"conv","stage_key":"cvr","worst_brands":[{"brand":"topyich","metric":0.27,"gmv":3528},{"brand":"essentials_360","metric":0.33,"gmv":876},{"brand":"nkx","metric":0.33,"gmv":741}],"cause":"Execution/listing","metric_label":"CVR","metric_val":2.39,"metric_cat":4.75,"action":"Audit checkout/PDP for topyich (0.27% CVR)"},"storage_box":{"ctr":6.69,"atcr":10.35,"cvr":3.66,"instock":94.5,"instock_jul":87.2,"instock_chg":7.3,"asp_chg_pct":2.6,"total_sku":2653,"selling_sku":716,"selling_pct":27.0,"selling_chg":-228,"primary":"conv","stage_key":"atc","worst_brands":[{"brand":"jaexest","metric":0.15,"gmv":456},{"brand":"lodroc","metric":0.87,"gmv":1197},{"brand":"hooto","metric":2.72,"gmv":606}],"cause":"Execution/listing","metric_label":"ATC-rate","metric_val":10.35,"metric_cat":15.09,"action":"Audit PDP image/price badge for jaexest (0.15% ATC-rate)"},"food_containers":{"ctr":3.43,"atcr":21.93,"cvr":6.86,"instock":95.3,"instock_jul":89.0,"instock_chg":6.3,"asp_chg_pct":1.7,"total_sku":4198,"selling_sku":952,"selling_pct":22.7,"selling_chg":-230,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"zwilling","metric":1.06,"gmv":1277},{"brand":"teuuea","metric":1.2,"gmv":10497},{"brand":"hookor","metric":1.54,"gmv":1129}],"cause":"Execution/listing","metric_label":"CTR","metric_val":3.43,"metric_cat":5.05,"action":"Rewrite thumbnail/title for zwilling (1.06% CTR)"},"lunch_box":{"ctr":3.59,"atcr":16.16,"cvr":3.12,"instock":94.4,"instock_jul":85.6,"instock_chg":8.8,"asp_chg_pct":-6.0,"total_sku":2783,"selling_sku":627,"selling_pct":22.5,"selling_chg":36,"primary":"conv","stage_key":"cvr","worst_brands":[{"brand":"avrini","metric":0.73,"gmv":532},{"brand":"bluefire","metric":0.99,"gmv":908},{"brand":"omielife","metric":1.05,"gmv":2041}],"cause":"Execution/listing","metric_label":"CVR","metric_val":3.12,"metric_cat":4.75,"action":"Audit checkout/PDP for avrini (0.73% CVR)"},"storage_basket":{"ctr":14.34,"atcr":4.19,"cvr":1.33,"instock":95.0,"instock_jul":89.1,"instock_chg":5.9,"asp_chg_pct":2.1,"total_sku":877,"selling_sku":181,"selling_pct":20.6,"selling_chg":-69,"primary":"conv","stage_key":"atc","worst_brands":[{"brand":"pikengenus","metric":0.82,"gmv":652},{"brand":"arabest","metric":1.43,"gmv":841},{"brand":"lennd","metric":1.53,"gmv":1229}],"cause":"Execution/listing","metric_label":"ATC-rate","metric_val":4.19,"metric_cat":15.09,"action":"Audit PDP image/price badge for pikengenus (0.82% ATC-rate)"},"closet_clothes_hanger":{"ctr":3.22,"atcr":31.9,"cvr":13.62,"instock":95.9,"instock_jul":89.9,"instock_chg":6.0,"asp_chg_pct":7.2,"total_sku":1808,"selling_sku":452,"selling_pct":25.0,"selling_chg":-81,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"moment","metric":1.16,"gmv":1578},{"brand":"home_box","metric":1.16,"gmv":314},{"brand":"noon_east","metric":1.7,"gmv":51623}],"cause":"Execution/listing","metric_label":"CTR","metric_val":3.22,"metric_cat":5.05,"action":"Rewrite thumbnail/title for moment (1.16% CTR)"},"space_saver_bag":{"ctr":4.39,"atcr":19.26,"cvr":7.31,"instock":95.6,"instock_jul":85.0,"instock_chg":10.6,"asp_chg_pct":9.9,"total_sku":1295,"selling_sku":382,"selling_pct":29.5,"selling_chg":-189,"primary":"stock","stage_key":"stock","worst_brands":[{"brand":"home_care","metric":64.58,"gmv":2268},{"brand":"tnm_top_notch_merchandise","metric":66.67,"gmv":1068},{"brand":"feelso","metric":75.0,"gmv":1763}],"cause":"Stock","metric_label":"Instock%","metric_val":95.6,"metric_cat":null,"action":"Fix OOS on home_care (64.58% instock) \u2014 top SKUs below."},"cabinet_drawer_organization":{"ctr":3.66,"atcr":19.81,"cvr":5.65,"instock":95.4,"instock_jul":88.5,"instock_chg":6.9,"asp_chg_pct":1.3,"total_sku":793,"selling_sku":210,"selling_pct":26.5,"selling_chg":-76,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"eworld","metric":1.39,"gmv":8002},{"brand":"teuuea","metric":1.93,"gmv":1124},{"brand":"s2c","metric":2.07,"gmv":451}],"cause":"Execution/listing","metric_label":"CTR","metric_val":3.66,"metric_cat":5.05,"action":"Rewrite thumbnail/title for eworld (1.39% CTR)"},"foldable_wardrobe":{"ctr":5.89,"atcr":9.41,"cvr":2.58,"instock":94.3,"instock_jul":80.8,"instock_chg":13.5,"asp_chg_pct":-0.5,"total_sku":274,"selling_sku":63,"selling_pct":23.0,"selling_chg":-30,"primary":"conv","stage_key":"cvr","worst_brands":[{"brand":"homestar","metric":0.59,"gmv":527},{"brand":"auraluxi","metric":1.32,"gmv":1153},{"brand":"noon_east","metric":1.56,"gmv":2955}],"cause":"Execution/listing","metric_label":"CVR","metric_val":2.58,"metric_cat":4.75,"action":"Audit checkout/PDP for homestar (0.59% CVR)"},"lunch_bag":{"ctr":3.5,"atcr":18.88,"cvr":5.66,"instock":93.6,"instock_jul":85.8,"instock_chg":7.8,"asp_chg_pct":2.5,"total_sku":1090,"selling_sku":316,"selling_pct":29.0,"selling_chg":-5,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"omie","metric":1.2,"gmv":346},{"brand":"mi_vaza","metric":2.07,"gmv":9452},{"brand":"dmg_tech","metric":2.09,"gmv":709}],"cause":"Execution/listing","metric_label":"CTR","metric_val":3.5,"metric_cat":5.05,"action":"Rewrite thumbnail/title for omie (1.2% CTR)"},"closet_organization_systems":{"ctr":3.02,"atcr":20.77,"cvr":8.06,"instock":98.6,"instock_jul":93.9,"instock_chg":4.7,"asp_chg_pct":-4.4,"total_sku":725,"selling_sku":109,"selling_pct":15.0,"selling_chg":-21,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"urbazaar","metric":1.45,"gmv":11803},{"brand":"duniso","metric":1.62,"gmv":3964},{"brand":"feelings","metric":1.72,"gmv":1314}],"cause":"Execution/listing","metric_label":"CTR","metric_val":3.02,"metric_cat":5.05,"action":"Rewrite thumbnail/title for urbazaar (1.45% CTR)"},"storage_set":{"ctr":3.34,"atcr":26.19,"cvr":8.2,"instock":96.1,"instock_jul":90.7,"instock_chg":5.4,"asp_chg_pct":2.8,"total_sku":1015,"selling_sku":179,"selling_pct":17.6,"selling_chg":-42,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"winsor","metric":2.0,"gmv":481},{"brand":"noon_east","metric":2.19,"gmv":1664},{"brand":"noon","metric":2.2,"gmv":5307}],"cause":"Execution/listing","metric_label":"CTR","metric_val":3.34,"metric_cat":5.05,"action":"Rewrite thumbnail/title for winsor (2.0% CTR)"},"bag":{"ctr":5.35,"atcr":24.11,"cvr":9.18,"instock":96.7,"instock_jul":89.6,"instock_chg":7.1,"asp_chg_pct":14.7,"total_sku":972,"selling_sku":237,"selling_pct":24.4,"selling_chg":-99,"primary":"stock","stage_key":"stock","worst_brands":[{"brand":"longchamp","metric":79.17,"gmv":53036},{"brand":"moment","metric":81.25,"gmv":20556},{"brand":"hotpack","metric":83.59,"gmv":949}],"cause":"Stock","metric_label":"Instock%","metric_val":96.7,"metric_cat":null,"action":"Fix OOS on longchamp (79.17% instock) \u2014 top SKUs below."},"hanging_closet_organizer":{"ctr":4.72,"atcr":12.86,"cvr":4.21,"instock":95.2,"instock_jul":90.6,"instock_chg":4.6,"asp_chg_pct":1.8,"total_sku":545,"selling_sku":138,"selling_pct":25.3,"selling_chg":-44,"primary":"conv","stage_key":"atc","worst_brands":[{"brand":"arabest","metric":1.63,"gmv":306},{"brand":"duniso","metric":12.82,"gmv":21295},{"brand":"songmics","metric":14.98,"gmv":8992}],"cause":"Execution/listing","metric_label":"ATC-rate","metric_val":12.86,"metric_cat":15.09,"action":"Audit PDP image/price badge for arabest (1.63% ATC-rate)"},"closet_shelf_divider":{"ctr":7.18,"atcr":10.01,"cvr":2.54,"instock":94.6,"instock_jul":92.7,"instock_chg":1.9,"asp_chg_pct":13.6,"total_sku":106,"selling_sku":30,"selling_pct":28.3,"selling_chg":-13,"primary":"conv","stage_key":"cvr","worst_brands":[{"brand":"generic","metric":0.92,"gmv":1837},{"brand":"duniso","metric":3.15,"gmv":5169}],"cause":"Execution/listing","metric_label":"CVR","metric_val":2.54,"metric_cat":4.75,"action":"Audit checkout/PDP for generic (0.92% CVR)"},"spice_jars":{"ctr":4.86,"atcr":17.47,"cvr":5.38,"instock":96.8,"instock_jul":92.3,"instock_chg":4.5,"asp_chg_pct":6.5,"total_sku":871,"selling_sku":221,"selling_pct":25.4,"selling_chg":-62,"primary":"stock","stage_key":"stock","worst_brands":[{"brand":"sakan","metric":75.0,"gmv":707},{"brand":"shoelay","metric":84.38,"gmv":1381},{"brand":"maru","metric":85.42,"gmv":648}],"cause":"Stock","metric_label":"Instock%","metric_val":96.8,"metric_cat":null,"action":"Fix OOS on sakan (75.0% instock) \u2014 top SKUs below."},"storage_bottles":{"ctr":6.78,"atcr":13.3,"cvr":4.9,"instock":96.6,"instock_jul":91.2,"instock_chg":5.4,"asp_chg_pct":-4.3,"total_sku":732,"selling_sku":154,"selling_pct":21.0,"selling_chg":-54,"primary":"conv","stage_key":"atc","worst_brands":[{"brand":"joyoussto","metric":2.12,"gmv":618},{"brand":"chicabode","metric":2.46,"gmv":2166},{"brand":"fufu","metric":9.0,"gmv":817}],"cause":"Execution/listing","metric_label":"ATC-rate","metric_val":13.3,"metric_cat":15.09,"action":"Audit PDP image/price badge for joyoussto (2.12% ATC-rate)"},"clothes_rack":{"ctr":5.02,"atcr":16.19,"cvr":4.72,"instock":96.9,"instock_jul":93.6,"instock_chg":3.3,"asp_chg_pct":7.2,"total_sku":884,"selling_sku":211,"selling_pct":23.9,"selling_chg":-82,"primary":"stock","stage_key":"stock","worst_brands":[{"brand":"bukela","metric":79.17,"gmv":564},{"brand":"o2__","metric":87.5,"gmv":989},{"brand":"toshionics","metric":88.33,"gmv":14114}],"cause":"Stock","metric_label":"Instock%","metric_val":96.9,"metric_cat":null,"action":"Fix OOS on bukela (79.17% instock) \u2014 top SKUs below."},"biscuit_cookie_jar":{"ctr":4.05,"atcr":21.85,"cvr":6.32,"instock":94.8,"instock_jul":86.6,"instock_chg":8.2,"asp_chg_pct":8.4,"total_sku":303,"selling_sku":67,"selling_pct":22.1,"selling_chg":-29,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"bsq","metric":2.4,"gmv":1873},{"brand":"hookor","metric":2.49,"gmv":460},{"brand":"joyoussto","metric":3.04,"gmv":877}],"cause":"Execution/listing","metric_label":"CTR","metric_val":4.05,"metric_cat":5.05,"action":"Rewrite thumbnail/title for bsq (2.4% CTR)"},"food_saver":{"ctr":4.85,"atcr":21.85,"cvr":9.41,"instock":97.4,"instock_jul":88.7,"instock_chg":8.7,"asp_chg_pct":0.9,"total_sku":311,"selling_sku":70,"selling_pct":22.5,"selling_chg":-27,"primary":"stock","stage_key":"stock","worst_brands":[{"brand":"inkbird","metric":75.0,"gmv":1938},{"brand":"hawawa","metric":79.17,"gmv":2176},{"brand":"generic","metric":97.78,"gmv":3550}],"cause":"Stock","metric_label":"Instock%","metric_val":97.4,"metric_cat":null,"action":"Fix OOS on inkbird (75.0% instock) \u2014 top SKUs below."},"aluminium_foil":{"ctr":3.55,"atcr":49.05,"cvr":19.83,"instock":97.7,"instock_jul":95.1,"instock_chg":2.6,"asp_chg_pct":16.7,"total_sku":183,"selling_sku":52,"selling_pct":28.4,"selling_chg":-12,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"diamond","metric":1.92,"gmv":626},{"brand":"falcon","metric":2.29,"gmv":2222},{"brand":"hotpack","metric":2.55,"gmv":3706}],"cause":"Price-driven","metric_label":"CTR","metric_val":3.55,"metric_cat":5.05,"action":"ASP +16.7% MoM \u2014 review recent price changes first."},"countertop_wall_organization":{"ctr":4.59,"atcr":17.05,"cvr":3.82,"instock":95.7,"instock_jul":89.9,"instock_chg":5.8,"asp_chg_pct":-10.7,"total_sku":330,"selling_sku":38,"selling_pct":11.5,"selling_chg":-13,"primary":"conv","stage_key":"cvr","worst_brands":[{"brand":"generic","metric":2.78,"gmv":688},{"brand":"cozynest","metric":3.38,"gmv":1278},{"brand":"joyoussto","metric":9.05,"gmv":1146}],"cause":"Thin assortment","metric_label":"CVR","metric_val":3.82,"metric_cat":4.75,"action":"Selling-SKU rate 11.5% vs 23.0% cat avg \u2014 broaden active assortment."},"egg_holder":{"ctr":2.58,"atcr":23.37,"cvr":7.31,"instock":97.1,"instock_jul":87.3,"instock_chg":9.8,"asp_chg_pct":0.1,"total_sku":98,"selling_sku":23,"selling_pct":23.5,"selling_chg":-11,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"generic","metric":1.59,"gmv":780},{"brand":"munkan","metric":3.9,"gmv":380},{"brand":"homestar","metric":6.83,"gmv":665}],"cause":"Execution/listing","metric_label":"CTR","metric_val":2.58,"metric_cat":5.05,"action":"Rewrite thumbnail/title for generic (1.59% CTR)"},"cling_film":{"ctr":3.78,"atcr":40.17,"cvr":16.78,"instock":97.1,"instock_jul":87.9,"instock_chg":9.2,"asp_chg_pct":-8.0,"total_sku":104,"selling_sku":32,"selling_pct":30.8,"selling_chg":-14,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"hotpack","metric":2.28,"gmv":565},{"brand":"falcon","metric":2.52,"gmv":2246},{"brand":"packwell","metric":5.3,"gmv":617}],"cause":"Execution/listing","metric_label":"CTR","metric_val":3.78,"metric_cat":5.05,"action":"Rewrite thumbnail/title for hotpack (2.28% CTR)"},"kitchen_storage_accessories":{"ctr":5.59,"atcr":19.77,"cvr":5.79,"instock":96.8,"instock_jul":94.5,"instock_chg":2.3,"asp_chg_pct":7.7,"total_sku":313,"selling_sku":50,"selling_pct":16.0,"selling_chg":-20,"primary":"stock","stage_key":"stock","worst_brands":[{"brand":"toshionics","metric":68.75,"gmv":625},{"brand":"bestyash","metric":81.25,"gmv":1529},{"brand":"eworld","metric":91.41,"gmv":1086}],"cause":"Stock","metric_label":"Instock%","metric_val":96.8,"metric_cat":null,"action":"Fix OOS on toshionics (68.75% instock) \u2014 top SKUs below."},"dinnerware_stemware_storage":{"ctr":6.24,"atcr":17.26,"cvr":3.88,"instock":98.0,"instock_jul":85.0,"instock_chg":13.0,"asp_chg_pct":-3.4,"total_sku":63,"selling_sku":20,"selling_pct":31.7,"selling_chg":-3,"primary":"conv","stage_key":"cvr","worst_brands":[{"brand":"feelings","metric":3.41,"gmv":1722},{"brand":"duniso","metric":3.58,"gmv":2393}],"cause":"Execution/listing","metric_label":"CVR","metric_val":3.88,"metric_cat":4.75,"action":"Audit checkout/PDP for feelings (3.41% CVR)"},"sink_sets":{"ctr":4.17,"atcr":25.82,"cvr":8.3,"instock":95.2,"instock_jul":90.9,"instock_chg":4.3,"asp_chg_pct":-11.6,"total_sku":215,"selling_sku":39,"selling_pct":18.1,"selling_chg":-25,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"sky_touch","metric":3.16,"gmv":374},{"brand":"urbanessentia","metric":3.76,"gmv":2730},{"brand":"homiva","metric":3.92,"gmv":327}],"cause":"Execution/listing","metric_label":"CTR","metric_val":4.17,"metric_cat":5.05,"action":"Rewrite thumbnail/title for sky_touch (3.16% CTR)"},"under_bed_storage":{"ctr":6.29,"atcr":16.85,"cvr":7.42,"instock":94.9,"instock_jul":85.9,"instock_chg":9.0,"asp_chg_pct":-10.6,"total_sku":132,"selling_sku":27,"selling_pct":20.5,"selling_chg":-16,"primary":"stock","stage_key":"stock","worst_brands":[{"brand":"generic","metric":90.46,"gmv":976},{"brand":"duniso","metric":92.19,"gmv":7934},{"brand":"beauenty","metric":100.0,"gmv":2411}],"cause":"Stock","metric_label":"Instock%","metric_val":94.9,"metric_cat":null,"action":"Fix OOS on generic (90.46% instock) \u2014 top SKUs below."},"garage_storage":{"ctr":4.67,"atcr":14.99,"cvr":5.07,"instock":97.2,"instock_jul":90.9,"instock_chg":6.3,"asp_chg_pct":-4.4,"total_sku":159,"selling_sku":38,"selling_pct":23.9,"selling_chg":3,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"duniso","metric":2.3,"gmv":3963},{"brand":"forthcan","metric":3.52,"gmv":2415},{"brand":"xicen","metric":4.32,"gmv":416}],"cause":"Execution/listing","metric_label":"CTR","metric_val":4.67,"metric_cat":5.05,"action":"Rewrite thumbnail/title for duniso (2.3% CTR)"},"bread_box":{"ctr":6.46,"atcr":13.34,"cvr":4.2,"instock":93.6,"instock_jul":91.7,"instock_chg":1.9,"asp_chg_pct":-3.8,"total_sku":123,"selling_sku":31,"selling_pct":25.2,"selling_chg":-14,"primary":"conv","stage_key":"atc","worst_brands":[{"brand":"snh_packing","metric":20.17,"gmv":776}],"cause":"Execution/listing","metric_label":"ATC-rate","metric_val":13.34,"metric_cat":15.09,"action":"Audit PDP image/price badge for snh_packing (20.17% ATC-rate)"},"flatware_utensil_storage":{"ctr":6.22,"atcr":16.42,"cvr":5.24,"instock":96.7,"instock_jul":91.7,"instock_chg":5.0,"asp_chg_pct":-2.2,"total_sku":171,"selling_sku":35,"selling_pct":20.5,"selling_chg":-7,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"generic","metric":4.4,"gmv":2099},{"brand":"arabest","metric":4.55,"gmv":524},{"brand":"duniso","metric":4.95,"gmv":764}],"cause":"Execution/listing","metric_label":"CTR","metric_val":6.22,"metric_cat":5.05,"action":"Rewrite thumbnail/title for generic (4.4% CTR)"},"other_storage":{"ctr":5.81,"atcr":29.49,"cvr":11.36,"instock":98.0,"instock_jul":96.6,"instock_chg":1.4,"asp_chg_pct":-3.7,"total_sku":125,"selling_sku":24,"selling_pct":19.2,"selling_chg":-6,"primary":"ctr","stage_key":"ctr","worst_brands":[{"brand":"home_box","metric":4.44,"gmv":2883},{"brand":"sharpdo","metric":4.9,"gmv":715},{"brand":"generic","metric":6.15,"gmv":5749}],"cause":"Execution/listing","metric_label":"CTR","metric_val":5.81,"metric_cat":5.05,"action":"Rewrite thumbnail/title for home_box (4.44% CTR)"}};
+
+function causeChip(cause){
+  const map = {'Stock':['d','Stock'],'Stock-driven':['d','Stock'],'Price-driven':['a','Price'],'Thin assortment':['b','Assortment'],'Execution/listing':['c','Execution']};
+  const [cls,label] = map[cause] || ['c',cause];
+  return `<span class="chip ${cls}">${label}</span>`;
 }
-document.getElementById("tbl-funnel-opp").innerHTML = [...FUNNEL_OPP].filter(r=>r.total>0).sort((a,b)=>b.total-a.total).map(funnelOppRow).join("");
+function funnelOppRow(r){
+  const pst = r.key.split("|")[1];
+  const g = FUNNEL_DIAG[pst];
+  const issue = g ? `${g.metric_label} ${g.metric_val}%` + (g.metric_cat!==null?` <span class="small">vs cat ${g.metric_cat}%</span>`:"") : "—";
+  const cause = g ? causeChip(g.cause) : "—";
+  return `<tr><td class="l">${esc(r.name)}</td><td>${fmtAED(r.gmv)}</td><td class="l">${issue}</td><td class="l">${cause}</td><td><b>${fmtAED(r.total)}</b></td></tr>`;
+}
+const FUNNEL_OPP_SHOWN = [...FUNNEL_OPP].filter(r=>r.total>0).sort((a,b)=>b.total-a.total);
+document.getElementById("tbl-funnel-opp").innerHTML = FUNNEL_OPP_SHOWN.map(funnelOppRow).join("");
+function funnelOppDetailHTML(r){
+  const pst = r.key.split("|")[1];
+  const g = FUNNEL_DIAG[pst];
+  if(!g) return null;
+  const dash = v => v>0 ? fmtAED(v) : "—";
+  const sic = g.instock_chg>=0 ? "+"+g.instock_chg : g.instock_chg;
+  const asc = g.asp_chg_pct>=0 ? "+"+g.asp_chg_pct : g.asp_chg_pct;
+  const brandRows = (g.worst_brands||[]).map(b=>`<tr><td class="l">${esc(b.brand)}</td><td>${b.metric}%</td><td>${fmtAED(b.gmv)}</td></tr>`).join("");
+  const brandTable = brandRows ? `<table class="heat-sub" style="margin-top:6px;"><thead><tr><th class="l">Weakest brand</th><th>${esc(g.metric_label)}</th><th>GMV/mo</th></tr></thead><tbody>${brandRows}</tbody></table>` : '<div class="small" style="padding:6px 0;">No single-brand concentration — spread across many small sellers.</div>';
+  return `<div class="heat-sub-wrap" style="padding:12px 14px;">
+    <div style="font-size:11.5px; color:var(--steel); font-family:'IBM Plex Mono',monospace;">Instock ${g.instock}% (${sic}pp MoM) · ASP ${asc}% MoM · Selling SKUs ${g.selling_sku}/${g.total_sku} (${g.selling_pct}%)</div>
+    <div style="font-size:11.5px; color:var(--steel); font-family:'IBM Plex Mono',monospace; margin-top:3px;">B·CTR ${dash(r.ctr)} · C·${(r.atc_or_cvr||'').toUpperCase()||'Conv'} ${dash(r.conv)} · D·Stock ${dash(r.stock)}</div>
+    ${brandTable}
+    <div style="margin-top:8px; padding:8px 10px; background:var(--surface-2); border-radius:8px; font-size:12.5px;"><b class="hl">Action:</b> ${esc(g.action)}</div>
+  </div>`;
+}
+attachExpand("tbl-funnel-opp", FUNNEL_OPP_SHOWN, 5, funnelOppDetailHTML);
 
 /* ---- 05 brand ---- */
 const BRAND_SB = [
@@ -1214,50 +1195,6 @@ lineChart("cosmo-chart", ["Jan25","Feb25","Mar25","Apr25","May25","Jun25","Jul25
 lineChart("season-chart", ["Jan25","Feb25","Mar25","Apr25","May25","Jun25","Jul25","Aug25","Sep25","Oct25","Nov25","Dec25","Jan26","Feb26","Mar26","Apr26","May26","Jun26","Jul26","Aug26"],
   [1783629,2072283,1980506,1842132,1689684,1671923,1704262,2254352,2146582,2094877,2422348,2471682,2684017,2771748,2774396,2647234,2520540,2378032,2508104,2946159], {allLabels:false});
 
-function multiLine(svgId, months, series, opts={}){
-  const svg = document.getElementById(svgId);
-  const W=900,H=svg.viewBox.baseVal.height, padL=44,padR=118,padT=16,padB=44;
-  const plotW=W-padL-padR, plotH=H-padT-padB;
-  const allVals = series.flatMap(s=>s.vals);
-  const max = opts.max || Math.max(...allVals)*1.1;
-  const min = opts.min!==undefined ? opts.min : 0;
-  const n = months.length;
-  const x = i => padL + i*(plotW/(n-1));
-  const y = v => padT + plotH - (v-min)/(max-min)*plotH;
-  let gridLines="";
-  for(let g=0; g<=3; g++){
-    const gy = padT + plotH - g/3*plotH;
-    const val = min + g/3*(max-min);
-    gridLines += `<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="var(--line-soft)" stroke-width="1"/>`;
-    gridLines += `<text x="${padL-8}" y="${gy+3}" text-anchor="end" font-size="9.5" fill="var(--steel-2)">${val.toFixed(1)}%</text>`;
-  }
-  let xLabels="";
-  const showEvery = n>14 ? 2 : 1;
-  months.forEach((m,i)=>{ if(i%showEvery===0 || i===n-1) xLabels += `<text x="${x(i)}" y="${H-26}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${m}</text>`; });
-  let body="";
-  series.forEach(s=>{
-    let path = s.vals.map((v,i)=>`${i===0?"M":"L"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-    body += `<path d="${path}" fill="none" stroke="${s.color}" stroke-width="${s.width||2}" stroke-dasharray="${s.dash||'none'}"/>`;
-    const li = n-1;
-    body += `<circle cx="${x(li)}" cy="${y(s.vals[li])}" r="4.5" fill="${s.color}" stroke="var(--surface)" stroke-width="1.5"/>`;
-    body += `<text x="${x(li)+8}" y="${y(s.vals[li])+3}" font-size="10" font-weight="600" fill="${s.color}">${s.label} ${s.vals[li].toFixed(1)}%</text>`;
-  });
-  // legend
-  let legend = "";
-  series.forEach((s,i)=>{
-    const lx = padL + i*130;
-    legend += `<rect x="${lx}" y="${H-14}" width="10" height="3" fill="${s.color}"/><text x="${lx+15}" y="${H-9}" font-size="10" fill="var(--steel)">${s.label}</text>`;
-  });
-  svg.innerHTML = gridLines + xLabels + body + legend;
-}
-multiLine("big3-chart",
-  ["Jan25","Feb25","Mar25","Apr25","May25","Jun25","Jul25","Aug25","Sep25","Oct25","Nov25","Dec25","Jan26","Feb26","Mar26","Apr26","May26","Jun26","Jul26","Aug26"],
-  [
-    {label:"Category", color:"var(--steel-2)", width:2, dash:"4,3", vals:[4.43,4.55,4.93,4.70,5.10,5.20,4.59,4.45,5.01,5.45,5.56,5.89,5.73,5.68,5.54,5.24,5.64,5.31,5.26,4.75]},
-    {label:"Storage Box", color:"var(--amber)", vals:[4.75,5.00,5.61,5.55,5.76,6.28,5.46,5.51,5.29,5.71,5.70,6.17,6.51,5.86,5.82,5.58,5.67,5.39,5.30,3.66]},
-    {label:"Racks", color:"var(--teal)", vals:[3.18,3.29,3.54,3.57,3.79,3.87,3.46,3.56,3.85,3.91,3.84,4.12,3.83,3.74,3.74,3.62,3.61,3.17,3.36,2.39]},
-    {label:"Storage Basket", color:"var(--rose)", vals:[4.88,5.17,5.32,5.03,6.00,5.44,4.92,4.97,5.51,5.65,4.98,5.65,6.17,5.89,6.11,5.45,6.16,5.91,5.50,1.33]},
-  ], {min:0, max:7});
 
 /* ---- 06 sku tables ---- */
 const SKU_HERO = [
@@ -1368,6 +1305,33 @@ table("tbl-sku-conv", SKU_CONV, [
   {k:"asp", fmt:v=>"AED "+v.toFixed(0)},
   {k:"opp", dir:true, fmt:v=>"+"+fmtAED(v)},
 ]);
+
+const SBB_SELLERS = [{"name":"JANTENS-SA","gmv":2652,"impressions":10898,"si_share":61.5,"gv":756,"ctr":6.94,"atc":117,"atc_rate":15.5,"units":15,"cvr":2.01,"cancel_pct":0.0,"instock":64.1,"n_sku":4,"uplift":5392},{"name":"Jashstore","gmv":82,"impressions":1826,"si_share":53.5,"gv":28,"ctr":1.56,"atc":6,"atc_rate":20.0,"units":6,"cvr":6.67,"cancel_pct":100.0,"instock":18.8,"n_sku":1,"uplift":3481},{"name":"CLIQNSHOP","gmv":2460,"impressions":203,"si_share":76.6,"gv":49,"ctr":24.3,"atc":13,"atc_rate":26.9,"units":19,"cvr":34.62,"cancel_pct":68.6,"instock":68.1,"n_sku":9,"uplift":1622},{"name":"FUFU Trading FZCO","gmv":399,"impressions":895,"si_share":77.7,"gv":38,"ctr":4.25,"atc":9,"atc_rate":22.5,"units":10,"cvr":25.0,"cancel_pct":0.0,"instock":100.0,"n_sku":3,"uplift":1196},{"name":"DubaiGallery","gmv":6803,"impressions":14772,"si_share":77.9,"gv":705,"ctr":4.77,"atc":126,"atc_rate":17.8,"units":66,"cvr":7.82,"cancel_pct":0.0,"instock":100.0,"n_sku":20,"uplift":1161},{"name":"yuxing88","gmv":1319,"impressions":10,"si_share":80.0,"gv":4,"ctr":40.0,"atc":0,"atc_rate":0.0,"units":10,"cvr":150.0,"cancel_pct":65.7,"instock":62.5,"n_sku":2,"uplift":831},{"name":"FAZAN TRADING CO. L.L.C","gmv":413,"impressions":522,"si_share":57.1,"gv":38,"ctr":7.27,"atc":9,"atc_rate":24.5,"units":10,"cvr":25.0,"cancel_pct":60.3,"instock":100.0,"n_sku":1,"uplift":717},{"name":"Andador Baby","gmv":2923,"impressions":310,"si_share":33.7,"gv":84,"ctr":26.99,"atc":38,"atc_rate":45.5,"units":36,"cvr":18.18,"cancel_pct":25.5,"instock":100.0,"n_sku":2,"uplift":669},{"name":"ENG","gmv":1360,"impressions":17,"si_share":55.6,"gv":17,"ctr":100.0,"atc":8,"atc_rate":44.4,"units":8,"cvr":44.44,"cancel_pct":50.0,"instock":6.2,"n_sku":2,"uplift":644},{"name":"Plastica Industries LLC","gmv":1125,"impressions":86,"si_share":53.3,"gv":13,"ctr":15.56,"atc":6,"atc_rate":42.9,"units":19,"cvr":57.14,"cancel_pct":56.1,"instock":84.4,"n_sku":4,"uplift":601},{"name":"AS Zone FZE LLC","gmv":551,"impressions":2,"si_share":0.0,"gv":4,"ctr":200.0,"atc":2,"atc_rate":50.0,"units":19,"cvr":50.0,"cancel_pct":100.0,"instock":43.8,"n_sku":1,"uplift":536},{"name":"GULVAAR FOR ONLINE SELLING","gmv":1091,"impressions":39938,"si_share":95.3,"gv":3783,"ctr":9.47,"atc":142,"atc_rate":3.8,"units":21,"cvr":0.55,"cancel_pct":9.6,"instock":81.2,"n_sku":2,"uplift":506},{"name":"We Never Close","gmv":1571,"impressions":165,"si_share":42.5,"gv":48,"ctr":28.74,"atc":19,"atc_rate":40.0,"units":11,"cvr":24.0,"cancel_pct":34.3,"instock":87.5,"n_sku":6,"uplift":498},{"name":"Apparel Point","gmv":418,"impressions":46,"si_share":33.3,"gv":2,"ctr":4.17,"atc":0,"atc_rate":10.0,"units":4,"cvr":200.0,"cancel_pct":0.0,"instock":100.0,"n_sku":2,"uplift":458},{"name":"Yiwushicetenriyongpinyouxiangongsi","gmv":2046,"impressions":4830,"si_share":61.2,"gv":714,"ctr":14.79,"atc":167,"atc_rate":23.4,"units":120,"cvr":6.65,"cancel_pct":24.5,"instock":87.2,"n_sku":22,"uplift":447},{"name":"BRIGHT CRESCENT TRADING","gmv":209,"impressions":8,"si_share":25.0,"gv":4,"ctr":50.0,"atc":2,"atc_rate":40.0,"units":2,"cvr":50.0,"cancel_pct":100.0,"instock":81.2,"n_sku":1,"uplift":416},{"name":"Aiwanto & Home","gmv":1235,"impressions":124,"si_share":52.3,"gv":30,"ctr":24.62,"atc":4,"atc_rate":11.9,"units":8,"cvr":18.75,"cancel_pct":0.0,"instock":79.2,"n_sku":3,"uplift":406},{"name":"Li Ying","gmv":370,"impressions":49,"si_share":73.1,"gv":6,"ctr":11.54,"atc":0,"atc_rate":0.0,"units":6,"cvr":33.33,"cancel_pct":100.0,"instock":31.2,"n_sku":1,"uplift":361},{"name":"Prime Seller","gmv":1927,"impressions":4157,"si_share":78.5,"gv":224,"ctr":5.39,"atc":55,"atc_rate":24.3,"units":59,"cvr":15.25,"cancel_pct":12.0,"instock":100.0,"n_sku":11,"uplift":313},{"name":"qiongdian","gmv":297,"impressions":23,"si_share":100.0,"gv":10,"ctr":41.67,"atc":2,"atc_rate":20.0,"units":2,"cvr":20.0,"cancel_pct":100.0,"instock":100.0,"n_sku":1,"uplift":290}];
+const SBB_SKUS = {"JANTENS-SA":[{"name":"Microwave Stand with Storage Cabinet and 5 Hooks Coffee Croner Table K\u2026","sid":"Z1D64411D1AF6464A0553Z-1","gmv":1284,"cancel_pct":0.0,"instock":62.0,"units":7,"cvr":2.9,"uplift":2233},{"name":"Coffee Bar Cabinet with Storage Drawer Coffee Stand Buffet Sideboard W\u2026","sid":"ZE0FC8F19434DA28FDD30Z-1","gmv":454,"cancel_pct":0.0,"instock":62.0,"units":1,"cvr":1.7,"uplift":1964},{"name":"4 Tier Coffee Bar Station,Corner Coffee Bar Cabinet for Small Spaces,C\u2026","sid":"Z0CE148E4BA61EA4DD9F0Z-1","gmv":593,"cancel_pct":0.0,"instock":69.0,"units":3,"cvr":1.9,"uplift":1063},{"name":"Kitchen Storage Rack,Coffee Croner Table,Microwave Stand with Storage \u2026","sid":"ZBB75B51AAAB2DA6AA134Z-1","gmv":321,"cancel_pct":0.0,"instock":62.0,"units":1,"cvr":1.0,"uplift":132}],"Jashstore":[{"name":"Food Storage Container with Lid, Borosilicate Glass, Microwave Safe, B\u2026","sid":"N13380221A","gmv":82,"cancel_pct":100.0,"instock":19.0,"units":5,"cvr":6.7,"uplift":3481}],"CLIQNSHOP":[{"name":"MACKENZIE-CHILDS Enamel Squashed Pot, Cute Enameled Container with Lid\u2026","sid":"Z1A86203DD1C0BDDD058AZ-1","gmv":1127,"cancel_pct":100.0,"instock":100.0,"units":1,"cvr":33.3,"uplift":1097},{"name":"MARU 9 in 1 Spice Box Steel stylish Extra Large | Masala Box for Kitch\u2026","sid":"Z79FA0A559FCF9AD25168Z-1","gmv":274,"cancel_pct":100.0,"instock":56.0,"units":1,"cvr":100.0,"uplift":266},{"name":"Sumeet Stainless Steel Akhand Jointless Milk Can with Lid | 2000 ml Ca\u2026","sid":"ZEF4B6E2D9E6B782193FAZ-1","gmv":186,"cancel_pct":100.0,"instock":75.0,"units":1,"cvr":100.0,"uplift":181},{"name":"CR18 COLLECTION Wall Mount Stainless Steel Cup & Saucer Holder, Plate \u2026","sid":"ZF121E85028EDF7E9F07AZ-1","gmv":101,"cancel_pct":100.0,"instock":75.0,"units":1,"cvr":25.0,"uplift":98},{"name":"HomeWiz Sprout Maker with 4 Compartments for Multi Purpose Use - Plast\u2026","sid":"Z7E75BE910DB4A581A4E8Z-1","gmv":112,"cancel_pct":0.0,"instock":62.0,"units":1,"cvr":20.0,"uplift":0},{"name":"Tupperware Keep Tab Small Plastic Container 500Ml Lunch Box Set Of 2 (\u2026","sid":"ZA2D7CA4EC862BA86488AZ-1","gmv":106,"cancel_pct":0.0,"instock":38.0,"units":1,"cvr":16.7,"uplift":0},{"name":"STAR WORK Glass Jars With Airtight Lids & Leak Proof Rubber Gasket,Lar\u2026","sid":"Z853885EB71047CD04A6FZ-1","gmv":116,"cancel_pct":0.0,"instock":75.0,"units":1,"cvr":100.0,"uplift":0},{"name":"ClayStone Ceramic Achaar Jar Set - 1 Kg (1000 ml) x 2 - Martban Pickle\u2026","sid":"ZBAB06076568A193F8076Z-1","gmv":334,"cancel_pct":0.0,"instock":56.0,"units":3,"cvr":0,"uplift":0},{"name":"Nayasa Plastic Printed Masala Box | Spice Box For Kitchen | Plastic Ma\u2026","sid":"ZB490F7A37B3A26E4C45BZ-1","gmv":104,"cancel_pct":0.0,"instock":75.0,"units":1,"cvr":20.0,"uplift":0}],"FUFU Trading FZCO":[{"name":"FUFU 12-Pack 8 Oz/250ml Clear Plastic Jars with Lids - Durable, Reusab\u2026","sid":"Z0803EEB02CF1E883B743Z-2","gmv":171,"cancel_pct":0.0,"instock":100.0,"units":3,"cvr":13.3,"uplift":647},{"name":"12 Pack, 2 oz Small Clear Glass Bottles with Lids & 3 Stainless Steel \u2026","sid":"Z9C343F73B866D5B5EA73Z-1","gmv":114,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":50.0,"uplift":549},{"name":"2Pcs 100ml Empty Refillable Amber Glass Essential Oil Bottle Vial Cont\u2026","sid":"Z5ED51B9380E59464BEA2Z-1","gmv":114,"cancel_pct":0.0,"instock":100.0,"units":3,"cvr":66.7,"uplift":0}],"DubaiGallery":[{"name":"4-Tier Water Bottle Holder Cooler Jug Rack 5 Gallon Water Bottle Stora\u2026","sid":"Z666E035D8B3BD3B05BEFZ-1","gmv":2250,"cancel_pct":0.0,"instock":100.0,"units":19,"cvr":16.3,"uplift":554},{"name":"3 LayerStainless Steel Kitchen Rack Dish Organizer Drying Rack Above S\u2026","sid":"Z2CC076C0718CD96FAD8BZ-1","gmv":264,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":1.7,"uplift":432},{"name":"Dish Drying Rack Over the Sink - 2 Tier Compact Kitchen Organizer and \u2026","sid":"Z219F5FD528F5577E484BZ-2","gmv":150,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":8.0,"uplift":77},{"name":"Dish Cabinet Rack Over Sink Drainer With Cover Stainless Steel Plate D\u2026","sid":"Z1132F8B56585262E604FZ-1","gmv":215,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":3.7,"uplift":36},{"name":"5-Tier Water Cooler Jug Rack 5 Gallon Water Bottle Holder Detachable H\u2026","sid":"Z969CEF02AD33FB6ED076Z-1","gmv":283,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":7.1,"uplift":28},{"name":"5 Gallon Water Cooler Jug Rack for 6 Bottles, 3-Tier Detachable Water \u2026","sid":"Z0F3DC7F8F48264422E7DZ-1","gmv":264,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":14.3,"uplift":18},{"name":"4-Tier Water Bottle Holder Cooler Jug Rack 5 Gallon Water Bottle Stora\u2026","sid":"Z16E03D181BD3C184D271Z-1","gmv":233,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":3.8,"uplift":17},{"name":"2-Pole Telescopic Clothes Rack Silver/Black","sid":"N29906634A","gmv":80,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":50.0,"uplift":0},{"name":"Industrial Grade Metal Garage Shelving Unit \u2013 Adjustable Heavy Duty St\u2026","sid":"Z08174F78E12DC3BF5DB6Z-1","gmv":287,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":12.5,"uplift":0},{"name":"Stainless Steel Foldable Clothes and Garment Hanging Rack Double Dryin\u2026","sid":"Z073BA97DBAB683B3195BZ-1","gmv":93,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":33.3,"uplift":0},{"name":"2-Tier Under Sink Kitchen Rack White 70x38x26cm","sid":"N39844154A","gmv":148,"cancel_pct":0.0,"instock":100.0,"units":3,"cvr":50.0,"uplift":0},{"name":"Dish Drying Rack Over the Sink - 2 Tier Compact Kitchen Organizer and \u2026","sid":"Z219F5FD528F5577E484BZ-1","gmv":450,"cancel_pct":0.0,"instock":100.0,"units":5,"cvr":2.5,"uplift":0},{"name":"Dual Cereal Dispenser with Airtight Storage Containers, Modern Counter\u2026","sid":"Z6DBAFDB3B66645923FE3Z-1","gmv":112,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":50.0,"uplift":0},{"name":"Heavy-Duty 5-Gallon Water Jug Storage Rack - Tiered Organizer Shelf fo\u2026","sid":"Z75E55D8EA8A2DF98E59EZ-1","gmv":538,"cancel_pct":0.0,"instock":100.0,"units":3,"cvr":11.1,"uplift":0},{"name":"Large Capacity Dish Drying Rack, 2-Tier Kitchen Organizer for Plates, \u2026","sid":"Z900AB729E048EC120231Z-1","gmv":70,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":100.0,"uplift":0}],"yuxing88":[{"name":"3pcs 1000ml Large Plastic Squeeze Bottles BPA Free for Jams Syrups Oil\u2026","sid":"ZB394D46F639FC3ECC594Z-1","gmv":905,"cancel_pct":50.0,"instock":62.0,"units":7,"cvr":200.0,"uplift":429},{"name":"Black Metal Kitchen Organizer Rack Multifunctional Storage Shelf For S\u2026","sid":"Z334C274FF0BC4B4114B6Z-1","gmv":414,"cancel_pct":100.0,"instock":62.0,"units":1,"cvr":100.0,"uplift":403}],"FAZAN TRADING CO. L.L.C":[{"name":"Multi Layer Lunch Box Set with Thermal Bag \u2013 4 Stainless Steel Food Co\u2026","sid":"Z66C1073023643378DE7CZ-1","gmv":413,"cancel_pct":60.3,"instock":100.0,"units":9,"cvr":25.0,"uplift":717}],"Andador Baby":[{"name":"Bentgo - Pop Leak-Proof Lunch Box With Removable Divider - Spring Gree\u2026","sid":"ZE26A53736BAA396D2A45Z-1","gmv":747,"cancel_pct":100.0,"instock":100.0,"units":5,"cvr":50.0,"uplift":727},{"name":"Bentgo - Kids Stainless Steel Food Jars - Dino - L - 330 ml","sid":"Z3A1BA1D50A156F9AF028Z-1","gmv":2176,"cancel_pct":0.0,"instock":100.0,"units":30,"cvr":16.7,"uplift":0}],"ENG":[{"name":"Stanley 40oz Cup Carrier Lunch Bag - Portable Tote Shoulder Bag with F\u2026","sid":"ZB67C397EC83360873B71Z-1","gmv":680,"cancel_pct":50.0,"instock":6.0,"units":3,"cvr":50.0,"uplift":322},{"name":"Stanley 40oz Cup Carrier Lunch Bag - Portable Tote Shoulder Bag with F\u2026","sid":"ZC186DB705132BB8A3E37Z-1","gmv":680,"cancel_pct":50.0,"instock":6.0,"units":3,"cvr":40.0,"uplift":322}],"Plastica Industries LLC":[{"name":"6pcs of Plastic Storage Crate 600x400x80mm Stackable Food Grade Ventil\u2026","sid":"Z56303ECBBA2D49B1FD13Z-1","gmv":494,"cancel_pct":100.0,"instock":69.0,"units":3,"cvr":50.0,"uplift":481},{"name":"3pcs of Plastic Storage Crate 600x400x80mm Stackable Food Grade Ventil\u2026","sid":"Z691B4D1F7AB42FC12DD7Z-1","gmv":137,"cancel_pct":100.0,"instock":69.0,"units":1,"cvr":100.0,"uplift":133},{"name":"4pcs of Plastic Storage Crate 600x400x80mm Stackable Food Grade Cateri\u2026","sid":"ZBF902FCADD393AE369E3Z-1","gmv":175,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":100.0,"uplift":0},{"name":"Wall-Mount Storage Bin - Stackable Storage Box for Garage & Workshop H\u2026","sid":"ZC78F34D76A022E5FF4FEZ-1","gmv":319,"cancel_pct":0.0,"instock":100.0,"units":11,"cvr":33.3,"uplift":0}],"AS Zone FZE LLC":[{"name":"Clear Plastic Storage Box 47 Liters with Lockable Lid & Wheels,Plastic\u2026","sid":"ZB14EC772E1D1961EEBFEZ-1","gmv":551,"cancel_pct":100.0,"instock":44.0,"units":19,"cvr":50.0,"uplift":536}],"GULVAAR FOR ONLINE SELLING":[{"name":"Heavy Duty Dish Drying Rack with Drainboard, Cup Holder & Cutting Boar\u2026","sid":"Z10BFC0600E7E4E6067CEZ-1","gmv":1045,"cancel_pct":10.0,"instock":62.0,"units":19,"cvr":1.0,"uplift":507},{"name":"Under Shelf Wire Storage Basket with Integrated Hanging Hooks - Heavy \u2026","sid":"Z0BE5BDF4E804338EF12DZ-1","gmv":46,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":0.1,"uplift":0}],"We Never Close":[{"name":"BAGSMART Lunch Bag Women, Double Deck Insulated Lunch Box, Quilted Puf\u2026","sid":"ZF5DCD4A3C10595C99A4AZ-1","gmv":361,"cancel_pct":100.0,"instock":100.0,"units":1,"cvr":6.7,"uplift":351},{"name":"LAIDOLAILA Fish Extender for Disney Cruise, 3-Pocket Hanging Organizer\u2026","sid":"ZCD7C55DFD8A9B20009BDZ-1","gmv":179,"cancel_pct":100.0,"instock":100.0,"units":1,"cvr":50.0,"uplift":174},{"name":"GLORIEROO Lunch Box Tote Women - Fashion Stylish Vegan Leather Insulat\u2026","sid":"Z2DD21D142065E38205F4Z-1","gmv":350,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":20.0,"uplift":0},{"name":"Con-Tact Brand Zip-N-Fit Solid Grip Liner, 18\" x 4', Taupe (04F-CZ6U59\u2026","sid":"Z1DA1BBC182EAA651F143Z-1","gmv":211,"cancel_pct":0.0,"instock":25.0,"units":1,"cvr":50.0,"uplift":0},{"name":"COMTIM Pet Food Can Lids, Silicone Stretch Can Lids Covers for Dog Cat\u2026","sid":"ZC068266CE0AC0A58E00DZ-1","gmv":125,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":100.0,"uplift":0},{"name":"Omie OmieBox Lunch Bag - Washable, Foldable, Durable, WaterResistant F\u2026","sid":"Z7B69B6B426F1BF46027CZ-1","gmv":346,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":0,"uplift":0}],"Apparel Point":[{"name":"Yanek Non Slip Ultra Thin Velvet Hangers with 360 Degree Rotating Hook\u2026","sid":"N51799580A","gmv":247,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":100.0,"uplift":458},{"name":"Non-Slip Rubber Pad Kids Hangers, Premium Quality Plastic Hangers 360\u00ba\u2026","sid":"ZE38FA4959D960306BDCAZ-1","gmv":171,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":0,"uplift":0}],"Yiwushicetenriyongpinyouxiangongsi":[{"name":"2-Piece Transparent Bottle With Stopper 1L Clear 1Liters","sid":"N15504491A","gmv":752,"cancel_pct":66.7,"instock":100.0,"units":68,"cvr":3.6,"uplift":482},{"name":"Over-The-Door Shoe Closet Organizer White/Clear 27.3x27.3x3.8cm","sid":"N14837645A","gmv":30,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":7.7,"uplift":0},{"name":"16-Piece Spice Jar Set With Stand Silver 6.5x6.5x11.5cm","sid":"N18636066A","gmv":74,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":50.0,"uplift":0},{"name":"Large Food Cover With Base Brown 41cm","sid":"N20647109A","gmv":99,"cancel_pct":0.0,"instock":100.0,"units":3,"cvr":16.7,"uplift":0},{"name":"Large Capacity Insulated Keep Warm Lunch Bag Oxford Material Black","sid":"N23405613A","gmv":76,"cancel_pct":0.0,"instock":100.0,"units":3,"cvr":28.6,"uplift":0},{"name":"Full Zipper Garment Bag White","sid":"N24138729A","gmv":34,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":3.3,"uplift":0},{"name":"6-Piece Travel Laundry Organizer Bag Wine Red 31x20x2cm","sid":"N28899770A","gmv":28,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":1.6,"uplift":0},{"name":"Rice Storage Box Light Blue 34x26x19.5cm","sid":"N33885629A","gmv":38,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":1.9,"uplift":0},{"name":"Dishwasher Basket Grey 24x14x12cm","sid":"N38534266A","gmv":38,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":50.0,"uplift":0},{"name":"100-Piece Vacuum Sealer Storage Bag Clear","sid":"N38690660A","gmv":48,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":7.7,"uplift":0},{"name":"Silicone Vacuum Sealed Storage Bag Clear 500cm","sid":"N38917052A","gmv":25,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":7.7,"uplift":0},{"name":"Magnetic Spice Rack For Refrigerator With Hook Black 31 x 13 x 17cm","sid":"N43105084A","gmv":74,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":0,"uplift":0},{"name":"3-Piece Cotton Tote Bags White 42x38cm","sid":"N44458595A","gmv":34,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":14.3,"uplift":0},{"name":"2-Tier Detachable Counter-Top Spice Rack Organizer Black 36 x 7 x 18cm","sid":"N46908340A","gmv":42,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":16.7,"uplift":0},{"name":"Portable 2 Tier Basket Drawer Kitchen And Bathroom Cabinets White","sid":"N47459628A","gmv":95,"cancel_pct":0.0,"instock":100.0,"units":3,"cvr":33.3,"uplift":0}],"BRIGHT CRESCENT TRADING":[{"name":"Vacuum Jar, Coffee and Food Storage Container - 1.6 Liter Jar - Airtig\u2026","sid":"Z2D6F6F9F84AF705BE89AZ-1","gmv":209,"cancel_pct":100.0,"instock":81.0,"units":1,"cvr":50.0,"uplift":416}],"Aiwanto & Home":[{"name":"Heavy Duty Double Rail Metal Garment Rack with 2-Tier Storage Shelves \u2026","sid":"ZFC81A3EFA8E5FAD27457Z-1","gmv":646,"cancel_pct":0.0,"instock":38.0,"units":3,"cvr":0,"uplift":406},{"name":"Double Rod Clothes Rack with Basket & Bottom Shelf \u2013 Heavy-Duty Rollin\u2026","sid":"Z7FB526495A4147AD22D2Z-1","gmv":304,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":0,"uplift":0},{"name":"2 Tier Clothing Rack with Shelves & 4 Wheels Heavy Duty Modern for Bed\u2026","sid":"ZF57175EB795312FC6426Z-1","gmv":285,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":6.2,"uplift":0}],"Li Ying":[{"name":"Liying Airtight Stainless Steel Container with Date Tracker and Scoop \u2026","sid":"Z86335425633FFAB06734Z-1","gmv":370,"cancel_pct":100.0,"instock":31.0,"units":5,"cvr":33.3,"uplift":361}],"Prime Seller":[{"name":"7-Piece Vacuum Storage Bag With Suction Pump Set Clear/Blue/Yellow 70x\u2026","sid":"N19798785A","gmv":65,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":6.2,"uplift":133},{"name":"30 Grid Large Capacity Plastic Fridge Storage Egg Containers Deviled E\u2026","sid":"ZC2B0C865C27C56EA632DZ-1","gmv":814,"cancel_pct":16.8,"instock":100.0,"units":34,"cvr":6.5,"uplift":115},{"name":"25pcs 250ml Empty Plastic Bottles with Leak-Proof Black Screw Caps \u2013 D\u2026","sid":"Z68AEBD84BB7AA29F2116Z-1","gmv":188,"cancel_pct":50.0,"instock":100.0,"units":3,"cvr":66.7,"uplift":89},{"name":"Rice And Cereal Storage Plastic Container With Pour Spout And Measurin\u2026","sid":"N41458019A","gmv":52,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":100.0,"uplift":0},{"name":"Disposable Paper Cup Storage Rack for Water Cooler Clear/White 41.00x1\u2026","sid":"N18553441A","gmv":63,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":33.3,"uplift":0},{"name":"Disposable Round Microwave Container with Lid Lunch Box Storage Take A\u2026","sid":"Z2C8D3249B03162E0EA42Z-1","gmv":95,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":11.1,"uplift":0},{"name":"Pet Dog Cat Interactive Toy Food Dispenser Tumbler Treat Dispensing To\u2026","sid":"N52945702A","gmv":122,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":25.0,"uplift":0},{"name":"30 Grid Large Capacity Plastic Fridge Storage Egg Containers Deviled E\u2026","sid":"ZC2B0C865C27C56EA632DZ-2","gmv":106,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":0,"uplift":0},{"name":"30 Grid Large Capacity Plastic Fridge Storage Egg Containers Deviled E\u2026","sid":"ZC2B0C865C27C56EA632DZ-5","gmv":61,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":100.0,"uplift":0},{"name":"1 Piece-Multi-Purpose Aluminum Bio-Degradable HDPE Nylon Foil","sid":"ZC97106D0D9832156442DZ-1","gmv":289,"cancel_pct":0.0,"instock":100.0,"units":5,"cvr":150.0,"uplift":0},{"name":"6 Pack 80X100Cm Vacuum Storage Bags with Pump Jumbo Extra Large Space \u2026","sid":"ZD139EBF6A38C06F1F403Z-1","gmv":72,"cancel_pct":0.0,"instock":100.0,"units":1,"cvr":50.0,"uplift":0}],"qiongdian":[{"name":"Insulated Food Delivery Bag Thermal Grocery Carrier Zippered Top Large\u2026","sid":"Z98B38862AF9106430016Z-1","gmv":297,"cancel_pct":100.0,"instock":100.0,"units":1,"cvr":20.0,"uplift":290}]};
+
+const SBB_SELLERS_SORTED = [...SBB_SELLERS].sort((a,b)=>b.impressions-a.impressions);
+table("tbl-sbb-sellers", SBB_SELLERS_SORTED, [
+  {k:"name", l:true},
+  {k:"gmv", fmt:fmtAED},
+  {k:"impressions", fmt:(v,r)=>v.toLocaleString()+` (${r.si_share.toFixed(0)}%)`},
+  {k:"gv", fmt:v=>v.toLocaleString()},
+  {k:"atc", fmt:v=>v.toLocaleString()},
+  {k:"units", fmt:v=>v.toLocaleString()},
+  {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
+  {k:"cancel_pct", fmt:v=>v.toFixed(1)+"%"},
+  {k:"instock", fmt:v=>v.toFixed(0)+"%"},
+  {k:"n_sku", fmt:v=>v.toLocaleString()},
+  {k:"uplift", fmt:v=>"+"+fmtAED(v)},
+]);
+function sbbSkuListHTML(seller){
+  const skus = SBB_SKUS[seller];
+  if(!skus || !skus.length) return null;
+  const rows = skus.map(s=>`<tr><td class="l">${esc(s.name)}</td><td class="l mono-id"><a href="${noonSearchUrl(s.sid)}" target="_blank" rel="noopener">${esc(s.sid)}</a></td><td>${fmtAED(s.gmv)}</td><td>${s.cvr.toFixed(1)}%</td><td>${s.cancel_pct.toFixed(0)}%</td><td>${s.instock.toFixed(0)}%</td><td>${s.units.toLocaleString()}</td><td>${s.uplift>0?"+"+fmtAED(s.uplift):"—"}</td></tr>`).join("");
+  return `<div class="heat-sub-wrap"><div class="small" style="padding:8px 12px 0;">SKU ID links to a Noon search for that ID (no product-URL field exists in the source data, so this can't be a verified direct link) — ranked by uplift, i.e. which SKUs to push to Express/FBN/DSE first.</div><table class="heat-sub">
+    <thead><tr><th class="l">SKU</th><th class="l">SKU ID</th><th>GMV/mo</th><th>CVR</th><th>Cancel%</th><th>Instock%</th><th>Units/mo</th><th>Uplift/mo</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+attachExpand("tbl-sbb-sellers", SBB_SELLERS_SORTED, 11, row=>sbbSkuListHTML(row.name));
 document.querySelectorAll("#tbl-sku-conv tr").forEach((tr,i)=>{ tr.children[1].textContent = SKU_CONV[i].brand+" · "+SKU_CONV[i].sub; });
 
 const SKU_STOCK = [
@@ -1541,7 +1505,7 @@ const TYPE_SKUS = {"storage_box||Foldable Fabric Storage Bag":[{"n":"6 Pack Clot
   });
 })();
 
-/* ---- 04.1 funnel shape + leaks ---- */
+/* ---- 05.2 funnel shape + leaks ---- */
 (function(){
   const svg = document.getElementById("funnel-shape");
   const stages = [
@@ -1566,72 +1530,6 @@ const TYPE_SKUS = {"storage_box||Foldable Fabric Storage Bag":[{"n":"6 Pack Clot
   els += `<text x="${cx}" y="${top+stages.length*(rowH+gap)+18}" text-anchor="middle" font-size="12" fill="var(--steel)">→ GMV AED 2.95M/mo · AOV AED 53.84 · overall Impression→Unit rate 0.28%</text>`;
   svg.innerHTML = els;
 })();
-const LEAK_DETAIL = {"ctr":{"food_containers":{"worst":[{"brand":"teuuea","gmv_mo":10497,"impr":60415,"ctr":1.2},{"brand":"snh_packing","gmv_mo":1748,"impr":17319,"ctr":1.81},{"brand":"noon_east","gmv_mo":50204,"impr":307963,"ctr":1.81},{"brand":"sky_touch","gmv_mo":3360,"impr":22068,"ctr":2.33}],"best":[{"brand":"homestar","gmv_mo":6722,"impr":16122,"ctr":6.26},{"brand":"alsaqer","gmv_mo":4788,"impr":20843,"ctr":5.19},{"brand":"locknlock","gmv_mo":7788,"impr":59948,"ctr":4.93}],"cat_avg":5.05},"closet_clothes_hanger":{"worst":[{"brand":"noon_east","gmv_mo":51623,"impr":148884,"ctr":1.7},{"brand":"feelings","gmv_mo":30930,"impr":104582,"ctr":3.01},{"brand":"duniso","gmv_mo":15618,"impr":45146,"ctr":3.24},{"brand":"sky_touch","gmv_mo":5065,"impr":16307,"ctr":3.27}],"best":[{"brand":"red_dot_gift","gmv_mo":9097,"impr":18584,"ctr":4.81},{"brand":"generic","gmv_mo":19385,"impr":49051,"ctr":4.14},{"brand":"yanek","gmv_mo":23159,"impr":36244,"ctr":3.6}],"cat_avg":5.05},"lunch_box":{"worst":[{"brand":"homify","gmv_mo":9162,"impr":83144,"ctr":0.56},{"brand":"milton","gmv_mo":18666,"impr":370983,"ctr":2.42},{"brand":"stor","gmv_mo":814,"impr":27788,"ctr":2.53},{"brand":"omie","gmv_mo":7443,"impr":25815,"ctr":2.79}],"best":[{"brand":"ggerou","gmv_mo":5439,"impr":39284,"ctr":5.07},{"brand":"royalford","gmv_mo":3108,"impr":36189,"ctr":5.01},{"brand":"arabest","gmv_mo":3757,"impr":22015,"ctr":4.96}],"cat_avg":5.05},"lunch_bag":{"worst":[{"brand":"mi_vaza","gmv_mo":9452,"impr":153467,"ctr":2.07},{"brand":"thermos","gmv_mo":1560,"impr":34773,"ctr":2.59},{"brand":"ssovi","gmv_mo":2375,"impr":20528,"ctr":2.82},{"brand":"mahmir","gmv_mo":3932,"impr":30916,"ctr":3.34}],"best":[{"brand":"cytheria","gmv_mo":2840,"impr":27537,"ctr":4.92},{"brand":"munkan","gmv_mo":3130,"impr":21630,"ctr":4.87},{"brand":"generic","gmv_mo":9183,"impr":45260,"ctr":4.59}],"cat_avg":5.05},"cabinet_drawer_organization":{"worst":[{"brand":"eworld","gmv_mo":8002,"impr":64933,"ctr":1.39},{"brand":"sky_touch","gmv_mo":7522,"impr":56202,"ctr":3.18},{"brand":"haidue","gmv_mo":15257,"impr":40598,"ctr":3.39},{"brand":"toshionics","gmv_mo":5813,"impr":30332,"ctr":3.6}],"best":[{"brand":"generic","gmv_mo":9485,"impr":39981,"ctr":3.71},{"brand":"duniso","gmv_mo":4996,"impr":29852,"ctr":3.66},{"brand":"toshionics","gmv_mo":5813,"impr":30332,"ctr":3.6}],"cat_avg":5.05},"storage_set":{"worst":[{"brand":"noon","gmv_mo":5307,"impr":26707,"ctr":2.2},{"brand":"feelings","gmv_mo":10903,"impr":112725,"ctr":2.26},{"brand":"home_box","gmv_mo":2257,"impr":20912,"ctr":2.4},{"brand":"generic","gmv_mo":7107,"impr":22652,"ctr":3.58}],"best":[{"brand":"generic","gmv_mo":7107,"impr":22652,"ctr":3.58},{"brand":"home_box","gmv_mo":2257,"impr":20912,"ctr":2.4},{"brand":"feelings","gmv_mo":10903,"impr":112725,"ctr":2.26}],"cat_avg":5.05},"closet_organization_systems":{"worst":[{"brand":"urbazaar","gmv_mo":11803,"impr":80946,"ctr":1.45},{"brand":"duniso","gmv_mo":3964,"impr":17751,"ctr":1.62},{"brand":"xiuwoo","gmv_mo":5154,"impr":16930,"ctr":5.22}],"best":[{"brand":"xiuwoo","gmv_mo":5154,"impr":16930,"ctr":5.22},{"brand":"duniso","gmv_mo":3964,"impr":17751,"ctr":1.62},{"brand":"urbazaar","gmv_mo":11803,"impr":80946,"ctr":1.45}],"cat_avg":5.05}},"atc":{"racks":{"worst":[{"brand":"topyich","gmv_mo":3528,"gv":2919,"atcr":1.06},{"brand":"anmi","gmv_mo":5948,"gv":11158,"atcr":1.32},{"brand":"zimnest","gmv_mo":18500,"gv":12382,"atcr":2.94},{"brand":"dunekart","gmv_mo":3965,"gv":5699,"atcr":3.46}],"best":[{"brand":"toshionics","gmv_mo":34109,"gv":3211,"atcr":18.75},{"brand":"dubaigallery","gmv_mo":24310,"gv":2104,"atcr":15.05},{"brand":"duniso","gmv_mo":38231,"gv":10214,"atcr":14.52}],"cat_avg":15.09},"storage_box":{"worst":[{"brand":"jaexest","gmv_mo":456,"gv":2683,"atcr":0.15},{"brand":"moment","gmv_mo":2188,"gv":4487,"atcr":3.52},{"brand":"soten","gmv_mo":14950,"gv":7123,"atcr":3.54},{"brand":"generic","gmv_mo":28698,"gv":9321,"atcr":6.87}],"best":[{"brand":"noon_east","gmv_mo":51549,"gv":5125,"atcr":19.34},{"brand":"marcolo","gmv_mo":39776,"gv":5746,"atcr":17.64},{"brand":"esqube","gmv_mo":35599,"gv":5249,"atcr":16.17}],"cat_avg":15.09},"storage_basket":{"worst":[{"brand":"pikengenus","gmv_mo":652,"gv":2943,"atcr":0.82},{"brand":"arabest","gmv_mo":841,"gv":3503,"atcr":1.43},{"brand":"haidue","gmv_mo":1275,"gv":2368,"atcr":1.86},{"brand":"eworld","gmv_mo":1404,"gv":2142,"atcr":2.29}],"best":[{"brand":"gudoo","gmv_mo":4226,"gv":2159,"atcr":8.01},{"brand":"generic","gmv_mo":10225,"gv":8681,"atcr":3.27},{"brand":"anmi","gmv_mo":5451,"gv":2410,"atcr":2.82}],"cat_avg":15.09}},"cvr":{"racks":{"worst":[{"brand":"topyich","gmv_mo":3528,"gv":2919,"cvr":0.27},{"brand":"anmi","gmv_mo":5948,"gv":11158,"cvr":0.37},{"brand":"dunekart","gmv_mo":3965,"gv":5699,"cvr":0.77},{"brand":"yoawllty","gmv_mo":9583,"gv":2679,"cvr":1.05}],"best":[{"brand":"toshionics","gmv_mo":34109,"gv":3211,"cvr":4.73},{"brand":"haidue","gmv_mo":29094,"gv":6066,"cvr":4.67},{"brand":"dubaigallery","gmv_mo":24310,"gv":2104,"cvr":3.85}],"cat_avg":4.75},"storage_basket":{"worst":[{"brand":"pikengenus","gmv_mo":652,"gv":2943,"cvr":0.17},{"brand":"arabest","gmv_mo":841,"gv":3503,"cvr":0.23},{"brand":"haidue","gmv_mo":1275,"gv":2368,"cvr":0.59},{"brand":"generic","gmv_mo":10225,"gv":8681,"cvr":0.93}],"best":[{"brand":"gudoo","gmv_mo":4226,"gv":2159,"cvr":2.32},{"brand":"anmi","gmv_mo":5451,"gv":2410,"cvr":1.29},{"brand":"eworld","gmv_mo":1404,"gv":2142,"cvr":0.93}],"cat_avg":4.75},"storage_box":{"worst":[{"brand":"jaexest","gmv_mo":456,"gv":2683,"cvr":0.04},{"brand":"moment","gmv_mo":2188,"gv":4487,"cvr":0.91},{"brand":"soten","gmv_mo":14950,"gv":7123,"cvr":1.35},{"brand":"generic","gmv_mo":28698,"gv":9321,"cvr":2.04}],"best":[{"brand":"noon_east","gmv_mo":51549,"gv":5125,"cvr":8.25},{"brand":"marcolo","gmv_mo":39776,"gv":5746,"cvr":6.14},{"brand":"esqube","gmv_mo":35599,"gv":5249,"cvr":6.02}],"cat_avg":4.75},"lunch_box":{"worst":[{"brand":"milton","gmv_mo":18666,"gv":8993,"cvr":2.51},{"brand":"beola","gmv_mo":15225,"gv":3294,"cvr":2.58},{"brand":"generic","gmv_mo":27197,"gv":8325,"cvr":3.14},{"brand":"toshionics","gmv_mo":5900,"gv":3218,"cvr":3.6}],"best":[{"brand":"toshionics","gmv_mo":5900,"gv":3218,"cvr":3.6},{"brand":"generic","gmv_mo":27197,"gv":8325,"cvr":3.14},{"brand":"beola","gmv_mo":15225,"gv":3294,"cvr":2.58}],"cat_avg":4.75}}};
-const LEAK_CTR = [
- {name:"Food Containers", key:"food_containers", impr:1580214, ctr:3.43},
- {name:"Closet Clothes Hanger", key:"closet_clothes_hanger", impr:616438, ctr:3.22},
- {name:"Lunch Box", key:"lunch_box", impr:1783687, ctr:3.59},
- {name:"Cabinet/Drawer Organization", key:"cabinet_drawer_organization", impr:444809, ctr:3.66},
- {name:"Lunch Bag", key:"lunch_bag", impr:679648, ctr:3.50},
- {name:"Storage Set", key:"storage_set", impr:329658, ctr:3.34},
-];
-const LEAK_ATC = [
- {name:"Racks", key:"racks", gv:230147, atcr:9.38},
- {name:"Storage Box", key:"storage_box", gv:187878, atcr:10.35},
- {name:"Storage Basket", key:"storage_basket", gv:73196, atcr:4.19},
-];
-const LEAK_CVR = [
- {name:"Racks", key:"racks", gv:230147, cvr:2.39},
- {name:"Storage Basket", key:"storage_basket", gv:73196, cvr:1.33},
- {name:"Storage Box", key:"storage_box", gv:187878, cvr:3.66},
- {name:"Lunch Box", key:"lunch_box", gv:121591, cvr:3.12},
-];
-
-/* ---- clickable "why" accordions for the leak tables ---- */
-function renderLeakAccordion(containerId, rows, metricKey, metricLabel, detailGroup, valFmt, sizeKey, sizeLabel, sizeFmt){
-  const el = document.getElementById(containerId);
-  el.innerHTML = rows.map((r,i)=>`
-    <button class="leak-row" data-idx="${i}">
-      <div class="lr1">
-        <span class="lname">${esc(r.name)} <span class="ltoggle">▾ why?</span></span>
-        <span class="lval">${valFmt(r[metricKey])}</span>
-      </div>
-      <div class="lmeta">${sizeLabel} ${sizeFmt(r[sizeKey])}</div>
-    </button>
-    <div class="leak-detail" id="${containerId}-d${i}" hidden></div>
-  `).join('');
-  el.querySelectorAll('.leak-row').forEach((btn,i)=>{
-    btn.addEventListener('click', ()=>{
-      const panel = document.getElementById(containerId+'-d'+i);
-      const isOpen = !panel.hidden;
-      panel.hidden = isOpen;
-      btn.classList.toggle('open', !isOpen);
-      if(!isOpen && !panel.dataset.rendered){
-        const d = (LEAK_DETAIL[detailGroup]||{})[rows[i].key];
-        if(!d){ panel.innerHTML = '<div class="small">No brand-level breakdown available for this subcategory.</div>'; }
-        else {
-          const item = (r)=>`<div class="leak-item"><span class="bname">${esc(r.brand)}</span><span>${valFmt(r[metricKey])} · ${fmtAED(r.gmv_mo)}/mo</span></div>`;
-          panel.innerHTML = `
-            <div class="leak-detail-grid">
-              <div>
-                <div class="leak-col-h" style="color:var(--rose);">Weakest brands here</div>
-                ${d.worst.map(item).join('')}
-              </div>
-              <div>
-                <div class="leak-col-h" style="color:var(--moss);">Healthiest brands here</div>
-                ${d.best.map(item).join('')}
-              </div>
-            </div>
-            <div class="leak-avg">Category average ${metricLabel}: ${valFmt(d.cat_avg)}. Even the healthiest brand in this subcategory ${d.best[0][metricKey] >= d.cat_avg ? 'clears' : 'still sits below'} that bar.</div>`;
-        }
-        panel.dataset.rendered = "1";
-      }
-    });
-  });
-}
-renderLeakAccordion("tbl-leak-ctr", LEAK_CTR, "ctr", "CTR", "ctr", v=>v.toFixed(2)+"%", "impr", "Impr/mo", v=>v.toLocaleString());
-renderLeakAccordion("tbl-leak-atc", LEAK_ATC, "atcr", "ATC rate", "atc", v=>v.toFixed(1)+"%", "gv", "GV/mo", fmtAED);
-renderLeakAccordion("tbl-leak-cvr", LEAK_CVR, "cvr", "CVR", "cvr", v=>v.toFixed(1)+"%", "gv", "GV/mo", fmtAED);
 
 /* ---- 07 assortment depth ---- */
 /* All 44 active subcategories, built directly from the same DRILL data behind
