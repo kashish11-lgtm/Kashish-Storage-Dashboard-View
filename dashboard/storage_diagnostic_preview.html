@@ -373,7 +373,7 @@ table.heat-sub td.hc{border-radius:3px;}
           <div class="eyebrow" style="margin-bottom:10px;">Seller concentration (1,046 active sellers)</div>
           <div class="bars" id="bar-seller-conc"></div>
         </div>
-        <div class="table-wrap compact"><table><thead><tr><th class="l">Business model</th><th>Share</th><th>CVR</th><th>Cancel%</th><th>Return%</th></tr></thead><tbody id="tbl-bizmodel"></tbody></table></div>
+        <div class="table-wrap compact"><table><thead><tr><th class="l">Business model</th><th>GMV Share</th><th>Impressions</th><th>CVR</th><th>Cancel+Return%</th></tr></thead><tbody id="tbl-bizmodel"></tbody></table></div>
       </div>
       <div class="callout warn" style="margin-top:16px;"><b>SBB sellers cancel 12.0% of GMV</b> — 3–4× the FBN (2.6%), Retail (2.6%) and DSE (4.2%) rates, on only 3.9% of category GMV. Not a scale risk, but a concrete, fixable CX/recovery item worth ~AED 10K/mo direct plus retention upside. See Action 8 (§13).</div>
       <p style="font-size:13px; color:var(--steel); margin-top:14px; max-width:80ch;">Seller concentration itself is healthy — the top seller (noon Retail) holds 21.7%, top 10 hold 45%, top 20 hold 55% — no single-seller dependency risk. FBN (Fulfilled by Noon marketplace) is the dominant model at 68.3% share with the best cancellation/return profile, consistent with the express-instock gap in §09 sitting mostly on FBN/DSE inventory rather than being a seller-quality issue.</p>
@@ -1372,17 +1372,17 @@ bar("bar-seller-conc", [
 ].map(r=>({...r, color:"var(--teal)"})), {max:100, fmt:v=>v.toFixed(1)+"%"});
 
 const BIZMODEL = [
- {name:"FBN (Fulfilled by Noon)", share:68.3, cvr:3.94, cancel:2.64, ret:3.96},
- {name:"Retail", share:22.1, cvr:8.34, cancel:2.63, ret:2.88},
- {name:"DSE", share:5.7, cvr:4.05, cancel:4.16, ret:5.18},
- {name:"SBB (Sold &amp; shipped by biz.)", share:3.9, cvr:7.33, cancel:12.03, ret:4.49},
+ {name:"FBN (Fulfilled by Noon)", share:68.3, impr:15918804, cvr:3.94, cancelret:6.61},
+ {name:"Retail", share:22.1, impr:5601076, cvr:8.34, cancelret:5.51},
+ {name:"DSE", share:5.7, impr:1062622, cvr:4.05, cancelret:9.35},
+ {name:"SBB (Sold &amp; shipped by biz.)", share:3.9, impr:204201, cvr:7.33, cancelret:16.52},
 ];
 table("tbl-bizmodel", BIZMODEL, [
   {k:"name", l:true},
   {k:"share", fmt:v=>v.toFixed(1)+"%"},
+  {k:"impr", fmt:v=>v.toLocaleString()},
   {k:"cvr", fmt:v=>v.toFixed(1)+"%"},
-  {k:"cancel", fmt:v=>v.toFixed(1)+"%"},
-  {k:"ret", fmt:v=>v.toFixed(1)+"%"},
+  {k:"cancelret", fmt:v=>v.toFixed(1)+"%"},
 ]);
 
 /* ---- 09.1 business model deep dive ---- */
