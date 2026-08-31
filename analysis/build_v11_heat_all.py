@@ -32,8 +32,16 @@ sku_mat = aug[(aug['pst'].isin(all_psts)) & (aug['gmv_aed']>0)].pivot_table(
 ).reindex(all_psts)[labels].fillna(0).astype(int)
 
 # total LISTED SKU count per (pst, band) cell -- no gmv filter, so this
-# includes SKUs that were live/listed in that band but didn't sell
-sku_total_mat = aug[aug['pst'].isin(all_psts)].pivot_table(
+# includes SKUs that were live/listed in that band but didn't sell, BUT
+# restricted to SKUs that were live (live_days>0) at least 1 day in the
+# trailing 60 days. Data is SKU-month grain with no day-of-month detail,
+# so an exact rolling 60-day window isn't computable; approximated via the
+# trailing 2 calendar months relative to the snapshot (Jul+Aug'26 here),
+# mirroring the "recently active" convention already used for brand-level
+# SKU counts below. This drops dead/delisted SKUs that still have an Aug
+# price row but haven't actually been live in ~2 months.
+recent26_live_skus = set(d[(d['month'].isin(['2026-07','2026-08'])) & (d['live_days']>0)]['sku'].unique())
+sku_total_mat = aug[aug['pst'].isin(all_psts) & aug['sku'].isin(recent26_live_skus)].pivot_table(
     index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
 ).reindex(all_psts)[labels].fillna(0).astype(int)
 
@@ -42,7 +50,10 @@ mat25 = aug25.pivot_table(index='pst', columns='pb', values='gmv_aed', aggfunc='
 sku_mat25 = aug25[aug25['gmv_aed']>0].pivot_table(
     index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
 ).reindex(all_psts)[labels].fillna(0)
-sku_total_mat25 = aug25.pivot_table(
+# same "live in trailing ~60 days" restriction, applied relative to the
+# year-ago snapshot (Jul+Aug'25) for an apples-to-apples comparison
+recent25_live_skus = set(d[(d['month'].isin(['2025-07','2025-08'])) & (d['live_days']>0)]['sku'].unique())
+sku_total_mat25 = aug25[aug25['sku'].isin(recent25_live_skus)].pivot_table(
     index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
 ).reindex(all_psts)[labels].fillna(0)
 
