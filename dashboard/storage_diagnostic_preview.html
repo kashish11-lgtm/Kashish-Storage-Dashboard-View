@@ -161,6 +161,7 @@ td.up{color:var(--moss);} td.down{color:var(--rose);}
 svg text{font-family:"IBM Plex Mono",monospace;}
 
 .heat{font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-align:center !important;}
+.heat-n{display:block; font-size:9.5px; opacity:0.72; font-weight:400; margin-top:1px;}
 footer{padding:30px 40px; color:var(--steel-2); font-size:12px;}
 .assume{font-size:12.5px; color:var(--steel); background:var(--surface-2); border:1px dashed var(--line); border-radius:8px; padding:12px 15px; margin-top:14px;}
 
@@ -1006,6 +1007,7 @@ const PST_BRAND_BAND = {"storage_box":{"duniso":{"total":102477,"bands":{"<25":3
 const HEAT_SUBS = ["Storage Box", "Racks", "Food Containers", "Space Saver Bag", "Closet Clothes Hanger", "Lunch Box", "Clothes Rack", "Bag", "Cabinet Drawer Organization", "Lunch Bag", "Foldable Wardrobe", "Storage Set", "Spice Jars", "Storage Basket", "Closet Organization Systems", "Hanging Closet Organizer", "Storage Bottles", "Biscuit Cookie Jar", "Other Storage", "Under Bed Storage", "Food Saver", "Garage Storage", "Aluminium Foil", "Kitchen Storage Accessories", "Closet Shelf Divider", "Outdoor Storage", "Paper Towel Holder", "Dinnerware Stemware Storage", "Cooler", "Cling Film", "Sink Sets", "Countertop Wall Organization", "Flatware Utensil Storage", "Cereal Dispenser", "Cube Shelf", "Bread Box", "Food Wrap Dispenser", "Travel Containers", "Egg Holder", "Pods", "Tool Organizers"];
 const HEAT_DATA = [[17653, 158126, 185015, 60209, 4029, 881], [9735, 66102, 159210, 160723, 21632, 5102], [42039, 81184, 164530, 25555, 722, 894], [14425, 72973, 173801, 22527, 0, 1359], [50655, 107137, 73029, 11881, 889, 836], [12717, 67129, 86498, 20098, 17786, 0], [3787, 20836, 55231, 36594, 14645, 1404], [37954, 11673, 20085, 38426, 466, 0], [5129, 36864, 34063, 20553, 1839, 5423], [28510, 22606, 17877, 13607, 0, 0], [171, 3054, 29520, 33094, 3359, 0], [16315, 21081, 16751, 3180, 1750, 3762], [7017, 18839, 31493, 3788, 0, 0], [3162, 15520, 30603, 7423, 528, 38], [6902, 29017, 9433, 2830, 0, 0], [976, 22225, 23117, 1838, 0, 0], [3970, 19853, 8397, 1285, 388, 0], [1992, 7292, 13936, 475, 0, 0], [3457, 6019, 660, 98, 11595, 0], [206, 7882, 7568, 414, 0, 0], [1602, 8579, 4753, 764, 0, 0], [202, 5389, 1087, 7775, 0, 0], [7714, 3081, 1145, 462, 0, 0], [1056, 6101, 1300, 226, 1529, 0], [131, 3919, 3530, 1247, 0, 0], [0, 2141, 617, 712, 1419, 2539], [2756, 1723, 2187, 0, 0, 0], [207, 1804, 4124, 0, 0, 0], [959, 339, 1930, 0, 0, 3727], [2096, 4548, 270, 0, 0, 0], [530, 2881, 2089, 447, 0, 625], [186, 3264, 3223, 0, 0, 0], [690, 1895, 3143, 904, 0, 0], [0, 1761, 3009, 1217, 234, 0], [179, 644, 3398, 378, 608, 0], [336, 1540, 2501, 1530, 0, 0], [1179, 1278, 894, 686, 1197, 0], [1172, 826, 2210, 0, 0, 0], [517, 1990, 329, 0, 0, 0], [40, 72, 121, 224, 0, 0], [0, 0, 0, 0, 0, 0]];
 const HEAT_KEYS = ["storage_box", "racks", "food_containers", "space_saver_bag", "closet_clothes_hanger", "lunch_box", "clothes_rack", "bag", "cabinet_drawer_organization", "lunch_bag", "foldable_wardrobe", "storage_set", "spice_jars", "storage_basket", "closet_organization_systems", "hanging_closet_organizer", "storage_bottles", "biscuit_cookie_jar", "other_storage", "under_bed_storage", "food_saver", "garage_storage", "aluminium_foil", "kitchen_storage_accessories", "closet_shelf_divider", "outdoor_storage", "paper_towel_holder", "dinnerware_stemware_storage", "cooler", "cling_film", "sink_sets", "countertop_wall_organization", "flatware_utensil_storage", "cereal_dispenser", "cube_shelf", "bread_box", "food_wrap_dispenser", "travel_containers", "egg_holder", "pods", "tool_organizers"];
+const HEAT_SKUS = [[86,291,251,65,5,1],[41,192,312,156,23,2],[271,348,257,46,1,1],[43,156,147,32,0,1],[130,183,99,26,2,1],[123,259,184,37,20,0],[9,68,89,32,12,1],[105,79,24,17,1,0],[19,80,74,28,3,2],[95,100,58,45,0,0],[1,12,18,28,4,0],[36,69,55,10,3,3],[34,92,77,10,0,0],[29,67,65,15,2,1],[27,50,28,4,0,0],[12,83,39,2,0,0],[37,83,26,3,1,0],[17,19,27,2,0,0],[8,5,4,1,4,0],[3,13,8,2,0,0],[21,30,14,3,0,0],[4,12,7,14,0,0],[30,15,4,2,0,0],[13,19,6,1,1,0],[2,13,10,4,0,0],[0,4,3,2,2,1],[12,13,9,0,0,0],[2,7,8,0,0,0],[3,2,2,0,0,2],[20,10,2,0,0,0],[4,20,8,2,0,1],[6,19,13,0,0,0],[3,15,12,4,0,0],[0,5,11,4,1,0],[1,3,11,1,1,0],[6,11,10,4,0,0],[6,11,4,1,1,0],[3,7,4,0,0,0],[3,17,3,0,0,0],[1,1,1,1,0,0],[0,0,0,0,0,0]];
 const BAND_LABELS = ["<25","25-50","50-100","100-200","200-400","400+"];
 (function(){
   const flat = HEAT_DATA.flat(); const max = Math.max(...flat);
@@ -1032,7 +1034,11 @@ const BAND_LABELS = ["<25","25-50","50-100","100-200","200-400","400+"];
       <tbody>${rows}</tbody></table></div>`;
   }
   const rows = HEAT_SUBS.map((name,i)=>{
-    const cells = HEAT_DATA[i].map(v=>`<td class="heat" style="background:${shade(v)}; color:${v/max>0.55?'#fff':'var(--ink)'}">${v>=1000?(v/1000).toFixed(0)+"K":v}</td>`).join("");
+    const cells = HEAT_DATA[i].map((v,j)=>{
+      const n = HEAT_SKUS[i][j];
+      const gmvTxt = v>=1000?(v/1000).toFixed(0)+"K":v;
+      return `<td class="heat" style="background:${shade(v)}; color:${v/max>0.55?'#fff':'var(--ink)'}">${gmvTxt}${n?`<span class="heat-n">${n} SKU${n===1?"":"s"}</span>`:""}</td>`;
+    }).join("");
     return `<tr class="heat-row" data-idx="${i}"><td class="l">${name}</td>${cells}</tr>
       <tr class="heat-sub-row" id="heat-sub-${i}" hidden><td colspan="7" style="padding:0;"></td></tr>`;
   }).join("");

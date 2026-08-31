@@ -18,9 +18,15 @@ pst_to_pt = aug.groupby('pst')['pt'].agg(lambda x: x.mode().iloc[0]).to_dict()
 mat = aug[aug['pst'].isin(all_psts)].pivot_table(index='pst', columns='pb', values='gmv_aed', aggfunc='sum', observed=True).reindex(all_psts)[labels].fillna(0)*F
 mat = mat.round(0).astype(int)
 
+# selling SKU count per (pst, band) cell -- distinct SKUs with GMV>0 in that cell
+sku_mat = aug[(aug['pst'].isin(all_psts)) & (aug['gmv_aed']>0)].pivot_table(
+    index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
+).reindex(all_psts)[labels].fillna(0).astype(int)
+
 HEAT_SUBS = [p.replace('_',' ').title() for p in all_psts]
 HEAT_KEYS = all_psts
 HEAT_DATA = mat.values.tolist()
+HEAT_SKUS = sku_mat.values.tolist()
 
 # brand x band matrix for ALL psts (top 20 brands each) -- reuse for click-to-expand
 PST_BRAND_BAND = {}
@@ -38,7 +44,7 @@ for pst in all_psts:
         if total>0: m[br] = {'total': round(total), 'bands': row}
     if m: PST_BRAND_BAND[pst] = m
 
-OUT = {'subs':HEAT_SUBS, 'keys':HEAT_KEYS, 'pts':[pst_to_pt[p] for p in all_psts], 'data':HEAT_DATA, 'brandband':PST_BRAND_BAND}
+OUT = {'subs':HEAT_SUBS, 'keys':HEAT_KEYS, 'pts':[pst_to_pt[p] for p in all_psts], 'data':HEAT_DATA, 'skus':HEAT_SKUS, 'brandband':PST_BRAND_BAND}
 with open('heat_all.json','w') as f:
     json.dump(OUT, f, separators=(',',':'))
 import os
