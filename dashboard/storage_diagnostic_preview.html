@@ -161,7 +161,7 @@ span.up{color:var(--moss);} span.down{color:var(--rose);}
 
 svg text{font-family:"IBM Plex Mono",monospace;}
 
-.heat{font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-align:center !important;}
+.heat{font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-align:center !important; white-space:normal !important; min-width:88px;}
 .heat-n{display:block; font-size:9.5px; opacity:0.72; font-weight:400; margin-top:1px;}
 .mono-id a{font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--teal); text-decoration:none;}
 .mono-id a:hover{text-decoration:underline;}
@@ -279,7 +279,7 @@ table.heat-sub td.hc{border-radius:3px;}
         <div class="card kpi"><div class="eyebrow">GMV YoY (Jul'26 vs Jul'25)</div><div class="v">+47.2%</div><div class="d"><span class="pill up">▲ AED +804K/mo</span></div></div>
         <div class="card kpi"><div class="eyebrow">GV (visits) /mo</div><div class="v">1.15M</div><div class="d"><span class="pill up">▲ 27.2% MoM</span></div></div>
         <div class="card kpi"><div class="eyebrow">CVR</div><div class="v">4.75%</div><div class="d"><span class="pill down">▼ 0.50pp MoM</span></div></div>
-        <div class="card kpi"><div class="eyebrow">Instock %</div><div class="v">96.2%</div><div class="d"><span class="pill up">▲ 3.1pp MoM</span></div></div>
+        <div class="card kpi"><div class="eyebrow">Instock %</div><div class="v">95.6%</div><div class="d"><span class="pill up">▲ 6.4pp MoM</span></div></div>
       </div>
       <p style="margin-top:18px; font-size:13.5px; color:var(--steel); max-width:80ch;">
       <b class="hl">Why:</b> YoY, growth is balanced — traffic is 42% of the gain, conversion 37%, pricing/AOV 22%. MoM, traffic is doing all the work (156% of the gain) while conversion actively subtracts (−70%) — that flip is the Big-3 crash below. Full decomposition in Section 01.
@@ -343,8 +343,8 @@ table.heat-sub td.hc{border-radius:3px;}
       <div class="section-head"><span class="idx">02</span><h2>Subcategory Growth Matrix</h2></div>
       <p class="dek">45 subcategories (pst). Growth and contribution use the clean YoY comparison (Jul'26 vs Jul'25, both full months) — the metric that matters for prioritisation, not % growth on a small base, and not distorted by Aug'26 being partial.</p>
 
-      <span class="tag-h">Top 12 by absolute GMV contribution to YoY category growth</span>
-      <div class="bars" id="bar-subcat"></div>
+      <span class="tag-h">All 41 subcategories by absolute GMV contribution to YoY category growth</span>
+      <div class="bars" id="bar-subcat" style="max-height:900px; overflow-y:auto; padding-right:6px;"></div>
 
       <div class="grid g2" style="margin-top:24px;">
         <div class="card" style="padding:16px 18px;">
@@ -378,7 +378,8 @@ table.heat-sub td.hc{border-radius:3px;}
       <div class="callout warn" style="margin-top:18px;"><b>The 50–100 AED band is now the category's centre of gravity</b> — 40.6% of GMV (up from 37.2% a year ago), GV up +37% YoY, and 48.2% of all category YoY growth. Its CVR actually improved YoY (+0.7pp through July) — the current Aug'26 dip to 3.3% is downstream of the same Big-3 conversion event in §04, not a structural price-band problem.</div>
 
       <span class="tag-h">GMV by price band × all 44 subcategories (Aug'26, AED/mo, darker = more GMV) — click any row to see its top 20 brands by price band and SKU count</span>
-      <div class="table-wrap" style="max-height:640px; overflow-y:auto;"><table><thead><tr>
+      <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Each cell: GMV and selling-SKU count for that (subcategory, price band), with YoY% vs Aug'25 — both months normalized to a month-equivalent run-rate so the partial Aug'26 (16 days) is comparable to the full Aug'25. "New" = no Aug'25 base in that cell to grow from.</p>
+      <div class="table-wrap" style="margin-top:8px; max-height:640px; overflow-y:auto;"><table><thead><tr>
         <th class="l">Subcategory</th><th>&lt;25</th><th>25–50</th><th>50–100</th><th>100–200</th><th>200–400</th><th>400+</th>
       </tr></thead><tbody id="tbl-heat"></tbody></table></div>
 
@@ -896,7 +897,9 @@ const HEALTH = [
   {m:"ASP (AED)", jul25:41.92, jul26:44.33, aug:45.44, yoy:5.7, mom:2.5},
   {m:"AOV (AED)", jul25:49.07, jul26:52.72, aug:53.84, yoy:7.4, mom:2.1},
   {m:"CTR", jul25:4.77, jul26:3.92, aug:5.05, yoy:-0.85, mom:1.13, pp:true},
-  {m:"Instock %", jul25:94.2, jul26:93.1, aug:96.2, yoy:-1.1, mom:3.1, pp:true},
+  {m:"Instock %", jul25:90.9, jul26:89.2, aug:95.6, yoy:-1.7, mom:6.4, pp:true},
+  {m:"Total SKUs (assortment)", jul25:26911, jul26:30696, aug:28767, yoy:14.1, mom:-6.3},
+  {m:"Selling SKUs", jul25:7388, jul26:8455, aug:6615, yoy:14.4, mom:-21.8},
 ];
 table("tbl-health", HEALTH, [
   {k:"m", l:true},
@@ -918,11 +921,13 @@ document.querySelectorAll("#tbl-health tr").forEach((tr,i)=>{
 /* waterfall svgs: YoY (clean) + MoM (live) decomposition */
 function waterfall(svgId, steps, maxV){
   const svg = document.getElementById(svgId);
-  const W=460,H=svg.viewBox.baseVal.height, padL=42,padR=10,padT=14,padB=30;
+  const W=460,H=svg.viewBox.baseVal.height, padL=42,padR=10,padT=24,padB=30;
   const plotW = W-padL-padR, plotH = H-padT-padB;
   const y = v => padT + plotH - (v/maxV*plotH);
   const bw = plotW/steps.length*0.62;
   const gap = plotW/steps.length;
+  // % of net change, for the pos/neg lever steps only (not the total bars)
+  const netChange = steps.filter(s=>s.type!=="total").reduce((a,s)=>a+s.value,0);
   let cum = 0;
   let svgEls = "";
   const colors = {total:"var(--steel)", pos:"var(--moss)", neg:"var(--rose)"};
@@ -937,7 +942,12 @@ function waterfall(svgId, steps, maxV){
     svgEls += `<text x="${x+bw/2}" y="${H-16}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${lbl[0]}</text>`;
     if(lbl[1]) svgEls += `<text x="${x+bw/2}" y="${H-6}" text-anchor="middle" font-size="9.5" fill="var(--steel-2)">${lbl[1]}</text>`;
     const valTxt = s.type==="total" ? "AED "+(s.value/1e6).toFixed(2)+"M" : (s.value>0?"+":"") + Math.round(s.value/1000)+"K";
-    svgEls += `<text x="${x+bw/2}" y="${Math.min(y0,y1)-6}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink)">${valTxt}</text>`;
+    const labelTop = Math.min(y0,y1);
+    if(s.type!=="total" && netChange){
+      const pct = (s.value/netChange*100).toFixed(0)+"% of change";
+      svgEls += `<text x="${x+bw/2}" y="${labelTop-18}" text-anchor="middle" font-size="9" fill="var(--steel-2)">${pct}</text>`;
+    }
+    svgEls += `<text x="${x+bw/2}" y="${labelTop-6}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink)">${valTxt}</text>`;
   });
   svg.innerHTML = svgEls;
 }
@@ -959,29 +969,54 @@ waterfall("waterfall", [
 /* ---- 02 subcategory ---- */
 /* growth/abs/cvrChg/aspChg = clean YoY, Jul'26 vs Jul'25 (both full months). cvr/asp/instock/nsku/selling = current Aug'26 snapshot. */
 const SUBCAT = [
- {name:"Storage Box", key:"storage_home_organization|storage_box", gmv:431906, share:16.5, growth:102.7, abs:213273, cvr:3.66,cvrChg:-0.2, asp:48.9,aspChg:11.7, instock:94.5, nsku:2685, selling:26.7, sellcount:716},
- {name:"Space Saver Bag", key:"storage_home_organization|space_saver_bag", gmv:285822, share:11.6, growth:177.1, abs:189118, cvr:7.31,cvrChg:0.3, asp:53.6,aspChg:21.6, instock:95.6, nsku:1297, selling:29.5, sellcount:382},
- {name:"Closet Clothes Hanger", key:"storage_home_organization|closet_clothes_hanger", gmv:247462, share:7.5, growth:46.0, abs:60154, cvr:13.62,cvrChg:2.1, asp:34.2,aspChg:-4.1, instock:95.9, nsku:1816, selling:24.9, sellcount:452},
- {name:"Food Containers", key:"storage_organization|food_containers", gmv:322057, share:11.2, growth:38.1, abs:79167, cvr:6.86,cvrChg:1.0, asp:37.8,aspChg:2.0, instock:95.3, nsku:4261, selling:22.3, sellcount:952},
- {name:"Lunch Box", key:"storage_organization|lunch_box", gmv:204719, share:4.7, growth:22.0, abs:21830, cvr:3.12,cvrChg:0.2, asp:48.6,aspChg:18.3, instock:94.4, nsku:2821, selling:22.2, sellcount:627},
- {name:"Bag", key:"storage_organization|bag", gmv:109334, share:3.7, growth:249.4, abs:68044, cvr:9.18,cvrChg:4.3, asp:29.2,aspChg:28.0, instock:96.7, nsku:973, selling:24.4, sellcount:237},
- {name:"Racks", key:"storage_organization|racks", gmv:424666, share:15.0, growth:22.0, abs:68944, cvr:2.39,cvrChg:-0.1, asp:71.7,aspChg:13.0, instock:96.3, nsku:3505, selling:21.1, sellcount:739},
- {name:"Foldable Wardrobe", key:"storage_home_organization|foldable_wardrobe", gmv:69198, share:1.9, growth:115.9, abs:25635, cvr:2.58,cvrChg:0.2, asp:94.8,aspChg:6.0, instock:94.3, nsku:275, selling:22.9, sellcount:63},
- {name:"Lunch Bag", key:"storage_organization|lunch_bag", gmv:84899, share:2.2, growth:38.4, abs:15790, cvr:5.66,cvrChg:0.7, asp:31.8,aspChg:0.7, instock:93.6, nsku:1094, selling:28.9, sellcount:316},
- {name:"Storage Set", key:"storage_organization|storage_set", gmv:63212, share:1.8, growth:30.8, abs:10615, cvr:8.20,cvrChg:0.8, asp:31.8,aspChg:-7.0, instock:96.1, nsku:1016, selling:17.6, sellcount:179},
- {name:"Storage Basket", key:"storage_home_organization|storage_basket", gmv:57638, share:2.0, growth:70.8, abs:20949, cvr:1.33,cvrChg:0.6, asp:52.1,aspChg:8.0, instock:95.0, nsku:877, selling:20.6, sellcount:181},
- {name:"Hanging Closet Organizer", key:"storage_home_organization|hanging_closet_organizer", gmv:48192, share:1.6, growth:61.9, abs:16082, cvr:4.21,cvrChg:-0.0, asp:48.1,aspChg:19.0, instock:95.2, nsku:545, selling:25.3, sellcount:138},
- {name:"Cabinet/Drawer Organization", key:"storage_organization|cabinet_drawer_organization", gmv:104387, share:3.8, growth:-9.9, abs:-10834, cvr:5.65,cvrChg:-0.8, asp:65.0,aspChg:-10.5, instock:95.4, nsku:793, selling:26.5, sellcount:210},
- {name:"Clothes Rack", key:"storage_home_organization|clothes_rack", gmv:132566, share:4.2, growth:20.0, abs:17996, cvr:4.72,cvrChg:-0.9, asp:78.9,aspChg:61.7, instock:96.9, nsku:884, selling:23.9, sellcount:211},
- {name:"Closet Organization Systems", key:"storage_home_organization|closet_organization_systems", gmv:48294, share:1.9, growth:-29.0, abs:-20118, cvr:8.06,cvrChg:1.4, asp:37.4,aspChg:5.7, instock:98.6, nsku:725, selling:15.0, sellcount:109},
- {name:"Kitchen Storage Accessories", key:"storage_organization|kitchen_storage_accessories", gmv:10993, share:0.4, growth:-45.6, abs:-9162, cvr:5.79,cvrChg:-0.7, asp:36.4,aspChg:15.8, instock:96.8, nsku:313, selling:16.0, sellcount:50},
- {name:"Outdoor Storage", key:"storage_home_organization|outdoor_storage", gmv:7634, share:0.3, growth:-10.3, abs:-854, cvr:3.70,cvrChg:-1.2, asp:93.4,aspChg:140.9, instock:97.2, nsku:104, selling:12.5, sellcount:13},
+ {name:"Storage Box", key:"storage_home_organization|storage_box", gmv:431906, share:16.5, growth:102.7, abs:213273, contrib:26.0, cvr:3.66,cvrChg:-0.2, asp:48.9,aspChg:11.7, instock:94.5, nsku:2685, sellcount:716, selling:26.7},
+ {name:"Racks", key:"storage_organization|racks", gmv:424666, share:15.0, growth:22.0, abs:68944, contrib:8.4, cvr:2.39,cvrChg:-0.1, asp:71.7,aspChg:13.0, instock:96.3, nsku:3505, sellcount:739, selling:21.1},
+ {name:"Food Containers", key:"storage_organization|food_containers", gmv:322057, share:11.2, growth:38.1, abs:79167, contrib:9.7, cvr:6.86,cvrChg:1.0, asp:37.8,aspChg:2.0, instock:95.3, nsku:4261, sellcount:952, selling:22.3},
+ {name:"Space Saver Bag", key:"storage_home_organization|space_saver_bag", gmv:285822, share:11.6, growth:177.1, abs:189118, contrib:23.1, cvr:7.31,cvrChg:0.3, asp:53.6,aspChg:21.6, instock:95.6, nsku:1297, sellcount:382, selling:29.5},
+ {name:"Closet Clothes Hanger", key:"storage_home_organization|closet_clothes_hanger", gmv:247462, share:7.5, growth:46.0, abs:60154, contrib:7.3, cvr:13.62,cvrChg:2.1, asp:34.2,aspChg:-4.1, instock:95.9, nsku:1816, sellcount:452, selling:24.9},
+ {name:"Lunch Box", key:"storage_organization|lunch_box", gmv:204719, share:4.7, growth:22.0, abs:21830, contrib:2.7, cvr:3.12,cvrChg:0.2, asp:48.6,aspChg:18.3, instock:94.4, nsku:2821, sellcount:627, selling:22.2},
+ {name:"Clothes Rack", key:"storage_home_organization|clothes_rack", gmv:132566, share:4.2, growth:20.0, abs:17996, contrib:2.2, cvr:4.72,cvrChg:-0.9, asp:74.3,aspChg:61.7, instock:96.9, nsku:884, sellcount:211, selling:23.9},
+ {name:"Bag", key:"storage_organization|bag", gmv:109334, share:3.7, growth:249.4, abs:68044, contrib:8.3, cvr:9.18,cvrChg:4.2, asp:29.2,aspChg:28.0, instock:96.7, nsku:973, sellcount:237, selling:24.4},
+ {name:"Cabinet/Drawer Organization", key:"storage_organization|cabinet_drawer_organization", gmv:104387, share:3.8, growth:-9.9, abs:-10834, contrib:-1.3, cvr:5.65,cvrChg:-0.8, asp:53.2,aspChg:-10.5, instock:95.4, nsku:793, sellcount:210, selling:26.5},
+ {name:"Lunch Bag", key:"storage_organization|lunch_bag", gmv:84899, share:2.2, growth:38.4, abs:15790, contrib:1.9, cvr:5.66,cvrChg:0.7, asp:31.8,aspChg:0.7, instock:93.6, nsku:1094, sellcount:316, selling:28.9},
+ {name:"Foldable Wardrobe", key:"storage_home_organization|foldable_wardrobe", gmv:69198, share:1.9, growth:115.9, abs:25634, contrib:3.1, cvr:2.58,cvrChg:0.2, asp:94.8,aspChg:6.0, instock:94.3, nsku:275, sellcount:63, selling:22.9},
+ {name:"Storage Set", key:"storage_organization|storage_set", gmv:63212, share:1.8, growth:30.8, abs:10615, contrib:1.3, cvr:8.2,cvrChg:0.8, asp:31.8,aspChg:-7.0, instock:96.1, nsku:1016, sellcount:179, selling:17.6},
+ {name:"Spice Jars", key:"storage_organization|spice_jars", gmv:63008, share:2.1, growth:22.7, abs:9905, contrib:1.2, cvr:5.38,cvrChg:1.1, asp:44.3,aspChg:-3.2, instock:96.8, nsku:871, sellcount:221, selling:25.4},
+ {name:"Storage Basket", key:"storage_home_organization|storage_basket", gmv:57638, share:2.0, growth:70.8, abs:20949, contrib:2.6, cvr:1.33,cvrChg:0.6, asp:52.1,aspChg:8.0, instock:95.0, nsku:877, sellcount:181, selling:20.6},
+ {name:"Closet Organization Systems", key:"storage_home_organization|closet_organization_systems", gmv:48294, share:1.9, growth:-29.0, abs:-20118, contrib:-2.5, cvr:8.06,cvrChg:1.4, asp:37.4,aspChg:5.7, instock:98.6, nsku:725, sellcount:109, selling:15.0},
+ {name:"Hanging Closet Organizer", key:"storage_home_organization|hanging_closet_organizer", gmv:48192, share:1.6, growth:61.9, abs:16082, contrib:2.0, cvr:4.21,cvrChg:-0.0, asp:48.1,aspChg:19.0, instock:95.2, nsku:545, sellcount:138, selling:25.3},
+ {name:"Storage Bottles", key:"storage_organization|storage_bottles", gmv:34091, share:1.2, growth:72.5, abs:12758, contrib:1.6, cvr:4.9,cvrChg:-0.4, asp:33.9,aspChg:14.6, instock:96.6, nsku:732, sellcount:154, selling:21.0},
+ {name:"Biscuit Cookie Jar", key:"storage_organization|biscuit_cookie_jar", gmv:23838, share:0.8, growth:-4.2, abs:-927, contrib:-0.1, cvr:6.32,cvrChg:0.5, asp:43.0,aspChg:-0.8, instock:94.8, nsku:307, sellcount:67, selling:21.8},
+ {name:"Other Storage", key:"storage_home_organization|other_storage", gmv:22667, share:0.6, growth:-34.6, abs:-8152, contrib:-1.0, cvr:11.36,cvrChg:1.6, asp:31.1,aspChg:-20.6, instock:98.0, nsku:125, sellcount:24, selling:19.2},
+ {name:"Under Bed Storage", key:"storage_home_organization|under_bed_storage", gmv:16412, share:0.5, growth:51.8, abs:4447, contrib:0.5, cvr:7.42,cvrChg:1.3, asp:43.0,aspChg:-5.3, instock:94.9, nsku:132, sellcount:27, selling:20.5},
+ {name:"Food Saver", key:"storage_organization|food_saver", gmv:15833, share:0.5, growth:146.8, abs:7408, contrib:0.9, cvr:9.41,cvrChg:4.0, asp:33.1,aspChg:5.2, instock:97.4, nsku:311, sellcount:70, selling:22.5},
+ {name:"Garage Storage", key:"storage_home_organization|garage_storage", gmv:14665, share:0.3, growth:-3.7, abs:-336, contrib:-0.0, cvr:5.07,cvrChg:0.3, asp:66.5,aspChg:-49.2, instock:97.2, nsku:159, sellcount:38, selling:23.9},
+ {name:"Aluminium Foil", key:"storage_organization|aluminium_foil", gmv:12601, share:0.5, growth:44.8, abs:3658, contrib:0.4, cvr:19.83,cvrChg:4.0, asp:15.6,aspChg:-10.6, instock:97.7, nsku:183, sellcount:52, selling:28.4},
+ {name:"Kitchen Storage Accessories", key:"storage_organization|kitchen_storage_accessories", gmv:10993, share:0.4, growth:-45.6, abs:-9162, contrib:-1.1, cvr:5.79,cvrChg:-0.7, asp:36.4,aspChg:15.8, instock:96.8, nsku:313, sellcount:50, selling:16.0},
+ {name:"Closet Shelf Divider", key:"storage_home_organization|closet_shelf_divider", gmv:8984, share:0.3, growth:54.8, abs:2379, contrib:0.3, cvr:2.54,cvrChg:-0.0, asp:52.0,aspChg:9.5, instock:94.6, nsku:107, sellcount:30, selling:28.0},
+ {name:"Outdoor Storage", key:"storage_home_organization|outdoor_storage", gmv:7634, share:0.3, growth:-10.3, abs:-854, contrib:-0.1, cvr:3.7,cvrChg:-1.1, asp:93.4,aspChg:140.9, instock:97.2, nsku:104, sellcount:13, selling:12.5},
+ {name:"Paper Towel Holder", key:"storage_organization|paper_towel_holder", gmv:7576, share:0.2, growth:87.6, abs:2878, contrib:0.4, cvr:23.21,cvrChg:2.7, asp:24.9,aspChg:8.4, instock:89.6, nsku:136, sellcount:44, selling:32.4},
+ {name:"Dinnerware Stemware Storage", key:"storage_organization|dinnerware_stemware_storage", gmv:7140, share:0.2, growth:55.6, abs:2111, contrib:0.3, cvr:3.88,cvrChg:0.4, asp:34.8,aspChg:-24.1, instock:98.0, nsku:63, sellcount:20, selling:31.7},
+ {name:"Cooler", key:"storage_organization|cooler", gmv:6956, share:0.2, growth:-51.9, abs:-4624, contrib:-0.6, cvr:7.95,cvrChg:-0.3, asp:81.4,aspChg:-28.6, instock:97.4, nsku:44, sellcount:9, selling:20.5},
+ {name:"Cling Film", key:"storage_organization|cling_film", gmv:6915, share:0.3, growth:54.1, abs:3130, contrib:0.4, cvr:16.78,cvrChg:1.3, asp:19.2,aspChg:59.9, instock:97.1, nsku:104, sellcount:32, selling:30.8},
+ {name:"Sink Sets", key:"storage_organization|sink_sets", gmv:6869, share:0.3, growth:59.5, abs:3069, contrib:0.4, cvr:8.3,cvrChg:2.5, asp:34.8,aspChg:22.1, instock:95.2, nsku:215, sellcount:39, selling:18.1},
+ {name:"Countertop Wall Organization", key:"storage_organization|countertop_wall_organization", gmv:6673, share:0.3, growth:104.1, abs:4012, contrib:0.5, cvr:3.82,cvrChg:0.3, asp:43.4,aspChg:7.1, instock:95.7, nsku:331, sellcount:38, selling:11.5},
+ {name:"Flatware Utensil Storage", key:"storage_organization|flatware_utensil_storage", gmv:6659, share:0.2, growth:-0.2, abs:-8, contrib:-0.0, cvr:5.24,cvrChg:-0.2, asp:44.4,aspChg:10.5, instock:96.7, nsku:171, sellcount:35, selling:20.5},
+ {name:"Cereal Dispenser", key:"storage_organization|cereal_dispenser", gmv:6220, share:0.2, growth:152.1, abs:3094, contrib:0.4, cvr:5.93,cvrChg:0.7, asp:54.6,aspChg:-30.8, instock:94.9, nsku:90, sellcount:21, selling:23.3},
+ {name:"Cube Shelf", key:"storage_home_organization|cube_shelf", gmv:5972, share:0.2, growth:50.7, abs:1691, contrib:0.2, cvr:4.2,cvrChg:0.0, asp:64.1,aspChg:21.7, instock:90.3, nsku:101, sellcount:19, selling:18.8},
+ {name:"Bread Box", key:"storage_organization|bread_box", gmv:5907, share:0.3, growth:98.2, abs:3440, contrib:0.4, cvr:4.2,cvrChg:2.0, asp:46.4,aspChg:-14.7, instock:93.6, nsku:123, sellcount:31, selling:25.2},
+ {name:"Food Wrap Dispenser", key:"storage_organization|food_wrap_dispenser", gmv:5417, share:0.1, growth:-21.8, abs:-606, contrib:-0.1, cvr:6.16,cvrChg:-0.4, asp:41.3,aspChg:20.1, instock:97.6, nsku:196, sellcount:25, selling:12.8},
+ {name:"Travel Containers", key:"storage_organization|travel_containers", gmv:5234, share:0.2, growth:183.4, abs:3172, contrib:0.4, cvr:11.97,cvrChg:5.4, asp:15.6,aspChg:-36.1, instock:98.1, nsku:86, sellcount:15, selling:17.4},
+ {name:"Egg Holder", key:"storage_organization|egg_holder", gmv:2836, share:0.1, growth:35.3, abs:675, contrib:0.1, cvr:7.31,cvrChg:1.1, asp:30.5,aspChg:-1.3, instock:97.1, nsku:98, sellcount:23, selling:23.5},
+ {name:"Pods", key:"storage_organization|pods", gmv:587, share:0.0, growth:-48.5, abs:-713, contrib:-0.1, cvr:5.68,cvrChg:-0.0, asp:61.8,aspChg:3.1, instock:93.4, nsku:65, sellcount:5, selling:7.7},
+ {name:"Tool Organizers", key:"storage_home_organization|tool_organizers", gmv:124, share:0.0, growth:373.8, abs:228, contrib:0.0, cvr:2.27,cvrChg:5.8, asp:65.0,aspChg:35.4, instock:94.9, nsku:21, sellcount:1, selling:4.8}
 ];
-bar("bar-subcat", [...SUBCAT].sort((a,b)=>Math.abs(b.abs)-Math.abs(a.abs)).slice(0,12).map(s=>({
-  label:s.name, value:s.abs, color: s.abs>=0? "var(--moss)":"var(--rose)"
+bar("bar-subcat", [...SUBCAT].sort((a,b)=>Math.abs(b.abs)-Math.abs(a.abs)).map(s=>({
+  label:s.name, value:s.abs, color: s.abs>=0? "var(--moss)":"var(--rose)",
+  sub: (s.contrib>=0?"+":"")+s.contrib.toFixed(1)+"% of growth"
 })), {fmt:v=> (v>=0?"▲ ":"▼ ")+fmtAED(Math.abs(v))});
 
-const SUBCAT_SORTED = [...SUBCAT].sort((a,b)=>b.gmv-a.gmv).slice(0,20);
+const SUBCAT_SORTED = [...SUBCAT].sort((a,b)=>b.gmv-a.gmv);
 table("tbl-subcat", SUBCAT_SORTED, [
   {k:"name", l:true},
   {k:"gmv", fmt:fmtAED},
@@ -1029,6 +1064,8 @@ const HEAT_SUBS = ["Storage Box","Racks","Food Containers","Space Saver Bag","Cl
 const HEAT_DATA = [[17653,158126,185015,60209,4029,881],[9735,66102,159210,160723,21632,5102],[42039,81184,164530,25555,722,894],[14425,72973,173801,22527,0,1359],[50655,107137,73029,11881,889,836],[12717,67129,86498,20098,17786,0],[3787,20836,55231,36594,14645,1404],[37954,11673,20085,38426,466,0],[5129,36864,34063,20553,1839,5423],[28510,22606,17877,13607,0,0],[171,3054,29520,33094,3359,0],[16315,21081,16751,3180,1750,3762],[7017,18839,31493,3788,0,0],[3162,15520,30603,7423,528,38],[6902,29017,9433,2830,0,0],[976,22225,23117,1838,0,0],[3970,19853,8397,1285,388,0],[1992,7292,13936,475,0,0],[3457,6019,660,98,11595,0],[206,7882,7568,414,0,0],[1602,8579,4753,764,0,0],[202,5389,1087,7775,0,0],[7714,3081,1145,462,0,0],[1056,6101,1300,226,1529,0],[131,3919,3530,1247,0,0],[0,2141,617,712,1419,2539],[2756,1723,2187,0,0,0],[207,1804,4124,0,0,0],[959,339,1930,0,0,3727],[2096,4548,270,0,0,0],[530,2881,2089,447,0,625],[186,3264,3223,0,0,0],[690,1895,3143,904,0,0],[0,1761,3009,1217,234,0],[179,644,3398,378,608,0],[336,1540,2501,1530,0,0],[1179,1278,894,686,1197,0],[1172,826,2210,0,0,0],[517,1990,329,0,0,0],[40,72,121,224,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
 const HEAT_KEYS = ["storage_box","racks","food_containers","space_saver_bag","closet_clothes_hanger","lunch_box","clothes_rack","bag","cabinet_drawer_organization","lunch_bag","foldable_wardrobe","storage_set","spice_jars","storage_basket","closet_organization_systems","hanging_closet_organizer","storage_bottles","biscuit_cookie_jar","other_storage","under_bed_storage","food_saver","garage_storage","aluminium_foil","kitchen_storage_accessories","closet_shelf_divider","outdoor_storage","paper_towel_holder","dinnerware_stemware_storage","cooler","cling_film","sink_sets","countertop_wall_organization","flatware_utensil_storage","cereal_dispenser","cube_shelf","bread_box","food_wrap_dispenser","travel_containers","egg_holder","pods","tool_organizers","clamshells_hinged","carton","compost"];
 const HEAT_SKUS = [[86,291,251,65,5,1],[41,192,312,156,23,2],[271,348,257,46,1,1],[43,156,147,32,0,1],[130,183,99,26,2,1],[123,259,184,37,20,0],[9,68,89,32,12,1],[105,79,24,17,1,0],[19,80,74,28,3,2],[95,100,58,45,0,0],[1,12,18,28,4,0],[36,69,55,10,3,3],[34,92,77,10,0,0],[29,67,65,15,2,1],[27,50,28,4,0,0],[12,83,39,2,0,0],[37,83,26,3,1,0],[17,19,27,2,0,0],[8,5,4,1,4,0],[3,13,8,2,0,0],[21,30,14,3,0,0],[4,12,7,14,0,0],[30,15,4,2,0,0],[13,19,6,1,1,0],[2,13,10,4,0,0],[0,4,3,2,2,1],[12,13,9,0,0,0],[2,7,8,0,0,0],[3,2,2,0,0,2],[20,10,2,0,0,0],[4,20,8,2,0,1],[6,19,13,0,0,0],[3,15,12,4,0,0],[0,5,11,4,1,0],[1,3,11,1,1,0],[6,11,10,4,0,0],[6,11,4,1,1,0],[3,7,4,0,0,0],[3,17,3,0,0,0],[1,1,1,1,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
+const HEAT_GMV_YOY = [[-30.4,110.1,98.0,159.2,35.9,29.3],[-10.1,19.6,-7.4,50.3,158.9,122.6],[50.5,-2.1,21.7,117.5,-45.2,102.8],[-5.7,124.3,482.0,274.1,null,-12.2],[60.4,42.4,26.2,-41.0,-3.7,"new"],[-17.9,-58.4,-21.0,-62.1,115.6,-100.0],[-73.7,-27.3,53.2,220.2,130.3,-16.7],[143.2,3.0,1330.6,2794.5,-72.4,null],[11.7,22.6,7.3,-53.0,-54.9,932.6],[-4.6,-35.5,31.0,330.1,-100.0,null],[769.7,210.5,301.6,369.9,6.5,null],[86.7,111.2,-16.0,-15.5,53.5,"new"],[16.1,13.7,14.3,57.4,-100.0,-100.0],[65.3,-5.0,97.2,76.3,"new","new"],[-25.9,-13.2,-36.5,-70.2,-100.0,null],[-35.9,7.7,202.6,87.0,null,null],[15.1,202.9,28.6,-22.6,"new",null],[-13.7,-19.6,12.2,368.4,null,-100.0],[79.1,-14.9,8.6,-97.9,68.7,null],[327.0,67.7,264.3,-42.7,null,null],[38.9,122.9,725.5,513.7,null,null],[-63.7,570.8,96.3,461.3,null,-100.0],[146.8,-27.7,19.3,"new",null,null],[-66.9,-53.0,-71.2,-55.7,"new",null],[-70.6,66.1,-6.2,155.0,null,null],[-100.0,-48.1,-24.2,-67.4,292.2,-38.2],[49.8,9.6,1319.1,null,null,null],[-60.7,49.3,20.5,-100.0,-100.0,null],[-30.0,-32.8,24.8,-100.0,-100.0,443.7],[-34.1,73.4,177.8,null,null,null],[-79.6,4.9,144.6,28.1,-100.0,"new"],[-70.9,150.8,51.8,-100.0,null,null],[31.0,14.6,182.1,302.7,null,null],[-100.0,224.6,185.6,594.3,"new",null],[210.9,-56.7,71.9,-36.9,"new",null],[192.2,65.8,-8.9,631.5,null,null],[149.5,67.9,-39.4,906.5,"new",-100.0],[155.4,-17.9,1809.8,-100.0,null,null],[307.9,16.5,118.4,null,null,null],[55.4,-92.1,-84.8,-58.1,null,-100.0],[null,-100.0,-100.0,null,-100.0,null],[null,null,null,-100.0,null,null],[null,-100.0,null,-100.0,null,null],[null,null,null,-100.0,null,null]];
+const HEAT_SKU_YOY = [[-21.1,-6.7,-3.8,14.0,-37.5,0.0],[-52.3,-31.4,-32.6,-37.3,27.8,0.0],[-24.3,-26.9,-17.6,0.0,-80.0,0.0],[-41.9,4.7,77.1,220.0,null,-50.0],[-12.2,-27.4,-48.2,-54.4,100.0,"new"],[-26.8,-54.2,-47.3,-52.6,122.2,-100.0],[-70.0,-28.4,-11.0,-5.9,-7.7,0.0],[-23.4,-16.0,140.0,240.0,-50.0,null],[-65.5,-33.9,-28.8,-34.9,-50.0,0.0],[-42.4,-43.2,-24.7,246.2,-100.0,null],[0.0,71.4,-40.0,47.4,-50.0,null],[-47.1,-24.2,-41.5,-50.0,-25.0,"new"],[-51.4,-34.3,-35.3,0.0,-100.0,-100.0],[16.0,-4.3,-7.1,25.0,"new","new"],[-67.5,-62.4,-67.4,-85.7,-100.0,null],[-42.9,-1.2,-27.8,-50.0,null,null],[-32.7,80.4,-13.3,0.0,"new",null],[-34.6,-55.8,-15.6,100.0,null,-100.0],[-70.4,-70.6,-33.3,-80.0,0.0,null],[200.0,-27.8,-38.5,-33.3,null,null],[-12.5,-30.2,100.0,200.0,null,null],[-55.6,140.0,75.0,180.0,null,-100.0],[-23.1,-40.0,-50.0,"new",null,null],[-70.5,-67.8,-76.0,-66.7,"new",null],[-83.3,-18.8,-41.2,100.0,null,null],[-100.0,-33.3,-57.1,-83.3,0.0,-66.7],[-42.9,-18.8,350.0,null,null,null],[-60.0,75.0,0.0,-100.0,-100.0,null],[-62.5,-66.7,-50.0,-100.0,-100.0,100.0],[5.3,-37.5,100.0,null,null,null],[-75.0,-9.1,60.0,-33.3,-100.0,"new"],[-50.0,5.6,-23.5,-100.0,null,null],[-76.9,-25.0,50.0,300.0,null,null],[-100.0,-28.6,57.1,300.0,"new",null],[-50.0,-75.0,10.0,0.0,"new",null],[100.0,-21.4,11.1,100.0,null,null],[-50.0,-31.2,-75.0,0.0,"new",-100.0],[-76.9,-30.0,100.0,-100.0,null,null],[50.0,-19.0,0.0,null,null,null],[0.0,-90.9,-66.7,-66.7,null,-100.0],[null,-100.0,-100.0,null,-100.0,null],[null,null,null,-100.0,null,null],[null,-100.0,null,-100.0,null,null],[null,null,null,-100.0,null,null]];
 const BAND_LABELS = ["<25","25-50","50-100","100-200","200-400","400+"];
 (function(){
   const flat = HEAT_DATA.flat(); const max = Math.max(...flat);
@@ -1054,11 +1091,19 @@ const BAND_LABELS = ["<25","25-50","50-100","100-200","200-400","400+"];
       <thead><tr><th class="l">Brand</th><th>Total/mo</th><th>SKUs</th>${BAND_LABELS.map(b=>`<th>${b}</th>`).join("")}</tr></thead>
       <tbody>${rows}</tbody></table></div>`;
   }
+  // Aug'26 vs Aug'25, both month-equivalent normalized -- null = nothing to
+  // compare (empty both years), 'new' = no Aug'25 base to grow from
+  function yoyTag(y){
+    if(y===null || y===undefined) return "";
+    if(y==="new") return " (New)";
+    return ` (${y>=0?"+":""}${y.toFixed(0)}% YoY)`;
+  }
   const rows = HEAT_SUBS.map((name,i)=>{
     const cells = HEAT_DATA[i].map((v,j)=>{
       const n = HEAT_SKUS[i][j];
       const gmvTxt = v>=1000?(v/1000).toFixed(0)+"K":v;
-      return `<td class="heat" style="background:${shade(v)}; color:${v/max>0.55?'#fff':'var(--ink)'}">${gmvTxt}${n?`<span class="heat-n">${n} SKU${n===1?"":"s"}</span>`:""}</td>`;
+      const gy = yoyTag(HEAT_GMV_YOY[i][j]), sy = yoyTag(HEAT_SKU_YOY[i][j]);
+      return `<td class="heat" style="background:${shade(v)}; color:${v/max>0.55?'#fff':'var(--ink)'}">${gmvTxt}${gy}${n?`<span class="heat-n">${n} SKU${n===1?"":"s"}${sy}</span>`:""}</td>`;
     }).join("");
     return `<tr class="heat-row" data-idx="${i}"><td class="l">${name}</td>${cells}</tr>
       <tr class="heat-sub-row" id="heat-sub-${i}" hidden><td colspan="7" style="padding:0;"></td></tr>`;

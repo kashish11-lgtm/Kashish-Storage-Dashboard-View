@@ -6,6 +6,12 @@ bins=[0,25,50,100,200,400,np.inf]; labels=['<25','25-50','50-100','100-200','200
 aug['pb']=pd.cut(aug['offer_price_aed'], bins=bins, labels=labels, right=False)
 F = 30.4/16
 
+# Aug'25 (full month, same calendar month one year back) for per-cell GMV/SKU
+# YoY -- monthly-equivalent normalized the same way so the two are comparable
+aug25 = d[d['month']=='2025-08'].copy()
+aug25['pb'] = pd.cut(aug25['offer_price_aed'], bins=bins, labels=labels, right=False)
+F25 = 30.4/31
+
 # every subcategory present in Aug'26 (44 of 45 total -- garment_rack has zero
 # rows in any 2026 month, only a single stray Feb'25 row, so it's excluded as
 # having no current-period presence at all rather than by a GMV filter)
@@ -25,10 +31,34 @@ sku_mat = aug[(aug['pst'].isin(all_psts)) & (aug['gmv_aed']>0)].pivot_table(
     index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
 ).reindex(all_psts)[labels].fillna(0).astype(int)
 
+# same two matrices for Aug'25, to compute per-cell YoY against
+mat25 = aug25.pivot_table(index='pst', columns='pb', values='gmv_aed', aggfunc='sum', observed=True).reindex(all_psts)[labels].fillna(0)*F25
+sku_mat25 = aug25[aug25['gmv_aed']>0].pivot_table(
+    index='pst', columns='pb', values='sku', aggfunc='nunique', observed=True
+).reindex(all_psts)[labels].fillna(0)
+
+def yoy_matrix(cur, prev):
+    """null where prev==0 and cur==0 (nothing to compare, cell is empty both
+    years); 'new' where prev==0 and cur>0 (no base to grow from -- avoid a
+    fabricated +inf%); a rounded numeric % otherwise."""
+    out = []
+    for i in range(len(cur)):
+        row = []
+        for j in range(len(cur[i])):
+            c, p = cur[i][j], prev.values[i][j]
+            if p <= 0:
+                row.append(None if c <= 0 else 'new')
+            else:
+                row.append(round((c - p) / p * 100, 1))
+        out.append(row)
+    return out
+
 HEAT_SUBS = [p.replace('_',' ').title() for p in all_psts]
 HEAT_KEYS = all_psts
 HEAT_DATA = mat.values.tolist()
 HEAT_SKUS = sku_mat.values.tolist()
+HEAT_GMV_YOY = yoy_matrix(HEAT_DATA, mat25)
+HEAT_SKU_YOY = yoy_matrix(HEAT_SKUS, sku_mat25)
 
 # SKU counts at brand level -- Jul+Aug 2026 combined, a SKU counts if it either
 # has inventory (live_days>0, i.e. was listed/orderable at some point) or has
@@ -55,7 +85,7 @@ for pst in all_psts:
         if total>0: m[br] = {'total': round(total), 'bands': row, 'skus': skus}
     if m: PST_BRAND_BAND[pst] = m
 
-OUT = {'subs':HEAT_SUBS, 'keys':HEAT_KEYS, 'pts':[pst_to_pt[p] for p in all_psts], 'data':HEAT_DATA, 'skus':HEAT_SKUS, 'brandband':PST_BRAND_BAND}
+OUT = {'subs':HEAT_SUBS, 'keys':HEAT_KEYS, 'pts':[pst_to_pt[p] for p in all_psts], 'data':HEAT_DATA, 'skus':HEAT_SKUS, 'gmvYoy':HEAT_GMV_YOY, 'skuYoy':HEAT_SKU_YOY, 'brandband':PST_BRAND_BAND}
 with open('heat_all.json','w') as f:
     json.dump(OUT, f, separators=(',',':'))
 import os
