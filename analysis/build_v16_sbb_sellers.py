@@ -59,6 +59,7 @@ for _, r in top20.iterrows():
         'platform_loss': x['platform_gmv_loss_aed'].sum(), 'express_loss': x['express_gmv_loss_aed'].sum(),
         'instock': x['live_days'].sum() / x['days_in_month'].sum() * 100 if x['days_in_month'].sum() else 0,
         'units': x['units'].sum(), 'gv': x['gv'].sum(), 'orders': x['orders'].sum(),
+        'impressions': x['impressions'].sum(),
     }), include_groups=False).reset_index()
     sg['cancel_pct'] = sg['cancelled'] / sg['gmv'].replace(0, np.nan) * 100
     sg['excess_cancel'] = np.maximum(0, sg['cancelled'] - sg['gmv'] * fbn_cancel_pct)
@@ -73,6 +74,7 @@ for _, r in top20.iterrows():
             'name': clean_name(sr['product_name']), 'sid': sr['sku'],
             'gmv': round(sr['gmv'] * F), 'cancel_pct': round(sr['cancel_pct'], 1) if not pd.isna(sr['cancel_pct']) else 0,
             'instock': round(sr['instock'], 0), 'units': int(sr['units'] * F),
+            'impressions': round(sr['impressions'] * F),
             'cvr': round(sr['cvr'], 1) if not pd.isna(sr['cvr']) else 0,
             'uplift': round(sr['uplift'] * F),
         })
