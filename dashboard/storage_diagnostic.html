@@ -299,7 +299,7 @@ table.heat-sub td.hc{border-radius:3px;}
 
       <div class="table-wrap" style="margin-top:20px;">
         <table>
-          <thead><tr><th class="l">Metric (monthly run-rate)</th><th>Jul '25</th><th>Jul '26</th><th>Aug '26</th><th>YoY (Aug)</th><th>MoM (Aug vs Jul)</th></tr></thead>
+          <thead><tr><th class="l">Metric (monthly run-rate)</th><th>Aug '25</th><th>Jul '26</th><th>Aug '26</th><th>YoY (Aug)</th><th>MoM (Aug vs Jul)</th></tr></thead>
           <tbody id="tbl-health"></tbody>
         </table>
       </div>
@@ -855,25 +855,25 @@ renderDrillAll();
 /* ---- 01 category health ---- */
 /* ordered to match the metric flow below: demand -> conversion -> assortment */
 const HEALTH = [
-  {m:"GMV (AED)", jul25:1704262, jul26:2508104, aug:3472201, yoy:54.0, mom:38.4},
-  {m:"Impressions", jul25:15853001, jul26:23083472, aug:32576173, yoy:35.4, mom:41.1},
-  {m:"Search Impression %", jul25:73.37, jul26:78.45, aug:76.77, yoy:5.92, mom:-1.68, pp:true},
-  {m:"CTR", jul25:4.77, jul26:3.92, aug:4.31, yoy:-0.01, mom:0.39, pp:true},
-  {m:"GV — visits", jul25:755964, jul26:905256, aug:1405058, yoy:34.9, mom:55.2},
-  {m:"ATC", jul25:132054, jul26:166650, aug:236672, yoy:27.3, mom:42.0},
-  {m:"ATC %", jul25:17.47, jul26:18.41, aug:16.84, yoy:-1.01, mom:-1.56, pp:true},
-  {m:"CVR", jul25:4.59, jul26:5.26, aug:4.58, yoy:0.14, mom:-0.67, pp:true},
-  {m:"Orders", jul25:34730, jul26:47572, aug:64383, yoy:39.1, mom:35.3},
-  {m:"Units", jul25:40655, jul26:56583, aug:76180, yoy:41.6, mom:34.6},
-  {m:"AOV (AED)", jul25:49.07, jul26:52.72, aug:53.93, yoy:10.8, mom:2.3},
-  {m:"ASP (AED)", jul25:41.92, jul26:44.33, aug:45.58, yoy:8.8, mom:2.8},
-  {m:"Total SKUs (assortment)", jul25:26911, jul26:30696, aug:30913, yoy:7.2, mom:0.7},
-  {m:"Selling SKUs", jul25:7388, jul26:8455, aug:10295, yoy:12.6, mom:21.8},
-  {m:"Instock %", jul25:90.9, jul26:89.2, aug:91.5, yoy:1.9, mom:2.3, pp:true},
+  {m:"GMV (AED)", aug25:2254352, jul26:2508104, aug:3472201, yoy:54.0, mom:38.4},
+  {m:"Impressions", aug25:24066215, jul26:23083472, aug:32576173, yoy:35.4, mom:41.1},
+  {m:"Search Impression %", aug25:70.85, jul26:78.45, aug:76.77, yoy:5.92, mom:-1.68, pp:true},
+  {m:"CTR", aug25:4.33, jul26:3.92, aug:4.31, yoy:-0.01, mom:0.39, pp:true},
+  {m:"GV — visits", aug25:1041388, jul26:905256, aug:1405058, yoy:34.9, mom:55.2},
+  {m:"ATC", aug25:185919, jul26:166650, aug:236672, yoy:27.3, mom:42.0},
+  {m:"ATC %", aug25:17.85, jul26:18.41, aug:16.84, yoy:-1.01, mom:-1.56, pp:true},
+  {m:"CVR", aug25:4.45, jul26:5.26, aug:4.58, yoy:0.14, mom:-0.67, pp:true},
+  {m:"Orders", aug25:46302, jul26:47572, aug:64383, yoy:39.1, mom:35.3},
+  {m:"Units", aug25:53804, jul26:56583, aug:76180, yoy:41.6, mom:34.6},
+  {m:"AOV (AED)", aug25:48.69, jul26:52.72, aug:53.93, yoy:10.8, mom:2.3},
+  {m:"ASP (AED)", aug25:41.90, jul26:44.33, aug:45.58, yoy:8.8, mom:2.8},
+  {m:"Total SKUs (assortment)", aug25:28850, jul26:30696, aug:30913, yoy:7.2, mom:0.7},
+  {m:"Selling SKUs", aug25:9146, jul26:8455, aug:10295, yoy:12.6, mom:21.8},
+  {m:"Instock %", aug25:89.6, jul26:89.2, aug:91.5, yoy:1.9, mom:2.3, pp:true},
 ];
 table("tbl-health", HEALTH, [
   {k:"m", l:true},
-  {k:"jul25", fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:2})},
+  {k:"aug25", fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:2})},
   {k:"jul26", fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:2})},
   {k:"aug", fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:2})},
   {k:"yoy", dir:true, fmt:(v)=>0},
