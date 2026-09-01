@@ -353,6 +353,12 @@ table.heat-sub td.hc{border-radius:3px;}
 
       <div class="callout" style="margin-top:16px;"><b>White-space signal:</b> the 100–200 and 400+ AED bands show the fastest visit growth YoY (GV +51% and +58%) but the 200–400 and 400+ tiers carry the thinnest assortment (667 and 169 SKUs, only 10–13% selling). The 200–400 AED band also has the category's weakest instock (90.0%, clearly the lowest band) — 400+ AED's instock is actually fine (95.6%), so the assortment-depth gap there is a SKU-count problem, not a stock problem. Demand is outpacing premium assortment depth. See §08.</div>
 
+      <span class="tag-h" style="margin-top:26px;">Impressions by price band × all 44 subcategories (Aug'26, /mo, darker = more impressions)</span>
+      <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Same grid, demand side: each cell is impressions (YoY% vs Aug'25) and the count of SKUs generating impressions in that (subcategory, price band) — with last year's count alongside it. Both months normalized to a month-equivalent run-rate. Read next to the GMV heatmap above — a band with strong impressions but weak GMV there is a conversion problem, not a demand problem.</p>
+      <div class="table-wrap" style="margin-top:8px; max-height:640px; overflow-y:auto;"><table><thead><tr>
+        <th class="l">Subcategory</th><th>&lt;25</th><th>25–50</th><th>50–100</th><th>100–200</th><th>200–400</th><th>400+</th>
+      </tr></thead><tbody id="tbl-heat-impr"></tbody></table></div>
+
       <span class="tag-h" style="margin-top:26px;">03.1 · Which price point wins — by subcategory (this year only)</span>
       <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Jun–Aug 2026 combined (the most recent complete quarter, 2026 data only — not blended with 2025) so this reflects current buying behaviour, not last year's. "Wins" = highest GMV, not highest CVR — cheap items convert better almost by definition, so a CVR-ranked winner would just point at the entry band every time and say nothing about where the money actually is. All 40 subcategories with meaningful volume; CVR shown alongside for reference only.</p>
       <div class="table-wrap compact" style="margin-top:8px; max-height:520px; overflow-y:auto;"><table><thead><tr><th class="l">Subcategory</th><th>Highest-GMV band</th><th>GMV there</th><th>% of its total</th><th>CVR there</th></tr></thead><tbody id="tbl-pst-priceband"></tbody></table></div>
@@ -1068,6 +1074,41 @@ const BAND_LABELS = ["<25","25-50","50-100","100-200","200-400","400+"];
       }
     });
   });
+})();
+
+/* ---- 03 impressions-by-price-band heatmap (demand-side companion to the
+   GMV heatmap above -- same subcategory list/order, HEAT_SUBS/HEAT_KEYS
+   reused, no click-to-expand brand drill for this one) ---- */
+const HEAT_IMPR_DATA = [[245201,1211106,1091446,215432,22547,4298],[121668,626800,1425418,704376,75658,16384],[774721,736429,1337176,132291,1482,519],[152329,486465,761746,64720,433,521],[409526,558093,168604,29042,3441,34],[410343,1202250,1453580,211191,110901,422],[26188,131765,296480,185503,45361,7378],[363848,96923,73747,149456,568,36],[94479,253065,359024,119594,15590,3264],[656319,402842,195634,28635,1862,36],[830,43958,197172,183884,15793,314],[287802,201484,109503,19990,6612,606],[54842,173930,211647,24607,378,38],[42136,193384,248056,25105,1320,129],[68776,279404,58286,14231,790,70],[15225,252018,168961,5191,49,19],[43918,107557,79300,1849,36,684],[23936,58776,89496,4512,27,25],[29243,27311,8565,2067,8691,0],[1379,31312,33387,4404,230,49],[14520,60857,9941,2293,1049,256],[2960,35384,6749,20360,1186,0],[76063,19277,4499,1526,38,0],[14529,44374,9424,2001,950,27],[2172,39379,26818,12679,0,0],[893,2536,2552,3306,1440,1936],[21839,7188,4615,238,17,65],[551,25409,23431,1340,0,0],[5430,3152,4229,0,228,3287],[22792,26437,819,274,21,0],[11656,29218,13900,1984,0,23],[6017,33869,34977,8039,540,11],[5413,13308,24485,445,0,0],[162,12958,15512,536,182,0],[1134,3941,11352,7752,158,36],[8107,15778,17693,3659,201,0],[4566,7541,7207,272,277,2],[17070,3405,11934,1364,0,0],[3129,32076,10974,108,0,0],[228,1702,1372,587,0,0],[0,1264,401,76,0,0],[162,19,0,0,0,0],[99,51,0,0,0,0],[0,0,0,0,28,10]];
+const HEAT_IMPR_SKUS = [[266,1054,928,317,58,15],[139,907,1324,918,133,28],[793,1729,1298,284,34,21],[163,512,517,86,4,4],[426,663,535,150,13,1],[349,1192,799,300,118,14],[47,196,373,203,47,20],[272,426,193,37,5,1],[83,296,294,86,18,3],[225,440,270,90,24,5],[2,48,114,91,14,2],[215,322,313,88,23,8],[108,295,397,52,5,1],[91,309,307,136,14,3],[108,270,253,69,14,2],[55,264,195,21,1,2],[145,311,211,34,3,15],[53,120,97,27,3,1],[29,48,28,10,7,0],[8,48,53,19,2,1],[72,124,59,28,19,4],[20,42,37,45,8,0],[61,56,38,16,8,0],[55,138,81,20,2,1],[15,37,44,10,0,0],[8,20,30,29,13,4],[22,47,49,6,1,1],[9,16,31,3,0,0],[7,12,16,0,3,5],[33,39,14,17,1,0],[32,116,47,10,0,1],[34,110,143,26,11,1],[16,66,73,9,0,0],[4,12,56,14,2,0],[3,20,47,23,3,1],[17,39,37,21,7,0],[26,65,72,8,3,1],[13,43,21,3,0,0],[13,62,23,1,0,0],[4,25,28,7,0,0],[0,10,5,5,0,0],[4,1,0,0,0,0],[2,3,0,0,0,0],[0,0,0,0,1,1]];
+const HEAT_IMPR_YOY = [[-5.0,112.9,66.3,51.3,-16.0,-46.4],[-36.7,-4.2,-7.2,-1.6,17.2,191.1],[44.9,-28.3,-54.7,37.4,-71.6,-5.8],[-1.6,137.6,354.9,582.4,78.0,-7.6],[85.0,29.1,-26.9,-66.7,-11.6,"new"],[-31.2,-55.6,29.4,-27.5,115.2,1.5],[-96.4,-56.6,28.8,154.3,78.5,1514.5],[63.5,-4.1,411.4,5126.5,-66.4,-86.6],[-25.9,16.5,25.2,-42.3,-46.1,473.9],[-2.4,-24.3,7.8,47.6,-62.7,"new"],[148.9,307.0,99.7,120.9,-74.7,-51.5],[109.6,69.4,-38.2,15.6,162.4,72.6],[-35.2,-26.8,-14.9,27.1,-43.6,-72.9],[15.2,34.8,105.6,-33.9,21.0,"new"],[-28.0,-3.4,-60.2,-80.9,-78.7,"new"],[-36.8,28.3,120.0,-35.3,-96.2,"new"],[-14.3,70.8,36.6,-36.6,-96.8,118.7],[-31.9,-26.5,7.0,67.4,-97.1,-78.0],[-16.7,-59.5,30.9,-76.7,-52.3,-100.0],[101.8,13.3,36.8,-44.0,334.3,"new"],[-19.8,88.8,3.2,-32.3,-50.7,-21.1],[-39.7,490.4,32.6,56.5,"new",-100.0],[86.3,-64.5,12.5,75.0,-90.3,null],[-70.5,-60.4,-65.7,-78.7,-81.2,-98.9],[-58.4,149.7,24.3,409.4,-100.0,null],[-85.7,-82.5,-65.7,-78.9,-41.3,-47.9],[50.8,-56.8,100.1,112.9,-89.2,"new"],[-88.7,183.2,29.2,-42.0,-100.0,-100.0],[-50.6,-49.5,-31.4,-100.0,-80.6,1.5],[-44.9,46.9,73.3,"new","new",null],[-65.2,5.8,35.5,67.6,-100.0,"new"],[-37.5,40.5,42.2,42.6,277.2,"new"],[-49.0,-35.2,113.5,-12.4,-100.0,null],[-84.1,258.2,65.4,-17.9,2.0,null],[118.2,-71.1,9.7,103.4,-46.3,"new"],[41.7,-18.7,-22.9,7.8,659.1,null],[-41.3,-13.8,-34.8,-60.2,-70.7,-99.1],[63.2,-61.3,1330.0,2298.1,-100.0,null],[11.2,19.4,273.9,-85.9,-100.0,null],[-76.0,-74.8,-80.0,-72.1,null,-100.0],[-100.0,-39.1,-43.4,115.3,-100.0,null],["new",29.2,null,-100.0,null,null],["new",-98.4,null,-100.0,null,null],[null,null,null,-100.0,-42.9,-92.7]];
+const HEAT_IMPR_SKU_PREV = [[243,859,751,344,77,18],[204,986,1661,1064,118,10],[854,1692,1183,201,28,10],[145,358,288,29,6,3],[267,595,597,207,16,0],[334,1459,797,167,36,3],[68,221,320,163,83,3],[228,353,170,48,23,8],[102,332,364,90,14,2],[278,436,288,37,16,0],[1,31,69,50,27,1],[157,362,325,95,19,3],[140,423,542,56,14,5],[66,261,277,106,9,0],[186,368,360,142,11,0],[36,247,172,28,7,0],[140,200,172,26,6,3],[51,123,129,30,10,3],[58,64,50,17,9,1],[2,41,61,27,1,0],[73,135,98,23,15,9],[33,32,26,18,0,5],[65,78,34,5,10,0],[117,192,148,75,67,40],[23,55,67,13,1,0],[18,29,35,94,13,4],[29,62,36,3,2,0],[17,35,41,15,8,4],[15,12,16,8,5,5],[28,48,7,0,0,0],[32,99,48,9,1,0],[32,91,95,15,2,0],[30,68,63,7,1,0],[3,16,31,8,2,0],[3,25,30,10,3,0],[19,38,29,12,1,0],[40,90,114,7,12,2],[19,60,19,1,1,0],[6,54,19,8,1,0],[9,22,18,11,0,1],[2,5,11,2,1,0],[0,1,0,1,0,0],[0,4,0,1,0,0],[0,0,0,1,1,2]];
+(function(){
+  const flat = HEAT_IMPR_DATA.flat(); const max = Math.max(...flat);
+  function shade(v){
+    const t = v/max;
+    const l = 92 - t*58;
+    return `hsl(200 40% ${l}%)`;
+  }
+  function yoyTag(y){
+    if(y===null || y===undefined) return "";
+    if(y==="new") return " (New)";
+    return ` (${y>=0?"+":""}${y.toFixed(0)}% YoY)`;
+  }
+  function skuPrevTag(p){
+    if(p===null || p===undefined) return "";
+    return ` (${p.toLocaleString()} last year)`;
+  }
+  const rows = HEAT_SUBS.map((name,i)=>{
+    const cells = HEAT_IMPR_DATA[i].map((v,j)=>{
+      const n = HEAT_IMPR_SKUS[i][j];
+      const txt = v>=1000?(v/1000).toFixed(0)+"K":v;
+      const gy = yoyTag(HEAT_IMPR_YOY[i][j]), sy = skuPrevTag(HEAT_IMPR_SKU_PREV[i][j]);
+      return `<td class="heat" style="background:${shade(v)}; color:${v/max>0.55?'#fff':'var(--ink)'}">${txt}${gy}${n?`<span class="heat-n">${n} SKU${n===1?"":"s"}${sy}</span>`:""}</td>`;
+    }).join("");
+    return `<tr><td class="l">${name}</td>${cells}</tr>`;
+  }).join("");
+  document.getElementById("tbl-heat-impr").innerHTML = rows;
 })();
 
 /* ---- 04 funnel ---- */
