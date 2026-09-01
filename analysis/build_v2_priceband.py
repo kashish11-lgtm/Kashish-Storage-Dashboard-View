@@ -35,6 +35,9 @@ tbl = pd.DataFrame({
  'cvr_a26': a26['cvr']*100, 'cvr_a25': a25['cvr']*100, 'cvr_yoy_pp': (a26['cvr']-a25['cvr'])*100,
  'asp_a26': a26['asp'], 'instock_a26': a26['instock_wtd'], 'selling_a26': a26['selling_pct'], 'nsku_a26': a26['n_skus'],
  'nselling_a26': a26['n_selling'],
+ 'nsku_a25': a25['n_skus'], 'nselling_a25': a25['n_selling'],
+ 'nsku_yoy_pct': (a26['n_skus']-a25['n_skus'])/a25['n_skus'].replace(0,np.nan)*100,
+ 'nselling_yoy_pct': (a26['n_selling']-a25['n_selling'])/a25['n_selling'].replace(0,np.nan)*100,
 })
 tbl = tbl.reindex(labels)
 tbl['contrib'] = (a26['gmv']-a25['gmv'])
