@@ -3,7 +3,7 @@ import pandas as pd, numpy as np, json, re
 d = pd.read_parquet('storage_full_v2.parquet')
 aug = d[d['month'] == '2026-08'].copy()
 aug['brand'] = aug['brand'].fillna('unbranded_generic')
-F = 30.4 / 16
+F = 30.4 / 31
 
 # Same FBN cancellation benchmark used everywhere else in the Seller
 # Analysis section, and the same brand list/order as tbl-bizmodel-migration
@@ -11,8 +11,8 @@ F = 30.4 / 16
 fbn = aug[aug['business_model'] == 'FBN']
 fbn_cancel_pct = fbn['cancelled_gmv_aed'].sum() / fbn['gmv_aed'].sum()
 
-BRANDS = ['famapy', 'chako_lab', 'mackenzie_childs', 'aiwanto', 'kovar',
-          'dubaigallery', 'bentgo', 'marcolo', 'blooming_time', 'locknlock']
+BRANDS = ['eworld', 'feelings', 'hemingway', 'aiwanto', 'adebola',
+          'dubaigallery', 'famapy', 'duniso', 'toshionics', 'chako_lab']
 
 
 def clean_name(s):

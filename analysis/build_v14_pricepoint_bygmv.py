@@ -2,7 +2,7 @@ import pandas as pd, numpy as np, json
 
 d = pd.read_parquet('storage_full_v2.parquet')
 recent = d[d['month'].isin(['2026-06','2026-07','2026-08'])].copy()
-DAYS = 30+31+16
+DAYS = 30+31+31
 F = 30.4/DAYS
 
 bins=[0,25,50,100,200,400,np.inf]; labels=['<25 AED','25-50 AED','50-100 AED','100-200 AED','200-400 AED','400+ AED']

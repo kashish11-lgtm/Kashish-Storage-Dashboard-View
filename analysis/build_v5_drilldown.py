@@ -3,7 +3,7 @@ d = pd.read_parquet('storage_full_v2.parquet')
 AUG='2026-08'
 aug = d[d['month']==AUG].copy()
 aug['brand']=aug['brand'].fillna('unbranded_generic')
-F = 30.4/16  # daily-rate monthly-equiv factor for Aug (16 days)
+F = 30.4/31  # daily-rate monthly-equiv factor for Aug (31 days)
 
 def agg(df):
     gmv=df['gmv_aed'].sum(); gv=df['gv'].sum(); orders=df['orders'].sum(); units=df['units'].sum()

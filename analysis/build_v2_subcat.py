@@ -1,6 +1,6 @@
 import pandas as pd, numpy as np
 d = pd.read_parquet('storage_full_v2.parquet')
-days_map = {'2025-07':31,'2025-08':31,'2026-07':31,'2026-08':16}
+days_map = {'2025-07':31,'2025-08':31,'2026-07':31,'2026-08':31}
 
 def sub_agg(df):
     r = df.groupby('pst').apply(lambda x: pd.Series({
@@ -21,7 +21,7 @@ sub_jul26 = sub_agg(d[d['month']=='2026-07'])
 
 flow=['gmv','units','orders','gv','impressions','atc']
 sa26=sub_aug26.copy();
-for c in flow: sa26[c]=sub_aug26[c]/16*30.4
+for c in flow: sa26[c]=sub_aug26[c]/31*30.4
 sa25=sub_aug25.copy()
 for c in flow: sa25[c]=sub_aug25[c]/31*30.4
 sj26=sub_jul26.copy()

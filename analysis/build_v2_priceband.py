@@ -23,19 +23,21 @@ def agg(df, live_set=None):
     r['selling_pct']=r['n_selling']/r['n_skus']*100
     return r.fillna(0)
 
-j26=agg(d[d['month']=='2026-07']); j25=agg(d[d['month']=='2025-07'])
+# Aug26 vs Aug25 is now the clean full-month YoY basis (Aug26 is a full 31-day
+# month), superseding the earlier Jul-vs-Jul workaround.
 a26=agg(d[d['month']=='2026-08'], live_set=recent_live_skus['2026-08'])
-cat_j26=j26['gmv'].sum(); cat_j25=j25['gmv'].sum(); cat_a26=a26['gmv'].sum()
+a25=agg(d[d['month']=='2025-08'], live_set=recent_live_skus['2025-08'])
+cat_a26=a26['gmv'].sum(); cat_a25=a25['gmv'].sum()
 tbl = pd.DataFrame({
- 'share_a26': a26['gmv']/cat_a26*100, 'share_j26': j26['gmv']/cat_j26*100, 'share_j25': j25['gmv']/cat_j25*100,
- 'yoy_pct': (j26['gmv']-j25['gmv'])/j25['gmv'].replace(0,np.nan)*100,
- 'gv_yoy_pct': (j26['gv']-j25['gv'])/j25['gv'].replace(0,np.nan)*100,
- 'cvr_a26': a26['cvr']*100, 'cvr_j25': j25['cvr']*100, 'cvr_yoy_pp': (j26['cvr']-j25['cvr'])*100,
+ 'share_a26': a26['gmv']/cat_a26*100, 'share_a25': a25['gmv']/cat_a25*100,
+ 'yoy_pct': (a26['gmv']-a25['gmv'])/a25['gmv'].replace(0,np.nan)*100,
+ 'gv_yoy_pct': (a26['gv']-a25['gv'])/a25['gv'].replace(0,np.nan)*100,
+ 'cvr_a26': a26['cvr']*100, 'cvr_a25': a25['cvr']*100, 'cvr_yoy_pp': (a26['cvr']-a25['cvr'])*100,
  'asp_a26': a26['asp'], 'instock_a26': a26['instock_wtd'], 'selling_a26': a26['selling_pct'], 'nsku_a26': a26['n_skus'],
  'nselling_a26': a26['n_selling'],
 })
 tbl = tbl.reindex(labels)
-tbl['contrib'] = (j26['gmv']-j25['gmv'])
+tbl['contrib'] = (a26['gmv']-a25['gmv'])
 tbl['contrib_pct']=tbl['contrib']/tbl['contrib'].sum()*100
 print(tbl.round(1))
 tbl.to_csv('priceband_v2_yoy.csv')

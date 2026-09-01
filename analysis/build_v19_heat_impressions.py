@@ -3,7 +3,7 @@ d = pd.read_parquet('storage_full_v2.parquet')
 aug = d[d['month'] == '2026-08'].copy()
 bins = [0, 25, 50, 100, 200, 400, np.inf]; labels = ['<25', '25-50', '50-100', '100-200', '200-400', '400+']
 aug['pb'] = pd.cut(aug['offer_price_aed'], bins=bins, labels=labels, right=False)
-F = 30.4 / 16
+F = 30.4 / 31
 
 # same subcategory list/order as the GMV heat matrix (build_v11_heat_all.py) --
 # every subcategory present in Aug'26

@@ -3,7 +3,7 @@ from collections import Counter
 
 d = pd.read_parquet('storage_full_v2.parquet')
 recent = d[d['month'].isin(['2026-06','2026-07','2026-08'])].copy()
-DAYS = 30+31+16
+DAYS = 30+31+31
 F = 30.4/DAYS
 
 # ---- curated rules for the 6 subcategories already hand-reviewed (kept as-is) ----

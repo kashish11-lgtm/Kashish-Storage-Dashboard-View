@@ -4,8 +4,8 @@ AUG='2026-08'
 aug = d[d['month']==AUG].copy()
 aug['brand']=aug['brand'].fillna('unbranded_generic')
 
-# Category-level funnel waterfall (Aug'26, 16-day, monthly-equiv x30.4/16)
-F = 30.4/16
+# Category-level funnel waterfall (Aug'26, 31-day, monthly-equiv x30.4/31)
+F = 30.4/31
 impr = aug['impressions'].sum()*F
 gv = aug['gv'].sum()*F
 atc = aug['atc'].sum()*F

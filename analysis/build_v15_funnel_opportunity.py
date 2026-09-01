@@ -2,7 +2,7 @@ import pandas as pd, numpy as np, json
 d = pd.read_parquet('storage_full_v2.parquet')
 AUG = '2026-08'
 aug = d[d['month'] == AUG].copy()
-F = 30.4 / 16
+F = 30.4 / 31
 
 # category-wide Aug'26 funnel benchmarks (monthly-equivalent)
 impr = aug['impressions'].sum() * F

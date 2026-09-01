@@ -4,7 +4,7 @@ aug = d[d['month']=='2026-08'].copy()
 aug['brand']=aug['brand'].fillna('unbranded_generic')
 bins=[0,25,50,100,200,400,np.inf]; labels=['<25','25-50','50-100','100-200','200-400','400+']
 aug['pb']=pd.cut(aug['offer_price_aed'], bins=bins, labels=labels, right=False)
-F = 30.4/16
+F = 30.4/31
 
 top_psts = aug.groupby('pst')['gmv_aed'].sum().sort_values(ascending=False).head(10).index.tolist()
 OUT = {}

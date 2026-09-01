@@ -2,7 +2,7 @@ import pandas as pd, numpy as np, json, re
 
 d = pd.read_parquet('storage_full_v2.parquet')
 recent = d[d['month'].isin(['2026-06','2026-07','2026-08'])].copy()
-DAYS = 30+31+16
+DAYS = 30+31+31
 F = 30.4/DAYS
 
 RULES = {

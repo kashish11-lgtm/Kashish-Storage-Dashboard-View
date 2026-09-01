@@ -5,7 +5,7 @@ aug['brand']=aug['brand'].fillna('unbranded_generic')
 cat_ctr = aug['gv'].sum()/aug['impressions'].sum()
 cat_atcr = aug['atc'].sum()/aug['gv'].sum()
 cat_cvr = aug['orders'].sum()/aug['gv'].sum()
-F = 30.4/16
+F = 30.4/31
 
 def brand_agg(pst, min_val, val_col):
     s = aug[aug['pst']==pst]

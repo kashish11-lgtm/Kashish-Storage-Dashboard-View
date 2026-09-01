@@ -2,7 +2,7 @@ import pandas as pd, numpy as np, json
 d = pd.read_parquet('storage_full_v2.parquet')
 aug = d[d['month'] == '2026-08'].copy()
 jul = d[d['month'] == '2026-07'].copy()
-F = 30.4 / 16
+F = 30.4 / 31
 
 # root-cause enrichment for the §05.1 $ opportunity table: for each
 # subcategory's dominant loss bucket (from funnel_opportunity.json), work out
@@ -18,7 +18,7 @@ orders_c = aug['orders'].sum() * F
 cat_ctr = gv_c / impr_c * 100
 cat_atcr = atc_c / gv_c * 100
 cat_cvr = orders_c / gv_c * 100
-cat_selling_pct = 6615 / 28767 * 100  # matches the Category Health table's Aug'26 figures
+cat_selling_pct = aug['sku'].loc[aug['gmv_aed'] > 0].nunique() / aug['sku'].nunique() * 100  # Category Health table's Aug'26 selling-SKU rate, computed directly rather than hardcoded
 
 recent_live = set(d[(d['month'].isin(['2026-07', '2026-08'])) & (d['live_days'] > 0)]['sku'].unique())
 

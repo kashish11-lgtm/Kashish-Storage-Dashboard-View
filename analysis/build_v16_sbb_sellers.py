@@ -1,7 +1,7 @@
 import pandas as pd, numpy as np, json, re
 d = pd.read_parquet('storage_full_v2.parquet')
 aug = d[d['month'] == '2026-08'].copy()
-F = 30.4 / 16
+F = 30.4 / 31
 
 # FBN cancellation benchmark -- the "if fulfilled well" baseline used
 # consistently elsewhere in the Seller Analysis section

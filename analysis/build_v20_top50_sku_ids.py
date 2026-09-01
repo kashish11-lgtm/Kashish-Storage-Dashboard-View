@@ -2,7 +2,7 @@ import pandas as pd, json
 
 d = pd.read_parquet('storage_full_v2.parquet')
 aug = d[d['month'] == '2026-08'].copy()
-F = 30.4 / 16
+F = 30.4 / 31
 
 g = aug.groupby(['sku', 'product_name']).agg(gmv=('gmv_aed', 'sum')).reset_index()
 g['gmv_m'] = g['gmv'] * F
