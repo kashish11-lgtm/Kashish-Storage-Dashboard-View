@@ -602,6 +602,13 @@ table.heat-sub td.hc{border-radius:3px;}
       <div class="section-head"><span class="idx">12</span><h2>Seasonality</h2></div>
       <p class="dek">20 continuous months (Jan 2025 – Aug 2026), monthly-equivalent run-rate. Every month including Aug'26 is now a full calendar month, so this is a clean trend read with no provisional/partial-month figures.</p>
       <svg id="season-chart" width="100%" height="220" viewBox="0 0 900 220" preserveAspectRatio="xMidYMid meet" style="margin-top:12px;"></svg>
+
+      <span class="tag-h" style="margin-top:22px;">12.1 · Monthly GMV — 2025 vs 2026, YoY</span>
+      <p style="font-size:12.5px; color:var(--steel); max-width:82ch; margin-top:2px;">Same monthly-equivalent series as the chart above, laid out month-by-month with YoY next to each. 2026 is complete only through Aug — Sep–Dec 2026 will fill in as those months close.</p>
+      <div class="table-wrap" style="margin-top:10px; max-width:560px;"><table><thead><tr>
+        <th class="l">Month</th><th>2025 GMV/mo</th><th>2026 GMV/mo</th><th>YoY %</th>
+      </tr></thead><tbody id="tbl-season-yoy"></tbody></table></div>
+
       <p style="font-size:13px; color:var(--steel); margin-top:12px; max-width:82ch;"><b class="hl">Aug'26 is now the highest month in the entire series</b> (AED 3.47M/mo) — well above the Feb–Mar 2026 Ramadan peak (AED 2.77M/mo both months), which is itself the clearest seasonal event: Feb–Mar 2026 squarely matches Ramadan 2026 (~Feb 18–Mar 19), and Ramadan 2025 (~Mar 1–30) shows the same pattern one year earlier, though less pronounced (Feb'25 was actually the 2025 high point at AED 2.07M, just ahead of Ramadan). Aug'26's level is best read as continued structural growth (§01), not a seasonal spike — August carries no obvious seasonal driver in this category. <b class="hl">Holiday-season effect:</b> Nov–Dec 2025 shows a second, independent peak (AED 2.42M and 2.47M/mo) consistent with White Friday and year-end demand. <b class="hl">Summer trough:</b> both years dip hardest in Jun–Jul (2025: AED 1.67–1.70M; a much shallower dip in 2026 given the underlying YoY growth, and now followed by Aug'26's sharp rebound). Every single month from Jul'25 onward sits above its Jan–Jun'25 counterpart-period level, reinforcing that the growth in §01 is structural, not just riding these seasonal cycles.</p>
     </div>
 
@@ -1239,6 +1246,27 @@ lineChart("cosmo-chart", ["Jan25","Feb25","Mar25","Apr25","May25","Jun25","Jul25
   [41770,73214,82348,80985,58103,75519,66652,61400,58738,70470,83152,92039,102397,83906,105164,65257,48422,30883,24261,25684], {allLabels:false});
 lineChart("season-chart", ["Jan25","Feb25","Mar25","Apr25","May25","Jun25","Jul25","Aug25","Sep25","Oct25","Nov25","Dec25","Jan26","Feb26","Mar26","Apr26","May26","Jun26","Jul26","Aug26"],
   [1783629,2072283,1980506,1842132,1689684,1671923,1704262,2254352,2146582,2094877,2422348,2471682,2684017,2771748,2774396,2647234,2520540,2378032,2508104,3472201], {allLabels:false});
+
+const SEASON_YOY = [
+ {m:"January", gmv25:1783629, gmv26:2684017},
+ {m:"February", gmv25:2072283, gmv26:2771748},
+ {m:"March", gmv25:1980506, gmv26:2774396},
+ {m:"April", gmv25:1842132, gmv26:2647234},
+ {m:"May", gmv25:1689684, gmv26:2520540},
+ {m:"June", gmv25:1671923, gmv26:2378032},
+ {m:"July", gmv25:1704262, gmv26:2508104},
+ {m:"August", gmv25:2254352, gmv26:3472201},
+ {m:"September", gmv25:2146582, gmv26:null},
+ {m:"October", gmv25:2094877, gmv26:null},
+ {m:"November", gmv25:2422348, gmv26:null},
+ {m:"December", gmv25:2471682, gmv26:null},
+];
+document.getElementById("tbl-season-yoy").innerHTML = SEASON_YOY.map(r=>{
+  const yoy = r.gmv26!=null ? (r.gmv26-r.gmv25)/r.gmv25*100 : null;
+  const yoyTd = yoy!=null ? `<td class="${yoy>0?"up":(yoy<0?"down":"")}">${fmtPct(yoy)}</td>` : `<td class="small" style="color:var(--steel-2);">—</td>`;
+  const gmv26Td = r.gmv26!=null ? `<td>${fmtAED(r.gmv26)}</td>` : `<td class="small" style="color:var(--steel-2);">pending</td>`;
+  return `<tr><td class="l">${r.m}</td><td>${fmtAED(r.gmv25)}</td>${gmv26Td}${yoyTd}</tr>`;
+}).join("");
 
 
 /* ---- 06 sku tables ---- */
