@@ -47,7 +47,10 @@ name_map = {
     'cube_shelf': 'Cube Shelf', 'bread_box': 'Bread Box', 'food_wrap_dispenser': 'Food Wrap Dispenser',
     'travel_containers': 'Travel Containers', 'egg_holder': 'Egg Holder', 'pods': 'Pods',
     'tool_organizers': 'Tool Organizers', 'clamshells_hinged': 'Clamshells Hinged', 'carton': 'Carton',
-    'compost': 'Compost',
+    'compost': 'Compost', 'garment_rack': 'Garment Rack (legacy)',
+    'laundry_bag': 'Laundry Bag', 'basket': 'Laundry Basket', 'laundry_basket': 'Laundry Hamper',
+    'clothes_drying_stand': 'Clothes Drying Stand', 'clothes_drying_clip': 'Clothes Drying Clip',
+    'iron_board': 'Iron Board', 'laundry_accessories': 'Laundry Accessories',
 }
 
 rows = a26.sort_values('gmv', ascending=False)
